@@ -1,0 +1,14 @@
+#aside_feed .tree.sticky {
+	position: fixed;
+	top: 0; bottom: 0;
+	margin: 0 0 60px;
+	overflow: auto;
+}
+
+@media(max-width: 840px) {
+	/* No effect on mobile */
+	#aside_feed .tree.sticky {
+		position: static;
+		margin: 10px 0 50px;
+	}
+}
