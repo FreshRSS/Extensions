@@ -1,37 +1,39 @@
 "use strict";
 
-var sticky_feeds_aside_tree = null,
-    sticky_feeds_initial_pos_top = 0,
-    sticky_feeds_window = null;
+var sticky_feeds = {
+	tree: null,
+	initial_pos_top: 0,
+	width: 0,
+	window: null,
+
+	init: function() {
+		if (!window.$) {
+			window.setTimeout(sticky_feeds.init, 50);
+			return;
+		}
+
+		sticky_feeds.tree = $('#aside_feed .tree');
+		if (sticky_feeds.tree.length > 0) {
+			sticky_feeds.window = $(window);
+			sticky_feeds.initial_pos_top = sticky_feeds.tree.position().top;
+			sticky_feeds.tree.css('min-width', $('#aside_feed').width());
+			sticky_feeds.tree.addClass('sticky');
+
+			sticky_feeds.window.on('scroll', sticky_feeds.scroller);
+			sticky_feeds.scroller();
+		}
+	},
+
+	scroller: function() {
+		var pos_top_window = sticky_feeds.window.scrollTop();
+
+		if (pos_top_window < sticky_feeds.initial_pos_top) {
+			sticky_feeds.tree.css('top', sticky_feeds.initial_pos_top - pos_top_window + 10);
+		} else {
+			sticky_feeds.tree.css('top', 0);
+		}
+	},
+};
 
 
-function sticky_feeds_scroller() {
-	var pos_top_window = sticky_feeds_window.scrollTop();
-
-	if (pos_top_window >= sticky_feeds_initial_pos_top &&
-			!sticky_feeds_aside_tree.hasClass('sticky')) {
-		sticky_feeds_aside_tree.addClass('sticky');
-		sticky_feeds_aside_tree.css('width', $('#aside_feed').width());
-	} else if (pos_top_window < sticky_feeds_initial_pos_top) {
-		sticky_feeds_aside_tree.removeClass('sticky');
-	}
-}
-
-
-function sticky_feeds_init() {
-	if (!window.$) {
-		window.setTimeout(init_sticky_feeds, 50);
-		return;
-	}
-
-	sticky_feeds_aside_tree = $('#aside_feed .tree');
-	if (sticky_feeds_aside_tree.length > 0) {
-		sticky_feeds_initial_pos_top = sticky_feeds_aside_tree.position().top;
-		sticky_feeds_window = $(window);
-		sticky_feeds_window.on('scroll', sticky_feeds_scroller);
-		sticky_feeds_scroller();
-	}
-}
-
-
-window.onload = sticky_feeds_init;
+window.onload = sticky_feeds.init;
