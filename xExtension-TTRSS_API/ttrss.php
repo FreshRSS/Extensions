@@ -189,7 +189,15 @@ class FreshAPI_TTRSS {
 		$offset = (int)$this->param('offset', -1);
 		// $include_nested = $this->param('include_nested', false) === true;  // not supported
 
-		$sql_values = array($cat_id);
+		$sql_values = array();
+
+		$sql_where = '';
+		if ($cat_id >= 0) {
+			// special ids are not supported (yet?)
+			$sql_where = ' WHERE f.category = ?';
+			$sql_values[] = $cat_id;
+		}
+
 		$sql_limit = '';
 		if ($limit >= 0 && $offset >= 0) {
 			$sql_limit = ' LIMIT ? OFFSET ?';
@@ -200,7 +208,7 @@ class FreshAPI_TTRSS {
 		$pdo = new MyPDO();
 		$sql = 'SELECT f.id, f.name, f.url, f.category, f.cache_nbUnreads AS unread, f.lastUpdate'
 		     . ' FROM `%_feed` f'
-		     . ' WHERE f.category = ?'
+		     . $sql_where
 		     . $sql_limit;
 		$stm = $pdo->prepare($sql);
 		$stm->execute($sql_values);
@@ -439,6 +447,48 @@ class FreshAPI_TTRSS {
 		$this->good($counters);
 	}
 
+	public function getFeedTree() {
+		$include_empty = $this->param('include_empty', true);
+		$tree = array(
+			'identifier' => 'id',
+			'label' => 'name',
+			'items' => array(),
+		);
+
+		$categoryDAO = new FreshRSS_CategoryDAO();
+		$categories = $categoryDAO->listCategories(true, true);
+		foreach ($categories as $cat) {
+			$tree_cat = array(
+				'id' => 'CAT:' . $cat->id(),
+				'name' => $cat->name(),
+				'unread' => $cat->nbNotRead(),
+				'type' => 'category',
+				'bare_id' => $cat->id(),
+				'items' => array(),
+			);
+
+			foreach ($cat->feeds() as $feed) {
+				$tree_cat['items'][] = array(
+					'id' => 'FEED:' . $feed->id(),
+					'name' => $feed->name(),
+					'unread' => $feed->nbNotRead(),
+					'type' => 'feed',
+					'error' => $feed->inError(),
+					'updated' => $feed->lastUpdate(),
+					'bare_id' => $feed->id(),
+				);
+			}
+
+			if (count($tree_cat['items']) > 0 || $include_empty) {
+				$tree['items'][] = $tree_cat;
+			}
+		}
+
+		$this->good(array(
+			'categories' => $tree
+		));
+	}
+
 	public function getUnread() {
 		Minz_Log::warning('TTRSS API: getUnread() not implemented');
 	}
@@ -469,9 +519,6 @@ class FreshAPI_TTRSS {
 	public function unsubscribeFeed() {
 		Minz_Log::warning('TTRSS API: unsubscribeFeed() not implemented');
 	}
-	public function getFeedTree() {
-		Minz_Log::warning('TTRSS API: getFeedTree() not implemented');
-	}
 }
 
 
@@ -482,13 +529,12 @@ Minz_Configuration::register('system',
 $input = file_get_contents("php://input");
 // Minz_Log::debug($input);
 $input = json_decode($input, true);
-$_REQUEST = $input;
 
-if (isset($_REQUEST["sid"])) {
-	session_id($_REQUEST["sid"]);
+if (isset($input["sid"])) {
+	session_id($input["sid"]);
 }
 
 Minz_Session::init('FreshRSS');
 
-$api = new FreshAPI_TTRSS($_REQUEST);
+$api = new FreshAPI_TTRSS($input);
 $api->handle();
