@@ -44,7 +44,7 @@ class TTRSS_APIExtension extends Minz_Extension {
 		return true;
 	}
 
-	public function postUpdateHook() {
+	public static function postUpdateHook() {
 		$res = $this->install();
 
 		if ($res !== true) {
