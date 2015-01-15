@@ -3,7 +3,7 @@
 class TTRSS_APIExtension extends Minz_Extension {
 	public function init() {
 		$this->registerHook('post_update',
-		                    array('TTRSS_APIExtension', 'postUpdateHook'));
+		                    array($this, 'postUpdateHook'));
 	}
 
 	public function install() {
@@ -44,7 +44,7 @@ class TTRSS_APIExtension extends Minz_Extension {
 		return true;
 	}
 
-	public static function postUpdateHook() {
+	public function postUpdateHook() {
 		$res = $this->install();
 
 		if ($res !== true) {
