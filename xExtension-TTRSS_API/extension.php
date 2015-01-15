@@ -1,6 +1,11 @@
 <?php
 
 class TTRSS_APIExtension extends Minz_Extension {
+	public function init() {
+		$this->registerHook('post_update',
+		                    array('TTRSS_APIExtension', 'postUpdateHook'));
+	}
+
 	public function install() {
 		$filename = 'ttrss.php';
 		$file_source = join_path($this->getPath(), $filename);
@@ -37,5 +42,13 @@ class TTRSS_APIExtension extends Minz_Extension {
 		}
 
 		return true;
+	}
+
+	public function postUpdateHook() {
+		$res = $this->install();
+
+		if ($res !== true) {
+			Minz_Log::warning('Problem during TTRSS API extension post update: ' . $res);
+		}
 	}
 }
