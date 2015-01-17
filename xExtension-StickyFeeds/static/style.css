@@ -11,7 +11,7 @@
 }
 
 @media(max-width: 840px) {
-	/* No effect on mobile */
+	/* No effect on mobile. And yep, under 840px it is a mobile... a big one. */
 	#aside_feed.sticky .tree {
 		position: static;
 	}

@@ -41,7 +41,7 @@ var sticky_feeds = {
 			// scroll top has not reached the top of the sticky tree yet so it
 			// stays in place but its height must adapted:
 			// window height - sticky tree pos top + actual scroll top
-			var real_tree_pos_top = sticky_feeds.aside.initial_pos.top - sticky_feeds.tree.initial_pos.top;
+			var real_tree_pos_top = sticky_feeds.aside.initial_pos.top + sticky_feeds.tree.initial_pos.top;
 			sticky_feeds.tree.css('top', sticky_feeds.tree.initial_pos.top);
 			sticky_feeds.tree.css('height', sticky_feeds.window.height - real_tree_pos_top + pos_top_window);
 		} else {
