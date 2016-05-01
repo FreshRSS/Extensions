@@ -22,13 +22,13 @@ class CustomCSSExtension extends Minz_Extension {
 		$filepath = join_path($this->getPath(), 'static', $filename);
 
 		if (Minz_Request::isPost()) {
-			$css_rules = Minz_Request::param('css-rules', '');
+			$css_rules = html_entity_decode(Minz_Request::param('css-rules', ''));
 			file_put_contents($filepath, $css_rules);
 		}
 
 		$this->css_rules = '';
 		if (file_exists($filepath)) {
-			$this->css_rules = file_get_contents($filepath);
+			$this->css_rules = htmlentities(file_get_contents($filepath));
 		}
 	}
 }
