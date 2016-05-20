@@ -40,6 +40,10 @@ class ImageProxyExtension extends Minz_Extension {
 	}
 
 	public static function swapUris($content) {
+		if (empty($content)) {
+			return $content;
+		}
+
 		$doc = new DOMDocument();
 		libxml_use_internal_errors(true); // prevent tag soup errors from showing
 		$doc->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'));
