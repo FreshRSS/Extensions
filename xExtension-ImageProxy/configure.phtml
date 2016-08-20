@@ -1,0 +1,15 @@
+<form action="<?php echo _url('extension', 'configure', 'e', urlencode($this->getName())); ?>" method="post">
+	<div class="form-group">
+		<label class="group-name" for="css-rules"><?php echo _t('ext.imageproxy.proxy_url'); ?></label>
+		<div class="group-controls">
+			<input type="url" name="image_proxy_url" id="image_proxy_url" value="<?php echo FreshRSS_Context::$user_conf->image_proxy_url; ?>">
+		</div>
+	</div>
+
+	<div class="form-group form-actions">
+		<div class="group-controls">
+			<button type="submit" class="btn btn-important"><?php echo _t('gen.action.submit'); ?></button>
+			<button type="reset" class="btn"><?php echo _t('gen.action.cancel'); ?></button>
+		</div>
+	</div>
+</form>
