@@ -1,4 +1,5 @@
 <form action="<?php echo _url('extension', 'configure', 'e', urlencode($this->getName())); ?>" method="post">
+	<input type="hidden" name="_csrf" value="<?php echo FreshRSS_Auth::csrfToken(); ?>" />
 	<div class="form-group">
 		<label class="group-name" for="css-rules"><?php echo _t('ext.custom_css.write_css'); ?></label>
 		<div class="group-controls">
