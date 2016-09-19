@@ -1,9 +1,9 @@
 <form action="<?php echo _url('extension', 'configure', 'e', urlencode($this->getName())); ?>" method="post">
 	<input type="hidden" name="_csrf" value="<?php echo FreshRSS_Auth::csrfToken(); ?>" />
 	<div class="form-group">
-		<label class="group-name" for="css-rules"><?php echo _t('ext.imageproxy.proxy_url'); ?></label>
+		<label class="group-name" for="js-rules"><?php echo _t('ext.custom_js.write_js'); ?></label>
 		<div class="group-controls">
-			<input type="url" name="image_proxy_url" id="image_proxy_url" value="<?php echo FreshRSS_Context::$user_conf->image_proxy_url; ?>">
+			<textarea name="js-rules" id="js-rules"><?php echo $this->js_rules; ?></textarea>
 		</div>
 	</div>
 
