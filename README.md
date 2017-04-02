@@ -1,25 +1,23 @@
 # FreshRSS extensions
 
-This repository contains all the official FreshRSS extensions.
+This repository contains all the official [FreshRSS](https://github.com/FreshRSS/FreshRSS) extensions.
 
-To install an extension, download [the extension archive](https://github.com/FreshRSS/Extensions/archive/master.zip) first and extract it on your PC. Then, upload the specific extension(s) you want on your server. Extensions must be in the `./extensions` directory of your FreshRSS installation.
+To install an extension, download [the extension archive](https://github.com/FreshRSS/Extensions/archive/master.zip) first and extract it on your PC.
+Then, upload the specific extension(s) you want on your server.
+Extensions must be in the `./extensions` directory of your FreshRSS installation.
 
 ## Third-party extensions
 
-There are some FreshRSS extensions out there, which were developed by community members:
+There are some FreshRSS extensions out there, developed by community members:
 
-- [Youtube](https://github.com/kevinpapst/freshrss-youtube) - will display videos from YouTube feeds inline
+### By [@kevinpapst](https://github.com/kevinpapst), [Web](http://www.kevinpapst.de/)
 
-## oYoX Collection: 
+* [Youtube](https://github.com/kevinpapst/freshrss-youtube): Display videos from YouTube feeds inline.
 
-Some more extensions developed by oYoX.de ( [overview](https://github.com/oyox/FreshRSS-extensions) )
 
-**Desktop**
-- Fixed Nav Menu - sets the position of the navigation menu to fixed when scrolling down.
+### By [@oYoX](https://github.com/oyox/FreshRSS-extensions), [Web](https://oyox.de/)
 
-**Desktop / Mobile**
-- Keep Folder State - stores the state of the folders locally and expand them automatically if necessary 
-
-**Mobile**
-- Mobile Scroll Menu - automatically hides the header menu when scrolling down and shows it when scrolling up
-- Touch Control - add touch gestures to FreshRSS
+* [Keep Folder State](https://github.com/oyox/FreshRSS-extensions/tree/master/xExtension-KeepFolderState): Stores the state of the folders locally and expand them automatically if necessary.
+* [Fixed Nav Menu](https://github.com/oyox/FreshRSS-extensions/tree/master/xExtension-FixedNavMenu): (desktop) Sets the position of the navigation menu to fixed when scrolling down.
+* [Mobile Scroll Menu](https://github.com/oyox/FreshRSS-extensions/tree/master/xExtension-MobileScrollMenu): (mobile) Automatically hides the header menu when scrolling down and shows it when scrolling up.
+* [Touch Control](https://github.com/oyox/FreshRSS-extensions/tree/master/xExtension-TouchControl): (mobile) Add touch gestures to FreshRSS.
