@@ -21,3 +21,7 @@ There are some FreshRSS extensions out there, developed by community members:
 * [Fixed Nav Menu](https://github.com/oyox/FreshRSS-extensions/tree/master/xExtension-FixedNavMenu): (desktop) Sets the position of the navigation menu to fixed when scrolling down.
 * [Mobile Scroll Menu](https://github.com/oyox/FreshRSS-extensions/tree/master/xExtension-MobileScrollMenu): (mobile) Automatically hides the header menu when scrolling down and shows it when scrolling up.
 * [Touch Control](https://github.com/oyox/FreshRSS-extensions/tree/master/xExtension-TouchControl): (mobile) Add touch gestures to FreshRSS.
++
+ +### By [@Eisa01](https://github.com/Eisa01)
+ +
+ +* [FreshRSS Auto Refresh](https://github.com/Eisa01/FreshRSS---Auto-Refresh-Extension): Automatically refreshes FreshRSS page once in a minute.
