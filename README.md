@@ -15,7 +15,7 @@ There are some FreshRSS extensions out there, developed by community members:
 * [Youtube](https://github.com/kevinpapst/freshrss-youtube): Display videos from YouTube feeds inline.
 
 
-### By [@oYoX](https://github.com/oyox/FreshRSS-extensions), [Web](https://oyox.de/)
+### By [@oYoX](https://github.com/oyox), [Web](https://oyox.de/)
 
 * [Keep Folder State](https://github.com/oyox/FreshRSS-extensions/tree/master/xExtension-KeepFolderState): Stores the state of the folders locally and expand them automatically if necessary.
 * [Fixed Nav Menu](https://github.com/oyox/FreshRSS-extensions/tree/master/xExtension-FixedNavMenu): (desktop) Sets the position of the navigation menu to fixed when scrolling down.
