@@ -26,3 +26,8 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@Eisa01](https://github.com/Eisa01)
 
 * [FreshRSS Auto Refresh](https://github.com/Eisa01/FreshRSS---Auto-Refresh-Extension): Automatically refreshes FreshRSS page once in a minute.
+
+
+### By [@aledeg](https://github.com/aledeg)
+
+* [Reddit Image](https://github.com/aledeg/FreshRSS-extensions/tree/master/xExtension-RedditImage): Replace link to Reddit topic with resource link
