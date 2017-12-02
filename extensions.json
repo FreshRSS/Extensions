@@ -1,0 +1,61 @@
+{
+  "version": 0.1,
+  "extensions": [
+    {
+      "name": "CustomCSS",
+      "description": "A FreshRSS extension which give ability to create user-specific CSS rules to apply in addition of the actual theme",
+      "version": 0.1,
+      "author": "Marien Fressinaud",
+      "url": "https://github.com/FreshRSS/Extensions",
+      "type": "gh-subdirectory"
+    },
+    {
+      "name": "CustomJS",
+      "description": "A FreshRSS extension which give ability to create user-specific Javascript rules to apply in addition of the actual theme",
+      "version": 0.1,
+      "author": "₣rans de Jonge",
+      "url": "https://github.com/FreshRSS/Extensions",
+      "type": "gh-subdirectory"
+    },
+    {
+      "name": "ImageProxy",
+      "description": "No insecure content warnings or disappearing images on https sites",
+      "version": 0.3,
+      "author": "₣rans de Jonge",
+      "url": "https://github.com/FreshRSS/Extensions",
+      "type": "gh-subdirectory"
+    },
+    {
+      "name": "StickyFeeds",
+      "description": "Set the feed aside in the main stream following the window scroll",
+      "version": 0.1,
+      "author": "Marien Fressinaud",
+      "url": "https://github.com/FreshRSS/Extensions",
+      "type": "gh-subdirectory"
+    },
+    {
+      "name": "TTRSS_API",
+      "description": "Provides an API compliant with TinyTinyRSS applications",
+      "version": 0.1,
+      "author": "Marien Fressinaud",
+      "url": "https://github.com/FreshRSS/Extensions",
+      "type": "gh-subdirectory"
+    },
+    {
+      "name": "YouTube",
+      "description": "Display videos from YouTube feeds inline",
+      "version": 0.2,
+      "author": "Kevin Papst",
+      "url": "https://github.com/kevinpapst/freshrss-youtube",
+      "type": "gh-subdirectory"
+    },
+    {
+      "name": "Dilbert",
+      "description": "Embeds the Dilbert daily comic strip in your feed items",
+      "version": 0.1,
+      "author": "Kevin Papst",
+      "url": "https://github.com/kevinpapst/freshrss-dilbert",
+      "type": "gh-subdirectory"
+    }
+  ]
+}
