@@ -13,7 +13,7 @@
       "name": "CustomJS",
       "description": "A FreshRSS extension which give ability to create user-specific Javascript rules to apply in addition of the actual theme",
       "version": 0.1,
-      "author": "₣rans de Jonge",
+      "author": "Frans de Jonge",
       "url": "https://github.com/FreshRSS/Extensions",
       "type": "gh-subdirectory"
     },
@@ -21,7 +21,7 @@
       "name": "ImageProxy",
       "description": "No insecure content warnings or disappearing images on https sites",
       "version": 0.3,
-      "author": "₣rans de Jonge",
+      "author": "Frans de Jonge",
       "url": "https://github.com/FreshRSS/Extensions",
       "type": "gh-subdirectory"
     },
