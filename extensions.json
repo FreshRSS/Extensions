@@ -1,0 +1,109 @@
+{
+  "version": 0.1,
+  "extensions": [
+    {
+      "name": "CustomCSS",
+      "description": "A FreshRSS extension which give ability to create user-specific CSS rules to apply in addition of the actual theme",
+      "version": 0.1,
+      "author": "Marien Fressinaud",
+      "url": "https://github.com/FreshRSS/Extensions",
+      "type": "gh-subdirectory"
+    },
+    {
+      "name": "CustomJS",
+      "description": "A FreshRSS extension which give ability to create user-specific Javascript rules to apply in addition of the actual theme",
+      "version": 0.1,
+      "author": "Frans de Jonge",
+      "url": "https://github.com/FreshRSS/Extensions",
+      "type": "gh-subdirectory"
+    },
+    {
+      "name": "ImageProxy",
+      "description": "No insecure content warnings or disappearing images on https sites",
+      "version": 0.3,
+      "author": "Frans de Jonge",
+      "url": "https://github.com/FreshRSS/Extensions",
+      "type": "gh-subdirectory"
+    },
+    {
+      "name": "StickyFeeds",
+      "description": "Set the feed aside in the main stream following the window scroll",
+      "version": 0.1,
+      "author": "Marien Fressinaud",
+      "url": "https://github.com/FreshRSS/Extensions",
+      "type": "gh-subdirectory"
+    },
+    {
+      "name": "YouTube",
+      "description": "Display videos from YouTube feeds inline",
+      "version": 0.2,
+      "author": "Kevin Papst",
+      "url": "https://github.com/kevinpapst/freshrss-youtube",
+      "type": "gh-subdirectory"
+    },
+    {
+      "name": "Dilbert",
+      "description": "Embeds the Dilbert daily comic strip in your feed items",
+      "version": 0.1,
+      "author": "Kevin Papst",
+      "url": "https://github.com/kevinpapst/freshrss-dilbert",
+      "type": "gh-subdirectory"
+    },
+    {
+      "name": "FixedNavMenu",
+      "description": "Sets the position of the navigation menu to fixed when scrolling down",
+      "version": 0.1,
+      "author": "Marco Heizmann",
+      "url": "https://github.com/oyox/FreshRSS-extensions",
+      "type": "gh-subdirectory"
+    },
+    {
+      "name": "KeepFolderState",
+      "description": "Stores the state of the folders locally and expand them automatically if necessary",
+      "version": 0.1,
+      "author": "Marco Heizmann",
+      "url": "https://github.com/oyox/FreshRSS-extensions",
+      "type": "gh-subdirectory"
+    },
+    {
+      "name": "MobileScrollMenu",
+      "description": "Automatically hides the header menu on mobile phones, when scrolling down and shows it when scrolling up",
+      "version": 0.2,
+      "author": "Marco Heizmann",
+      "url": "https://github.com/oyox/FreshRSS-extensions",
+      "type": "gh-subdirectory"
+    },
+    {
+      "name": "SmartMobileMenu",
+      "description": "Minimizes the required button space and groups buttons",
+      "version": 0.1,
+      "author": "Marco Heizmann",
+      "url": "https://github.com/oyox/FreshRSS-extensions",
+      "type": "gh-subdirectory"
+    },
+    {
+      "name": "TouchControl",
+      "description": "Add touch gestures to FreshRSS",
+      "version": 0.2,
+      "author": "Marco Heizmann",
+      "url": "https://github.com/oyox/FreshRSS-extensions",
+      "type": "gh-subdirectory"
+    },
+    {
+      "name": "AutoRefresh",
+      "description": "Automatically refreshes the RSS feed when there is no activity",
+      "version": 1.0,
+      "author": "Essa AlAwadi",
+      "url": "https://github.com/Eisa01/FreshRSS---Auto-Refresh-Extension",
+      "type": "gh-subdirectory"
+    },
+    {
+      "name": "RedditImage",
+      "description": "Replace the link to the Reddit topic with the link to the resource",
+      "version": 0.1,
+      "author": "Alexis Degrugillier",
+      "url": "https://github.com/aledeg/FreshRSS-extensions",
+      "type": "gh-subdirectory"
+    }
+  ]
+}
