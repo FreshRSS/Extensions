@@ -34,14 +34,6 @@
       "type": "gh-subdirectory"
     },
     {
-      "name": "TTRSS_API",
-      "description": "Provides an API compliant with TinyTinyRSS applications",
-      "version": 0.1,
-      "author": "Marien Fressinaud",
-      "url": "https://github.com/FreshRSS/Extensions",
-      "type": "gh-subdirectory"
-    },
-    {
       "name": "YouTube",
       "description": "Display videos from YouTube feeds inline",
       "version": 0.2,
