@@ -8,9 +8,13 @@
 	</div>
 
 	<div class="form-group form-actions">
-		<div class="group-controls">
-			<button type="submit" class="btn btn-important"><?php echo _t('gen.action.submit'); ?></button>
-			<button type="reset" class="btn"><?php echo _t('gen.action.cancel'); ?></button>
-		</div>
+		<?php if (isset($this->permission_problem)) { ?>
+			<p class="alert alert-error"><?php echo _t('ext.custom_css.permission_problem', $this->permission_problem); ?></p>
+		<?php } else { ?>
+			<div class="group-controls">
+				<button type="submit" class="btn btn-important"><?php echo _t('gen.action.submit'); ?></button>
+				<button type="reset" class="btn"><?php echo _t('gen.action.cancel'); ?></button>
+			</div>
+		<?php } ?>
 	</div>
 </form>

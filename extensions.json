@@ -4,7 +4,7 @@
     {
       "name": "CustomCSS",
       "description": "A FreshRSS extension which give ability to create user-specific CSS rules to apply in addition of the actual theme",
-      "version": 0.1,
+      "version": 0.2,
       "author": "Marien Fressinaud",
       "url": "https://github.com/FreshRSS/Extensions",
       "type": "gh-subdirectory"
@@ -12,7 +12,7 @@
     {
       "name": "CustomJS",
       "description": "A FreshRSS extension which give ability to create user-specific Javascript rules to apply in addition of the actual theme",
-      "version": 0.1,
+      "version": 0.2,
       "author": "Frans de Jonge",
       "url": "https://github.com/FreshRSS/Extensions",
       "type": "gh-subdirectory"
