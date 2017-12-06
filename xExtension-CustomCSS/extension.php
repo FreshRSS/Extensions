@@ -3,7 +3,6 @@
 class CustomCSSExtension extends Minz_Extension {
 	public function init() {
 		$this->registerTranslates();
-		Minz_View::appendStyle($this->getFileUrl('style.css', 'css'));
 
 		$current_user = Minz_Session::param('currentUser');
 		$filename =  'style.' . $current_user . '.css';

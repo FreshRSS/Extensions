@@ -6,5 +6,5 @@ To use it, upload this directory in your `./extensions` directory and enable it 
 
 ## Changelog
 
-- 0.2 added file permission check and german translation
+- 0.2 added file permission check, added german translation, removed un-editable file static/style.css
 - 0.1 initial version
