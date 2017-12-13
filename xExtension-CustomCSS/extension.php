@@ -3,7 +3,6 @@
 class CustomCSSExtension extends Minz_Extension {
 	public function init() {
 		$this->registerTranslates();
-		Minz_View::appendStyle($this->getFileUrl('style.css', 'css'));
 
 		$current_user = Minz_Session::param('currentUser');
 		$filename =  'style.' . $current_user . '.css';
@@ -19,9 +18,16 @@ class CustomCSSExtension extends Minz_Extension {
 
 		$current_user = Minz_Session::param('currentUser');
 		$filename =  'style.' . $current_user . '.css';
-		$filepath = join_path($this->getPath(), 'static', $filename);
+		$staticPath = join_path($this->getPath(), 'static');
+		$filepath = join_path($staticPath, $filename);
 
-		if (Minz_Request::isPost()) {
+		if (!file_exists($filepath) && !is_writable($staticPath)) {
+			$tmpPath = explode(EXTENSIONS_PATH . '/', $staticPath);
+			$this->permission_problem = $tmpPath[1] . '/';
+		} else if (file_exists($filepath) && !is_writable($filepath)) {
+			$tmpPath = explode(EXTENSIONS_PATH . '/', $filepath);
+			$this->permission_problem = $tmpPath[1];
+		} else if (Minz_Request::isPost()) {
 			$css_rules = html_entity_decode(Minz_Request::param('css-rules', ''));
 			file_put_contents($filepath, $css_rules);
 		}
