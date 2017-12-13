@@ -36,7 +36,7 @@
     {
       "name": "YouTube",
       "description": "Display videos from YouTube feeds inline",
-      "version": 0.2,
+      "version": 0.5,
       "author": "Kevin Papst",
       "url": "https://github.com/kevinpapst/freshrss-youtube",
       "type": "gh-subdirectory"
@@ -47,6 +47,14 @@
       "version": 0.1,
       "author": "Kevin Papst",
       "url": "https://github.com/kevinpapst/freshrss-dilbert",
+      "type": "gh-subdirectory"
+    },
+    {
+      "name": "Teem",
+      "description": "Embeds videos from the skydiving website jointheteem.com",
+      "version": 0.1,
+      "author": "Kevin Papst",
+      "url": "https://github.com/kevinpapst/freshrss-teem",
       "type": "gh-subdirectory"
     },
     {
