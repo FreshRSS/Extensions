@@ -36,4 +36,4 @@ There are some FreshRSS extensions out there, developed by community members:
 
 ### By [@Korbak](https://github.com/Korbak)
 
-* [Hooktube](https://github.com/Korbak/freshrss-Hooktube): Displays videos from YouTube feeds inline (fork of "YouTube" Extension) but replaces every source by Hooktube
+* [Hooktube](https://github.com/Korbak/freshrss-Hooktube): Displays videos from YouTube feeds inline and replaces every source, included the displayed video by Hooktube, a YouTube mirror that allows you to watch YouTube content without being tracked, limited or using an account.
