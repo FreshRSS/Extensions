@@ -33,3 +33,7 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@aledeg](https://github.com/aledeg)
 
 * [Reddit Image](https://github.com/aledeg/FreshRSS-extensions/tree/master/xExtension-RedditImage): Replace link to Reddit topic with resource link
+
+### By [@Korbak](https://github.com/Korbak)
+
+* [Hooktube](https://github.com/Korbak/freshrss-Hooktube): Displays videos from YouTube feeds inline (fork of "YouTube" Extension) but replaces every source by Hooktube
