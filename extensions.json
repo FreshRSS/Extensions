@@ -112,14 +112,6 @@
       "author": "Alexis Degrugillier",
       "url": "https://github.com/aledeg/FreshRSS-extensions",
       "type": "gh-subdirectory"
-    },
-    {
-      "name": "Hooktube",
-      "description": "Displays videos from YouTube feeds inline and replaces every source by Hooktube for an enhanced privacy (no tracking or limitation)",
-      "version": 0.2,
-      "author": "Korbak",
-      "url": "https://github.com/Korbak/freshrss-Hooktube",
-      "type": "gh-subdirectory"
     }
   ]
 }
