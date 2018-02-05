@@ -1,6 +1,6 @@
 # Image Proxy extension
 
-This FreshRSS extension allows you to get rid of insecure content warnings or disappearing images when you use an encrypted connection to FreshRSS. An encrypted connected can be [very easily enabled](http://fransdejonge.com/2016/05/lets-encrypt-on-debianjessie/) thanks to the [Let's Encrypt](https://letsencrypt.org/) initiative.
+This FreshRSS extension allows you to get rid of insecure content warnings or disappearing images when you use an encrypted connection to FreshRSS. An encrypted connection can be [very easily enabled](http://fransdejonge.com/2016/05/lets-encrypt-on-debianjessie/) thanks to the [Let's Encrypt](https://letsencrypt.org/) initiative.
 
 To use it, upload this entire directory to the FreshRSS `./extensions` directory on your server and enable it on the extension panel in FreshRSS.
 
