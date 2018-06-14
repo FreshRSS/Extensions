@@ -12,7 +12,7 @@ There are some FreshRSS extensions out there, developed by community members:
 
 ### By [@kevinpapst](https://github.com/kevinpapst), [Web](http://www.kevinpapst.de/)
 
-* [Youtube](https://github.com/kevinpapst/freshrss-youtube): Display videos from YouTube feeds inline
+* [Youtube/Peertube](https://github.com/kevinpapst/freshrss-youtube): Display videos from YouTube/PeerTube feeds inline
 * [Dilbert](https://github.com/kevinpapst/freshrss-dilbert): Display your daily Dilbert comic in FreshRSS directly
 * [Teem](https://github.com/kevinpapst/freshrss-teem): Display videos from the skydiving website jointheteem.com inline
 
