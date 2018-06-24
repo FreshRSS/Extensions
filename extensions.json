@@ -34,8 +34,8 @@
       "type": "gh-subdirectory"
     },
     {
-      "name": "YouTube/PeerTube",
-      "description": "Display videos from YouTube/PeerTube feeds inline",
+      "name": "YouTube",
+      "description": "Display videos from YouTube and PeerTube feeds inline",
       "version": 0.7,
       "author": "Kevin Papst",
       "url": "https://github.com/kevinpapst/freshrss-youtube",
