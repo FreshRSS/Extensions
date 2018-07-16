@@ -63,14 +63,24 @@
     },
     };
 
-
     function add_load_more_listener() {
+        if (!window.$) {
+            if (window.console) {
+                console.log('FreshRSS extension ReadingTime waiting for jQuery…');
+            }
+            window.setTimeout(add_load_more_listener, 100);
+            return;
+        }
         reading_time.init();
         document.body.addEventListener('freshrss:load-more', function (e) {
             reading_time.init();
         });
     }
 
-    document.addEventListener('DOMContentLoaded', add_load_more_listener);
+    if (document.readyState && document.readyState !== 'loading') {
+        add_load_more_listener();
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', add_load_more_listener, false);
+    }
 
 }());
