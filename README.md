@@ -33,3 +33,8 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@aledeg](https://github.com/aledeg)
 
 * [Reddit Image](https://github.com/aledeg/FreshRSS-extensions/tree/master/xExtension-RedditImage): Replace link to Reddit topic with resource link
+
+
+### By [@Lapineige](https://github.com/lapineige)
+
+* [Reading Time](https://framagit.org/Lapineige/FreshRSS_Extension-ReadingTime): Add a reading time estimation next to each article.

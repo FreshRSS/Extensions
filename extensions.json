@@ -112,6 +112,14 @@
       "author": "Alexis Degrugillier",
       "url": "https://github.com/aledeg/FreshRSS-extensions",
       "type": "gh-subdirectory"
+    },
+    {
+      "name": "ReadingTime",
+      "description": "Add a reading time estimation for each article",
+      "version": 1.0,
+      "author": "Lapineige",
+      "url": "https://framagit.org/Lapineige/FreshRSS_Extension-ReadingTime/",
+      "type": "gh-subdirectory",
     }
   ]
 }
