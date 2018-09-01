@@ -17,20 +17,27 @@ class ImageProxyExtension extends Minz_Extension {
 
 		if (Minz_Request::isPost()) {
 			FreshRSS_Context::$user_conf->image_proxy_url = Minz_Request::param('image_proxy_url', '');
+			FreshRSS_Context::$user_conf->image_proxy_force = Minz_Request::param('image_proxy_force', '');
 			FreshRSS_Context::$user_conf->save();
 		}
 	}
 
 	public static function getProxyImageUri($url) {
 		$parsed_url = parse_url($url);
-		if (isset($parsed_url['scheme']) && $parsed_url['scheme'] === 'http') {
-			$url = self::$proxy_url . rawurlencode(substr($url, strlen('http://')));
-		}
-		// oddly enough there are protocol-less IMG SRC attributes that don't actually work with HTTPS
-		// so I guess we should just run 'em all through the proxy
+        if (isset($parsed_url['scheme']) && $parsed_url['scheme'] === 'http') {
+		    $url = self::$proxy_url . rawurlencode(substr($url, strlen('http://')));
+	    }
+        // force proxy even with https, if set by the user
+        else if (isset($parsed_url['scheme']) &&
+                $parsed_url['scheme'] === 'https' &&
+                FreshRSS_Context::$user_conf->image_proxy_force) {
+			$url = self::$proxy_url . rawurlencode(substr($url, strlen('https://')));
+        }
+    	// oddly enough there are protocol-less IMG SRC attributes that don't actually work with HTTPS
+	    // so I guess we should just run 'em all through the proxy
 		else if (empty($parsed_url['scheme'])) {
-			$url = self::$proxy_url . rawurlencode($url);
-		}
+		    $url = self::$proxy_url . rawurlencode($url);
+        }
 
 		return $url;
 	}
