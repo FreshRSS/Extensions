@@ -20,7 +20,7 @@
     {
       "name": "ImageProxy",
       "description": "No insecure content warnings or disappearing images on https sites",
-      "version": 0.3,
+      "version": 0.4,
       "author": "Frans de Jonge",
       "url": "https://github.com/FreshRSS/Extensions",
       "type": "gh-subdirectory"

@@ -3,7 +3,7 @@
 class ImageProxyExtension extends Minz_Extension {
 	public function init() {
 		$this->registerHook('entry_before_display',
-							array('ImageProxyExtension', 'setImageProxyHook'));
+                            array('ImageProxyExtension', 'setImageProxyHook'));
 
 		if (FreshRSS_Context::$user_conf->image_proxy_url != '') {
 			self::$proxy_url = FreshRSS_Context::$user_conf->image_proxy_url;
