@@ -44,7 +44,7 @@
     {
       "name": "Dilbert",
       "description": "Embeds the Dilbert daily comic strip in your feed items",
-      "version": 0.2,
+      "version": 0.3,
       "author": "Kevin Papst",
       "url": "https://github.com/kevinpapst/freshrss-dilbert",
       "type": "gh-subdirectory"

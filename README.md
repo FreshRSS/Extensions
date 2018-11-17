@@ -10,7 +10,7 @@ Extensions must be in the `./extensions` directory of your FreshRSS installation
 
 There are some FreshRSS extensions out there, developed by community members:
 
-### By [@kevinpapst](https://github.com/kevinpapst), [Web](http://www.kevinpapst.de/)
+### By [@kevinpapst](https://github.com/kevinpapst), [Web](https://www.kevinpapst.de/)
 
 * [Youtube/Peertube](https://github.com/kevinpapst/freshrss-youtube): Display videos from YouTube/PeerTube feeds inline
 * [Dilbert](https://github.com/kevinpapst/freshrss-dilbert): Display your daily Dilbert comic in FreshRSS directly
