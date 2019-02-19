@@ -120,6 +120,14 @@
       "author": "Lapineige",
       "url": "https://framagit.org/Lapineige/FreshRSS_Extension-ReadingTime/",
       "type": "gh-subdirectory"
+    },
+    {
+      "name": "ThreePanesView",
+      "version": 1.2,
+      "description": "Adds a third vertical pane along the article list, to display the article's content.",
+      "author": "Nicolas <nicofrand> Frandeboeuf",
+      "url": "https://framagit.org/nicofrand/xextension-threepanesview",
+      "type": "gh-subdirectory"
     }
   ]
 }
