@@ -107,8 +107,8 @@
     },
     {
       "name": "RedditImage",
-      "description": "Replace the link to the Reddit topic with the link to the resource",
-      "version": 0.1,
+      "description": "Modify reddit entries by ease access to the linked resource",
+      "version": 0.2,
       "author": "Alexis Degrugillier",
       "url": "https://github.com/aledeg/FreshRSS-extensions",
       "type": "gh-subdirectory"
