@@ -5,11 +5,11 @@
 
     var reading_time = {
         flux_list: null,
- flux: null,
- textContent: null,
- words_count: null,
- read_time: null,
- reading_time: null,
+        flux: null,
+        textContent: null,
+        words_count: null,
+        read_time: null,
+        reading_time: null,
 
  init: function() {
      var flux_list = document.querySelectorAll('[id^="flux_"]');
@@ -26,8 +26,8 @@
          if (document.body.clientWidth <= 840) { // in mobile mode, the feed name is not visible (there is only the favicon)
              // add the reading time right before article's title
              // in that case, [Time] - [Title] format is used instead of a "|" (as it looks better and doesn't take much more space)
-             if ( $("#" + reading_time.flux.id + " ul.horizontal-list li.item.title a")[0].textContent.substring(0,(reading_time.reading_time + 'm - ').length) != reading_time.reading_time + 'm - ' ) {
-                 $("#" + reading_time.flux.id + " ul.horizontal-list li.item.title a")[0].textContent = reading_time.reading_time + 'm - ' + $("#" + reading_time.flux.id + " ul.horizontal-list li.item.title a")[0].textContent;
+             if ( document.querySelector("#" + reading_time.flux.id + " ul.horizontal-list li.item.title a").textContent.substring(0,(reading_time.reading_time + 'm - ').length) != reading_time.reading_time + 'm - ' ) {
+                 document.querySelector("#" + reading_time.flux.id + " ul.horizontal-list li.item.title a").textContent = reading_time.reading_time + 'm - ' + document.querySelector("#" + reading_time.flux.id + " ul.horizontal-list li.item.title a").textContent;
              }
          } else {
              // add the reading time just after the feed name
