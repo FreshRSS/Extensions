@@ -1,23 +1,21 @@
 .horizontal-list {
- display: flex;
- /* uncomment to allow title to expand onto its own line */
- /*flex-wrap: wrap;*/
+    display: flex;
 }
 .horizontal-list.bottom {
- display: table;
+    display: table;
 }
 .flux .item {
- flex-shrink: 0;
- line-height: normal;
- padding: .3em 0;
+    flex-shrink: 0;
+    line-height: normal;
+    padding: .3em 0;
 }
 .flux .item > a {
- white-space: normal;
+    white-space: normal;
 }
 .flux:not(.current):hover .item.title {
- position: relative;
- max-width: inherit;
+    position: relative;
+    max-width: inherit;
 }
 .flux_header .title {
- flex: auto;
+    flex: auto;
 }
