@@ -114,6 +114,22 @@
       "type": "gh-subdirectory"
     },
     {
+      "name": "ReadingTime",
+      "description": "Add a reading time estimation for each article",
+      "version": 1.0,
+      "author": "Lapineige",
+      "url": "https://framagit.org/Lapineige/FreshRSS_Extension-ReadingTime/",
+      "type": "gh-subdirectory"
+    },
+    {
+      "name": "ThreePanesView",
+      "version": 1.3,
+      "description": "Adds a third vertical pane along the article list, to display the article's content.",
+      "author": "Nicolas <nicofrand> Frandeboeuf",
+      "url": "https://framagit.org/nicofrand/xextension-threepanesview",
+      "type": "gh-subdirectory"
+    },
+    {
       "name": "Invidious",
       "description": "Displays videos from YouTube feeds inline and replaces every source by the Invidious instance of your choice for an enhanced privacy (no tracking or limitation)",
       "version": 1.0,
