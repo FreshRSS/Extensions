@@ -112,6 +112,14 @@
       "author": "Alexis Degrugillier",
       "url": "https://github.com/aledeg/FreshRSS-extensions",
       "type": "gh-subdirectory"
+    },
+    {
+      "name": "Invidious",
+      "description": "Displays videos from YouTube feeds inline and replaces every source by the Invidious instance of your choice for an enhanced privacy (no tracking or limitation)",
+      "version": 1.0,
+      "author": "Korbak",
+      "url": "https://github.com/Korbak/freshrss-invidious",
+      "type": "gh-subdirectory"
     }
   ]
 }
