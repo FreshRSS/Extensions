@@ -33,3 +33,7 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@aledeg](https://github.com/aledeg)
 
 * [Reddit Image](https://github.com/aledeg/FreshRSS-extensions/tree/master/xExtension-RedditImage): Replace link to Reddit topic with resource link
+
+### By [@Korbak](https://github.com/Korbak)
+
+* [Invidious](https://github.com/Korbak/freshrss-invidious): Displays videos from YouTube feeds inline and replaces every source by the Invidious instance of your choice for an enhanced privacy (no tracking or limitation)
