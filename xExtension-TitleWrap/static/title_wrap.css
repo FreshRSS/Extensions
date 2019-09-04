@@ -1,0 +1,21 @@
+.horizontal-list {
+    display: flex;
+}
+.horizontal-list.bottom {
+    display: table;
+}
+.flux .item {
+    flex-shrink: 0;
+    line-height: normal;
+    padding: .3em 0;
+}
+.flux .item > a {
+    white-space: normal;
+}
+.flux:not(.current):hover .item.title {
+    position: relative;
+    max-width: inherit;
+}
+.flux_header .title {
+    flex: auto;
+}
