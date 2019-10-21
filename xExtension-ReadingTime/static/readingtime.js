@@ -27,8 +27,8 @@
          if (document.body.clientWidth <= 840) { // in mobile mode, the feed name is not visible (there is only the favicon)
              // add the reading time right before article's title
              // in that case, [Time] - [Title] format is used instead of a "|" (as it looks better and doesn't take much more space)
-                          if ( document.querySelector("#" + reading_time.flux.id + " ul.horizontal-list li.item.title a").textContent.substring(0,(reading_time.reading_time + 'm - ').length) != reading_time.reading_time + 'm - ' ) {
-                              document.querySelector("#" + reading_time.flux.id + " ul.horizontal-list li.item.title a").textContent = reading_time.reading_time + 'm - ' + document.querySelector("#" + reading_time.flux.id + " ul.horizontal-list li.item.title a").textContent;
+             if ( document.querySelector("#" + reading_time.flux.id + " ul.horizontal-list li.item.title a").textContent.substring(0,(reading_time.reading_time + 'm - ').length) != reading_time.reading_time + 'm - ' ) {
+                 document.querySelector("#" + reading_time.flux.id + " ul.horizontal-list li.item.title a").textContent = reading_time.reading_time + 'm - ' + document.querySelector("#" + reading_time.flux.id + " ul.horizontal-list li.item.title a").textContent;
              }
          } else {
              // add the reading time just after the feed name
@@ -42,7 +42,7 @@
 
  flux_words_count: function flux_words_count(flux) {
 
-     reading_time.textContent = flux.childNodes[2].childNodes[1].textContent; // get textContent, from the article itself (not the header, not the bottom line). `childNodes[2].childNodes[1]` gives : `<div class="content no_limit">` element
+     reading_time.textContent = flux.querySelector('.flux_content').textContent; // get textContent, from the article itself (not the header, not the bottom line). `childNodes[2].childNodes[1]` gives : `<div class="content no_limit">` element
 
      // split the text to count the words correctly (source: http://www.mediacollege.com/internet/javascript/text/count-words.html)
      reading_time.textContent = reading_time.textContent.replace(/(^\s*)|(\s*$)/gi,"");//exclude  start and end white-space
