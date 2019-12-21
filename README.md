@@ -43,3 +43,8 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@Korbak](https://github.com/Korbak)
 
 * [Invidious](https://github.com/Korbak/freshrss-invidious): Displays videos from YouTube feeds inline and replaces every source by the Invidious instance of your choice for an enhanced privacy (no tracking or limitation)
+
+### By [@CN-Tools](https://github.com/cn-tools)
+
+* [YouTube Channel 2 RSSFeed](https://github.com/cn-tools/cntools_FreshRssExtensions/tree/master/xExtension-YouTubeChannel2RssFeed): You can add a YouTube Channel URL and will get it as RSSFeed
+* [Feed Title Builder](https://github.com/cn-tools/cntools_FreshRssExtensions/tree/master/xExtension-FeedTitleBuilder): Build your own feed title based on url, the original feed title and the date the feed was added
