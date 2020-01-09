@@ -136,6 +136,22 @@
       "author": "Korbak",
       "url": "https://github.com/Korbak/freshrss-invidious",
       "type": "gh-subdirectory"
+    },
+    {
+      "name": "YouTubeChannel2RssFeed",
+      "description": "Transfer YouTube Channel URL into RSS Feed URL",
+      "version": 0.1,
+      "author": "CNTools | Clemens Neubauer",
+      "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
+      "type": "gh-subdirectory"
+    },
+    {
+      "name": "FeedTitleBuilder",
+      "description": "Build your own feed title based on url, the original feed title and the date the feed was added",
+      "version": 0.1,
+      "author": "CNTools | Clemens Neubauer",
+      "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
+      "type": "gh-subdirectory"
     }
   ]
 }
