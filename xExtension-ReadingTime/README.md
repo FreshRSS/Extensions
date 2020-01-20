@@ -1,6 +1,6 @@
 Extension pour FreshRSS (https://github.com/FreshRSS)
 
-**v1.1**
+**v1.2**
 
 Source: https://framagit.org/Lapineige/FreshRSS_Extension-ReadingTime
 
@@ -17,7 +17,7 @@ Pour le moment la vitesse de lecture est réglée manuellement à 300 mots/min. 
 
 Extension for FressRSS (https://github.com/FreshRSS)
 
-**v1.1**
+**v1.2**
 
 Source: https://framagit.org/Lapineige/FreshRSS_Extension-ReadingTime
 
