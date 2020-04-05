@@ -45,7 +45,7 @@ Along the following Apache configuration for the `www.example.org` virtual host:
   RewriteCond %{REQUEST_URI} ^/proxy/http:/+(.*)$
   RewriteRule ^ http://%1 [QSA,P,L]
   <Location "/proxy/">
-    # CRITICAL: Do NOT leave your proxy opened to everyone!!!
+    # CRITICAL: Do NOT leave your proxy open to everyone!!!
     # Local network
     Require ip 192.168.0.0/16 172.16.0.0/12 10.0.0.0/8
     # Users
