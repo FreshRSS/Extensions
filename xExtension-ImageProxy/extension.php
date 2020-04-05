@@ -5,7 +5,7 @@ class ImageProxyExtension extends Minz_Extension {
 	private const PROXY_URL = 'https://images.weserv.nl/?url=';
 	private const SCHEME_HTTP = '1';
 	private const SCHEME_HTTPS = '';
-	private const SCHEME_DEFAULT = 'http';
+	private const SCHEME_DEFAULT = 'auto';
 	private const SCHEME_INCLUDE = '';
 	private const URL_ENCODE = '1';
 
@@ -78,9 +78,18 @@ class ImageProxyExtension extends Minz_Extension {
 			}
 		}
 		else if (empty($scheme)) {
-			if (substr(FreshRSS_Context::$user_conf->image_proxy_scheme_default,0, 4) !== 'http') return $url;
-			if (FreshRSS_Context::$user_conf->image_proxy_scheme_include) {
-				$url = FreshRSS_Context::$user_conf->image_proxy_scheme_default . '://' . $url;
+			if (FreshRSS_Context::$user_conf->image_proxy_scheme_default === 'auto') {
+				if (FreshRSS_Context::$user_conf->image_proxy_scheme_include) {
+					$url = ((!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS'])!== 'off') ? 'https:' : 'http:') . $url;
+				}
+			}
+			else if (substr(FreshRSS_Context::$user_conf->image_proxy_scheme_default, 0, 4) === 'http') {
+				if (FreshRSS_Context::$user_conf->image_proxy_scheme_include) {
+					$url = FreshRSS_Context::$user_conf->image_proxy_scheme_default . ':' . $url;
+				}
+			}
+			else {  // do not proxy unschemed ("//path/...") URLs
+				return $url;
 			}
 		}
 		else {  // unknown/unsupported (non-http) scheme

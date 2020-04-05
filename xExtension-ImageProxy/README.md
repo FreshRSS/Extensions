@@ -12,7 +12,8 @@ To use it, upload this entire directory to the FreshRSS `./extensions` directory
 
 * `scheme_https` (default: `0`): whether to proxy HTTPS resources
 
-* `scheme_default` (default: `http`): which scheme to use for resources that do not include one (if set to `-`, those will not be proxied)
+* `scheme_default` (default: `auto`): which scheme to use for resources that do not include one; if set to `-`, those will not be proxied;
+  if set along `scheme_include`, the scheme included in the URL will either be `auto`-matically derived from your current connection or the one explicitly specified
 
 * `scheme_include` (default: `0`): whether to include the scheme - `http*://` - in the proxied URL
 
