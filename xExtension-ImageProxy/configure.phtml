@@ -5,9 +5,40 @@
 		<div class="group-controls">
 			<input type="url" name="image_proxy_url" id="image_proxy_url" value="<?php echo FreshRSS_Context::$user_conf->image_proxy_url; ?>">
 		</div>
-		<label class="group-name" for="image_proxy_force"><?php echo _t('ext.imageproxy.force'); ?></label>
+	</div>
+	<div class="form-group">
+		<label class="group-name" for="image_proxy_scheme_http"><?php echo _t('ext.imageproxy.scheme_http'); ?></label>
 		<div class="group-controls">
-			<input type="checkbox" name="image_proxy_force" id="image_proxy_force" value="1" <?php echo (FreshRSS_Context::$user_conf->image_proxy_force ? 'checked' : ''); ?>>
+			<input type="checkbox" name="image_proxy_scheme_http" id="image_proxy_scheme_http" value="1" <?php echo (FreshRSS_Context::$user_conf->image_proxy_scheme_http ? 'checked' : ''); ?>>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="group-name" for="image_proxy_scheme_https"><?php echo _t('ext.imageproxy.scheme_https'); ?></label>
+		<div class="group-controls">
+			<input type="checkbox" name="image_proxy_scheme_https" id="image_proxy_scheme_https" value="1" <?php echo (FreshRSS_Context::$user_conf->image_proxy_scheme_https ? 'checked' : ''); ?>>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="group-name" for="image_proxy_scheme_default"><?php echo _t('ext.imageproxy.scheme_default'); ?></label>
+		<div class="group-controls">
+			<select name="image_proxy_scheme_default" id="image_proxy_scheme_default">
+				<option value="<?php echo htmlentities(FreshRSS_Context::$user_conf->image_proxy_scheme_default); ?>" selected="selected"><?php echo htmlentities(FreshRSS_Context::$user_conf->image_proxy_scheme_default); ?></option>
+				<option value="-">-</option>
+				<option value="http">http</option>
+				<option value="https">https</option>
+			</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="group-name" for="image_proxy_scheme_include"><?php echo _t('ext.imageproxy.scheme_include'); ?></label>
+		<div class="group-controls">
+			<input type="checkbox" name="image_proxy_scheme_include" id="image_proxy_scheme_include" value="1" <?php echo (FreshRSS_Context::$user_conf->image_proxy_scheme_include ? 'checked' : ''); ?>>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="group-name" for="image_proxy_url_encode"><?php echo _t('ext.imageproxy.url_encode'); ?></label>
+		<div class="group-controls">
+			<input type="checkbox" name="image_proxy_url_encode" id="image_proxy_url_encode" value="1" <?php echo (FreshRSS_Context::$user_conf->image_proxy_url_encode ? 'checked' : ''); ?>>
 		</div>
 	</div>
 

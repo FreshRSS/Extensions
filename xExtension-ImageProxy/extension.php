@@ -1,45 +1,95 @@
 <?php
 
 class ImageProxyExtension extends Minz_Extension {
+	// Defaults
+	private const PROXY_URL = 'https://images.weserv.nl/?url=';
+	private const SCHEME_HTTP = '1';
+	private const SCHEME_HTTPS = '';
+	private const SCHEME_DEFAULT = 'http';
+	private const SCHEME_INCLUDE = '';
+	private const URL_ENCODE = '1';
+
 	public function init() {
 		$this->registerHook('entry_before_display',
 		                    array('ImageProxyExtension', 'setImageProxyHook'));
-
-		if (FreshRSS_Context::$user_conf->image_proxy_url != '') {
-			self::$proxy_url = FreshRSS_Context::$user_conf->image_proxy_url;
+		// Defaults
+		$save = false;
+		if (is_null(FreshRSS_Context::$user_conf->image_proxy_url)) {
+			FreshRSS_Context::$user_conf->image_proxy_url = self::PROXY_URL;
+			$save = true;
+		}
+		if (is_null(FreshRSS_Context::$user_conf->image_proxy_scheme_http)) {
+			FreshRSS_Context::$user_conf->image_proxy_scheme_http = self::SCHEME_HTTP;
+			$save = true;
+		}
+		if (is_null(FreshRSS_Context::$user_conf->image_proxy_scheme_https)) {
+			FreshRSS_Context::$user_conf->image_proxy_scheme_https = self::SCHEME_HTTPS;
+			// Legacy
+			if (!is_null(FreshRSS_Context::$user_conf->image_proxy_force)) {
+				FreshRSS_Context::$user_conf->image_proxy_scheme_https = FreshRSS_Context::$user_conf->image_proxy_force;
+				FreshRSS_Context::$user_conf->image_proxy_force = null;  // Minz -> unset
+			}
+			$save = true;
+		}
+		if (is_null(FreshRSS_Context::$user_conf->image_proxy_scheme_default)) {
+			FreshRSS_Context::$user_conf->image_proxy_scheme_default = self::SCHEME_DEFAULT;
+			$save = true;
+		}
+		if (is_null(FreshRSS_Context::$user_conf->image_proxy_scheme_include)) {
+			FreshRSS_Context::$user_conf->image_proxy_scheme_include = self::SCHEME_INCLUDE;
+			$save = true;
+		}
+		if (is_null(FreshRSS_Context::$user_conf->image_proxy_url_encode)) {
+			FreshRSS_Context::$user_conf->image_proxy_url_encode = self::URL_ENCODE;
+			$save = true;
+		}
+		if ($save) {
+			FreshRSS_Context::$user_conf->save();
 		}
 	}
-
-	public static $proxy_url = 'https://images.weserv.nl/?url=';
 
 	public function handleConfigureAction() {
 		$this->registerTranslates();
 
 		if (Minz_Request::isPost()) {
-			FreshRSS_Context::$user_conf->image_proxy_url = Minz_Request::param('image_proxy_url', '');
-			FreshRSS_Context::$user_conf->image_proxy_force = Minz_Request::param('image_proxy_force', '');
+			FreshRSS_Context::$user_conf->image_proxy_url = Minz_Request::param('image_proxy_url', self::PROXY_URL);
+			FreshRSS_Context::$user_conf->image_proxy_scheme_http = Minz_Request::param('image_proxy_scheme_http', '');
+			FreshRSS_Context::$user_conf->image_proxy_scheme_https = Minz_Request::param('image_proxy_scheme_https', '');
+			FreshRSS_Context::$user_conf->image_proxy_scheme_default = Minz_Request::param('image_proxy_scheme_default', self::SCHEME_DEFAULT);
+			FreshRSS_Context::$user_conf->image_proxy_scheme_include = Minz_Request::param('image_proxy_scheme_include', '');
+			FreshRSS_Context::$user_conf->image_proxy_url_encode = Minz_Request::param('image_proxy_url_encode', '');
 			FreshRSS_Context::$user_conf->save();
 		}
 	}
 
 	public static function getProxyImageUri($url) {
 		$parsed_url = parse_url($url);
-		if (isset($parsed_url['scheme']) && $parsed_url['scheme'] === 'http') {
-			$url = self::$proxy_url . rawurlencode(substr($url, strlen('http://')));
+		$scheme = isset($parsed_url['scheme']) ? $parsed_url['scheme'] : null;
+		if ($scheme === 'http') {
+			if (!FreshRSS_Context::$user_conf->image_proxy_scheme_http) return $url;
+			if (!FreshRSS_Context::$user_conf->image_proxy_scheme_include) {
+				$url = substr($url, 7);  // http://
+			}
 		}
-		// force proxy even with https, if set by the user
-		else if (isset($parsed_url['scheme']) &&
-				$parsed_url['scheme'] === 'https' &&
-				FreshRSS_Context::$user_conf->image_proxy_force) {
-			$url = self::$proxy_url . rawurlencode(substr($url, strlen('https://')));
+		else if ($scheme === 'https') {
+			if (!FreshRSS_Context::$user_conf->image_proxy_scheme_https) return $url;
+			if (!FreshRSS_Context::$user_conf->image_proxy_scheme_include) {
+				$url = substr($url, 8);  // https://
+			}
 		}
-		// oddly enough there are protocol-less IMG SRC attributes that don't actually work with HTTPS
-		// so I guess we should just run 'em all through the proxy
-		else if (empty($parsed_url['scheme'])) {
-			$url = self::$proxy_url . rawurlencode($url);
+		else if (empty($scheme)) {
+			if (substr(FreshRSS_Context::$user_conf->image_proxy_scheme_default,0, 4) !== 'http') return $url;
+			if (FreshRSS_Context::$user_conf->image_proxy_scheme_include) {
+				$url = FreshRSS_Context::$user_conf->image_proxy_scheme_default . '://' . $url;
+			}
 		}
-
-		return $url;
+		else {  // unknown/unsupported (non-http) scheme
+			return $url;
+		}
+		if (FreshRSS_Context::$user_conf->image_proxy_url_encode) {
+			$url = rawurlencode($url);
+		}
+		return FreshRSS_Context::$user_conf->image_proxy_url . $url;
 	}
 
 	public static function getSrcSetUris($matches) {

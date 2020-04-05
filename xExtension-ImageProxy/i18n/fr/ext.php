@@ -3,7 +3,11 @@
 return array(
 	'imageproxy' => array(
 		'proxy_url' => 'URL du proxy',
-		'force' => 'Toujours utiliser le proxy, même en https',
+		'scheme_http' => 'Proxy HTTP',
+		'scheme_https' => 'Proxy HTTPS',
+		'scheme_default' => 'Proxy indéterminées',
+		'scheme_include' => 'Inclure http*:// dans l\'URL',
+		'url_encode' => 'Encoder l\'URL',
 		'true' => 'Oui',
 		'false' => 'Non',
 	),
