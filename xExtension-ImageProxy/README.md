@@ -28,7 +28,7 @@ The source code for the images.weserv.nl proxy can be found at [github.com/andri
 
 ### Apache configuration
 
-In order to use Apache `mod_rewrite`, you will need to set the following settings:
+In order to use Apache [mod_rewrite](https://httpd.apache.org/docs/current/mod/mod_rewrite.html), you will need to set the following settings:
 
 * `proxy_url` = **https://www.example.org/proxy/**
 
