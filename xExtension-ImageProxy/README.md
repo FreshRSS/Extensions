@@ -39,7 +39,7 @@ In order to use Apache `mod_rewrite`, you will need to set the following setting
 Along the following Apache configuration for the `www.example.org` virtual host:
 
 ```
-  # WARNING: Multiple '/' are trimmed to a single one!
+  # WARNING: Multiple '/' in %{REQUEST_URI} are internally trimmed to a single one!
   RewriteCond %{REQUEST_URI} ^/proxy/https:/+(.*)$
   RewriteRule ^ https://%1 [QSA,P,L]
   RewriteCond %{REQUEST_URI} ^/proxy/http:/+(.*)$
