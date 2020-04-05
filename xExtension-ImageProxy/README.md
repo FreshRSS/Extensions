@@ -40,26 +40,26 @@ In order to use Apache [mod_rewrite](https://httpd.apache.org/docs/current/mod/m
 Along the following Apache configuration for the `www.example.org` virtual host:
 
 ```
-  # WARNING: Multiple '/' in %{REQUEST_URI} are internally trimmed to a single one!
-  RewriteCond %{REQUEST_URI} ^/proxy/https:/+(.*)$
-  RewriteRule ^ https://%1 [QSA,P,L]
-  RewriteCond %{REQUEST_URI} ^/proxy/http:/+(.*)$
-  RewriteRule ^ http://%1 [QSA,P,L]
-  # CRITICAL: Do NOT leave your proxy open to everyone!!!
-  <Location "/proxy/">
-    # Local network
-    Require ip 192.168.0.0/16 172.16.0.0/12 10.0.0.0/8
-    # Users
-    AuthType Basic
-    AuthName "Proxy - Authorized Users ONLY"
-    AuthBasicProvider file
-    AuthUserFile /etc/apache2/htpasswd/users
-    Require valid-user
-    # Local network OR authenticated users
-    Satisfy any
-  </Location>
-  # CRITICAL: Do NOT allow access to local resources!!!
-  <LocationMatch "^/proxy/.*(localhost|127\.0\.0\.1|::1|local\.domain)">
-    Require all denied
-  </LocationMatch>
+# WARNING: Multiple '/' in %{REQUEST_URI} are internally trimmed to a single one!
+RewriteCond %{REQUEST_URI} ^/proxy/https:/+(.*)$
+RewriteRule ^ https://%1 [QSA,P,L]
+RewriteCond %{REQUEST_URI} ^/proxy/http:/+(.*)$
+RewriteRule ^ http://%1 [QSA,P,L]
+# CRITICAL: Do NOT leave your proxy open to everyone!!!
+<Location "/proxy/">
+  # Local network
+  Require ip 192.168.0.0/16 172.16.0.0/12 10.0.0.0/8
+  # Users
+  AuthType Basic
+  AuthName "Proxy - Authorized Users ONLY"
+  AuthBasicProvider file
+  AuthUserFile /etc/apache2/htpasswd/users
+  Require valid-user
+  # Local network OR authenticated users
+  Satisfy any
+</Location>
+# CRITICAL: Do NOT allow access to local resources!!!
+<LocationMatch "^/proxy/.*(localhost|127\.0\.0\.1|::1|local\.domain)">
+  Require all denied
+</LocationMatch>
 ```
