@@ -63,7 +63,7 @@ RewriteRule ^ http://%1 [QSA,P,L]
 #  - (any) IPv6
 #  - localhost
 #  - local.domain (e.g. example.org)
-<LocationMatch "^/proxy/https?:/+([0-9]{1,3}(\.[0-9]{1,3}){3}|([0-9a-zA-Z]{0,4}:?)?(:[0-9a-zA-Z]{1,4}:){0,6}([.:][0-9a-zA-Z]{1,4}){1,7}|[^/]*(localhost|local\.domain|example\.org))(/|$)">
+<LocationMatch "^/proxy/https?:/+([0-9]{1,3}(\.[0-9]{1,3}){3}|([0-9a-fA-F]{0,4}:?)?(:[0-9a-fA-F]{1,4}:){0,6}([.:][0-9a-fA-F]{1,4}){1,7}|[^/]*(localhost|local\.domain|example\.org))(/|$)">
   Require all denied
 </LocationMatch>
 ```
