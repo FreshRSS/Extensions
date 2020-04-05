@@ -45,8 +45,8 @@ Along the following Apache configuration for the `www.example.org` virtual host:
   RewriteRule ^ https://%1 [QSA,P,L]
   RewriteCond %{REQUEST_URI} ^/proxy/http:/+(.*)$
   RewriteRule ^ http://%1 [QSA,P,L]
+  # CRITICAL: Do NOT leave your proxy open to everyone!!!
   <Location "/proxy/">
-    # CRITICAL: Do NOT leave your proxy open to everyone!!!
     # Local network
     Require ip 192.168.0.0/16 172.16.0.0/12 10.0.0.0/8
     # Users
@@ -58,4 +58,8 @@ Along the following Apache configuration for the `www.example.org` virtual host:
     # Local network OR authenticated users
     Satisfy any
   </Location>
+  # CRITICAL: Do NOT allow access to local resources!!!
+  <LocationMatch "^/proxy/.*(localhost|127\.0\.0\.1|::1|local\.domain)">
+    Require all denied
+  </LocationMatch>
 ```
