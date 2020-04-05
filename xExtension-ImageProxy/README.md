@@ -59,7 +59,11 @@ RewriteRule ^ http://%1 [QSA,P,L]
   Satisfy any
 </Location>
 # CRITICAL: Do NOT allow access to local resources!!!
-<LocationMatch "^/proxy/.*(localhost|127\.0\.0\.1|::1|local\.domain)">
+#  - (any) IPv4
+#  - (any) IPv6
+#  - localhost
+#  - local.domain (e.g. example.org)
+<LocationMatch "^/proxy/https?:/+([0-9]{1,3}(\.[0-9]{1,3}){3}|([0-9a-zA-Z]{0,4}:?)?(:[0-9a-zA-Z]{1,4}:){0,6}([.:][0-9a-zA-Z]{1,4}){1,7}|[^/]*(localhost|local\.domain|example\.org))(/|$)">
   Require all denied
 </LocationMatch>
 ```
