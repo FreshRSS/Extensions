@@ -7,7 +7,7 @@ class QuickCollapseExtension extends Minz_Extension {
 		$this->registerController('quickCollapse');
 
 		Minz_View::appendStyle($this->getFileUrl('style.css', 'css'));
-		Minz_View::appendScript(_url('quickCollapse', 'jsVars'));
-		Minz_View::appendScript($this->getFileUrl('script.js', 'js'));
+		Minz_View::appendScript(_url('quickCollapse', 'jsVars'), false, true, false);
+		Minz_View::appendScript($this->getFileUrl('script.js', 'js'), false, true, false);
 	}
 }
