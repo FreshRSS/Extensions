@@ -2,12 +2,12 @@
 
 class ImageProxyExtension extends Minz_Extension {
 	// Defaults
-	private const PROXY_URL = 'https://images.weserv.nl/?url=';
-	private const SCHEME_HTTP = '1';
-	private const SCHEME_HTTPS = '';
-	private const SCHEME_DEFAULT = 'auto';
-	private const SCHEME_INCLUDE = '';
-	private const URL_ENCODE = '1';
+	const PROXY_URL = 'https://images.weserv.nl/?url=';
+	const SCHEME_HTTP = '1';
+	const SCHEME_HTTPS = '';
+	const SCHEME_DEFAULT = 'auto';
+	const SCHEME_INCLUDE = '';
+	const URL_ENCODE = '1';
 
 	public function init() {
 		$this->registerHook('entry_before_display',
