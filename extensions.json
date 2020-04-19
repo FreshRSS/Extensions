@@ -160,6 +160,14 @@
       "author": "Marien Fressinaud",
       "url": "https://github.com/FreshRSS/Extensions",
       "type": "gh-subdirectory"
+    },
+    {
+      "name": "GReader Redate",
+      "description": "Workaround a dating problem on GReader API with Reeder and EasyRSS.",
+      "version": 1.0,
+      "author": "Julien Avérous",
+      "url": "https://github.com/javerous/freshrss-greader-redate",
+      "type": "gh-subdirectory"
     }
   ]
 }
