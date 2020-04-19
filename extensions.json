@@ -163,9 +163,9 @@
     },
     {
       "name": "GReader Redate",
-      "description": "Workaround a dating problem on GReader API with Reeder and EasyRSS.",
+      "description": "Works around a dating problem on GReader API with Reeder.",
       "version": 1.0,
-      "author": "Julien Avérous",
+      "author": "Julien AvÃ©rous",
       "url": "https://github.com/javerous/freshrss-greader-redate",
       "type": "gh-subdirectory"
     }
