@@ -160,6 +160,14 @@
       "author": "Marien Fressinaud",
       "url": "https://github.com/FreshRSS/Extensions",
       "type": "gh-subdirectory"
+    },
+    {
+      "name": "LatexSupport",
+      "description": "Add support for LaTeX notation rendering",
+      "version": "0.1.2",
+      "author": "Alexis Degrugillier",
+      "url": "https://github.com/aledeg/FreshRSS-extensions",
+      "type": "gh-subdirectory"
     }
   ]
 }
