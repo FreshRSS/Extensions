@@ -175,6 +175,7 @@
       "version": "0.1.2",
       "author": "Alexis Degrugillier",
       "url": "https://github.com/aledeg/FreshRSS-extensions",
+      "type": "gh-subdirectory"
     }
   ]
 }
