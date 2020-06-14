@@ -162,12 +162,19 @@
       "type": "gh-subdirectory"
     },
     {
+      "name": "GReader Redate",
+      "description": "Works around a dating problem on GReader API with Reeder and EasyRSS (prior to 0.7.5).",
+      "version": 1.0,
+      "author": "Julien Avérous",
+      "url": "https://github.com/javerous/freshrss-greader-redate",
+      "type": "gh-subdirectory"
+    },
+    {
       "name": "LatexSupport",
       "description": "Add support for LaTeX notation rendering",
       "version": "0.1.2",
       "author": "Alexis Degrugillier",
       "url": "https://github.com/aledeg/FreshRSS-extensions",
-      "type": "gh-subdirectory"
     }
   ]
 }
