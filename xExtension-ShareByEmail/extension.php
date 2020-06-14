@@ -9,7 +9,7 @@ class ShareByEmailExtension extends Minz_Extension {
 
 		FreshRSS_Share::register([
 			'type' => 'email',
-			'url' => _url('shareByEmail', 'share') . '&amp;id=~ID~',
+			'url' => Minz_Url::display(['c' => 'shareByEmail', 'a' => 'share']) . '&amp;id=~ID~',
 			'transform' => [],
 			'form' => 'simple',
 			'method' => 'GET',
