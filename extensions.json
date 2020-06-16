@@ -1,229 +1,324 @@
 {
-  "version": 0.1,
-  "extensions": [
-    {
-      "name": "Custom CSS",
-      "description": "A FreshRSS extension which give ability to create user-specific CSS rules to apply in addition of the actual theme",
-      "version": 0.2,
-      "author": "Marien Fressinaud",
-      "url": "https://github.com/FreshRSS/Extensions",
-      "type": "gh-subdirectory"
-    },
-    {
-      "name": "Custom JS",
-      "description": "A FreshRSS extension which give ability to create user-specific Javascript rules to apply in addition of the actual theme",
-      "version": 0.2,
-      "author": "Frans de Jonge",
-      "url": "https://github.com/FreshRSS/Extensions",
-      "type": "gh-subdirectory"
-    },
-    {
-      "name": "Image Proxy",
-      "description": "No insecure content warnings or disappearing images on https sites",
-      "version": 0.4,
-      "author": "Frans de Jonge",
-      "url": "https://github.com/FreshRSS/Extensions",
-      "type": "gh-subdirectory"
-    },
-    {
-      "name": "Sticky Feeds",
-      "description": "Set the feed aside in the main stream following the window scroll",
-      "version": 0.1,
-      "author": "Marien Fressinaud",
-      "url": "https://github.com/FreshRSS/Extensions",
-      "type": "gh-subdirectory"
-    },
-    {
-      "name": "YouTube/PeerTube Video Feed",
-      "description": "Display videos from YouTube and PeerTube feeds inline",
-      "version": 0.10,
-      "author": "Kevin Papst",
-      "url": "https://github.com/kevinpapst/freshrss-youtube",
-      "type": "gh-subdirectory"
-    },
-    {
-      "name": "Dilberts Daily Comic",
-      "description": "Embeds the Dilbert daily comic strip in your feed items",
-      "version": 0.3,
-      "author": "Kevin Papst",
-      "url": "https://github.com/kevinpapst/freshrss-dilbert",
-      "type": "gh-subdirectory"
-    },
-    {
-      "name": "Teem Video Feed",
-      "description": "Embeds videos from the skydiving website jointheteem.com",
-      "version": 0.1,
-      "author": "Kevin Papst",
-      "url": "https://github.com/kevinpapst/freshrss-teem",
-      "type": "gh-subdirectory"
-    },
-    {
-      "name": "Fixed Nav Menu",
-      "description": "Sets the position of the navigation menu to fixed when scrolling down",
-      "version": 0.1,
-      "author": "Marco Heizmann",
-      "url": "https://github.com/oyox/FreshRSS-extensions",
-      "type": "gh-subdirectory"
-    },
-    {
-      "name": "Mobile Scroll Menu",
-      "description": "Automatically hides the header menu on mobile phones, when scrolling down and shows it when scrolling up",
-      "version": 0.2,
-      "author": "Marco Heizmann",
-      "url": "https://github.com/oyox/FreshRSS-extensions",
-      "type": "gh-subdirectory"
-    },
-    {
-      "name": "Smart Mobile Menu",
-      "description": "Minimizes the required button space and groups buttons",
-      "version": 0.1,
-      "author": "Marco Heizmann",
-      "url": "https://github.com/oyox/FreshRSS-extensions",
-      "type": "gh-subdirectory"
-    },
-    {
-      "name": "Touch Control",
-      "description": "Add touch gestures to FreshRSS",
-      "version": 0.2,
-      "author": "Marco Heizmann",
-      "url": "https://github.com/oyox/FreshRSS-extensions",
-      "type": "gh-subdirectory"
-    },
-    {
-      "name": "Auto Refresh",
-      "description": "Automatically refreshes the RSS feed when there is no activity",
-      "version": 1.0,
-      "author": "Essa AlAwadi",
-      "url": "https://github.com/Eisa01/FreshRSS---Auto-Refresh-Extension",
-      "type": "gh-subdirectory"
-    },
-    {
-      "name": "Reddit Image",
-      "description": "Modify reddit entries by displaying known medias and easing access to the linked resource",
-      "version": "0.12.0",
-      "author": "Alexis Degrugillier",
-      "url": "https://github.com/aledeg/xExtension-RedditImage",
-      "type": "gh-subdirectory"
-    },
-    {
-      "name": "Reading Time",
-      "description": "Add a reading time estimation for each article",
-      "version": 1.0,
-      "author": "Lapineige",
-      "url": "https://framagit.org/Lapineige/FreshRSS_Extension-ReadingTime/",
-      "type": "gh-subdirectory"
-    },
-    {
-      "name": "ThreePanesView",
-      "version": 1.11,
-      "description": "Adds a third vertical pane along the article list, to display the article's content.",
-      "author": "Nicolas <nicofrand> Frandeboeuf",
-      "url": "https://framagit.org/nicofrand/xextension-threepanesview",
-      "type": "gh-subdirectory"
-    },
-    {
-      "name": "Invidious Video Feed",
-      "description": "Displays videos from YouTube feeds inline and replaces every source by the Invidious instance of your choice for an enhanced privacy (no tracking or limitation)",
-      "version": 1.0,
-      "author": "Korbak",
-      "url": "https://github.com/Korbak/freshrss-invidious",
-      "type": "gh-subdirectory"
-    },
-    {
-      "name": "YouTubeChannel2RssFeed",
-      "description": "Transfer YouTube Channel URL into RSS Feed URL",
-      "version": 0.2,
-      "author": "CNTools | Clemens Neubauer",
-      "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
-      "type": "gh-subdirectory"
-    },
-    {
-      "name": "FeedTitleBuilder",
-      "description": "Build your own feed title based on url, the original feed title and the date the feed was added",
-      "version": 0.1,
-      "author": "CNTools | Clemens Neubauer",
-      "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
-      "type": "gh-subdirectory"
-    },
-    {
-      "name": "Copy2Clipboard",
-      "description": "Add a button in the navigation bar to copy the destination links of all visible entries into clipboard",
-      "version": 0.3,
-      "author": "CNTools | Clemens Neubauer",
-      "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
-      "type": "gh-subdirectory"
-    },
-    {
-      "name": "Share By Email",
-      "description": "Improve the sharing by email system.",
-      "version": 0.1,
-      "author": "Marien Fressinaud",
-      "url": "https://github.com/FreshRSS/Extensions",
-      "type": "gh-subdirectory"
-    },
-    {
-      "name": "GReader Redate",
-      "description": "Works around a dating problem on GReader API with Reeder and EasyRSS (prior to 0.7.5).",
-      "version": 1.0,
-      "author": "Julien Avérous",
-      "url": "https://github.com/javerous/freshrss-greader-redate",
-      "type": "gh-subdirectory"
-    },
-    {
-      "name": "LaTeX support",
-      "description": "Add support for LaTeX notation rendering",
-      "version": "0.1.4",
-      "author": "Alexis Degrugillier",
-      "url": "https://github.com/aledeg/xExtension-LatexSupport",
-      "type": "gh-subdirectory"
-    },
-    {
-      "name": "Date format",
-      "description": "Change how dates are displayed in the interface",
-      "version": "0.2.1",
-      "author": "Alexis Degrugillier",
-      "url": "https://github.com/aledeg/xExtension-DateFormat",
-      "type": "gh-subdirectory"
-    },
-    {
-      "name": "Quick Collapse",
-      "description": "Quickly change from folded to unfolded articles",
-      "version": 0.1,
-      "author": "romibi and Marien Fressinaud",
-      "url": "https://github.com/FreshRSS/Extensions",
-      "type": "gh-subdirectory"
-    },
-    {
-      "name": "RSS-Bridge",
-      "description": "Run URLs through <a href=\"https://github.com/rss-bridge/rss-bridge\">RSS-Bridge</a> detection",
-      "version": 1.1,
-      "author": "Devon Hess",
-      "url": "https://github.com/DevonHess/FreshRSS-Extensions",
-      "type": "gh-subdirectory"
-    },
-    {
-      "name": "Clickable Links",
-      "description": "Replaces non-clickable plain text URLs found in articles with clickable HTML links",
-      "version": 1.01,
-      "author": "Kapdap",
-      "url": "https://github.com/Kapdap/freshrss-extensions",
-      "type": "gh-subdirectory"
-    },
-    {
-      "name": "Explosm Daily Comic",
-      "version": "0.1.1",
-      "description": "Embed the images from Explosm daily feed inside article content.",
-      "author": "dohseven",
-      "url": "https://framagit.org/dohseven/freshrss-explosm",
-      "type": "gh-subdirectory"
-    },
-    {
-      "name": "Whitelist",
-      "version": "0.0.1",
-      "description": "White list the accessible feeds to users",
-      "author": "Alexis Degrugillier",
-      "url": "https://github.com/aledeg/xExtension-WhiteList",
-      "type": "gh-subdirectory"
-    }
-  ]
+    "version": 0.1,
+    "extensions": [
+        {
+            "name": "Auto Refresh",
+            "author": "Essa AlAwadi",
+            "description": "Automatically refreshes the RSS feed when there is no activity",
+            "version": 1.3,
+            "entrypoint": "AutoRefresh",
+            "type": "user",
+            "url": "https:\/\/github.com\/Eisa01\/FreshRSS---Auto-Refresh-Extension",
+            "method": "git",
+            "directory": "xExtension-AutoRefresh"
+        },
+        {
+            "name": "Copy2Clipboard",
+            "author": "CNTools | Clemens Neubauer",
+            "description": "Copy the destination links of all visible entries into clipboard",
+            "version": 0.3,
+            "entrypoint": "Copy2Clipboard",
+            "type": "user",
+            "url": "https:\/\/github.com\/cn-tools\/cntools_FreshRssExtensions",
+            "method": "git",
+            "directory": "xExtension-Copy2Clipboard"
+        },
+        {
+            "name": "Custom CSS",
+            "author": "Marien Fressinaud",
+            "description": "Give possibility to overwrite the CSS with a user-specific rules.",
+            "version": 0.2,
+            "entrypoint": "CustomCSS",
+            "type": "user",
+            "url": "https:\/\/github.com\/FreshRSS\/Extensions",
+            "method": "git",
+            "directory": "xExtension-CustomCSS"
+        },
+        {
+            "name": "Custom JS",
+            "author": "Frans de Jonge",
+            "description": "Apply custom JS.",
+            "version": 0.2,
+            "entrypoint": "CustomJS",
+            "type": "user",
+            "url": "https:\/\/github.com\/FreshRSS\/Extensions",
+            "method": "git",
+            "directory": "xExtension-CustomJS"
+        },
+        {
+            "name": "Date Format",
+            "author": "Alexis Degrugillier",
+            "description": "Change how dates are displayed in the interface",
+            "version": "0.2.1",
+            "entrypoint": "DateFormat",
+            "type": "user",
+            "url": "https:\/\/github.com\/aledeg\/xExtension-DateFormat",
+            "method": "git",
+            "directory": "6"
+        },
+        {
+            "name": "Dilberts Daily Comic",
+            "author": "Kevin Papst",
+            "description": "Embed the images from Dilberts daily feed inside article content.",
+            "version": "0.3.1",
+            "entrypoint": "Dilbert",
+            "type": "system",
+            "url": "https:\/\/github.com\/kevinpapst\/freshrss-dilbert",
+            "method": "git",
+            "directory": "xExtension-Dilbert"
+        },
+        {
+            "name": "FeedTitleBuilder",
+            "author": "CNTools | Clemens Neubauer",
+            "description": "Build your own feed title based on url, the original feed title and the date the feed was added",
+            "version": 0.1,
+            "entrypoint": "FeedTitleBuilder",
+            "type": "user",
+            "url": "https:\/\/github.com\/cn-tools\/cntools_FreshRssExtensions",
+            "method": "git",
+            "directory": "xExtension-FeedTitleBuilder"
+        },
+        {
+            "name": "Fixed Nav Menu",
+            "author": "Marco Heizmann",
+            "description": "Sets the position of the navigation menu to fixed when scrolling down.",
+            "version": 0.1,
+            "entrypoint": "FixedNavMenu",
+            "type": "user",
+            "url": "https:\/\/github.com\/oyox\/FreshRSS-extensions",
+            "method": "git",
+            "directory": "xExtension-FixedNavMenu"
+        },
+        {
+            "name": "GReader Redate",
+            "author": "Julien Av\u00e9rous",
+            "description": "Use published date instead of fetching date.",
+            "version": 1.1,
+            "entrypoint": "GReaderRedate",
+            "type": "user",
+            "url": "https:\/\/github.com\/javerous\/freshrss-greader-redate",
+            "method": "git",
+            "directory": "xExtension-GReaderRedate"
+        },
+        {
+            "name": "Image Proxy",
+            "author": "Frans de Jonge",
+            "description": "No insecure content warnings or disappearing images.",
+            "version": 0.5,
+            "entrypoint": "ImageProxy",
+            "type": "user",
+            "url": "https:\/\/github.com\/FreshRSS\/Extensions",
+            "method": "git",
+            "directory": "xExtension-ImageProxy"
+        },
+        {
+            "name": "Invidious Video Feed",
+            "author": "Korbak (forked from Kevin Papst)",
+            "description": "Embed YouTube feeds inside article content, but with Invidious.",
+            "version": 1.1,
+            "entrypoint": "Invidious",
+            "type": "system",
+            "url": "https:\/\/github.com\/Korbak\/freshrss-invidious",
+            "method": "git",
+            "directory": "xExtension-Invidious"
+        },
+        {
+            "name": "Keep Folder State",
+            "author": "Marco Heizmann",
+            "description": "Stores the state of the folders locally and expand them automatically if necessary.",
+            "version": 0.1,
+            "entrypoint": "KeepFolderState",
+            "type": "user",
+            "url": "https:\/\/github.com\/oyox\/FreshRSS-extensions",
+            "method": "git",
+            "directory": "xExtension-KeepFolderState"
+        },
+        {
+            "name": "LaTeX support",
+            "author": "Alexis Degrugillier",
+            "description": "Add support for LaTeX notation rendering",
+            "version": "0.1.4",
+            "entrypoint": "LatexSupport",
+            "type": "user",
+            "url": "https:\/\/github.com\/aledeg\/xExtension-LatexSupport",
+            "method": "git",
+            "directory": "7"
+        },
+        {
+            "name": "Mobile Scroll Menu",
+            "author": "Marco Heizmann",
+            "description": "Automatically hides the header menu on mobile phones, when scrolling down and shows it when scrolling up.",
+            "version": 0.2,
+            "entrypoint": "MobileScrollMenu",
+            "type": "user",
+            "url": "https:\/\/github.com\/oyox\/FreshRSS-extensions",
+            "method": "git",
+            "directory": "xExtension-MobileScrollMenu"
+        },
+        {
+            "name": "Quick Collapse",
+            "author": "romibi and Marien Fressinaud",
+            "description": "Quickly change from folded to unfolded articles",
+            "version": 0.1,
+            "entrypoint": "QuickCollapse",
+            "type": "user",
+            "url": "https:\/\/github.com\/FreshRSS\/Extensions",
+            "method": "git",
+            "directory": "xExtension-QuickCollapse"
+        },
+        {
+            "name": "Reading Time",
+            "author": "Lapineige",
+            "description": "Add a reading time estimation next to each article title",
+            "version": 1.2,
+            "entrypoint": "ReadingTime",
+            "type": "user",
+            "url": "https:\/\/framagit.org\/Lapineige\/FreshRSS_Extension-ReadingTime\/",
+            "method": "git",
+            "directory": "10"
+        },
+        {
+            "name": "ReadingTime",
+            "author": "Lapineige",
+            "description": "Add a reading time estimation next to each article title",
+            "version": 1.2,
+            "entrypoint": "ReadingTime",
+            "type": "user",
+            "url": "https:\/\/github.com\/FreshRSS\/Extensions",
+            "method": "git",
+            "directory": "xExtension-ReadingTime"
+        },
+        {
+            "name": "Reddit Image",
+            "author": "Alexis Degrugillier",
+            "description": "Modify reddit entries by displaying known medias and easing access to the linked resource",
+            "version": "0.11.1",
+            "entrypoint": "RedditImage",
+            "type": "user",
+            "url": "https:\/\/github.com\/aledeg\/xExtension-RedditImage",
+            "method": "git",
+            "directory": "8"
+        },
+        {
+            "name": "Share By Email",
+            "author": "Marien Fressinaud",
+            "description": "Improve the sharing by email system.",
+            "version": 0.1,
+            "entrypoint": "ShareByEmail",
+            "type": "user",
+            "url": "https:\/\/github.com\/FreshRSS\/Extensions",
+            "method": "git",
+            "directory": "xExtension-ShareByEmail"
+        },
+        {
+            "name": "Smart Mobile Menu",
+            "author": "Marco Heizmann",
+            "description": "Minimizes the required button space and groups buttons.",
+            "version": 0.1,
+            "entrypoint": "SmartMobileMenu",
+            "type": "user",
+            "url": "https:\/\/github.com\/oyox\/FreshRSS-extensions",
+            "method": "git",
+            "directory": "xExtension-SmartMobileMenu"
+        },
+        {
+            "name": "Sticky Feeds",
+            "author": "Marien Fressinaud",
+            "description": "Set the feed aside in the main stream following the window scroll.",
+            "version": 0.1,
+            "entrypoint": "StickyFeeds",
+            "type": "user",
+            "url": "https:\/\/github.com\/FreshRSS\/Extensions",
+            "method": "git",
+            "directory": "xExtension-StickyFeeds"
+        },
+        {
+            "name": "Teem Video Feed",
+            "author": "Kevin Papst",
+            "description": "Embed video from JOINTHETEEM inside article content.",
+            "version": 0.1,
+            "entrypoint": "Teem",
+            "type": "system",
+            "url": "https:\/\/github.com\/kevinpapst\/freshrss-teem",
+            "method": "git",
+            "directory": "xExtension-Teem"
+        },
+        {
+            "name": "ThreePanesView",
+            "author": "nicofrand",
+            "description": "Adds a third vertical pane along the articles list, to display the articles content.",
+            "version": 1.11,
+            "entrypoint": "ThreePanesView",
+            "type": "user",
+            "url": "https:\/\/framagit.org\/nicofrand\/xextension-threepanesview",
+            "method": "git",
+            "directory": "11"
+        },
+        {
+            "name": "TinyTinyRSS API",
+            "author": "Marien Fressinaud",
+            "description": "Provides an API compliant with TinyTinyRSS applications.",
+            "version": 0.1,
+            "entrypoint": "TTRSS_API",
+            "type": "system",
+            "url": "https:\/\/github.com\/FreshRSS\/Extensions",
+            "method": "git",
+            "directory": "xExtension-TTRSS_API"
+        },
+        {
+            "name": "Title-Wrap",
+            "author": "\u20a3rans de Jonge, Joris Kinable",
+            "description": "Applies a line-wrap to long article titles, as opposed to truncating the title when it overflows its display area.",
+            "version": 0.1,
+            "entrypoint": "TitleWrap",
+            "type": "user",
+            "url": "https:\/\/github.com\/FreshRSS\/Extensions",
+            "method": "git",
+            "directory": "xExtension-TitleWrap"
+        },
+        {
+            "name": "Touch Control",
+            "author": "Marco Heizmann",
+            "description": "Add touch gestures to FreshRSS.",
+            "version": 0.2,
+            "entrypoint": "TouchControl",
+            "type": "user",
+            "url": "https:\/\/github.com\/oyox\/FreshRSS-extensions",
+            "method": "git",
+            "directory": "xExtension-TouchControl"
+        },
+        {
+            "name": "White List",
+            "author": "Alexis Degrugillier",
+            "description": "White list the accessible feeds to users",
+            "version": "0.0.1",
+            "entrypoint": "WhiteList",
+            "type": "system",
+            "url": "https:\/\/github.com\/aledeg\/xExtension-WhiteList",
+            "method": "git",
+            "directory": "9"
+        },
+        {
+            "name": "YouTube\/PeerTube Video Feed",
+            "author": "Kevin Papst",
+            "description": "Embed YouTube\/PeerTube feeds inside article content.",
+            "version": 0.1,
+            "entrypoint": "YouTube",
+            "type": "user",
+            "url": "https:\/\/github.com\/kevinpapst\/freshrss-youtube",
+            "method": "git",
+            "directory": "xExtension-YouTube"
+        },
+        {
+            "name": "YouTubeChannel2RssFeed",
+            "author": "CNTools | Clemens Neubauer",
+            "description": "Transfer YouTube Channel URL into RSS Feed URL.",
+            "version": 0.2,
+            "entrypoint": "YouTubeChannel2RssFeed",
+            "type": "user",
+            "url": "https:\/\/github.com\/cn-tools\/cntools_FreshRssExtensions",
+            "method": "git",
+            "directory": "xExtension-YouTubeChannel2RssFeed"
+        }
+    ]
 }
