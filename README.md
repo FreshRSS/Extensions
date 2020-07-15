@@ -32,6 +32,8 @@ There are some FreshRSS extensions out there, developed by community members:
 
 ### By [@aledeg](https://github.com/aledeg)
 
+* [Date Format](https://github.com/aledeg/FreshRSS-extensions/tree/master/xExtension-DateFormat): Change how dates are displayed in the interface
+* [Latex Support](https://github.com/aledeg/FreshRSS-extensions/tree/master/xExtension-LatexSupport): Add support for LaTeX notation rendering
 * [Reddit Image](https://github.com/aledeg/FreshRSS-extensions/tree/master/xExtension-RedditImage): Replace link to Reddit topic with resource link
 
 
