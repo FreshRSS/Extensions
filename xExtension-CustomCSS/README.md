@@ -40,12 +40,11 @@ The following CSS rules let you have a more comfortable mobile view by hiding so
 
 The result is shown below:
 
-\begin{table}[]
-\begin{tabular}{l}
-Desktop screen resolution: \\
-![Desktop](desktop_resolution.png)                           \\
-Mobile screen resolution:  \\
+Desktop screen resolution:
+
+![Desktop](desktop_resolution.png)
+
+Mobile screen resolution:
+
 ![Mobile](mobile_resolution.png)                          
-\end{tabular}
-\end{table}
 
