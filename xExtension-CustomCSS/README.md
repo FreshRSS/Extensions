@@ -15,7 +15,7 @@ To use it, upload this directory in your `./extensions` directory and enable it 
 
 The following CSS rules let you have a more comfortable mobile view by hiding some icons (read/unread article, mark as favorite and RSS feed's favicon) and by reducing text size. It also displays the name of the subscribed feed, instead of the favicon:
 
-```
+```css
 @media (max-width: 840px) 
 {
 	.flux_header .item.website
@@ -47,4 +47,3 @@ Desktop screen resolution:
 Mobile screen resolution:
 
 ![Mobile](mobile_resolution.png)                          
-
