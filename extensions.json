@@ -66,14 +66,6 @@
       "type": "gh-subdirectory"
     },
     {
-      "name": "Keep Folder State",
-      "description": "Stores the state of the folders locally and expand them automatically if necessary",
-      "version": 0.1,
-      "author": "Marco Heizmann",
-      "url": "https://github.com/oyox/FreshRSS-extensions",
-      "type": "gh-subdirectory"
-    },
-    {
       "name": "Mobile Scroll Menu",
       "description": "Automatically hides the header menu on mobile phones, when scrolling down and shows it when scrolling up",
       "version": 0.2,
