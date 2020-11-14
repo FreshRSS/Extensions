@@ -187,7 +187,6 @@
     },
     {
       "name": "Quick Collapse",
-      "description": "Improve the sharing by email system.",
       "description": "Quickly change from folded to unfolded articles",
       "version": 0.1,
       "author": "romibi and Marien Fressinaud",
