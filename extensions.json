@@ -187,11 +187,18 @@
     },
     {
       "name": "Quick Collapse",
-      "description": "Improve the sharing by email system.",
       "description": "Quickly change from folded to unfolded articles",
       "version": 0.1,
       "author": "romibi and Marien Fressinaud",
       "url": "https://github.com/FreshRSS/Extensions",
+      "type": "gh-subdirectory"
+    },
+    {
+      "name": "RSS-Bridge",
+      "description": "Run URLs through <a href=\"https://github.com/rss-bridge/rss-bridge\">RSS-Bridge</a> detection",
+      "version": 1,
+      "author": "Devon Hess",
+      "url": "https://github.com/DevonHess/FreshRSS-Extensions",
       "type": "gh-subdirectory"
     }
   ]

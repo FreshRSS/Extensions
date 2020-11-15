@@ -50,3 +50,7 @@ There are some FreshRSS extensions out there, developed by community members:
 
 * [YouTube Channel 2 RSSFeed](https://github.com/cn-tools/cntools_FreshRssExtensions/tree/master/xExtension-YouTubeChannel2RssFeed): You can add a YouTube Channel URL and will get it as RSSFeed
 * [Feed Title Builder](https://github.com/cn-tools/cntools_FreshRssExtensions/tree/master/xExtension-FeedTitleBuilder): Build your own feed title based on url, the original feed title and the date the feed was added
+
+### By [@DevonHess](https://github.com/DevonHess)
+
+* [RSS-Bridge](https://github.com/DevonHess/FreshRSS-Extensions/tree/main/xExtension-RssBridge): Run URLs through [RSS-Bridge](https://github.com/rss-bridge/rss-bridge) detection
