@@ -52,7 +52,7 @@ class ImageProxyExtension extends Minz_Extension {
 		$this->registerTranslates();
 
 		if (Minz_Request::isPost()) {
-			FreshRSS_Context::$user_conf->image_proxy_url = Minz_Request::param('image_proxy_url', self::PROXY_URL);
+			FreshRSS_Context::$user_conf->image_proxy_url = Minz_Request::param('image_proxy_url', self::PROXY_URL, true);
 			FreshRSS_Context::$user_conf->image_proxy_scheme_http = Minz_Request::param('image_proxy_scheme_http', '');
 			FreshRSS_Context::$user_conf->image_proxy_scheme_https = Minz_Request::param('image_proxy_scheme_https', '');
 			FreshRSS_Context::$user_conf->image_proxy_scheme_default = Minz_Request::param('image_proxy_scheme_default', self::SCHEME_DEFAULT);
