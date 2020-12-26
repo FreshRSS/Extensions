@@ -54,3 +54,7 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@DevonHess](https://github.com/DevonHess)
 
 * [RSS-Bridge](https://github.com/DevonHess/FreshRSS-Extensions/tree/main/xExtension-RssBridge): Run URLs through [RSS-Bridge](https://github.com/rss-bridge/rss-bridge) detection
+
+### By [@Kapdap](https://github.com/Kapdap)
+
+* [Clickable Links](https://github.com/kapdap/freshrss-extensions/tree/master/xExtension-ClickableLinks): Replaces non-clickable plain text URLs found in articles with clickable HTML links
