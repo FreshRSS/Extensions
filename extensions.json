@@ -200,6 +200,14 @@
       "author": "Devon Hess",
       "url": "https://github.com/DevonHess/FreshRSS-Extensions",
       "type": "gh-subdirectory"
+    },
+    {
+      "name": "Clickable Links",
+      "description": "Replaces non-clickable plain text URLs found in articles with clickable HTML links",
+      "version": 1,
+      "author": "Kapdap",
+      "url": "https://github.com/Kapdap/freshrss-extensions",
+      "type": "gh-subdirectory"
     }
   ]
 }
