@@ -52,24 +52,27 @@ Mobile screen resolution:
 
 The Top Menu within the mobile view might look a little bit cluttered, depending on the theme. The following CSS rules allow to hide unneccessary top menu buttons or input boxes.
 ```css
-/* Hides "Actions" Menu in Mobile View */
-#nav_menu_actions {
-    display: none;
-}
-
-/* Hides "Views" Menu in Mobile View */
-#nav_menu_views {
-    display: none;
-}
-
-/* Hides "Search" Input Box in Mobile View */
-.nav_menu .item.search {
-    display: none;
-}
-
-/* Hides the Dropdown Menu Button next to the "Mark all read" Button in Mobile View */
-#mark-read-menu .dropdown {
-    display: none;
+@media (max-width: 840px) 
+{
+    /* Hides "Actions" Menu in Mobile View */
+    #nav_menu_actions {
+        display: none;
+    }
+    
+    /* Hides "Views" Menu in Mobile View */
+    #nav_menu_views {
+        display: none;
+    }
+    
+    /* Hides "Search" Input Box in Mobile View */
+    .nav_menu .item.search {
+        display: none;
+    }
+    
+    /* Hides the Dropdown Menu Button next to the "Mark all read" Button in Mobile View */
+    #mark-read-menu .dropdown {
+        display: none;
+    }
 }
 ```
 
