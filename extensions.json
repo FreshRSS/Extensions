@@ -108,7 +108,7 @@
     {
       "name": "Reddit Image",
       "description": "Modify reddit entries by displaying known medias and easing access to the linked resource",
-      "version": "0.9.0",
+      "version": "0.9.1",
       "author": "Alexis Degrugillier",
       "url": "https://github.com/aledeg/FreshRSS-extensions",
       "type": "gh-subdirectory"
