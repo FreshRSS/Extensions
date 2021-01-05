@@ -9,6 +9,14 @@ class ImageProxyExtension extends Minz_Extension {
 	const SCHEME_INCLUDE = '';
 	const URL_ENCODE = '1';
 
+	public function install() {
+		return true;
+	}
+
+	public function uninstall() {
+		return true;
+	}
+
 	public function init() {
 		$this->registerHook('entry_before_display',
 		                    array('ImageProxyExtension', 'setImageProxyHook'));

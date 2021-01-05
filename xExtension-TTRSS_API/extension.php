@@ -1,6 +1,9 @@
 <?php
 
 class TTRSS_APIExtension extends Minz_Extension {
+	public function handleConfigureAction() {
+	}
+
 	public function init() {
 		$this->registerHook('post_update',
 		                    array($this, 'postUpdateHook'));

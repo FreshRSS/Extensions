@@ -1,6 +1,14 @@
 <?php
 
 class CustomJSExtension extends Minz_Extension {
+	public function install() {
+		return true;
+	}
+
+	public function uninstall() {
+		return true;
+	}
+
 	public function init() {
 		$this->registerTranslates();
 

@@ -2,7 +2,7 @@
 	"name": "Keep Folder State",
 	"author": "Marco Heizmann",
 	"description": "Stores the state of the folders locally and expand them automatically if necessary.",
-	"version": 0.1,
+	"version": 0.2,
 	"entrypoint": "KeepFolderState",
 	"type": "user"
 }
