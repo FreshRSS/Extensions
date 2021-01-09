@@ -1,6 +1,6 @@
 {
 	"name": "Custom JS",
-	"author": "₣rans de Jonge",
+	"author": "Frans de Jonge",
 	"description": "Apply custom JS.",
 	"version": 0.2,
 	"entrypoint": "CustomJS",
