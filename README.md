@@ -59,3 +59,7 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@Kapdap](https://github.com/Kapdap)
 
 * [Clickable Links](https://github.com/kapdap/freshrss-extensions/tree/master/xExtension-ClickableLinks): Replaces non-clickable plain text URLs found in articles with clickable HTML links
+
+### By [@dohseven](https://framagit.org/dohseven)
+
+* [Explosm](https://framagit.org/dohseven/freshrss-explosm): Directly displays the Explosm comic in FreshRSS
