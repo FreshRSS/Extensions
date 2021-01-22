@@ -208,6 +208,14 @@
       "author": "Kapdap",
       "url": "https://github.com/Kapdap/freshrss-extensions",
       "type": "gh-subdirectory"
+    },
+    {
+      "name": "Explosm Daily Comic",
+      "version": "0.1.0",
+      "description": "Embed the images from Explosm daily feed inside article content.",
+      "author": "dohseven",
+      "url": "https://framagit.org/dohseven/freshrss-explosm",
+      "type": "gh-subdirectory"
     }
   ]
 }
