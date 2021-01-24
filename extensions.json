@@ -180,7 +180,7 @@
     {
       "name": "Date format",
       "description": "Change how dates are displayed in the interface",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "author": "Alexis Degrugillier",
       "url": "https://github.com/aledeg/FreshRSS-extensions",
       "type": "gh-subdirectory"
