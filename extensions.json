@@ -196,7 +196,7 @@
     {
       "name": "RSS-Bridge",
       "description": "Run URLs through <a href=\"https://github.com/rss-bridge/rss-bridge\">RSS-Bridge</a> detection",
-      "version": 1,
+      "version": 1.1,
       "author": "Devon Hess",
       "url": "https://github.com/DevonHess/FreshRSS-Extensions",
       "type": "gh-subdirectory"
