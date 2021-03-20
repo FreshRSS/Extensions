@@ -148,7 +148,7 @@
     {
       "name": "Copy2Clipboard",
       "description": "Add a button in the navigation bar to copy the destination links of all visible entries into clipboard",
-      "version": 0.2,
+      "version": 0.3,
       "author": "CNTools | Clemens Neubauer",
       "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
       "type": "gh-subdirectory"
