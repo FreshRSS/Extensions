@@ -102,7 +102,7 @@
       "description": "Modify reddit entries by displaying known medias and easing access to the linked resource",
       "version": "0.10.1",
       "author": "Alexis Degrugillier",
-      "url": "https://github.com/aledeg/FreshRSS-extensions",
+      "url": "https://github.com/aledeg/xExtension-RedditImage",
       "type": "gh-subdirectory"
     },
     {
@@ -174,7 +174,7 @@
       "description": "Add support for LaTeX notation rendering",
       "version": "0.1.4",
       "author": "Alexis Degrugillier",
-      "url": "https://github.com/aledeg/FreshRSS-extensions",
+      "url": "https://github.com/aledeg/xExtension-LatexSupport",
       "type": "gh-subdirectory"
     },
     {
@@ -182,7 +182,7 @@
       "description": "Change how dates are displayed in the interface",
       "version": "0.2.1",
       "author": "Alexis Degrugillier",
-      "url": "https://github.com/aledeg/FreshRSS-extensions",
+      "url": "https://github.com/aledeg/xExtension-DateFormat",
       "type": "gh-subdirectory"
     },
     {
