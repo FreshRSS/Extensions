@@ -100,7 +100,7 @@
     {
       "name": "Reddit Image",
       "description": "Modify reddit entries by displaying known medias and easing access to the linked resource",
-      "version": "0.10.1",
+      "version": "0.12.0",
       "author": "Alexis Degrugillier",
       "url": "https://github.com/aledeg/xExtension-RedditImage",
       "type": "gh-subdirectory"
