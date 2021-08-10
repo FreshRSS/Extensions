@@ -82,9 +82,9 @@ Add this to your nginx config:
 
 ``` nginx
 # Use 1 GiB cache with a 1 MiB memory zone (enough for ~8,000 keys).
-# Delete data that has not been accessed for 30 minutes.
+# Delete data that has not been accessed for 12 hours.
 proxy_cache_path /var/cache/nginx/freshrss levels=1:2 keys_zone=freshrss:1m
-                   max_size=1G inactive=30m use_temp_path=off;
+                 max_size=1g inactive=12h use_temp_path=off;
 
 server {
 
@@ -96,10 +96,10 @@ server {
         }
         # Handle redirects coming from the target server.
         proxy_redirect ~^(.*)$ https://www.example.org/proxy?key=$arg_key&url=$1;
-        client_max_body_size 10M;
+        proxy_ssl_server_name on;
         proxy_cache freshrss;
-        # Cache positive answers for up to 1 hour.
-        proxy_cache_valid 200 301 302 307 308 1h;
+        # Cache positive answers for up to 2 days.
+        proxy_cache_valid 200 301 302 307 308 2d;
     }
 
 …
