@@ -67,3 +67,46 @@ RewriteRule ^ http://%1 [QSA,P,L]
   Require all denied
 </LocationMatch>
 ```
+
+### nginx configuration
+
+In order to use nginx's [proxy
+module](https://nginx.org/en/docs/http/ngx_http_proxy_module.html), you will
+need to set the following settings:
+
+* `proxy_url` = **https://www.example.org/proxy?key=changeme&url=**
+* `scheme_include` = **1**
+* `url_encode` = **0**
+
+Add this to your nginx config:
+
+``` nginx
+# Use 1 GiB cache with a 1 MiB memory zone (enough for ~8,000 keys).
+# Delete data that has not been accessed for 30 minutes.
+proxy_cache_path /var/cache/nginx/freshrss levels=1:2 keys_zone=freshrss:1m
+                   max_size=1G inactive=30m use_temp_path=off;
+
+server {
+
+…
+
+    location /proxy {
+        if ($arg_key = "changeme") {
+            proxy_pass $arg_url;
+        }
+        # Handle redirects coming from the target server.
+        proxy_redirect ~^(.*)$ https://www.example.org/proxy?key=$arg_key&url=$1;
+        client_max_body_size 10M;
+        proxy_cache freshrss;
+        # Cache positive answers for up to 1 hour.
+        proxy_cache_valid 200 301 302 307 308 1h;
+    }
+
+…
+
+}
+```
+
+If you do not need caching, omit all lines starting with `proxy_cache`. If you
+would like to limit access based on IP addresses instead, take a look at
+[ngx_http_access_module](http://nginx.org/en/docs/http/ngx_http_access_module.html).
