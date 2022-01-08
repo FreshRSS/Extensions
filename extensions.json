@@ -216,6 +216,14 @@
       "author": "dohseven",
       "url": "https://framagit.org/dohseven/freshrss-explosm",
       "type": "gh-subdirectory"
+    },
+    {
+      "name": "Whitelist",
+      "version": "0.0.1",
+      "description": "White list the accessible feeds to users",
+      "author": "Alexis Degrugillier",
+      "url": "https://github.com/aledeg/xExtension-WhiteList",
+      "type": "gh-subdirectory"
     }
   ]
 }
