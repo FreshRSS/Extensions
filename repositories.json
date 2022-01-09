@@ -1,0 +1,46 @@
+[{
+	"url": "https://github.com/FreshRSS/Extensions",
+	"type": "git"
+}, {
+	"url": "https://github.com/kevinpapst/freshrss-youtube",
+	"type": "git"
+}, {
+	"url": "https://github.com/kevinpapst/freshrss-dilbert",
+	"type": "git"
+}, {
+	"url": "https://github.com/kevinpapst/freshrss-teem",
+	"type": "git"
+}, {
+	"url": "https://github.com/oyox/FreshRSS-extensions",
+	"type": "git"
+}, {
+	"url": "https://github.com/Eisa01/FreshRSS---Auto-Refresh-Extension",
+	"type": "git"
+}, {
+	"url": "https://github.com/aledeg/xExtension-DateFormat",
+	"type": "git"
+}, {
+	"url": "https://github.com/aledeg/xExtension-LatexSupport",
+	"type": "git"
+}, {
+	"url": "https://github.com/aledeg/xExtension-RedditImage",
+	"type": "git"
+}, {
+	"url": "https://github.com/aledeg/xExtension-WhiteList",
+	"type": "git"
+}, {
+	"url": "https://framagit.org/Lapineige/FreshRSS_Extension-ReadingTime/",
+	"type": "git"
+}, {
+	"url": "https://framagit.org/nicofrand/xextension-threepanesview",
+	"type": "git"
+}, {
+	"url": "https://github.com/Korbak/freshrss-invidious",
+	"type": "git"
+}, {
+	"url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
+	"type": "git"
+}, {
+	"url": "https://github.com/javerous/freshrss-greader-redate",
+	"type": "git"
+}]
