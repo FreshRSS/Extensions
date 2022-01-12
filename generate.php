@@ -1,26 +1,35 @@
+#!/usr/bin/env php
 <?php
 
+// ------------------- //
+// Prepare environment //
+// ------------------- //
 const VERSION = 0.1;
 const TYPE_GIT = 'git';
+$tempFolder = './tmp';
 
 $extensions = [];
+$gitRepositories = [];
+if (file_exists($tempFolder)) {
+	exec("rm -rf -- {$tempFolder}");
+}
 
 // --------------------------------------------------------------- //
 // Parse the repositories.json file to extract extension locations //
 // --------------------------------------------------------------- //
-$repositories = json_decode(file_get_contents('repositories.json'), true);
-if (JSON_ERROR_NONE !== json_last_error()) {
+try {
+	$repositories = json_decode(file_get_contents('repositories.json'), true, 512, JSON_THROW_ON_ERROR);
+} catch (Exception $exception) {
 	echo 'The repositories.json file is not a valid JSON file.', PHP_EOL;
-	die;
+	exit(1);
 }
 
-$gitRepositories = [];
 foreach ($repositories as $repository) {
 	if (null === $url = $repository['url'] ?? null) {
 		continue;
 	}
 	if (TYPE_GIT === $repository['type'] ?? null) {
-		$gitRepositories[] = $url;
+		$gitRepositories[sha1($url)] = $url;
 	}
 }
 
@@ -29,19 +38,21 @@ foreach ($repositories as $repository) {
 // ---------------------------------------- //
 foreach ($gitRepositories as $key => $gitRepository) {
 	echo 'Processing ', $gitRepository, ' repository', PHP_EOL;
-	exec("git clone --quiet --single-branch --depth 1 --no-tags {$gitRepository} /tmp/extensions/{$key}");
+	exec("GIT_TERMINAL_PROMPT=0 git clone --quiet --single-branch --depth 1 --no-tags {$gitRepository} {$tempFolder}/{$key}");
 
 	unset($metadataFiles);
-	exec("find /tmp/extensions/{$key} -iname metadata.json", $metadataFiles);
+	exec("find {$tempFolder}/{$key} -iname metadata.json", $metadataFiles);
 	foreach ($metadataFiles as $metadataFile) {
-		$metadata = json_decode(file_get_contents($metadataFile), true);
-		if (JSON_ERROR_NONE !== json_last_error()) {
+		try {
+			$metadata = json_decode(file_get_contents($metadataFile), true, 512, JSON_THROW_ON_ERROR);
+			$directory = basename(dirname($metadataFile));
+			$metadata['url'] = $gitRepository;
+			$metadata['method'] = TYPE_GIT;
+			$metadata['directory'] = ($directory === sha1($gitRepository)) ? '.' : $directory;
+			$extensions[] = $metadata;
+		} catch (Exception $exception) {
 			continue;
 		}
-		$metadata['url'] = $gitRepository;
-		$metadata['method'] = TYPE_GIT;
-		$metadata['directory'] = basename(dirname($metadataFile));
-		$extensions[] = $metadata;
 	}
 }
 
@@ -55,7 +66,12 @@ $output = [
 	'version' => VERSION,
 	'extensions' => $extensions,
 ];
-file_put_contents('extensions.json', json_encode($output, JSON_PRETTY_PRINT) . PHP_EOL);
+try {
+	file_put_contents('extensions.json', json_encode($output, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR) . PHP_EOL);
 
-echo PHP_EOL;
-echo \count($extensions), ' extensions found', PHP_EOL;
+	echo PHP_EOL;
+	echo \count($extensions), ' extensions found.', PHP_EOL;
+} catch (Exception $exception) {
+	echo 'The extensions.json file can not be generated.', PHP_EOL;
+	exit(1);
+}

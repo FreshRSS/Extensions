@@ -8,7 +8,7 @@
             "version": 1.3,
             "entrypoint": "AutoRefresh",
             "type": "user",
-            "url": "https:\/\/github.com\/Eisa01\/FreshRSS---Auto-Refresh-Extension",
+            "url": "https://github.com/Eisa01/FreshRSS---Auto-Refresh-Extension",
             "method": "git",
             "directory": "xExtension-AutoRefresh"
         },
@@ -19,7 +19,7 @@
             "version": 0.3,
             "entrypoint": "Copy2Clipboard",
             "type": "user",
-            "url": "https:\/\/github.com\/cn-tools\/cntools_FreshRssExtensions",
+            "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
             "method": "git",
             "directory": "xExtension-Copy2Clipboard"
         },
@@ -30,7 +30,7 @@
             "version": 0.2,
             "entrypoint": "CustomCSS",
             "type": "user",
-            "url": "https:\/\/github.com\/FreshRSS\/Extensions",
+            "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
             "directory": "xExtension-CustomCSS"
         },
@@ -41,7 +41,7 @@
             "version": 0.2,
             "entrypoint": "CustomJS",
             "type": "user",
-            "url": "https:\/\/github.com\/FreshRSS\/Extensions",
+            "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
             "directory": "xExtension-CustomJS"
         },
@@ -52,9 +52,9 @@
             "version": "0.2.1",
             "entrypoint": "DateFormat",
             "type": "user",
-            "url": "https:\/\/github.com\/aledeg\/xExtension-DateFormat",
+            "url": "https://github.com/aledeg/xExtension-DateFormat",
             "method": "git",
-            "directory": "6"
+            "directory": "."
         },
         {
             "name": "Dilberts Daily Comic",
@@ -63,7 +63,7 @@
             "version": "0.3.1",
             "entrypoint": "Dilbert",
             "type": "system",
-            "url": "https:\/\/github.com\/kevinpapst\/freshrss-dilbert",
+            "url": "https://github.com/kevinpapst/freshrss-dilbert",
             "method": "git",
             "directory": "xExtension-Dilbert"
         },
@@ -74,7 +74,7 @@
             "version": 0.1,
             "entrypoint": "FeedTitleBuilder",
             "type": "user",
-            "url": "https:\/\/github.com\/cn-tools\/cntools_FreshRssExtensions",
+            "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
             "method": "git",
             "directory": "xExtension-FeedTitleBuilder"
         },
@@ -85,18 +85,18 @@
             "version": 0.1,
             "entrypoint": "FixedNavMenu",
             "type": "user",
-            "url": "https:\/\/github.com\/oyox\/FreshRSS-extensions",
+            "url": "https://github.com/oyox/FreshRSS-extensions",
             "method": "git",
             "directory": "xExtension-FixedNavMenu"
         },
         {
             "name": "GReader Redate",
-            "author": "Julien Av\u00e9rous",
+            "author": "Julien Avérous",
             "description": "Use published date instead of fetching date.",
             "version": 1.1,
             "entrypoint": "GReaderRedate",
             "type": "user",
-            "url": "https:\/\/github.com\/javerous\/freshrss-greader-redate",
+            "url": "https://github.com/javerous/freshrss-greader-redate",
             "method": "git",
             "directory": "xExtension-GReaderRedate"
         },
@@ -107,7 +107,7 @@
             "version": 0.5,
             "entrypoint": "ImageProxy",
             "type": "user",
-            "url": "https:\/\/github.com\/FreshRSS\/Extensions",
+            "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
             "directory": "xExtension-ImageProxy"
         },
@@ -118,7 +118,7 @@
             "version": 1.1,
             "entrypoint": "Invidious",
             "type": "system",
-            "url": "https:\/\/github.com\/Korbak\/freshrss-invidious",
+            "url": "https://github.com/Korbak/freshrss-invidious",
             "method": "git",
             "directory": "xExtension-Invidious"
         },
@@ -129,7 +129,7 @@
             "version": 0.1,
             "entrypoint": "KeepFolderState",
             "type": "user",
-            "url": "https:\/\/github.com\/oyox\/FreshRSS-extensions",
+            "url": "https://github.com/oyox/FreshRSS-extensions",
             "method": "git",
             "directory": "xExtension-KeepFolderState"
         },
@@ -140,9 +140,9 @@
             "version": "0.1.4",
             "entrypoint": "LatexSupport",
             "type": "user",
-            "url": "https:\/\/github.com\/aledeg\/xExtension-LatexSupport",
+            "url": "https://github.com/aledeg/xExtension-LatexSupport",
             "method": "git",
-            "directory": "7"
+            "directory": "."
         },
         {
             "name": "Mobile Scroll Menu",
@@ -151,7 +151,7 @@
             "version": 0.2,
             "entrypoint": "MobileScrollMenu",
             "type": "user",
-            "url": "https:\/\/github.com\/oyox\/FreshRSS-extensions",
+            "url": "https://github.com/oyox/FreshRSS-extensions",
             "method": "git",
             "directory": "xExtension-MobileScrollMenu"
         },
@@ -162,7 +162,7 @@
             "version": 0.1,
             "entrypoint": "QuickCollapse",
             "type": "user",
-            "url": "https:\/\/github.com\/FreshRSS\/Extensions",
+            "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
             "directory": "xExtension-QuickCollapse"
         },
@@ -173,9 +173,9 @@
             "version": 1.2,
             "entrypoint": "ReadingTime",
             "type": "user",
-            "url": "https:\/\/framagit.org\/Lapineige\/FreshRSS_Extension-ReadingTime\/",
+            "url": "https://framagit.org/Lapineige/FreshRSS_Extension-ReadingTime/",
             "method": "git",
-            "directory": "10"
+            "directory": "."
         },
         {
             "name": "ReadingTime",
@@ -184,7 +184,7 @@
             "version": 1.2,
             "entrypoint": "ReadingTime",
             "type": "user",
-            "url": "https:\/\/github.com\/FreshRSS\/Extensions",
+            "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
             "directory": "xExtension-ReadingTime"
         },
@@ -195,9 +195,9 @@
             "version": "0.11.1",
             "entrypoint": "RedditImage",
             "type": "user",
-            "url": "https:\/\/github.com\/aledeg\/xExtension-RedditImage",
+            "url": "https://github.com/aledeg/xExtension-RedditImage",
             "method": "git",
-            "directory": "8"
+            "directory": "."
         },
         {
             "name": "Share By Email",
@@ -206,7 +206,7 @@
             "version": 0.1,
             "entrypoint": "ShareByEmail",
             "type": "user",
-            "url": "https:\/\/github.com\/FreshRSS\/Extensions",
+            "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
             "directory": "xExtension-ShareByEmail"
         },
@@ -217,7 +217,7 @@
             "version": 0.1,
             "entrypoint": "SmartMobileMenu",
             "type": "user",
-            "url": "https:\/\/github.com\/oyox\/FreshRSS-extensions",
+            "url": "https://github.com/oyox/FreshRSS-extensions",
             "method": "git",
             "directory": "xExtension-SmartMobileMenu"
         },
@@ -228,7 +228,7 @@
             "version": 0.1,
             "entrypoint": "StickyFeeds",
             "type": "user",
-            "url": "https:\/\/github.com\/FreshRSS\/Extensions",
+            "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
             "directory": "xExtension-StickyFeeds"
         },
@@ -239,7 +239,7 @@
             "version": 0.1,
             "entrypoint": "Teem",
             "type": "system",
-            "url": "https:\/\/github.com\/kevinpapst\/freshrss-teem",
+            "url": "https://github.com/kevinpapst/freshrss-teem",
             "method": "git",
             "directory": "xExtension-Teem"
         },
@@ -250,9 +250,9 @@
             "version": 1.11,
             "entrypoint": "ThreePanesView",
             "type": "user",
-            "url": "https:\/\/framagit.org\/nicofrand\/xextension-threepanesview",
+            "url": "https://framagit.org/nicofrand/xextension-threepanesview",
             "method": "git",
-            "directory": "11"
+            "directory": "."
         },
         {
             "name": "TinyTinyRSS API",
@@ -261,18 +261,18 @@
             "version": 0.1,
             "entrypoint": "TTRSS_API",
             "type": "system",
-            "url": "https:\/\/github.com\/FreshRSS\/Extensions",
+            "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
             "directory": "xExtension-TTRSS_API"
         },
         {
             "name": "Title-Wrap",
-            "author": "\u20a3rans de Jonge, Joris Kinable",
+            "author": "₣rans de Jonge, Joris Kinable",
             "description": "Applies a line-wrap to long article titles, as opposed to truncating the title when it overflows its display area.",
             "version": 0.1,
             "entrypoint": "TitleWrap",
             "type": "user",
-            "url": "https:\/\/github.com\/FreshRSS\/Extensions",
+            "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
             "directory": "xExtension-TitleWrap"
         },
@@ -283,7 +283,7 @@
             "version": 0.2,
             "entrypoint": "TouchControl",
             "type": "user",
-            "url": "https:\/\/github.com\/oyox\/FreshRSS-extensions",
+            "url": "https://github.com/oyox/FreshRSS-extensions",
             "method": "git",
             "directory": "xExtension-TouchControl"
         },
@@ -294,18 +294,18 @@
             "version": "0.0.1",
             "entrypoint": "WhiteList",
             "type": "system",
-            "url": "https:\/\/github.com\/aledeg\/xExtension-WhiteList",
+            "url": "https://github.com/aledeg/xExtension-WhiteList",
             "method": "git",
-            "directory": "9"
+            "directory": "."
         },
         {
-            "name": "YouTube\/PeerTube Video Feed",
+            "name": "YouTube/PeerTube Video Feed",
             "author": "Kevin Papst",
-            "description": "Embed YouTube\/PeerTube feeds inside article content.",
+            "description": "Embed YouTube/PeerTube feeds inside article content.",
             "version": 0.1,
             "entrypoint": "YouTube",
             "type": "user",
-            "url": "https:\/\/github.com\/kevinpapst\/freshrss-youtube",
+            "url": "https://github.com/kevinpapst/freshrss-youtube",
             "method": "git",
             "directory": "xExtension-YouTube"
         },
@@ -316,7 +316,7 @@
             "version": 0.2,
             "entrypoint": "YouTubeChannel2RssFeed",
             "type": "user",
-            "url": "https:\/\/github.com\/cn-tools\/cntools_FreshRssExtensions",
+            "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
             "method": "git",
             "directory": "xExtension-YouTubeChannel2RssFeed"
         }
