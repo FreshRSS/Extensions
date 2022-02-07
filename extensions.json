@@ -167,6 +167,17 @@
             "directory": "xExtension-QuickCollapse"
         },
         {
+            "name": "Reading Time",
+            "author": "Lapineige",
+            "description": "Add a reading time estimation next to each article title",
+            "version": 1.2,
+            "entrypoint": "ReadingTime",
+            "type": "user",
+            "url": "https://framagit.org/Lapineige/FreshRSS_Extension-ReadingTime/",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "ReadingTime",
             "author": "Lapineige",
             "description": "Add a reading time estimation next to each article title",
@@ -231,6 +242,17 @@
             "url": "https://github.com/kevinpapst/freshrss-teem",
             "method": "git",
             "directory": "xExtension-Teem"
+        },
+        {
+            "name": "ThreePanesView",
+            "author": "nicofrand",
+            "description": "Adds a third vertical pane along the articles list, to display the articles content.",
+            "version": 1.11,
+            "entrypoint": "ThreePanesView",
+            "type": "user",
+            "url": "https://framagit.org/nicofrand/xextension-threepanesview",
+            "method": "git",
+            "directory": "."
         },
         {
             "name": "TinyTinyRSS API",
