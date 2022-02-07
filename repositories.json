@@ -43,4 +43,7 @@
 }, {
 	"url": "https://github.com/javerous/freshrss-greader-redate",
 	"type": "git"
+}, {
+	"url": "https://github.com/kapdap/freshrss-extensions",
+	"type": "git"
 }]
