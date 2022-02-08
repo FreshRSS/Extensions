@@ -13,6 +13,17 @@
             "directory": "xExtension-AutoRefresh"
         },
         {
+            "name": "Clickable Links",
+            "author": "Kapdap",
+            "description": "Replaces non-clickable plain text URLs found in articles with clickable HTML links.",
+            "version": 1.01,
+            "entrypoint": "ClickableLink",
+            "type": "user",
+            "url": "https://github.com/kapdap/freshrss-extensions",
+            "method": "git",
+            "directory": "xExtension-ClickableLinks"
+        },
+        {
             "name": "Copy2Clipboard",
             "author": "CNTools | Clemens Neubauer",
             "description": "Copy the destination links of all visible entries into clipboard",
