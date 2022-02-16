@@ -13,6 +13,17 @@
             "directory": "xExtension-AutoRefresh"
         },
         {
+            "name": "Black List",
+            "author": "CNTools | Clemens Neubauer",
+            "description": "Blacklist to block feeds for users",
+            "version": "0.1-alpha",
+            "entrypoint": "BlackList",
+            "type": "system",
+            "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
+            "method": "git",
+            "directory": "xExtension-BlackList"
+        },
+        {
             "name": "Clickable Links",
             "author": "Kapdap",
             "description": "Replaces non-clickable plain text URLs found in articles with clickable HTML links.",
