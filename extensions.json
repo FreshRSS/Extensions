@@ -341,17 +341,6 @@
             "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
             "method": "git",
             "directory": "xExtension-YouTubeChannel2RssFeed"
-        },
-        {
-            "name": "Pocket Button",
-            "author": "christian-putzke | Christian Putzke",
-            "description": "Add articles to Pocket with one simple button click or a keyboard shortcut.",
-            "version": 0.2,
-            "entrypoint": "PocketButton",
-            "type": "user",
-            "url": "https://github.com/christian-putzke/freshrss-pocket-button",
-            "method": "git",
-            "directory": "."
         }
     ]
 }
