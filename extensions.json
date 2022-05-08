@@ -178,6 +178,17 @@
             "directory": "xExtension-MobileScrollMenu"
         },
         {
+            "name": "Pocket Button",
+            "author": "Christian Putzke",
+            "description": "Add articles to Pocket with one simple button click or a keyboard shortcut.",
+            "version": 0.3,
+            "entrypoint": "PocketButton",
+            "type": "user",
+            "url": "https://github.com/christian-putzke/freshrss-pocket-button",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "Quick Collapse",
             "author": "romibi and Marien Fressinaud",
             "description": "Quickly change from folded to unfolded articles",
@@ -322,12 +333,12 @@
         },
         {
             "name": "YouTube/PeerTube Video Feed",
-            "author": "ImAReplicant (forked from Kevin Papst)",
+            "author": "Kevin Papst",
             "description": "Embed YouTube/PeerTube feeds inside article content.",
-            "version": 0.11,
+            "version": 0.1,
             "entrypoint": "YouTube",
             "type": "user",
-            "url": "https://framagit.org/ImAReplicant/freshrss-youtube",
+            "url": "https://github.com/kevinpapst/freshrss-youtube",
             "method": "git",
             "directory": "xExtension-YouTube"
         },
