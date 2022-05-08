@@ -46,4 +46,7 @@
 }, {
 	"url": "https://github.com/kapdap/freshrss-extensions",
 	"type": "git"
+}, {
+    "url": "https://github.com/christian-putzke/freshrss-pocket-button",
+    "type": "git"
 }]

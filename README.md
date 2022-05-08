@@ -63,7 +63,10 @@ There are some FreshRSS extensions out there, developed by community members:
 
 * [Explosm](https://framagit.org/dohseven/freshrss-explosm): Directly displays the Explosm comic in FreshRSS
 
-
 ### By [@ImAReplicant](https://framagit.org/ImAReplicant)
 
 * [Youtube/Peertube](https://framagit.org/ImAReplicant/freshrss-youtube): Display videos from YouTube/PeerTube feeds inline
+
+### By [@christian-putzke](https://github.com/christian-putzke/)
+
+* [Pocket Button](https://github.com/christian-putzke/freshrss-pocket-button): Add articles to Pocket with one simple button click or a keyboard shortcut.
