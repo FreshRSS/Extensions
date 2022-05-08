@@ -322,12 +322,12 @@
         },
         {
             "name": "YouTube/PeerTube Video Feed",
-            "author": "Kevin Papst",
+            "author": "ImAReplicant (forked from Kevin Papst)",
             "description": "Embed YouTube/PeerTube feeds inside article content.",
-            "version": 0.1,
+            "version": 0.11,
             "entrypoint": "YouTube",
             "type": "user",
-            "url": "https://github.com/kevinpapst/freshrss-youtube",
+            "url": "https://framagit.org/ImAReplicant/freshrss-youtube",
             "method": "git",
             "directory": "xExtension-YouTube"
         },
