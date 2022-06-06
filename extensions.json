@@ -202,7 +202,7 @@
         {
             "name": "Readable",
             "author": "printfuck",
-            "description": "Fetch article content for every feed with readability or mercury",
+            "description": "Fetch article content for selected feeds with readability or mercury",
             "version": 0.1,
             "entrypoint": "Readable",
             "type": "user",
