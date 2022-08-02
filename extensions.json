@@ -203,7 +203,7 @@
             "name": "Readable",
             "author": "printfuck",
             "description": "Fetch article content for selected feeds with readability or mercury",
-            "version": "0.1",
+            "version": "0.2",
             "entrypoint": "Readable",
             "type": "user",
             "url": "https://github.com/printfuck/xExtension-Readable",
