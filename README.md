@@ -74,3 +74,7 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@printfuck](https://github.com/printfuck/)
 
 * [Readable](https://github.com/printfuck/xExtension-Readable): Fetch article content for selected feeds with [Readability](https://github.com/mozilla/readability) or [Mercury](https://github.com/postlight/mercury-parser)
+
+### By [@Victrid](https://github.com/Victrid/)
+
+* [Image Cache](https://github.com/Victrid/freshrss-image-cache-plugin): Cache feed images on your own facility or Cloudflare cache.
