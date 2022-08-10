@@ -123,6 +123,17 @@
             "directory": "xExtension-GReaderRedate"
         },
         {
+            "name": "Image Cache",
+            "author": "Victrid",
+            "description": "Cache feed images on your own facility or Cloudflare cache.",
+	        "version": 0.2,
+            "entrypoint": "ImageCache",
+            "type": "user",
+            "url": "https://github.com/Victrid/freshrss-image-cache-plugin",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "Image Proxy",
             "author": "Frans de Jonge",
             "description": "No insecure content warnings or disappearing images.",
