@@ -13,15 +13,19 @@
 
  init: function() {
      var flux_list = document.querySelectorAll('[id^="flux_"]');
-     // console.log(flux_list)
 
      for (var i = 0; i < flux_list.length; i++) {
-         //console.log($("div[id^='flux']")[i], "Length (words): ", reading_time.flux_words_count($("div[id^='flux']")[i]))
+
+         if ("readingTime" in flux_list[i].dataset) {
+             continue;
+         }
 
          reading_time.flux = flux_list[i];
 
          reading_time.words_count = reading_time.flux_words_count(flux_list[i]); // count the words
          reading_time.reading_time = reading_time.calc_read_time(reading_time.words_count, 300); // change this number (in words) to your prefered reading speed
+
+         flux_list[i].dataset.readingTime = reading_time.reading_time;
 
          if (document.body.clientWidth <= 840) { // in mobile mode, the feed name is not visible (there is only the favicon)
              // add the reading time right before article's title
@@ -54,7 +58,6 @@
  calc_read_time : function calc_read_time(wd_count, speed) {
      reading_time.read_time = Math.round(wd_count/speed);
      if (reading_time.read_time === 0) { reading_time.read_time = '<1'; }
-     //console.log('Reading time: ', reading_time.read_time)
      return reading_time.read_time;
  },
     };
