@@ -16,16 +16,16 @@
 
      for (var i = 0; i < flux_list.length; i++) {
 
-                if ("readingTime" in flux_list[i].dataset) {
-                        continue;
-                }
+         if ("readingTime" in flux_list[i].dataset) {
+             continue;
+         }
 
          reading_time.flux = flux_list[i];
 
          reading_time.words_count = reading_time.flux_words_count(flux_list[i]); // count the words
          reading_time.reading_time = reading_time.calc_read_time(reading_time.words_count, 300); // change this number (in words) to your prefered reading speed
 
-                flux_list[i].dataset.readingTime = reading_time.reading_time;
+         flux_list[i].dataset.readingTime = reading_time.reading_time;
 
          if (document.body.clientWidth <= 840) { // in mobile mode, the feed name is not visible (there is only the favicon)
              // add the reading time right before article's title
