@@ -78,3 +78,7 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@Victrid](https://github.com/Victrid/)
 
 * [Image Cache](https://github.com/Victrid/freshrss-image-cache-plugin): Cache feed images on your own facility or Cloudflare cache.
+
+### By [@aidistan](https://github.com/aidistan)
+
+* [SyncWithSystemTheme](https://github.com/aidistan/freshrss-extensions/tree/master/xExtension-SyncWithSystemTheme): Synchronize the theme mode with your system.

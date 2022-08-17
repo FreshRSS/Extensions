@@ -288,6 +288,17 @@
             "directory": "xExtension-StickyFeeds"
         },
         {
+            "name": "Sync with System Theme",
+            "author": "Aidi Stan",
+            "description": "Synchronize the theme mode with your system.",
+            "version": "1.0.0",
+            "entrypoint": "SyncWithSystemTheme",
+            "type": "user",
+            "url": "https://github.com/aidistan/freshrss-extensions",
+            "method": "git",
+            "directory": "xExtension-SyncWithSystemTheme"
+        },
+        {
             "name": "Teem Video Feed",
             "author": "Kevin Papst",
             "description": "Embed video from JOINTHETEEM inside article content.",
