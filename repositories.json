@@ -55,4 +55,7 @@
 }, {
 	"url": "https://github.com/Victrid/freshrss-image-cache-plugin",
 	"type": "git"
+}, {
+	"url": "https://github.com/aidistan/freshrss-extensions",
+	"type": "git"
 }]
