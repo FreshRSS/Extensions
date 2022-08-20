@@ -290,8 +290,8 @@
         {
             "name": "Sync with System Theme",
             "author": "Aidi Stan",
-            "description": "Synchronize FreshRSS's theme with your system theme",
-            "version": "1.1.0",
+            "description": "Synchronize the theme with your system theme mode",
+            "version": "1.1.1",
             "entrypoint": "SyncWithSystemTheme",
             "type": "user",
             "url": "https://github.com/aidistan/freshrss-extensions",
