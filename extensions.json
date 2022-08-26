@@ -90,6 +90,17 @@
             "directory": "xExtension-Dilbert"
         },
         {
+            "name": "Feed Priority Shortcut",
+            "author": "Aidi Stan",
+            "description": "Quick setter for your feed priorities",
+            "version": "1.0.0",
+            "entrypoint": "FeedPriorityShortcut",
+            "type": "user",
+            "url": "https://github.com/aidistan/freshrss-extensions",
+            "method": "git",
+            "directory": "xExtension-FeedPriorityShortcut"
+        },
+        {
             "name": "FeedTitleBuilder",
             "author": "CNTools | Clemens Neubauer",
             "description": "Build your own feed title based on url, the original feed title and the date the feed was added",
@@ -288,17 +299,6 @@
             "directory": "xExtension-StickyFeeds"
         },
         {
-            "name": "Sync with System Theme",
-            "author": "Aidi Stan",
-            "description": "Synchronize the theme with your system theme mode",
-            "version": "1.1.1",
-            "entrypoint": "SyncWithSystemTheme",
-            "type": "user",
-            "url": "https://github.com/aidistan/freshrss-extensions",
-            "method": "git",
-            "directory": "xExtension-SyncWithSystemTheme"
-        },
-        {
             "name": "Teem Video Feed",
             "author": "Kevin Papst",
             "description": "Embed video from JOINTHETEEM inside article content.",
@@ -308,6 +308,17 @@
             "url": "https://github.com/kevinpapst/freshrss-teem",
             "method": "git",
             "directory": "xExtension-Teem"
+        },
+        {
+            "name": "Theme Mode Synchronizer",
+            "author": "Aidi Stan",
+            "description": "Synchronize the theme with your system light/dark mode",
+            "version": "1.1.2",
+            "entrypoint": "ThemeModeSynchronizer",
+            "type": "user",
+            "url": "https://github.com/aidistan/freshrss-extensions",
+            "method": "git",
+            "directory": "xExtension-ThemeModeSynchronizer"
         },
         {
             "name": "ThreePanesView",
