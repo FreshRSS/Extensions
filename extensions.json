@@ -93,7 +93,7 @@
             "name": "Feed Priority Shortcut",
             "author": "Aidi Stan",
             "description": "Quick setter for your feed priorities",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "entrypoint": "FeedPriorityShortcut",
             "type": "user",
             "url": "https://github.com/aidistan/freshrss-extensions",
