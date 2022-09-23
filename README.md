@@ -82,3 +82,8 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@aidistan](https://github.com/aidistan)
 
 * [SyncWithSystemTheme](https://github.com/aidistan/freshrss-extensions/tree/master/xExtension-SyncWithSystemTheme): Synchronize the theme mode with your system.
+
+### By [@balthisar](https://github.com/balthisar)
+
+* [RedditSub](https://github.com/balthisar/xExtension-RedditSub): A FreshRSS Extension to Show a Reddit Subreddit as Part of the Article Title.
+
