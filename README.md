@@ -83,3 +83,7 @@ There are some FreshRSS extensions out there, developed by community members:
 
 * [FeedPriorityShortcut](https://github.com/aidistan/freshrss-extensions#feed-priority-shortcut): Quick setter for your feed priorities.
 * [ThemeModeSynchronizer](https://github.com/aidistan/freshrss-extensions#theme-mode-synchronizer): Synchronize the theme with your system light/dark mode.
+
+### By [@balthisar](https://github.com/balthisar)
+
+* [RedditSub](https://github.com/balthisar/xExtension-RedditSub): A FreshRSS Extension to Show a Reddit Subreddit as Part of the Article Title.
