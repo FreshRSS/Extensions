@@ -310,6 +310,17 @@
             "directory": "xExtension-Teem"
         },
         {
+            "name": "TogglableMenu",
+            "author": "nicofrand",
+            "description": "This makes the icon to toggle the menu always displayed, even on larger screens.",
+            "version": 1.1,
+            "entrypoint": "TogglableMenu",
+            "type": "user",
+            "url": "https://framagit.org/nicofrand/xextension-togglablemenu",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "Theme Mode Synchronizer",
             "author": "Aidi Stan",
             "description": "Synchronize the theme with your system light/dark mode",
