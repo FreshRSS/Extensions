@@ -104,7 +104,7 @@
             "name": "Feed Priority Shortcut",
             "author": "Aidi Stan",
             "description": "Set up visibilities/priorities of your feeds easily",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "entrypoint": "FeedPriorityShortcut",
             "type": "user",
             "url": "https://github.com/aidistan/freshrss-extensions",
