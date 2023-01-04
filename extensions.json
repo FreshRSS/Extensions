@@ -2,6 +2,17 @@
     "version": 0.1,
     "extensions": [
         {
+            "name": "Always togglable menu",
+            "author": "nicofrand",
+            "description": "This makes the icon to toggle the menu always shown, even on larger screens.",
+            "version": 1.1,
+            "entrypoint": "TogglableMenu",
+            "type": "user",
+            "url": "https://framagit.org/nicofrand/xextension-togglablemenu",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "Auto Refresh",
             "author": "Essa AlAwadi",
             "description": "Automatically refreshes the RSS feed when there is no activity",
