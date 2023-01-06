@@ -214,7 +214,7 @@
             "name": "Pocket Button",
             "author": "Christian Putzke",
             "description": "Add articles to Pocket with one simple button click or a keyboard shortcut.",
-            "version": 0.3,
+            "version": 0.4,
             "entrypoint": "PocketButton",
             "type": "user",
             "url": "https://github.com/christian-putzke/freshrss-pocket-button",
