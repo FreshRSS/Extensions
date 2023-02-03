@@ -61,4 +61,7 @@
 }, {
 	"url": "https://github.com/aidistan/freshrss-extensions",
 	"type": "git"
+}, {
+	"url": "https://github.com/mgnsk/FreshRSS-AutoTTL",
+	"type": "git"
 }]

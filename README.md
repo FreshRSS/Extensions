@@ -87,3 +87,7 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@balthisar](https://github.com/balthisar)
 
 * [RedditSub](https://github.com/balthisar/xExtension-RedditSub): A FreshRSS Extension to Show a Reddit Subreddit as Part of the Article Title.
+
+### By [@mgnsk](https://github.com/mgnsk)
+
+* [AutoTTL](https://github.com/mgnsk/FreshRSS-AutoTTL): A FreshRSS extension for automatic feed refresh TTL based on the average frequency of entries.
