@@ -24,6 +24,17 @@
             "directory": "xExtension-AutoRefresh"
         },
         {
+            "name": "AutoTTL",
+            "author": "Magnus Kokk",
+            "description": "A FreshRSS extension for automatic feed refresh TTL based on the average frequency of entries.",
+            "version": 0.1,
+            "entrypoint": "AutoTTL",
+            "type": "user",
+            "url": "https://github.com/mgnsk/FreshRSS-AutoTTL",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "Black List",
             "author": "CNTools | Clemens Neubauer",
             "description": "Blacklist to block feeds for users",
