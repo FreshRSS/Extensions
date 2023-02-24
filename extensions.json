@@ -126,7 +126,7 @@
             "name": "FeedTitleBuilder",
             "author": "CNTools | Clemens Neubauer",
             "description": "Build your own feed title based on url, the original feed title and the date the feed was added",
-            "version": 0.1,
+            "version": 0.2,
             "entrypoint": "FeedTitleBuilder",
             "type": "user",
             "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
