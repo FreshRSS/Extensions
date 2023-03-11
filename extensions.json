@@ -27,7 +27,7 @@
             "name": "AutoTTL",
             "author": "Magnus Kokk",
             "description": "A FreshRSS extension for automatic feed refresh TTL based on the average frequency of entries.",
-            "version": "0.3.0",
+            "version": "0.4.0",
             "entrypoint": "AutoTTL",
             "type": "user",
             "url": "https://github.com/mgnsk/FreshRSS-AutoTTL",
