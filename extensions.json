@@ -288,6 +288,17 @@
             "directory": "."
         },
         {
+            "name": "RSS-Bridge",
+            "author": "Devon Hess",
+            "description": "Run URLs through <a href=\"https://github.com/rss-bridge/rss-bridge\">RSS-Bridge</a> detection.",
+            "version": 1.1,
+            "entrypoint": "RssBridge",
+            "type": "system",
+            "url": "https://github.com/DevonHess/FreshRSS-Extensions",
+            "method": "git",
+            "directory": "xExtension-RssBridge"
+        },
+        {
             "name": "Share By Email",
             "author": "Marien Fressinaud",
             "description": "Improve the sharing by email system.",

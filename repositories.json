@@ -64,4 +64,7 @@
 }, {
 	"url": "https://github.com/mgnsk/FreshRSS-AutoTTL",
 	"type": "git"
+}, {
+	"url": "https://github.com/DevonHess/FreshRSS-Extensions",
+	"type": "git"
 }]
