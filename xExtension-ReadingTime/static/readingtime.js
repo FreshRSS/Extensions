@@ -27,17 +27,17 @@
 
          flux_list[i].dataset.readingTime = reading_time.reading_time;
 
-        const li = document.createElement("li");
-        li.setAttribute("class", "item date");
-        li.style.width = "min-content";
-        li.style.minWidth = "40px";
-        li.style.overflow = "hidden";
-        li.style.textAlign = "right";
-        li.style.display = "table-cell";
-        li.textContent = reading_time.reading_time + '\u2009m';
- 
-        const ul = document.querySelector("#" + reading_time.flux.id + " ul.horizontal-list");
-        ul.insertBefore(li, ul.children[ul.children.length - 1]);
+         const li = document.createElement("li");
+         li.setAttribute("class", "item date");
+         li.style.width = "min-content";
+         li.style.minWidth = "40px";
+         li.style.overflow = "hidden";
+         li.style.textAlign = "right";
+         li.style.display = "table-cell";
+         li.textContent = reading_time.reading_time + '\u2009m';
+
+         const ul = document.querySelector("#" + reading_time.flux.id + " ul.horizontal-list");
+         ul.insertBefore(li, ul.children[ul.children.length - 1]);
      }
  },
 
