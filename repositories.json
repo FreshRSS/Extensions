@@ -67,4 +67,7 @@
 }, {
 	"url": "https://github.com/DevonHess/FreshRSS-Extensions",
 	"type": "git"
+}, {
+	"url": "https://github.com/reply2future/xExtension-NewsAssistant",
+	"type": "git"
 }]

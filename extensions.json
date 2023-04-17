@@ -429,6 +429,17 @@
             "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
             "method": "git",
             "directory": "xExtension-YouTubeChannel2RssFeed"
+        },
+        {
+            "name": "News Assistant",
+            "author": "Mervyn Zhan",
+            "description": "Use the api of OpenAI to summary the news.",
+            "version": 0.1,
+            "entrypoint": "NewsAssistant",
+            "type": "system",
+            "url": "https://github.com/reply2future/xExtension-NewsAssistant",
+            "method": "git",
+            "directory": "xExtension-NewsAssistant"
         }
     ]
 }
