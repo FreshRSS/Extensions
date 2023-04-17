@@ -27,19 +27,17 @@
 
         flux_list[i].dataset.readingTime = reading_time.reading_time;
 
-         if (document.body.clientWidth <= 840) { // in mobile mode, the feed name is not visible (there is only the favicon)
-             // add the reading time right before article's title
-             // in that case, [Time] - [Title] format is used instead of a "|" (as it looks better and doesn't take much more space)
-             if ( document.querySelector("#" + reading_time.flux.id + " ul.horizontal-list li.item.title a").textContent.substring(0,(reading_time.reading_time + 'm - ').length) != reading_time.reading_time + 'm - ' ) {
-                 document.querySelector("#" + reading_time.flux.id + " ul.horizontal-list li.item.title a").textContent = reading_time.reading_time + 'm - ' + document.querySelector("#" + reading_time.flux.id + " ul.horizontal-list li.item.title a").textContent;
-             }
-         } else {
-             // add the reading time just after the feed name
-             if ( document.querySelector("#" + reading_time.flux.id + " ul.horizontal-list li.item.website").textContent.substring(1, (reading_time.reading_time + 'm|').length + 1) != reading_time.reading_time + 'm|' ) {
-                 document.querySelector("#" + reading_time.flux.id + " ul.horizontal-list li.item.website").childNodes[0].childNodes[2].textContent = reading_time.reading_time + 'm| ' + document.querySelector("#" + reading_time.flux.id + " ul.horizontal-list li.item.website").childNodes[0].childNodes[2].textContent;
-             }
-         }
-
+        const li = document.createElement("li");
+        li.setAttribute("class", "item date");
+        li.style.width = "min-content";
+        li.style.minWidth = "40px";
+        li.style.overflow = "hidden";
+        li.style.textAlign = "right";
+        li.style.display = "table-cell";
+        li.textContent = "" + reading_time.reading_time + '\u2009m';
+ 
+        const ul = document.querySelector("#" + reading_time.flux.id + " ul.horizontal-list");
+        ul.insertBefore(li, ul.children[ul.children.length - 1]);
      }
  },
 
