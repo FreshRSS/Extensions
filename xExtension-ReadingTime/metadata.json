@@ -2,7 +2,7 @@
 	"name": "ReadingTime",
 	"author": "Lapineige",
 	"description": "Add a reading time estimation next to each article",
-	"version": 1.2,
+	"version": 1.3,
 	"entrypoint": "ReadingTime",
 	"type": "user"
 }
