@@ -1,6 +1,6 @@
 Extension pour FreshRSS (https://github.com/FreshRSS)
 
-**v1.2**
+**v1.3**
 
 Source: https://framagit.org/Lapineige/FreshRSS_Extension-ReadingTime
 
@@ -11,13 +11,13 @@ S'installe comme toute les extensions, soit via l'outil intégré dans l'interfa
 Aucune module externe. Une fois activée dans les préférences, l'extension doit fonctionner après avoir recharger la page.
 
 Un indicateur du temps de lecture doit s'afficher dans le nom du flux de chaque article.
-Pour le moment la vitesse de lecture est réglée manuellement à 300 mots/min. À changer si besoin ici: https://framagit.org/Lapineige/FreshRSS_Extension-ReadingTime/blob/master/static/readingtime.js#L24
+Pour le moment la vitesse de lecture est réglée manuellement à 300 mots/min. À changer si besoin ici: https://framagit.org/Lapineige/FreshRSS_Extension-ReadingTime/blob/master/static/readingtime.js#L26
 
 ---
 
 Extension for FressRSS (https://github.com/FreshRSS)
 
-**v1.2**
+**v1.3**
 
 Source: https://framagit.org/Lapineige/FreshRSS_Extension-ReadingTime
 
@@ -28,7 +28,7 @@ Install it the same way as any other extension, with the integrated tool in the 
 No external module. Once activated in the preferences, this extension should be working after reloading the page.
 
 A reading time
-For the moment the reading speed is manualy set to 300 words/min. If necessary, change it there: https://framagit.org/Lapineige/FreshRSS_Extension-ReadingTime/blob/master/static/readingtime.js#L24
+For the moment the reading speed is manualy set to 300 words/min. If necessary, change it there: https://framagit.org/Lapineige/FreshRSS_Extension-ReadingTime/blob/master/static/readingtime.js#L26
 
 
 
