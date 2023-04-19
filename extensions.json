@@ -290,8 +290,8 @@
         {
             "name": "ReadingTime",
             "author": "Lapineige",
-            "description": "Add a reading time estimation next to each article title",
-            "version": 1.2,
+            "description": "Add a reading time estimation next to each article",
+            "version": 1.3,
             "entrypoint": "ReadingTime",
             "type": "user",
             "url": "https://github.com/FreshRSS/Extensions",
