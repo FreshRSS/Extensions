@@ -225,7 +225,7 @@
             "name": "News Assistant",
             "author": "Mervyn Zhan",
             "description": "Use the api of `OpenAI` to summary the news.",
-            "version": 0.3,
+            "version": 0.4,
             "entrypoint": "NewsAssistant",
             "type": "system",
             "url": "https://github.com/reply2future/xExtension-NewsAssistant",
