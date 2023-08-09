@@ -148,7 +148,7 @@
             "name": "GReader Redate",
             "author": "Julien Avérous",
             "description": "Use published date instead of fetching date.",
-            "version": 1.1,
+            "version": 1.2,
             "entrypoint": "GReaderRedate",
             "type": "user",
             "url": "https://github.com/javerous/freshrss-greader-redate",
