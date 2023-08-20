@@ -91,3 +91,7 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@mgnsk](https://github.com/mgnsk)
 
 * [AutoTTL](https://github.com/mgnsk/FreshRSS-AutoTTL): A FreshRSS extension for automatic feed refresh TTL based on the average frequency of entries.
+
+### By [@giventofly](https://github.com/giventofly)
+
+* [Comics In Feed](https://github.com/giventofly/freshrss-comicsinfeed): Display comicss directly in FreshRSS (currently for The awkward yeti and Butter Safe).

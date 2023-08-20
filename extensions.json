@@ -440,6 +440,17 @@
             "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
             "method": "git",
             "directory": "xExtension-YouTubeChannel2RssFeed"
+        },
+        {
+            "name": "Comics in feed",
+            "author": "José Moreira",
+            "description": "Embed the images from comics feeds directly.",
+            "version": "1.0.0",
+            "entrypoint": "ComicsInFeed",
+            "type": "system",
+            "url": "https://github.com/giventofly/freshrss-comicsinfeed",
+            "type": "git",
+            "directory": "."
         }
     ]
 }

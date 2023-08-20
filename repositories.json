@@ -70,4 +70,8 @@
 }, {
 	"url": "https://github.com/reply2future/xExtension-NewsAssistant",
 	"type": "git"
+},
+{
+	"url": "https://github.com/giventofly/freshrss-comicsinfeed",
+	"type": "git"
 }]
