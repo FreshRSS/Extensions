@@ -1,12 +1,13 @@
-"use strict";
+/* globals $ */
+'use strict';
 
-var sticky_feeds = {
+const sticky_feeds = {
 	aside: null,
 	tree: null,
 	window: null,
 
-	init: function() {
-		if (window.matchMedia("(max-width: 840px)").matches) {
+	init: function () {
+		if (window.matchMedia('(max-width: 840px)').matches) {
 			return;
 		}
 
@@ -34,14 +35,14 @@ var sticky_feeds = {
 		}
 	},
 
-	scroller: function() {
-		var pos_top_window = sticky_feeds.window.scrollTop();
+	scroller: function () {
+		const pos_top_window = sticky_feeds.window.scrollTop();
 
 		if (pos_top_window < sticky_feeds.aside.initial_pos.top + sticky_feeds.tree.initial_pos.top) {
 			// scroll top has not reached the top of the sticky tree yet so it
 			// stays in place but its height must adapted:
 			// window height - sticky tree pos top + actual scroll top
-			var real_tree_pos_top = sticky_feeds.aside.initial_pos.top + sticky_feeds.tree.initial_pos.top;
+			const real_tree_pos_top = sticky_feeds.aside.initial_pos.top + sticky_feeds.tree.initial_pos.top;
 			sticky_feeds.tree.css('top', sticky_feeds.tree.initial_pos.top);
 			sticky_feeds.tree.css('height', sticky_feeds.window.height - real_tree_pos_top + pos_top_window);
 		} else {
@@ -54,6 +55,5 @@ var sticky_feeds = {
 		}
 	},
 };
-
 
 window.onload = sticky_feeds.init;
