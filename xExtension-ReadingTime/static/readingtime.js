@@ -30,7 +30,6 @@
          const li = document.createElement("li");
          li.setAttribute("class", "item date");
          li.style.width = "40px";
-         li.style.minWidth = "40px";
          li.style.overflow = "hidden";
          li.style.textAlign = "right";
          li.style.display = "table-cell";
