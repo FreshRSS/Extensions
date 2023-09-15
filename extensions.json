@@ -255,17 +255,6 @@
             "directory": "."
         },
         {
-            "name": "Quick Collapse",
-            "author": "romibi and Marien Fressinaud",
-            "description": "Quickly change from folded to unfolded articles",
-            "version": 0.1,
-            "entrypoint": "QuickCollapse",
-            "type": "user",
-            "url": "https://github.com/FreshRSS/Extensions",
-            "method": "git",
-            "directory": "xExtension-QuickCollapse"
-        },
-        {
             "name": "RSS-Bridge",
             "author": "Devon Hess",
             "description": "Run URLs through <a href=\"https://github.com/rss-bridge/rss-bridge\">RSS-Bridge</a> detection.",
@@ -299,17 +288,6 @@
             "directory": "."
         },
         {
-            "name": "ReadingTime",
-            "author": "Lapineige",
-            "description": "Add a reading time estimation next to each article",
-            "version": 1.3,
-            "entrypoint": "ReadingTime",
-            "type": "user",
-            "url": "https://github.com/FreshRSS/Extensions",
-            "method": "git",
-            "directory": "xExtension-ReadingTime"
-        },
-        {
             "name": "Reddit Image",
             "author": "Alexis Degrugillier",
             "description": "Modify reddit entries by displaying known medias and easing access to the linked resource",
@@ -332,6 +310,17 @@
             "directory": "xExtension-ShareByEmail"
         },
         {
+            "name": "ShowFeedID",
+            "author": "math-GH",
+            "description": "Show the feed ID",
+            "version": 0.1,
+            "entrypoint": "ShowFeedID",
+            "type": "user",
+            "url": "https://github.com/FreshRSS/Extensions",
+            "method": "git",
+            "directory": "xExtension-showFeedID"
+        },
+        {
             "name": "Smart Mobile Menu",
             "author": "Marco Heizmann",
             "description": "Minimizes the required button space and groups buttons.",
@@ -341,17 +330,6 @@
             "url": "https://github.com/oyox/FreshRSS-extensions",
             "method": "git",
             "directory": "xExtension-SmartMobileMenu"
-        },
-        {
-            "name": "Sticky Feeds",
-            "author": "Marien Fressinaud",
-            "description": "Set the feed aside in the main stream following the window scroll.",
-            "version": 0.1,
-            "entrypoint": "StickyFeeds",
-            "type": "user",
-            "url": "https://github.com/FreshRSS/Extensions",
-            "method": "git",
-            "directory": "xExtension-StickyFeeds"
         },
         {
             "name": "Teem Video Feed",
