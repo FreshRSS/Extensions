@@ -2,7 +2,7 @@
 	"name": "Custom JS",
 	"author": "Frans de Jonge",
 	"description": "Apply custom JS.",
-	"version": 0.2,
+	"version": "0.2",
 	"entrypoint": "CustomJS",
 	"type": "user"
 }
