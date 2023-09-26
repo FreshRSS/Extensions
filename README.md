@@ -95,3 +95,7 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@giventofly](https://github.com/giventofly)
 
 * [Comics In Feed](https://github.com/giventofly/freshrss-comicsinfeed): Display comicss directly in FreshRSS (currently for The awkward yeti and Butter Safe).
+
+### By [@rudism](https://code.sitosis.com/rudism)
+
+* [Kagi Summarizer](https://code.sitosis.com/rudism/freshrss-kagi-summarizer): Adds a "Summarize" button to the top of all entries that will fetch the summary of the entry using the [Kagi Universal Summarizer](https://kagi.com/summarizer/index.html).

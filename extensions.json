@@ -462,6 +462,17 @@
             "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
             "method": "git",
             "directory": "xExtension-YouTubeChannel2RssFeed"
+        },
+        {
+            "name": "Kagi Summarizer",
+            "author": "Rudis Muiznieks",
+            "description": "Add a button to summarize articles with the Kagi Universal Summarizer.",
+            "version": 0.1,
+            "entrypoint": "KagiSummarizer",
+            "type": "user",
+            "url": "https://code.sitosis.com/rudism/freshrss-kagi-summarizer",
+            "method": "git",
+            "directory": "."
         }
     ]
 }
