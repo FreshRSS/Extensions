@@ -200,6 +200,17 @@
             "directory": "xExtension-Invidious"
         },
         {
+            "name": "Kagi Summarizer",
+            "author": "Rudis Muiznieks",
+            "description": "Add a button to summarize articles with the Kagi Universal Summarizer.",
+            "version": 0.1,
+            "entrypoint": "KagiSummarizer",
+            "type": "user",
+            "url": "https://code.sitosis.com/rudism/freshrss-kagi-summarizer",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "Keep Folder State",
             "author": "Marco Heizmann",
             "description": "Stores the state of the folders locally and expand them automatically if necessary.",
@@ -462,17 +473,6 @@
             "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
             "method": "git",
             "directory": "xExtension-YouTubeChannel2RssFeed"
-        },
-        {
-            "name": "Kagi Summarizer",
-            "author": "Rudis Muiznieks",
-            "description": "Add a button to summarize articles with the Kagi Universal Summarizer.",
-            "version": 0.1,
-            "entrypoint": "KagiSummarizer",
-            "type": "user",
-            "url": "https://code.sitosis.com/rudism/freshrss-kagi-summarizer",
-            "method": "git",
-            "directory": "."
         }
     ]
 }
