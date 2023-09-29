@@ -202,8 +202,8 @@
         {
             "name": "Kagi Summarizer",
             "author": "Rudis Muiznieks",
-            "description": "Add a button to summarize articles with the Kagi Universal Summarizer.",
-            "version": 0.1,
+            "description": "Add buttons to summarize articles with the Kagi Universal Summarizer.",
+            "version": 0.2,
             "entrypoint": "KagiSummarizer",
             "type": "user",
             "url": "https://code.sitosis.com/rudism/freshrss-kagi-summarizer",
