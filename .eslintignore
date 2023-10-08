@@ -1,3 +1,4 @@
+*.min.js
 .git/
 node_modules/
 tmp/
