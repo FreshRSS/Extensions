@@ -31,10 +31,10 @@ const stringToColour = (str) => {
   str.split('').forEach(char => {
     hash = char.charCodeAt(0) + ((hash << 5) - hash)
   })
-  let colour = '#'
+  let color = '#';
   for (let i = 0; i < 3; i++) {
     const value = (hash >> (i * 8)) & 0xff
-    colour += value.toString(16).padStart(2, '0')
+    color += value.toString(16).padStart(2, '0')
   }
-  return colour
+  return color; 
 };
