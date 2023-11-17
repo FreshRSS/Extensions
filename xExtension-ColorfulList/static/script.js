@@ -1,4 +1,4 @@
-$(document).ready(function(){
+document.addEventListener('DOMContentLoaded', function(){
     function monitorEntry(monitorCallback) {
         const targetNode = document.getElementById('stream');
         const config = { attributes: false, childList: true, subtree: false};
