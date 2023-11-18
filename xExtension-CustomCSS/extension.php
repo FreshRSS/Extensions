@@ -30,7 +30,7 @@ class CustomCSSExtension extends Minz_Extension {
 			$tmpPath = explode(EXTENSIONS_PATH . '/', $filepath);
 			$this->permission_problem = $tmpPath[1];
 		} else if (Minz_Request::isPost()) {
-			$css_rules = html_entity_decode(Minz_Request::param('css-rules', ''));
+			$css_rules = html_entity_decode(Minz_Request::paramString('css-rules'));
 			file_put_contents($filepath, $css_rules);
 		}
 
