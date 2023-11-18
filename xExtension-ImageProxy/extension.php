@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 class ImageProxyExtension extends Minz_Extension {
 	// Defaults
 	const PROXY_URL = 'https://images.weserv.nl/?url=';

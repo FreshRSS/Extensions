@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 class CustomCSSExtension extends Minz_Extension {
 	public function init() {
 		$this->registerTranslates();
