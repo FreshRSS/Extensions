@@ -57,6 +57,17 @@
             "directory": "xExtension-ClickableLinks"
         },
         {
+            "name": "Colorful List",
+            "author": "Claud Xiao",
+            "description": "Colorful Entry Title based on RSS source",
+            "version": 0.1,
+            "entrypoint": "ColorfulList",
+            "type": "user",
+            "url": "https://github.com/FreshRSS/Extensions",
+            "method": "git",
+            "directory": "xExtension-ColorfulList"
+        },
+        {
             "name": "Comics in feed",
             "author": "José Moreira",
             "description": "Embed the images from comics feeds directly.",
