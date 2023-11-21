@@ -74,4 +74,8 @@
 {
 	"url": "https://github.com/giventofly/freshrss-comicsinfeed",
 	"type": "git"
+},
+{
+	"url": "https://code.sitosis.com/rudism/freshrss-kagi-summarizer",
+	"type": "git"
 }]

@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 class CustomJSExtension extends Minz_Extension {
 	public function init() {
 		$this->registerTranslates();
 
-		$current_user = Minz_Session::param('currentUser');
+		$current_user = Minz_Session::paramString('currentUser');
 		$filename =  'script.' . $current_user . '.js';
 		$filepath = join_path($this->getPath(), 'static', $filename);
 
@@ -16,7 +18,7 @@ class CustomJSExtension extends Minz_Extension {
 	public function handleConfigureAction() {
 		$this->registerTranslates();
 
-		$current_user = Minz_Session::param('currentUser');
+		$current_user = Minz_Session::paramString('currentUser');
 		$filename =  'script.' . $current_user . '.js';
 		$staticPath = join_path($this->getPath(), 'static');
 		$filepath = join_path($staticPath, $filename);
@@ -28,7 +30,7 @@ class CustomJSExtension extends Minz_Extension {
 			$tmpPath = explode(EXTENSIONS_PATH . '/', $filepath);
 			$this->permission_problem = $tmpPath[1];
 		} else if (Minz_Request::isPost()) {
-			$js_rules = html_entity_decode(Minz_Request::param('js-rules', ''));
+			$js_rules = html_entity_decode(Minz_Request::paramString('js-rules'));
 			file_put_contents($filepath, $js_rules);
 		}
 
