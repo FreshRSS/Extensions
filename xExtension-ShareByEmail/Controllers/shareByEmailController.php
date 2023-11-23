@@ -1,34 +1,51 @@
 <?php
 
+declare(strict_types=1);
+
 class FreshExtension_shareByEmail_Controller extends Minz_ActionController {
-	public function init() {
+	public ?Minz_Extension $extension;
+
+	/** @var ShareByEmail\mailers\View */
+	protected $view;
+
+	public function __construct() {
+		parent::__construct(ShareByEmail\mailers\View::class);
+	}
+
+	public function init(): void {
 		$this->extension = Minz_ExtensionManager::findExtension('Share By Email');
 	}
 
-	public function shareAction() {
+	public function shareAction(): void {
 		if (!FreshRSS_Auth::hasAccess()) {
 			Minz_Error::error(403);
 		}
 
-		$id = Minz_Request::param('id', null);
-		if (null === $id) {
+		$id = Minz_Request::paramString('id');
+		if ($id === '') {
 			Minz_Error::error(404);
 		}
 
 		$entryDAO = FreshRSS_Factory::createEntryDao();
 		$entry = $entryDAO->searchById($id);
-		if (null === $entry) {
+		if ($entry === null) {
 			Minz_Error::error(404);
 		}
+		$this->view->entry = $entry;
 
-		$username = Minz_Session::param('currentUser', '_');
+		if (FreshRSS_Context::$system_conf === null) {
+			throw new FreshRSS_Context_Exception('System configuration not initialised!');
+		}
+
+		$username = Minz_Session::paramString('currentUser') ?: '_';
 		$service_name = FreshRSS_Context::$system_conf->title;
 		$service_url = FreshRSS_Context::$system_conf->base_url;
 
 		Minz_View::prependTitle(_t('shareByEmail.share.title') . ' · ');
-		Minz_View::appendStyle($this->extension->getFileUrl('shareByEmail.css', 'css'));
+		if ($this->extension !== null) {
+			Minz_View::appendStyle($this->extension->getFileUrl('shareByEmail.css', 'css'));
+		}
 		$this->view->_layout('simple');
-		$this->view->entry = $entry;
 		$this->view->to = '';
 		$this->view->subject = _t('shareByEmail.share.form.subject_default');
 		$this->view->content = _t(
@@ -41,9 +58,9 @@ class FreshExtension_shareByEmail_Controller extends Minz_ActionController {
 		);
 
 		if (Minz_Request::isPost()) {
-			$this->view->to = $to = Minz_Request::param('to', '');
-			$this->view->subject = $subject = Minz_Request::param('subject', '');
-			$this->view->content = $content = Minz_Request::param('content', '');
+			$this->view->to = $to = Minz_Request::paramString('to');
+			$this->view->subject = $subject = Minz_Request::paramString('subject');
+			$this->view->content = $content = Minz_Request::paramString('content');
 
 			if ($to == "" || $subject == "" || $content == "") {
 				Minz_Request::bad(_t('shareByEmail.share.feedback.fields_required'), [

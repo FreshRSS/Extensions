@@ -339,7 +339,7 @@ class FreshAPI_TTRSS {
 
 			if ($show_excerpt) {
 				// @todo add a facultative max char in content method to get
-				// an exerpt.
+				// an excerpt.
 				$line['excerpt'] = $item->content();
 			}
 

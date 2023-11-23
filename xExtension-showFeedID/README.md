@@ -1,6 +1,6 @@
-Extension for FressRSS (https://github.com/FreshRSS)
+Extension for FressRSS (<https://github.com/FreshRSS>)
 
-It helps to find the feed IDs of each feed. 
+It helps to find the feed IDs of each feed.
 
 Feed IDs are used f.e. for the search or user queries.
 

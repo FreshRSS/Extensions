@@ -1,8 +1,10 @@
 <?php
 
-class ColorfulListExtension extends Minz_Extension {
+declare(strict_types=1);
 
-    public function init():void {
-        Minz_View::appendScript($this->getFileUrl('script.js', 'js'),'','','');       
-    }
+class ColorfulListExtension extends Minz_Extension
+{
+	public function init(): void {
+		Minz_View::appendScript($this->getFileUrl('script.js', 'js'));
+	}
 }
