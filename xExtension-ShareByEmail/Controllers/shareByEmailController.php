@@ -30,6 +30,7 @@ class FreshExtension_shareByEmail_Controller extends Minz_ActionController {
 		$entry = $entryDAO->searchById($id);
 		if ($entry === null) {
 			Minz_Error::error(404);
+			return;
 		}
 		$this->view->entry = $entry;
 
