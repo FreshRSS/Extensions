@@ -1,23 +1,29 @@
+
+
 document.addEventListener('DOMContentLoaded', function(){
-    function monitorEntry(monitorCallback) {
-        const targetNode = document.getElementById('stream');
-        const config = { attributes: false, childList: true, subtree: false};
-        const callback = function(mutationsList, observer) {
-            for(let mutation of mutationsList) {
-                if (mutation.type === 'childList') {
-                    monitorCallback(mutationsList);
-                }
-                    }
-        };
-        const observer = new MutationObserver(callback);
-        observer.observe(targetNode, config);
-        //observer.disconnect();
-    };
+    //Initial Colorize for situation where 'no new item changes triggered later' (https://github.com/FreshRSS/Extensions/issues/183)
+    colorize();
+
+    //Insert entry monitor
     monitorEntry(colorize);
 });
 
+function monitorEntry(monitorCallback) {
+    const targetNode = document.getElementById('stream');
+    const config = { attributes: false, childList: true, subtree: false};
+    const callback = function(mutationsList, observer) {
+        for(let mutation of mutationsList) {
+            if (mutation.type === 'childList') {
+                monitorCallback(mutationsList);
+            }
+        }
+    };
+    const observer = new MutationObserver(callback);
+    observer.observe(targetNode, config);
+    //observer.disconnect();
+};
 
-function colorize(entries){
+function colorize(){
     let entry = document.querySelectorAll('.flux_header');
     entry.forEach((e,i)=>{
         let cl = stringToColour(e.querySelector('.website').textContent)+'12';
