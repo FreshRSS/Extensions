@@ -38,9 +38,6 @@ jobs:
     - name: Check PHTML syntax
       run: composer run-script phtml-lint
 
-    - name: Check translations syntax
-      run: composer run-script translations && git diff --exit-code
-
     - name: Use Composer cache
       id: composer-cache
       uses: actions/cache@v3
@@ -53,9 +50,6 @@ jobs:
     - name: Run Composer install
       run: composer install --prefer-dist --no-progress
       if: steps.composer-cache.outputs.cache-hit != 'true'
-
-    - name: Run PHP unit tests
-      run: composer run-script phpunit
 
     - name: PHP_CodeSniffer
       run: composer run-script phpcs

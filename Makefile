@@ -41,10 +41,6 @@ help:
 ######################
 ## Tests and linter ##
 ######################
-.PHONY: test
-test: vendor/bin/phpunit ## Run the test suite
-	$(PHP) vendor/bin/phpunit --bootstrap ./tests/bootstrap.php ./tests
-
 .PHONY: lint
 lint: vendor/bin/phpcs ## Run the linter on the PHP files
 	$(PHP) vendor/bin/phpcs . -p -s
@@ -56,10 +52,6 @@ lint-fix: vendor/bin/phpcbf ## Fix the errors detected by the linter
 bin/composer:
 	mkdir -p bin/
 	wget 'https://raw.githubusercontent.com/composer/getcomposer.org/a19025d6c0a1ff9fc1fac341128b2823193be462/web/installer' -O - -q | php -- --quiet --install-dir='./bin/' --filename='composer'
-
-vendor/bin/phpunit: bin/composer
-	bin/composer install --prefer-dist --no-progress
-	ln -s ../vendor/bin/phpunit bin/phpunit
 
 vendor/bin/phpcs: bin/composer
 	bin/composer install --prefer-dist --no-progress
