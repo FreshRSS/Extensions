@@ -3,7 +3,8 @@
 declare(strict_types=1);
 
 class ShareByEmailExtension extends Minz_Extension {
-	public function init() {
+
+	public function init(): void {
 		$this->registerTranslates();
 
 		$this->registerController('shareByEmail');
@@ -20,7 +21,7 @@ class ShareByEmailExtension extends Minz_Extension {
 		spl_autoload_register(array($this, 'loader'));
 	}
 
-	public function loader($class_name) {
+	public function loader(string $class_name): void {
 		if (strpos($class_name, 'ShareByEmail') === 0) {
 			$class_name = substr($class_name, 13);
 			$base_path = $this->getPath() . '/';

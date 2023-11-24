@@ -20,14 +20,14 @@
 				reading_time.flux = flux_list[i];
 
 				reading_time.words_count = reading_time.flux_words_count(flux_list[i]); // count the words
-				// change this number (in words) to your prefered reading speed:
+				// change this number (in words) to your preferred reading speed:
 				reading_time.reading_time = reading_time.calc_read_time(reading_time.words_count, 300);
 
 				flux_list[i].dataset.readingTime = reading_time.reading_time;
 
 				const li = document.createElement('li');
 				li.setAttribute('class', 'item date');
-				li.style.width = "40px";
+				li.style.width = '40px';
 				li.style.overflow = 'hidden';
 				li.style.textAlign = 'right';
 				li.style.display = 'table-cell';

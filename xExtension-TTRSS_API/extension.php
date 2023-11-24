@@ -1,11 +1,12 @@
 <?php
-
 declare(strict_types=1);
 
 class TTRSS_APIExtension extends Minz_Extension {
 	public function init() {
-		$this->registerHook('post_update',
-		                    array($this, 'postUpdateHook'));
+		$this->registerHook(
+			'post_update',
+			array($this, 'postUpdateHook')
+		);
 	}
 
 	public function install() {

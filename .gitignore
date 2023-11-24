@@ -1,3 +1,6 @@
-tmp
-/node_modules/
 .vscode/
+bin/
+node_modules/
+symbolic/
+tmp/
+vendor/
