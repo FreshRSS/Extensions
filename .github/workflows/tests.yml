@@ -2,9 +2,9 @@ name: Automated tests
 
 on:
   push:
-    branches: [ edge ]
+    branches: [ master ]
   pull_request:
-    branches: [ edge ]
+    branches: [ master ]
 
 jobs:
 
