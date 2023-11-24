@@ -19,13 +19,7 @@ jobs:
     - name: Git checkout source code
       uses: actions/checkout@v4
       with:
-        repository: FreshRSS/FreshRSS
-        path: ./FreshRSS
-
-    - name: Git checkout source code
-      uses: actions/checkout@v4
-      with:
-        path: ./Extensions
+        path: Extensions
 
     # Composer tests
 
@@ -50,6 +44,12 @@ jobs:
 
     - name: PHP_CodeSniffer
       run: composer run-script phpcs
+
+    - name: Git checkout FreshRSS source code
+      uses: actions/checkout@v4
+      with:
+        repository: FreshRSS/FreshRSS
+        path: FreshRSS
 
     - name: PHPStan
       run: composer run-script phpstan
