@@ -87,7 +87,7 @@ jobs:
       id: shell-cache
       uses: actions/cache@v3
       with:
-        path: bin
+        path: Extensions/bin
         key: ${{ runner.os }}-typos@v1.16.21
 
     - name: Add ./bin/ to $PATH
