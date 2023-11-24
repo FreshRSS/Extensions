@@ -13,22 +13,19 @@ jobs:
     runs-on: ubuntu-22.04
     defaults:
       run:
-        working-directory: ./extensions
+        working-directory: ./Extensions
 
     steps:
     - name: Git checkout source code
       uses: actions/checkout@v4
       with:
         repository: FreshRSS/FreshRSS
-
-    - name: Prepare extensions directory
-      working-directory: ./
-      run: rm -r ./extensions
+        path: ./FreshRSS
 
     - name: Git checkout source code
       uses: actions/checkout@v4
       with:
-        path: ./extensions
+        path: ./Extensions
 
     # Composer tests
 
