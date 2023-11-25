@@ -1,9 +1,13 @@
+window.onload = function () {
+    // Initial Colorize for situation where 'no new item changes triggered later' (https://github.com/FreshRSS/Extensions/issues/183)
+    colorize();
+};
+
 document.addEventListener('DOMContentLoaded', function () {
-	// Initial Colorize for situation where 'no new item changes triggered later' (https://github.com/FreshRSS/Extensions/issues/183)
-	colorize();
-	// Insert entry monitor
-	monitorEntry(colorize);
+    // Insert entry monitor for autoloading list
+    monitorEntry(colorize);
 });
+
 
 function monitorEntry(monitorCallback) {
 	const targetNode = document.getElementById('stream');
