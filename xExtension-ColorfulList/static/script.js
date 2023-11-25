@@ -16,10 +16,10 @@ function monitorEntry(monitorCallback) {
 		}
 	}
 	const observer = new MutationObserver(callback);
-    if (targetNode){
-	    observer.observe(targetNode, config);
-    };
-};
+    if (targetNode) {
+        observer.observe(targetNode, config);
+    }
+}
 
 function colorize() {
 	const entry = document.querySelectorAll('.flux_header');
@@ -27,7 +27,7 @@ function colorize() {
 		const cl = stringToColour(e.querySelector('.website').textContent) + '12';
 		e.style.background = cl;
 	});
-};
+}
 
 const stringToColour = (str) => {
 	let hash = 0;
@@ -38,6 +38,6 @@ const stringToColour = (str) => {
 	for (let i = 0; i < 3; i++) {
 		const value = (hash >> (i * 8)) & 0xff;
 		color += value.toString(16).padStart(2, '0');
-	};
+	}
 	return color;
 };
