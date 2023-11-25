@@ -19,11 +19,12 @@ function monitorEntry(monitorCallback) {
         }
     };
     const observer = new MutationObserver(callback);
-    observer.observe(targetNode, config);
+    if(targetNode)
+        observer.observe(targetNode, config);
     //observer.disconnect();
 };
 
-function colorize(){
+function colorize(entries){
     let entry = document.querySelectorAll('.flux_header');
     entry.forEach((e,i)=>{
         let cl = stringToColour(e.querySelector('.website').textContent)+'12';
