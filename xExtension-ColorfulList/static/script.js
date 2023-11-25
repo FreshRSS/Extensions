@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function () {
     monitorEntry(colorize);
 });
 
-
 function monitorEntry(monitorCallback) {
 	const targetNode = document.getElementById('stream');
 	const config = { attributes: false, childList: true, subtree: false };
