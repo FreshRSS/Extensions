@@ -21,7 +21,7 @@ function monitorEntry(monitorCallback) {
     }
 }
 
-function colorize() {
+function colorize(mList) {
 	const entry = document.querySelectorAll('.flux_header');
 	entry.forEach((e, i) => {
 		const cl = stringToColour(e.querySelector('.website').textContent) + '12';
