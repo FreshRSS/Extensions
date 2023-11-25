@@ -1,4 +1,3 @@
-'use strict';
 document.addEventListener('DOMContentLoaded', function () {
 	// Initial Colorize for situation where 'no new item changes triggered later' (https://github.com/FreshRSS/Extensions/issues/183)
 	colorize();
@@ -13,11 +12,11 @@ function monitorEntry(monitorCallback) {
 		for (const mutation of mutationsList) {
 			if (mutation.type === 'childList') {
                 monitorCallback(mutationsList);
-			};
-		};
-	};
+			}
+		}
+	}
 	const observer = new MutationObserver(callback);
-    if(targetNode){
+    if (targetNode){
 	    observer.observe(targetNode, config);
     };
 };
