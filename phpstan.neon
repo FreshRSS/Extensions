@@ -1,0 +1,39 @@
+parameters:
+	# TODO: Increase rule-level https://phpstan.org/user-guide/rule-levels
+	level: 1
+	treatPhpDocTypesAsCertain: false
+	fileExtensions:
+		- php
+		- phtml
+	paths:
+		- ../FreshRSS
+		- .
+	excludePaths:
+		analyse:
+			- ../FreshRSS
+			- vendor/
+		analyseAndScan:
+			- .git/
+			- node_modules/
+			- symbolic/
+			- tmp/
+			- xExtension-TTRSS_API/
+	dynamicConstantNames:
+		- TYPE_GIT
+	reportMaybesInPropertyPhpDocTypes: false
+	strictRules:
+		allRules: false
+		booleansInConditions: false	# TODO pass
+		closureUsesThis: true
+		disallowedConstructs: false
+		disallowedLooseComparison: false
+		matchingInheritedMethodNames: true
+		noVariableVariables: false	# TODO pass
+		numericOperandsInArithmeticOperators: true
+		overwriteVariablesWithLoop: true
+		requireParentConstructorCall: true
+		strictCalls: true
+		switchConditionsMatchingType: true
+		uselessCast: true
+includes:
+	- vendor/phpstan/phpstan-strict-rules/rules.neon

@@ -100,8 +100,6 @@ There are some FreshRSS extensions out there, developed by community members:
 
 * [Kagi Summarizer](https://code.sitosis.com/rudism/freshrss-kagi-summarizer): Adds a "Summarize" button to the top of all entries that will fetch the summary of the entry using the [Kagi Universal Summarizer](https://kagi.com/summarizer/index.html).
 
-
-### By [@shinemoon](https://github.com/shinemoon]
+### By [@shinemoon](https://github.com/shinemoon)
 
 * [Colorful List](https://github.com/shinemoon/FreshRSS-Dev/tree/master/extensions/xExtension-ColorfulList): Generate light different background color for article list rows (relying on the feed name)
-

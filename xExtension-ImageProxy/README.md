@@ -31,7 +31,7 @@ The source code for the images.weserv.nl proxy can be found at [github.com/andri
 
 In order to use Apache [mod_rewrite](https://httpd.apache.org/docs/current/mod/mod_rewrite.html), you will need to set the following settings:
 
-* `proxy_url` = **https://www.example.org/proxy/**
+* `proxy_url` = **<https://www.example.org/proxy/>**
 
 * `scheme_include` = **1**
 
@@ -39,7 +39,7 @@ In order to use Apache [mod_rewrite](https://httpd.apache.org/docs/current/mod/m
 
 Along the following Apache configuration for the `www.example.org` virtual host:
 
-```
+```apache
 # WARNING: Multiple '/' in %{REQUEST_URI} are internally trimmed to a single one!
 RewriteCond %{REQUEST_URI} ^/proxy/https:/+(.*)$
 RewriteRule ^ https://%1 [QSA,P,L]
@@ -74,7 +74,7 @@ In order to use nginx's [proxy
 module](https://nginx.org/en/docs/http/ngx_http_proxy_module.html), you will
 need to set the following settings:
 
-* `proxy_url` = **https://www.example.org/proxy?key=changeme&url=**
+* `proxy_url` = **<https://www.example.org/proxy?key=changeme&url=>**
 * `scheme_include` = **1**
 * `url_encode` = **0**
 

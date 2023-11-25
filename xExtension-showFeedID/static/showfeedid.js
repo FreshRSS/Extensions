@@ -1,6 +1,6 @@
 'use strict';
 
-const url 		= new URL(window.location);
+const url = new URL(window.location);
 if (url.searchParams.get('c') === 'subscription') {
 	const div = document.querySelector('h1 ~ div');
 	const button = document.createElement('Button');

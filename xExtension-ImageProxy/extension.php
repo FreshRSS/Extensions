@@ -2,18 +2,23 @@
 
 declare(strict_types=1);
 
-class ImageProxyExtension extends Minz_Extension {
+final class ImageProxyExtension extends Minz_Extension {
 	// Defaults
-	const PROXY_URL = 'https://images.weserv.nl/?url=';
-	const SCHEME_HTTP = '1';
-	const SCHEME_HTTPS = '';
-	const SCHEME_DEFAULT = 'auto';
-	const SCHEME_INCLUDE = '';
-	const URL_ENCODE = '1';
+	private const PROXY_URL = 'https://images.weserv.nl/?url=';
+	private const SCHEME_HTTP = '1';
+	private const SCHEME_HTTPS = '';
+	private const SCHEME_DEFAULT = 'auto';
+	private const SCHEME_INCLUDE = '';
+	private const URL_ENCODE = '1';
 
-	public function init() {
-		$this->registerHook('entry_before_display',
-		                    array('ImageProxyExtension', 'setImageProxyHook'));
+	public function init(): void {
+		if (FreshRSS_Context::$system_conf === null) {
+			throw new FreshRSS_Context_Exception('System configuration not initialised!');
+		}
+		$this->registerHook(
+			'entry_before_display',
+			array('ImageProxyExtension', 'setImageProxyHook')
+		);
 		// Defaults
 		$save = false;
 		if (is_null(FreshRSS_Context::$user_conf->image_proxy_url)) {
@@ -50,7 +55,7 @@ class ImageProxyExtension extends Minz_Extension {
 		}
 	}
 
-	public function handleConfigureAction() {
+	public function handleConfigureAction(): void {
 		$this->registerTranslates();
 
 		if (Minz_Request::isPost()) {
@@ -64,37 +69,36 @@ class ImageProxyExtension extends Minz_Extension {
 		}
 	}
 
-	public static function getProxyImageUri($url) {
+	public static function getProxyImageUri(string $url): string {
 		$parsed_url = parse_url($url);
 		$scheme = isset($parsed_url['scheme']) ? $parsed_url['scheme'] : null;
 		if ($scheme === 'http') {
-			if (!FreshRSS_Context::$user_conf->image_proxy_scheme_http) return $url;
+			if (!FreshRSS_Context::$user_conf->image_proxy_scheme_http) {
+				return $url;
+			}
 			if (!FreshRSS_Context::$user_conf->image_proxy_scheme_include) {
 				$url = substr($url, 7);  // http://
 			}
-		}
-		else if ($scheme === 'https') {
-			if (!FreshRSS_Context::$user_conf->image_proxy_scheme_https) return $url;
+		} elseif ($scheme === 'https') {
+			if (!FreshRSS_Context::$user_conf->image_proxy_scheme_https) {
+				return $url;
+			}
 			if (!FreshRSS_Context::$user_conf->image_proxy_scheme_include) {
 				$url = substr($url, 8);  // https://
 			}
-		}
-		else if (empty($scheme)) {
+		} elseif (empty($scheme)) {
 			if (FreshRSS_Context::$user_conf->image_proxy_scheme_default === 'auto') {
 				if (FreshRSS_Context::$user_conf->image_proxy_scheme_include) {
-					$url = ((!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS'])!== 'off') ? 'https:' : 'http:') . $url;
+					$url = ((!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off') ? 'https:' : 'http:') . $url;
 				}
-			}
-			else if (substr(FreshRSS_Context::$user_conf->image_proxy_scheme_default, 0, 4) === 'http') {
+			} elseif (substr(FreshRSS_Context::$user_conf->image_proxy_scheme_default, 0, 4) === 'http') {
 				if (FreshRSS_Context::$user_conf->image_proxy_scheme_include) {
 					$url = FreshRSS_Context::$user_conf->image_proxy_scheme_default . ':' . $url;
 				}
-			}
-			else {  // do not proxy unschemed ("//path/...") URLs
+			} else {  // do not proxy unschemed ("//path/...") URLs
 				return $url;
 			}
-		}
-		else {  // unknown/unsupported (non-http) scheme
+		} else {  // unknown/unsupported (non-http) scheme
 			return $url;
 		}
 		if (FreshRSS_Context::$user_conf->image_proxy_url_encode) {
@@ -103,11 +107,16 @@ class ImageProxyExtension extends Minz_Extension {
 		return FreshRSS_Context::$user_conf->image_proxy_url . $url;
 	}
 
-	public static function getSrcSetUris($matches) {
-		return str_replace($matches[1], self::getProxyImageUri($matches[1]), $matches[0]);
+	/**
+	 * @param array<string> $matches
+	 * @return array<string>
+	 */
+	public static function getSrcSetUris(array $matches): array {
+		$result = str_replace($matches[1], self::getProxyImageUri($matches[1]), $matches[0]);
+		return is_array($result) ? $result : [$result];
 	}
 
-	public static function swapUris($content) {
+	public static function swapUris(string $content): string {
 		if (empty($content)) {
 			return $content;
 		}
@@ -122,15 +131,15 @@ class ImageProxyExtension extends Minz_Extension {
 				$img->setAttribute('src', $newSrc);
 			}
 			if ($img->hasAttribute('srcset')) {
-				$newSrcSet = preg_replace_callback('/(?:([^\s,]+)(\s*(?:\s+\d+[wx])(?:,\s*)?))/', 'self::getSrcSetUris', $img->getAttribute('srcset'));
+				$newSrcSet = preg_replace_callback('/(?:([^\s,]+)(\s*(?:\s+\d+[wx])(?:,\s*)?))/', fn($matches) => self::getSrcSetUris($matches), $img->getAttribute('srcset'));
 				$img->setAttribute('srcset', $newSrcSet);
 			}
 		}
 
-		return $doc->saveHTML();
+		return $doc->saveHTML() ?: '';
 	}
 
-	public static function setImageProxyHook($entry) {
+	public static function setImageProxyHook(FreshRSS_Entry $entry): FreshRSS_Entry {
 		$entry->_content(
 			self::swapUris($entry->content())
 		);

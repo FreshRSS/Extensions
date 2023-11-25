@@ -18,17 +18,20 @@ if (file_exists($tempFolder)) {
 // Parse the repositories.json file to extract extension locations //
 // --------------------------------------------------------------- //
 try {
-	$repositories = json_decode(file_get_contents('repositories.json'), true, 512, JSON_THROW_ON_ERROR);
+	$repositories = json_decode(file_get_contents('repositories.json') ?: '', true, 512, JSON_THROW_ON_ERROR);
+	if (!is_array($repositories)) {
+		throw new ParseError('Not an array!');
+	}
 } catch (Exception $exception) {
 	echo 'The repositories.json file is not a valid JSON file.', PHP_EOL;
 	exit(1);
 }
 
 foreach ($repositories as $repository) {
-	if (null === $url = $repository['url'] ?? null) {
+	if (null === $url = ($repository['url'] ?? null)) {
 		continue;
 	}
-	if (TYPE_GIT === $repository['type'] ?? null) {
+	if (TYPE_GIT === ($repository['type'] ?? null)) {
 		$gitRepositories[sha1($url)] = $url;
 	}
 }
@@ -44,7 +47,10 @@ foreach ($gitRepositories as $key => $gitRepository) {
 	exec("find {$tempFolder}/{$key} -iname metadata.json", $metadataFiles);
 	foreach ($metadataFiles as $metadataFile) {
 		try {
-			$metadata = json_decode(file_get_contents($metadataFile), true, 512, JSON_THROW_ON_ERROR);
+			$metadata = json_decode(file_get_contents($metadataFile) ?: '', true, 512, JSON_THROW_ON_ERROR);
+			if (!is_array($metadata)) {
+				throw new ParseError('Not an array!');
+			}
 			$directory = basename(dirname($metadataFile));
 			$metadata['url'] = $gitRepository;
 			$metadata['method'] = TYPE_GIT;
