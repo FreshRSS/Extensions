@@ -167,6 +167,17 @@
             "directory": "xExtension-FixedNavMenu"
         },
         {
+            "name": "FreshRss FlareSolverr",
+            "author": "James Ravenscroft",
+            "description": "Use a Flaresolverr instance to bypass cloudflare security checks",
+            "version": 0.1,
+            "entrypoint": "FlareSolverr",
+            "type": "system",
+            "url": "https://github.com/ravenscroftj/freshrss-flaresolverr-extension",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "GReader Redate",
             "author": "Julien Avérous",
             "description": "Use published date instead of fetching date.",
@@ -462,28 +473,6 @@
             "url": "https://github.com/babico/xExtension-TwitchChannel2RssFeed",
             "method": "git",
             "directory": "."
-        },
-        {
-            "name": "FreshRss FlareSolverr",
-            "author": "James Ravenscroft",
-            "description": "Use a Flaresolverr instance to bypass cloudflare security checks",
-            "version": 0.1,
-            "entrypoint": "FlareSolverr",
-            "type": "system",
-            "url": "https://github.com/ravenscroftj/freshrss-flaresolverr-extension",
-            "method": "git",
-            "directory": "."
-        },
-        {
-            "name": "Invidious Video Feed",
-            "author": "Paul Tunbridge (forked from Korbak and Kevin Papst)",
-            "description": "Embed YouTube feeds inside article content, but with Invidious.",
-            "version": 1.1,
-            "entrypoint": "Invidious",
-            "type": "user",
-            "url": "https://github.com/tunbridgep/freshrss-invidious",
-            "method": "git",
-            "directory": "xExtension-Invidious"
         },
         {
             "name": "White List",
