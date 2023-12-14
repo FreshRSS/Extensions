@@ -464,6 +464,17 @@
             "directory": "xExtension-TouchControl"
         },
         {
+            "name": "TranslateTitlesCN",
+            "author": "jacob2826",
+            "description": "Translate article titles of the specified feed into Chinese, using DeepLX or Google Translate.",
+            "version": 0.2,
+            "entrypoint": "TranslateTitles",
+            "type": "user",
+            "url": "https://github.com/jacob2826/FreshRSS-TranslateTitlesCN",
+            "method": "git",
+            "directory": "TranslateTitlesCN"
+        },
+        {
             "name": "TwitchChannel2RssFeed",
             "author": "Babico",
             "description": "Transfer Twitch Channel URL into RSS Feed URL.",

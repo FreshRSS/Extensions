@@ -115,3 +115,7 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@tunbridgep](https://github.com/tunbridgep)
 
 * [Invidious Video Feed](https://github.com/tunbridgep/freshrss-invidious/tree/master/xExtension-Invidious): Embed YouTube feeds inside article content, but with Invidious.
+
+### By [@jacob2826](https://github.com/jacob2826)
+
+* [TranslateTitlesCN](https://github.com/jacob2826/FreshRSS-TranslateTitlesCN): Translate article titles of the specified feed into Chinese, using [DeepLX](https://github.com/OwO-Network/DeepLX) or Google Translate.
