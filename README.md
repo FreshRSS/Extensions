@@ -103,3 +103,15 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@shinemoon](https://github.com/shinemoon)
 
 * [Colorful List](https://github.com/shinemoon/FreshRSS-Dev/tree/master/extensions/xExtension-ColorfulList): Generate light different background color for article list rows (relying on the feed name)
+
+### By [@babico](https://github.com/babico)
+
+* [Twitch Channel 2 Rss Feed](https://github.com/babico/xExtension-TwitchChannel2RssFeed): You can add a Twitch Channel URL and will get it as RSSFeed
+
+### By [@ravenscroftj](https://github.com/ravenscroftj)
+
+* [FreshRss FlareSolverr](https://github.com/ravenscroftj/freshrss-flaresolverr-extension): Use a Flaresolverr instance to bypass cloudflare security checks
+
+### By [@tunbridgep](https://github.com/tunbridgep)
+
+* [Invidious Video Feed](https://github.com/tunbridgep/freshrss-invidious/tree/master/xExtension-Invidious): Embed YouTube feeds inside article content, but with Invidious.

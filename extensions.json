@@ -453,6 +453,39 @@
             "directory": "xExtension-TouchControl"
         },
         {
+            "name": "TwitchChannel2RssFeed",
+            "author": "Babico",
+            "description": "Transfer Twitch Channel URL into RSS Feed URL.",
+            "version": 0.2,
+            "entrypoint": "TwitchChannel2RssFeed",
+            "type": "user",
+            "url": "https://github.com/babico/xExtension-TwitchChannel2RssFeed",
+            "method": "git",
+            "directory": "."
+        },
+        {
+            "name": "FreshRss FlareSolverr",
+            "author": "James Ravenscroft",
+            "description": "Use a Flaresolverr instance to bypass cloudflare security checks",
+            "version": 0.1,
+            "entrypoint": "FlareSolverr",
+            "type": "system",
+            "url": "https://github.com/ravenscroftj/freshrss-flaresolverr-extension",
+            "method": "git",
+            "directory": "."
+        },
+        {
+            "name": "Invidious Video Feed",
+            "author": "Paul Tunbridge (forked from Korbak and Kevin Papst)",
+            "description": "Embed YouTube feeds inside article content, but with Invidious.",
+            "version": 1.1,
+            "entrypoint": "Invidious",
+            "type": "user",
+            "url": "https://github.com/tunbridgep/freshrss-invidious",
+            "method": "git",
+            "directory": "xExtension-Invidious"
+        },
+        {
             "name": "White List",
             "author": "Alexis Degrugillier",
             "description": "White list the accessible feeds to users",
