@@ -17,7 +17,6 @@ parameters:
 			- node_modules/
 			- symbolic/
 			- tmp/
-			- xExtension-TTRSS_API/
 	dynamicConstantNames:
 		- TYPE_GIT
 	reportMaybesInPropertyPhpDocTypes: false
