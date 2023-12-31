@@ -23,12 +23,12 @@ parameters:
 	reportMaybesInPropertyPhpDocTypes: false
 	strictRules:
 		allRules: false
-		booleansInConditions: false	# TODO pass
+		booleansInConditions: true
 		closureUsesThis: true
 		disallowedConstructs: false
 		disallowedLooseComparison: false
 		matchingInheritedMethodNames: true
-		noVariableVariables: false	# TODO pass
+		noVariableVariables: true
 		numericOperandsInArithmeticOperators: true
 		overwriteVariablesWithLoop: true
 		requireParentConstructorCall: true
