@@ -346,7 +346,7 @@
             "name": "Reddit Image",
             "author": "Alexis Degrugillier",
             "description": "Modify reddit entries by displaying known medias and easing access to the linked resource",
-            "version": "1.1.1",
+            "version": "1.2.0",
             "entrypoint": "RedditImage",
             "type": "user",
             "url": "https://github.com/aledeg/xExtension-RedditImage",
