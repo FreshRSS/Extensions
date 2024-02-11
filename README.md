@@ -120,6 +120,6 @@ There are some FreshRSS extensions out there, developed by community members:
 
 * [TranslateTitlesCN](https://github.com/jacob2826/FreshRSS-TranslateTitlesCN): Translate article titles of the specified feed into Chinese, using [DeepLX](https://github.com/OwO-Network/DeepLX) or Google Translate.
 
-### By [kalvn](https://github.com/kalvn)
+### By [@kalvn](https://github.com/kalvn)
 
 * [Mark Previous as Read](https://github.com/kalvn/freshrss-mark-previous-as-read): Adds a button in the footer of each entry. Clicking this button will mark all previous entries belonging to the current feed, as read.
