@@ -12,7 +12,7 @@
 	</div>
 
 	<div class="form-group form-actions">
-		<?php if (isset($this->permission_problem)) { ?>
+		<?php if (!empty($this->permission_problem)) { ?>
 			<p class="alert alert-error"><?= _t('ext.custom_js.permission_problem', $this->permission_problem) ?></p>
 		<?php } else { ?>
 			<div class="group-controls">
