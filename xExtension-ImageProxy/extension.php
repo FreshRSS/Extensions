@@ -109,11 +109,11 @@ final class ImageProxyExtension extends Minz_Extension {
 
 	/**
 	 * @param array<string> $matches
-	 * @return array<string>
+	 * @return string
 	 */
-	public static function getSrcSetUris(array $matches): array {
-		$result = str_replace($matches[1], self::getProxyImageUri($matches[1]), $matches[0]);
-		return is_array($result) ? $result : [$result];
+	public static function getSrcSetUris(array $matches): string {
+		$result = str_replace($matches[1], self::getProxyImageUri($matches[1]), $matches[0]) ?: '';
+		return $result;
 	}
 
 	public static function swapUris(string $content): string {
@@ -131,7 +131,7 @@ final class ImageProxyExtension extends Minz_Extension {
 				$img->setAttribute('src', $newSrc);
 			}
 			if ($img->hasAttribute('srcset')) {
-				$newSrcSet = preg_replace_callback('/(?:([^\s,]+)(\s*(?:\s+\d+[wx])(?:,\s*)?))/', fn($matches) => self::getSrcSetUris($matches), $img->getAttribute('srcset'));
+				$newSrcSet = preg_replace_callback('/(?:([^\s,]+)(\s*(?:\s+\d+[wx])(?:,\s*)?))/', fn($matches) => self::getSrcSetUris($matches), $img->getAttribute('srcset')) ?: '';
 				$img->setAttribute('srcset', $newSrcSet);
 			}
 		}
