@@ -7,8 +7,6 @@ return array(
 		'scheme_https' => 'Proxy HTTPS',
 		'scheme_default' => 'Proxy unspecified',
 		'scheme_include' => 'Include http*:// in URL',
-		'url_encode' => 'Encode the URL',
-		'true' => 'On',
-		'false' => 'Off',
+		'url_encode' => 'Encode the URL'
 	),
 );
