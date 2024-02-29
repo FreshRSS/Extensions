@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 final class ImageProxyExtension extends Minz_Extension {
 	// Defaults
-	private const PROXY_URL = 'https://images.weserv.nl/?url=';
+	private const PROXY_URL = 'https://wsrv.nl/?url=';
 	private const SCHEME_HTTP = '1';
 	private const SCHEME_HTTPS = '';
 	private const SCHEME_DEFAULT = 'auto';
