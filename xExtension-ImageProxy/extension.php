@@ -12,7 +12,7 @@ final class ImageProxyExtension extends Minz_Extension {
 	private const URL_ENCODE = '1';
 
 	public function init(): void {
-		if (FreshRSS_Context::systemConf() === null) {
+		if (!FreshRSS_Context::hasSystemConf()) {
 			throw new FreshRSS_Context_Exception('System configuration not initialised!');
 		}
 		$this->registerHook(
@@ -109,11 +109,9 @@ final class ImageProxyExtension extends Minz_Extension {
 
 	/**
 	 * @param array<string> $matches
-	 * @return string
 	 */
 	public static function getSrcSetUris(array $matches): string {
-		$result = str_replace($matches[1], self::getProxyImageUri($matches[1]), $matches[0]) ?: '';
-		return $result;
+		return str_replace($matches[1], self::getProxyImageUri($matches[1]), $matches[0]);
 	}
 
 	public static function swapUris(string $content): string {
@@ -131,8 +129,10 @@ final class ImageProxyExtension extends Minz_Extension {
 				$img->setAttribute('src', $newSrc);
 			}
 			if ($img->hasAttribute('srcset')) {
-				$newSrcSet = preg_replace_callback('/(?:([^\s,]+)(\s*(?:\s+\d+[wx])(?:,\s*)?))/', fn($matches) => self::getSrcSetUris($matches), $img->getAttribute('srcset')) ?: '';
-				$img->setAttribute('srcset', $newSrcSet);
+				$newSrcSet = preg_replace_callback('/(?:([^\s,]+)(\s*(?:\s+\d+[wx])(?:,\s*)?))/', fn (array $matches) => self::getSrcSetUris($matches), $img->getAttribute('srcset'));
+				if ($newSrcSet != null) {
+					$img->setAttribute('srcset', $newSrcSet);
+				}
 			}
 		}
 
