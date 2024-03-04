@@ -156,6 +156,17 @@
             "directory": "xExtension-FeedTitleBuilder"
         },
         {
+            "name": "FilterTitle",
+            "author": "CNTools | Clemens Neubauer",
+            "description": "Get rid of some noise feed entries by filter keywords in title",
+            "version": "0.1-alpha",
+            "entrypoint": "FilterTitle",
+            "type": "system",
+            "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
+            "method": "git",
+            "directory": "xExtension-FilterTitle"
+        },
+        {
             "name": "Fixed Nav Menu",
             "author": "Marco Heizmann",
             "description": "Sets the position of the navigation menu to fixed when scrolling down.",
@@ -352,6 +363,17 @@
             "url": "https://github.com/aledeg/xExtension-RedditImage",
             "method": "git",
             "directory": "."
+        },
+        {
+            "name": "Remove emojis",
+            "author": "CNTools | Clemens Neubauer",
+            "description": "remove emojis in the title of newly added feed entries",
+            "version": "0.1-dev",
+            "entrypoint": "RemoveEmojis",
+            "type": "user",
+            "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
+            "method": "git",
+            "directory": "xExtension-RemoveEmojis"
         },
         {
             "name": "Share By Email",
