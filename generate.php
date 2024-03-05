@@ -53,6 +53,7 @@ foreach ($gitRepositories as $key => $gitRepository) {
 			}
 			$directory = basename(dirname($metadataFile));
 			$metadata['url'] = $gitRepository;
+			$metadata['version'] = strval($metadata['version']);
 			$metadata['method'] = TYPE_GIT;
 			$metadata['directory'] = ($directory === sha1($gitRepository)) ? '.' : $directory;
 			$extensions[] = $metadata;
