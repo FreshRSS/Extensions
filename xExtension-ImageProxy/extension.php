@@ -140,8 +140,7 @@ final class ImageProxyExtension extends Minz_Extension {
 
 		$output = $doc->saveHTML($body);
 
-		$output = preg_replace('/^<body>/', '', $output);
-		$output = preg_replace('/<\/body>$/', '', $output);
+		$output = preg_replace('/^<body>|<\/body>$/', '', $output);
 
 		return $output;
 	}
