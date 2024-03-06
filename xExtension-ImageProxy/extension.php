@@ -121,7 +121,7 @@ final class ImageProxyExtension extends Minz_Extension {
 
 		$doc = new DOMDocument();
 		libxml_use_internal_errors(true); // prevent tag soup errors from showing
-		$doc->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+		$doc->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'));
 		$imgs = $doc->getElementsByTagName('img');
 		foreach ($imgs as $img) {
 			if ($img->hasAttribute('src')) {
@@ -136,7 +136,13 @@ final class ImageProxyExtension extends Minz_Extension {
 			}
 		}
 
-		return $doc->saveHTML() ?: '';
+		$body = $doc->getElementsByTagName('body')->item(0);
+
+		$output = $doc->saveHTML($body);
+
+		$output = preg_replace('/^<body>|<\/body>$/', '', $output);
+
+		return $output;
 	}
 
 	public static function setImageProxyHook(FreshRSS_Entry $entry): FreshRSS_Entry {
