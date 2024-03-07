@@ -158,8 +158,8 @@
         {
             "name": "FilterTitle",
             "author": "CNTools | Clemens Neubauer",
-            "description": "Get rid of some noise feed entries by filter keywords in title",
-            "version": "0.0.1",
+            "description": "Filter feed entries by filter keywords in title",
+            "version": "0.0.2",
             "entrypoint": "FilterTitle",
             "type": "system",
             "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
