@@ -180,7 +180,7 @@ class YouTubeExtension extends Minz_Extension
     }
 
     /**
-     * Returns an HTML <iframe> for a given URL for the configured width and height, with content ignored, appended or formated.
+     * Returns an HTML <iframe> for a given URL for the configured width and height, with content ignored, appended or formatted.
      */
     public function getHtml(FreshRSS_Entry $entry, string $url): string
     {
