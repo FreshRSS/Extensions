@@ -1,3 +1,7 @@
+<?php
+declare(strict_types=1);
+/** @var CustomJSExtension $this */
+?>
 <form action="<?php echo _url('extension', 'configure', 'e', urlencode($this->getName())); ?>" method="post">
 	<input type="hidden" name="_csrf" value="<?php echo FreshRSS_Auth::csrfToken(); ?>" />
 	<div class="form-group">
@@ -11,7 +15,7 @@
 		<div class="group-controls">
 			<input type="number" id="yt_width" name="yt_width" value="<?php echo $this->getWidth(); ?>" min="100" data-leave-validation="1">
 		</div>
-		
+
 		<div class="group-controls">
 			<label class="checkbox" for="yt_show_content">
 				<input type="checkbox" id="yt_show_content" name="yt_show_content" value="1" <?php echo $this->isShowContent() ? 'checked' : ''; ?>>
