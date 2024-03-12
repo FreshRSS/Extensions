@@ -23,33 +23,37 @@ With activated Youtube extension:
 
 ## Changelog
 
+0.11:
+- Modernized codebase for latest FreshRSS release 1.23.1
+- Moved from [custom repo](https://github.com/kevinpapst/freshrss-youtube) to FreshRSS official extension repo
+
 0.10:
-* Enhance feed content formatting when included
-* Enhance YouTube URL matching
+- Enhance feed content formatting when included
+- Enhance YouTube URL matching
 
 0.9:
-* Set the extension level at "user" (**users must re-enable the extension**)
-* Fix calls to unset configuration variables
-* Register translations when extension is disabled
+- Set the extension level at "user" (**users must re-enable the extension**)
+- Fix calls to unset configuration variables
+- Register translations when extension is disabled
 
 0.8:
-* Automatically convert channel and username URLs to feed URLs
+- Automatically convert channel and username URLs to feed URLs
 
 0.7:
-* Support for PeerTube feed
+- Support for PeerTube feed
 
 0.6:
-* Support cookie-less domain www.youtube-nocookie.com for embedding
+- Support cookie-less domain www.youtube-nocookie.com for embedding
 
 0.5:
-* Opened "API" for external usage
+- Opened "API" for external usage
 
 0.4:
-* Added option to display original feed content (currently Youtube inserts a download icon link to the video file)
-* Fixed config loading
+- Added option to display original feed content (currently Youtube inserts a download icon link to the video file)
+- Fixed config loading
 
 0.3:
-* Added installation hints
+- Added installation hints
 
 0.2:
-* Fixed "Use of undefined constant FreshRSS_Context"
+- Fixed "Use of undefined constant FreshRSS_Context"
