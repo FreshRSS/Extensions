@@ -11,24 +11,20 @@ class YouTubeExtension extends Minz_Extension
 {
     /**
      * Video player width
-     * @var int
      */
-    protected $width = 560;
+    private int $width = 560;
     /**
      * Video player height
-     * @var int
      */
-    protected $height = 315;
+	private int $height = 315;
     /**
      * Whether we display the original feed content
-     * @var bool
      */
-    protected $showContent = false;
+	private bool $showContent = false;
     /**
      * Switch to enable the Youtube No-Cookie domain
-     * @var bool
      */
-    protected $useNoCookie = false;
+	private bool $useNoCookie = false;
 
     public function install() {
         return true;
@@ -48,11 +44,7 @@ class YouTubeExtension extends Minz_Extension
         $this->registerTranslates();
     }
 
-    /**
-     * @param string $url
-     * @return string
-     */
-    public function convertYoutubeFeedUrl($url)
+    public function convertYoutubeFeedUrl(string $url): string
     {
         $matches = [];
 
@@ -71,7 +63,7 @@ class YouTubeExtension extends Minz_Extension
      * Initializes the extension configuration, if the user context is available.
      * Do not call that in your extensions init() method, it can't be used there.
      */
-    public function loadConfigValues()
+    public function loadConfigValues(): void
     {
         if (!class_exists('FreshRSS_Context', false) || null === FreshRSS_Context::$user_conf) {
             return;
@@ -92,45 +84,37 @@ class YouTubeExtension extends Minz_Extension
     }
 
     /**
-     * Returns the width in pixel for the youtube player iframe.
+     * Returns the width in pixel for the YouTube player iframe.
      * You have to call loadConfigValues() before this one, otherwise you get default values.
-     *
-     * @return int
      */
-    public function getWidth()
+    public function getWidth(): int
     {
         return $this->width;
     }
 
     /**
-     * Returns the height in pixel for the youtube player iframe.
+     * Returns the height in pixel for the YouTube player iframe.
      * You have to call loadConfigValues() before this one, otherwise you get default values.
-     *
-     * @return int
      */
-    public function getHeight()
+    public function getHeight(): int
     {
         return $this->height;
     }
 
     /**
-     * Returns whether this extensions displays the content of the youtube feed.
+     * Returns whether this extension displays the content of the YouTube feed.
      * You have to call loadConfigValues() before this one, otherwise you get default values.
-     *
-     * @return bool
      */
-    public function isShowContent()
+    public function isShowContent(): bool
     {
         return $this->showContent;
     }
-    
+
     /**
      * Returns if this extension should use youtube-nocookie.com instead of youtube.com.
      * You have to call loadConfigValues() before this one, otherwise you get default values.
-     *
-     * @return bool
      */
-    public function isUseNoCookieDomain()
+    public function isUseNoCookieDomain(): bool
     {
         return $this->useNoCookie;
     }
@@ -141,7 +125,7 @@ class YouTubeExtension extends Minz_Extension
      * @param FreshRSS_Entry $entry
      * @return mixed
      */
-    public function embedYouTubeVideo($entry)
+    public function embedYouTubeVideo(FreshRSS_Entry $entry)
     {
         $link = $entry->link();
 
@@ -168,11 +152,8 @@ class YouTubeExtension extends Minz_Extension
 
     /**
      * Returns an HTML <iframe> for a given Youtube watch URL (www.youtube.com/watch?v=)
-     *
-     * @param string $link
-     * @return string
      */
-    public function getHtmlContentForLink($entry, $link)
+    public function getHtmlContentForLink(FreshRSS_Entry $entry, string $link): string
     {
         $domain = 'www.youtube.com';
         if ($this->useNoCookie) {
@@ -181,41 +162,32 @@ class YouTubeExtension extends Minz_Extension
         $url = str_replace('//www.youtube.com/watch?v=', '//'.$domain.'/embed/', $link);
         $url = str_replace('http://', 'https://', $url);
 
-        $html = $this->getHtml($entry, $url);
-
-        return $html;
+        return $this->getHtml($entry, $url);
     }
 
     /**
     * Returns an HTML <iframe> for a given PeerTube watch URL
-    *
-    * @param string $link
-    * @return string
     */
-    public function getHtmlPeerTubeContentForLink($entry, $link)
+    public function getHtmlPeerTubeContentForLink(FreshRSS_Entry $entry, string $link): string
     {
         $url = str_replace('/watch', '/embed', $link);
-        $html = $this->getHtml($entry, $url);
-        
-        return $html;
+
+		return $this->getHtml($entry, $url);
     }
 
     /**
      * Returns an HTML <iframe> for a given URL for the configured width and height, with content ignored, appended or formated.
-     *
-     * @param string $url
-     * @return string
      */
-    public function getHtml($entry, $url)
+    public function getHtml(FreshRSS_Entry $entry, string $url): string
     {
         $content = '';
-        
+
         $iframe = '<iframe class="youtube-plugin-video"
-                style="height: ' . $this->height . 'px; width: ' . $this->width . 'px;" 
-                width="' . $this->width . '" 
-                height="' . $this->height . '" 
-                src="' . $url . '" 
-                frameborder="0" 
+                style="height: ' . $this->height . 'px; width: ' . $this->width . 'px;"
+                width="' . $this->width . '"
+                height="' . $this->height . '"
+                src="' . $url . '"
+                frameborder="0"
                 allowFullScreen></iframe>';
 
         if ($this->showContent) {
@@ -226,7 +198,7 @@ class YouTubeExtension extends Minz_Extension
 
             if ($doc->loadHTML('<?xml encoding="utf-8" ?>' . $entry->content()))
             {
-                $xpath = new DOMXpath($doc);
+                $xpath = new DOMXPath($doc);
 
                 $titles = $xpath->evaluate("//*[@class='enclosure-title']");
                 $thumbnails = $xpath->evaluate("//*[@class='enclosure-thumbnail']/@src");
@@ -271,7 +243,7 @@ class YouTubeExtension extends Minz_Extension
      *  - We save configuration in case of a post.
      *  - We (re)load configuration in all case, so they are in-sync after a save and before a page load.
      */
-    public function handleConfigureAction()
+    public function handleConfigureAction(): void
     {
         $this->registerTranslates();
 
