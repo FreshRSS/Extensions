@@ -204,8 +204,11 @@ class YouTubeExtension extends Minz_Extension
             {
                 $xpath = new DOMXPath($doc);
 
+				/** @var DOMNodeList $titles */
                 $titles = $xpath->evaluate("//*[@class='enclosure-title']");
+				/** @var DOMNodeList $thumbnails */
                 $thumbnails = $xpath->evaluate("//*[@class='enclosure-thumbnail']/@src");
+				/** @var DOMNodeList $descriptions */
                 $descriptions = $xpath->evaluate("//*[@class='enclosure-description']");
 
                 $content = '<div class="enclosure">';
@@ -252,10 +255,10 @@ class YouTubeExtension extends Minz_Extension
         $this->registerTranslates();
 
         if (Minz_Request::isPost()) {
-            FreshRSS_Context::userConf()->yt_player_height = Minz_Request::paramInt('yt_height');
-            FreshRSS_Context::userConf()->yt_player_width = Minz_Request::paramInt('yt_width');
-            FreshRSS_Context::userConf()->yt_show_content = Minz_Request::paramBoolean('yt_show_content');
-            FreshRSS_Context::userConf()->yt_nocookie = Minz_Request::paramInt('yt_nocookie');
+            FreshRSS_Context::userConf()->_attribute('yt_player_height', Minz_Request::paramInt('yt_height'));
+            FreshRSS_Context::userConf()->_attribute('yt_player_width', Minz_Request::paramInt('yt_width'));
+            FreshRSS_Context::userConf()->_attribute('yt_show_content', Minz_Request::paramBoolean('yt_show_content'));
+            FreshRSS_Context::userConf()->_attribute('yt_nocookie', Minz_Request::paramInt('yt_nocookie'));
             FreshRSS_Context::userConf()->save();
         }
 
