@@ -248,11 +248,11 @@ class YouTubeExtension extends Minz_Extension
         $this->registerTranslates();
 
         if (Minz_Request::isPost()) {
-            FreshRSS_Context::$user_conf->yt_player_height = (int)Minz_Request::param('yt_height', '');
-            FreshRSS_Context::$user_conf->yt_player_width = (int)Minz_Request::param('yt_width', '');
-            FreshRSS_Context::$user_conf->yt_show_content = (bool)Minz_Request::param('yt_show_content', 0);
-            FreshRSS_Context::$user_conf->yt_nocookie = (int)Minz_Request::param('yt_nocookie', 0);
-            FreshRSS_Context::$user_conf->save();
+            FreshRSS_Context::userConf()->yt_player_height = Minz_Request::paramInt('yt_height');
+            FreshRSS_Context::userConf()->yt_player_width = Minz_Request::paramInt('yt_width');
+            FreshRSS_Context::userConf()->yt_show_content = Minz_Request::paramBoolean('yt_show_content');
+            FreshRSS_Context::userConf()->yt_nocookie = Minz_Request::paramInt('yt_nocookie');
+            FreshRSS_Context::userConf()->save();
         }
 
         $this->loadConfigValues();
