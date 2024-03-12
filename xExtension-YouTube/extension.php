@@ -65,21 +65,28 @@ class YouTubeExtension extends Minz_Extension
      */
     public function loadConfigValues(): void
     {
-        if (!class_exists('FreshRSS_Context', false) || null === FreshRSS_Context::$user_conf) {
+        if (!class_exists('FreshRSS_Context', false) || !FreshRSS_Context::hasUserConf()) {
             return;
         }
 
-        if (FreshRSS_Context::$user_conf->yt_player_width != '') {
-            $this->width = FreshRSS_Context::$user_conf->yt_player_width;
+		$width = FreshRSS_Context::userConf()->attributeInt('yt_player_width');
+        if ($width !== null) {
+            $this->width = $width;
         }
-        if (FreshRSS_Context::$user_conf->yt_player_height != '') {
-            $this->height = FreshRSS_Context::$user_conf->yt_player_height;
+
+		$height = FreshRSS_Context::userConf()->attributeInt('yt_player_height');
+        if ($height !== null) {
+            $this->height = $height;
         }
-        if (FreshRSS_Context::$user_conf->yt_show_content != '') {
-            $this->showContent = (bool)FreshRSS_Context::$user_conf->yt_show_content;
+
+		$showContent = FreshRSS_Context::userConf()->attributeBool('yt_show_content');
+        if ($showContent !== null) {
+            $this->showContent = $showContent;
         }
-        if (FreshRSS_Context::$user_conf->yt_nocookie != '') {
-            $this->useNoCookie = (bool)FreshRSS_Context::$user_conf->yt_nocookie;
+
+		$noCookie = FreshRSS_Context::userConf()->attributeBool('yt_nocookie');
+        if ($noCookie !== null) {
+            $this->useNoCookie = $noCookie;
         }
     }
 
@@ -121,11 +128,8 @@ class YouTubeExtension extends Minz_Extension
 
     /**
      * Inserts the YouTube video iframe into the content of an entry, if the entries link points to a YouTube watch URL.
-     *
-     * @param FreshRSS_Entry $entry
-     * @return mixed
      */
-    public function embedYouTubeVideo(FreshRSS_Entry $entry)
+    public function embedYouTubeVideo(FreshRSS_Entry $entry): FreshRSS_Entry
     {
         $link = $entry->link();
 
