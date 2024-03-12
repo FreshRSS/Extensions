@@ -1,0 +1,8 @@
+{
+	"name": "YouTube/PeerTube Video Feed",
+	"author": "Kevin Papst",
+	"description": "Embed YouTube/PeerTube feeds inside article content.",
+	"version": 0.10,
+	"entrypoint": "YouTube",
+	"type": "user"
+}
