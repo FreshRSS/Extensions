@@ -4,7 +4,7 @@ This FreshRSS extension allows you to directly watch YouTube/PeerTube videos fro
 
 To use it, upload the ```xExtension-YouTube``` directory to the FreshRSS `./extensions` directory on your server and enable it on the extension panel in FreshRSS.
 
-# Features
+## Features
 
 - Embeds Youtube videos directly in FreshRSS, instead of linking to the Youtube page
 - Simplifies the subscription to channel URLs by automatically detecting the channels feed URL
