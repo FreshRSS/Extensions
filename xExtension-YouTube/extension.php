@@ -204,11 +204,11 @@ class YouTubeExtension extends Minz_Extension
             {
                 $xpath = new DOMXPath($doc);
 
-				/** @var DOMNodeList $titles */
+				/** @var DOMNodeList<DOMElement> $titles */
                 $titles = $xpath->evaluate("//*[@class='enclosure-title']");
-				/** @var DOMNodeList $thumbnails */
+				/** @var DOMNodeList<DOMElement> $thumbnails */
                 $thumbnails = $xpath->evaluate("//*[@class='enclosure-thumbnail']/@src");
-				/** @var DOMNodeList $descriptions */
+				/** @var DOMNodeList<DOMElement> $descriptions */
                 $descriptions = $xpath->evaluate("//*[@class='enclosure-description']");
 
                 $content = '<div class="enclosure">';
