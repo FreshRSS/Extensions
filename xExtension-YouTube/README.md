@@ -43,7 +43,7 @@ With activated Youtube extension:
 - Support for PeerTube feed
 
 0.6:
-- Support cookie-less domain www.youtube-nocookie.com for embedding
+- Support cookie-less domain [youtube-nocookie.com](https://www.youtube-nocookie.com) for embedding
 
 0.5:
 - Opened "API" for external usage
