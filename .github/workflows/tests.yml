@@ -65,7 +65,7 @@ jobs:
         # https://nodejs.org/en/about/releases/
         node-version: '18'
         cache: 'npm'
-        cache-dependency-path: 'Extensions/composer.lock'
+        cache-dependency-path: 'Extensions/package-lock.json'
 
     - run: npm ci
 
