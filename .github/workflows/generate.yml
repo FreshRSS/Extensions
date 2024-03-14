@@ -27,7 +27,7 @@ jobs:
         id: diff
         run: |
           DIFF=$(git diff --numstat -- $FILE | wc -l)
-          echo "::set-output name=DIFF::$DIFF"
+          echo "DIFF=$DIFF" >> $GITHUB_OUTPUT
 
       - name: Commit changes
         run: |
