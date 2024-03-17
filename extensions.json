@@ -266,6 +266,17 @@
             "directory": "."
         },
         {
+            "name": "Mark Previous as Read",
+            "author": "kalvn",
+            "description": "This extension adds a button in the footer of each entry. Clicking this button will mark all previous entries belonging to the current feed, as read. The goal is, when going through a very long list of entries without reading them all, to be able to stop and continue later.",
+            "version": "1.0.1",
+            "entrypoint": "MarkPreviousAsRead",
+            "type": "user",
+            "url": "https://github.com/kalvn/freshrss-mark-previous-as-read",
+            "method": "git",
+            "directory": "xExtension-MarkPreviousAsRead"
+        },
+        {
             "name": "Mobile Scroll Menu",
             "author": "Marco Heizmann",
             "description": "Automatically hides the header menu on mobile phones, when scrolling down and shows it when scrolling up.",
@@ -467,7 +478,7 @@
             "name": "Title-Wrap",
             "author": "₣rans de Jonge, Joris Kinable",
             "description": "Applies a line-wrap to long article titles, as opposed to truncating the title when it overflows its display area.",
-            "version": "0.2",
+            "version": "0.2.1",
             "entrypoint": "TitleWrap",
             "type": "user",
             "url": "https://github.com/FreshRSS/Extensions",
