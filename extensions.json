@@ -71,7 +71,7 @@
             "name": "Comics in feed",
             "author": "José Moreira",
             "description": "Embed the images from comics feeds directly.",
-            "version": "1.1.0",
+            "version": "1.4.0",
             "entrypoint": "ComicsInFeed",
             "type": "system",
             "url": "https://github.com/giventofly/freshrss-comicsinfeed",
@@ -264,6 +264,17 @@
             "url": "https://github.com/aledeg/xExtension-LatexSupport",
             "method": "git",
             "directory": "."
+        },
+        {
+            "name": "Mark Previous as Read",
+            "author": "kalvn",
+            "description": "This extension adds a button in the footer of each entry. Clicking this button will mark all previous entries belonging to the current feed, as read. The goal is, when going through a very long list of entries without reading them all, to be able to stop and continue later.",
+            "version": "1.0.1",
+            "entrypoint": "MarkPreviousAsRead",
+            "type": "user",
+            "url": "https://github.com/kalvn/freshrss-mark-previous-as-read",
+            "method": "git",
+            "directory": "xExtension-MarkPreviousAsRead"
         },
         {
             "name": "Mobile Scroll Menu",
@@ -467,7 +478,7 @@
             "name": "Title-Wrap",
             "author": "₣rans de Jonge, Joris Kinable",
             "description": "Applies a line-wrap to long article titles, as opposed to truncating the title when it overflows its display area.",
-            "version": "0.2",
+            "version": "0.2.1",
             "entrypoint": "TitleWrap",
             "type": "user",
             "url": "https://github.com/FreshRSS/Extensions",
