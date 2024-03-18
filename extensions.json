@@ -123,17 +123,6 @@
             "directory": "."
         },
         {
-            "name": "Dilberts Daily Comic",
-            "author": "Kevin Papst",
-            "description": "Embed the images from Dilberts daily feed inside article content.",
-            "version": "0.3.1",
-            "entrypoint": "Dilbert",
-            "type": "system",
-            "url": "https://github.com/kevinpapst/freshrss-dilbert",
-            "method": "git",
-            "directory": "xExtension-Dilbert"
-        },
-        {
             "name": "Feed Priority Shortcut",
             "author": "Aidi Stan",
             "description": "Set up visibilities/priorities of your feeds easily",
@@ -431,17 +420,6 @@
             "directory": "xExtension-StickyFeeds"
         },
         {
-            "name": "Teem Video Feed",
-            "author": "Kevin Papst",
-            "description": "Embed video from JOINTHETEEM inside article content.",
-            "version": "0.1",
-            "entrypoint": "Teem",
-            "type": "system",
-            "url": "https://github.com/kevinpapst/freshrss-teem",
-            "method": "git",
-            "directory": "xExtension-Teem"
-        },
-        {
             "name": "Theme Mode Synchronizer",
             "author": "Aidi Stan",
             "description": "Synchronize the theme with your system light/dark mode",
@@ -531,10 +509,10 @@
             "directory": "."
         },
         {
-            "name": "YouTube Video Feed",
+            "name": "YouTube/PeerTube Video Feed",
             "author": "Kevin Papst",
-            "description": "Embed YouTube videos feeds inside article content.",
-            "version": "1.0",
+            "description": "Embed YouTube/PeerTube feeds inside article content.",
+            "version": "0.1",
             "entrypoint": "YouTube",
             "type": "user",
             "url": "https://github.com/FreshRSS/Extensions",
