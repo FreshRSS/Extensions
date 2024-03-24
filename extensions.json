@@ -279,8 +279,8 @@
         {
             "name": "News Assistant",
             "author": "Mervyn Zhan",
-            "description": "Use the api of `OpenAI` to summary the news.",
-            "version": "0.1",
+            "description": "Using the ai api of `OpenAI`, `Anthropic`, `Groq` by [Portkey-AI/gateway](https://github.com/Portkey-AI/gateway/) to summary the news.",
+            "version": "0.11.0",
             "entrypoint": "NewsAssistant",
             "type": "system",
             "url": "https://github.com/reply2future/xExtension-NewsAssistant",
