@@ -247,7 +247,7 @@
             "name": "LaTeX support",
             "author": "Alexis Degrugillier",
             "description": "Add support for LaTeX notation rendering",
-            "version": "0.1.4",
+            "version": "0.1.5",
             "entrypoint": "LatexSupport",
             "type": "user",
             "url": "https://github.com/aledeg/xExtension-LatexSupport",
