@@ -2,5 +2,6 @@
 bin/
 node_modules/
 symbolic/
+third-party/
 tmp/
 vendor/

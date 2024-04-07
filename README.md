@@ -6,6 +6,17 @@ To install an extension, download [the extension archive](https://github.com/Fre
 Then, upload the specific extension(s) you want on your server.
 Extensions must be in the `./extensions` directory of your FreshRSS installation.
 
+## Commands for developers
+
+```sh
+# Test this repository and its extensions
+make test-all
+
+# Test compatibility between `../FreshRSS/` core and all known extensions from `./repositories.json`
+./generate.php
+composer run-script phpstan-third-party
+```
+
 ## Third-party extensions
 
 There are some FreshRSS extensions out there, developed by community members:

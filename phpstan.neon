@@ -1,6 +1,7 @@
 parameters:
 	# TODO: Increase rule-level https://phpstan.org/user-guide/rule-levels
 	level: 1
+	phpVersion: 80399	# TODO: Remove line when moving composer.json to PHP 8+
 	treatPhpDocTypesAsCertain: false
 	fileExtensions:
 		- php
@@ -16,10 +17,11 @@ parameters:
 			- .git/
 			- node_modules/
 			- symbolic/
+			- third-party/
 			- tmp/
-			- xExtension-TTRSS_API/
 	dynamicConstantNames:
 		- TYPE_GIT
+	checkMissingOverrideMethodAttribute: true
 	reportMaybesInPropertyPhpDocTypes: false
 	strictRules:
 		allRules: false

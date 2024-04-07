@@ -6,11 +6,12 @@
 // ------------------- //
 const VERSION = 0.1;
 const TYPE_GIT = 'git';
-$tempFolder = './tmp';
+$tempFolder = './third-party/';
 
 $extensions = [];
 $gitRepositories = [];
 if (file_exists($tempFolder)) {
+	// TODO: Improve by keeping git copy if possible (e.g. fetch + reset)
 	exec("rm -rf -- {$tempFolder}");
 }
 

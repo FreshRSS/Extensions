@@ -18,8 +18,8 @@ final class Share extends \Minz_Mailer {
 
 		$this->view->content = $content;
 
-		if (isset(\FreshRSS_Context::$system_conf)) {
-			$subject_prefix = '[' . \FreshRSS_Context::$system_conf->title . ']';
+		if (\FreshRSS_Context::hasSystemConf()) {
+			$subject_prefix = '[' . \FreshRSS_Context::systemConf()->title . ']';
 		} else {
 			$subject_prefix = '';
 		}
