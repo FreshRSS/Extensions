@@ -32,8 +32,8 @@ final class YouTubeExtension extends Minz_Extension
 	#[Override]
     public function init(): void
     {
-        $this->registerHook('entry_before_display', array($this, 'embedYouTubeVideo'));
-        $this->registerHook('check_url_before_add', array($this, 'convertYoutubeFeedUrl'));
+        $this->registerHook('entry_before_display', [self::class, 'embedYouTubeVideo']);
+        $this->registerHook('check_url_before_add', [self::class, 'convertYoutubeFeedUrl']);
         $this->registerTranslates();
     }
 
