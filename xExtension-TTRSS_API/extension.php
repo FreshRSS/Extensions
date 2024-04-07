@@ -5,7 +5,7 @@ final class TTRSS_APIExtension extends Minz_Extension {
 
 	#[Override]
 	public function init(): void {
-		$this->registerHook('post_update', [self::class, 'postUpdateHook']);
+		$this->registerHook('post_update', [$this, 'postUpdateHook']);
 	}
 
 	#[Override]
