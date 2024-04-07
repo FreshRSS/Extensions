@@ -12,7 +12,7 @@ final class FreshExtension_shareByEmail_Controller extends Minz_ActionController
 		parent::__construct(ShareByEmail\mailers\View::class);
 	}
 
-	#[Override]
+	#[\Override]
 	public function init(): void {
 		$this->extension = Minz_ExtensionManager::findExtension('Share By Email');
 	}

@@ -11,7 +11,7 @@ final class ImageProxyExtension extends Minz_Extension {
 	private const SCHEME_INCLUDE = '';
 	private const URL_ENCODE = '1';
 
-	#[Override]
+	#[\Override]
 	public function init(): void {
 		if (!FreshRSS_Context::hasSystemConf()) {
 			throw new FreshRSS_Context_Exception('System configuration not initialised!');
@@ -53,7 +53,7 @@ final class ImageProxyExtension extends Minz_Extension {
 		}
 	}
 
-	#[Override]
+	#[\Override]
 	public function handleConfigureAction(): void {
 		$this->registerTranslates();
 

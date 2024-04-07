@@ -29,7 +29,7 @@ final class YouTubeExtension extends Minz_Extension
     /**
      * Initialize this extension
      */
-	#[Override]
+	#[\Override]
     public function init(): void
     {
         $this->registerHook('entry_before_display', [$this, 'embedYouTubeVideo']);
@@ -243,7 +243,7 @@ final class YouTubeExtension extends Minz_Extension
      *  - We save configuration in case of a post.
      *  - We (re)load configuration in all case, so they are in-sync after a save and before a page load.
      */
-	#[Override]
+	#[\Override]
     public function handleConfigureAction(): void
     {
         $this->registerTranslates();

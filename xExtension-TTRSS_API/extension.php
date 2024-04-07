@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 final class TTRSS_APIExtension extends Minz_Extension {
 
-	#[Override]
+	#[\Override]
 	public function init(): void {
 		$this->registerHook('post_update', [$this, 'postUpdateHook']);
 	}
 
-	#[Override]
+	#[\Override]
 	public function install() {
 		$filename = 'ttrss.php';
 		$file_source = join_path($this->getPath(), $filename);
@@ -36,7 +36,7 @@ final class TTRSS_APIExtension extends Minz_Extension {
 		return true;
 	}
 
-	#[Override]
+	#[\Override]
 	public function uninstall() {
 		$filename = 'ttrss.php';
 		$file_destination = join_path(PUBLIC_PATH, 'api', $filename);

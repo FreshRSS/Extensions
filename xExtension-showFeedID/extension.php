@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 final class ShowFeedIdExtension extends Minz_Extension {
-	#[Override]
+	#[\Override]
 	public function init(): void {
 		Minz_View::appendScript($this->getFileUrl('showfeedid.js', 'js'));
 	}

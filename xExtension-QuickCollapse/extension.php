@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 final class QuickCollapseExtension extends Minz_Extension {
-	#[Override]
+	#[\Override]
 	public function init(): void {
 		$this->registerTranslates();
 		$this->registerViews();
