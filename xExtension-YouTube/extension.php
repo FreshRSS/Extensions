@@ -33,11 +33,11 @@ final class YouTubeExtension extends Minz_Extension
     public function init(): void
     {
         $this->registerHook('entry_before_display', [$this, 'embedYouTubeVideo']);
-        $this->registerHook('check_url_before_add', [$this, 'convertYoutubeFeedUrl']);
+        $this->registerHook('check_url_before_add', [self::class, 'convertYoutubeFeedUrl']);
         $this->registerTranslates();
     }
 
-    public function convertYoutubeFeedUrl(string $url): string
+    public static function convertYoutubeFeedUrl(string $url): string
     {
         $matches = [];
 
