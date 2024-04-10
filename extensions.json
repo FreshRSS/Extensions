@@ -71,7 +71,7 @@
             "name": "Comics in feed",
             "author": "José Moreira",
             "description": "Embed the images from comics feeds directly.",
-            "version": "1.4.0",
+            "version": "1.5.0",
             "entrypoint": "ComicsInFeed",
             "type": "system",
             "url": "https://github.com/giventofly/freshrss-comicsinfeed",
