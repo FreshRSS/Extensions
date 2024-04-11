@@ -11,14 +11,12 @@ final class ImageProxyExtension extends Minz_Extension {
 	private const SCHEME_INCLUDE = '';
 	private const URL_ENCODE = '1';
 
+	#[\Override]
 	public function init(): void {
 		if (!FreshRSS_Context::hasSystemConf()) {
 			throw new FreshRSS_Context_Exception('System configuration not initialised!');
 		}
-		$this->registerHook(
-			'entry_before_display',
-			array('ImageProxyExtension', 'setImageProxyHook')
-		);
+		$this->registerHook('entry_before_display', [self::class, 'setImageProxyHook']);
 		// Defaults
 		$save = false;
 		if (is_null(FreshRSS_Context::userConf()->image_proxy_url)) {
@@ -55,6 +53,7 @@ final class ImageProxyExtension extends Minz_Extension {
 		}
 	}
 
+	#[\Override]
 	public function handleConfigureAction(): void {
 		$this->registerTranslates();
 

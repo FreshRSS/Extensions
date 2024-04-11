@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-class CustomCSSExtension extends Minz_Extension {
+final class CustomCSSExtension extends Minz_Extension {
 	public string $css_rules;
 	public string $permission_problem = '';
 
+	#[\Override]
 	public function init(): void {
 		$this->registerTranslates();
 
@@ -18,6 +19,7 @@ class CustomCSSExtension extends Minz_Extension {
 		}
 	}
 
+	#[\Override]
 	public function handleConfigureAction(): void {
 		$this->registerTranslates();
 

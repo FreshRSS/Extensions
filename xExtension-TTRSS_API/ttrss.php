@@ -4,16 +4,11 @@ require('../../constants.php');
 require(LIB_PATH . '/lib_rss.php');  // Includes class autoloader
 
 
-class MyPDO extends Minz_ModelPdo {
-	function prepare($sql) {
-		$sql = str_replace('%_', $this->prefix, $sql);
-		// Minz_Log::debug($sql);
-		return $this->bd->prepare($sql);
-	}
+final class MyPDO extends Minz_ModelPdo {
 }
 
 
-class FreshAPI_TTRSS {
+final class FreshAPI_TTRSS {
 	const API_LEVEL = 11;
 
 	const STATUS_OK = 0;
@@ -28,7 +23,7 @@ class FreshAPI_TTRSS {
 
 	public function __construct($params) {
 		$this->seq = isset($params['seq']) ? $params['seq'] : 0;
-		$this->user = Minz_Session::param('currentUser', '');
+		$this->user = Minz_Session::paramString('currentUser');
 		$this->method = $params['op'];
 		$this->params = $params;
 		$this->system_conf = Minz_Configuration::get('system');
@@ -74,7 +69,7 @@ class FreshAPI_TTRSS {
 		}
 
 		if ($this->user === '' &&
-				!in_array($this->method, array('login', 'isloggedin'))) {
+				!in_array($this->method, ['login', 'isloggedin'], true)) {
 			$this->bad(array(
 				'error' => 'NOT_LOGGED_IN'
 			));
@@ -121,7 +116,7 @@ class FreshAPI_TTRSS {
 	public function login() {
 		$username = $this->param('user');
 		$password = $this->param('password');
-		$password_base64 = base64_decode($this->param('password'));
+		$password_base64 = base64_decode($this->param('password'), true);
 
 		if ($this->auth_user($username, $password) ||
 				$this->auth_user($username, $password_base64)) {
@@ -156,11 +151,13 @@ class FreshAPI_TTRSS {
 		// $enable_nested = $this->param('enable_nested', true);  // not supported
 
 		$pdo = new MyPDO();
-		$sql = 'SELECT DISTINCT c.id, c.name, COUNT(f.id) AS nb_feeds,'
-		     . ' (SELECT COUNT(e.id) FROM %_entry e WHERE e.id_feed = f.id AND e.is_read=0) AS unread'
-		     . ' FROM `%_category` c'
-		     . ' LEFT JOIN `%_feed` f ON c.id = f.category'
-		     . ' GROUP BY c.id, c.name';
+		$sql = <<<SQL
+SELECT DISTINCT c.id, c.name, COUNT(f.id) AS nb_feeds,
+(SELECT COUNT(e.id) FROM entry e WHERE e.id_feed = f.id AND e.is_read=0) AS unread
+FROM `_category` c
+LEFT JOIN `_feed` f ON c.id = f.category
+GROUP BY c.id, c.name
+SQL;
 		$stm = $pdo->prepare($sql);
 		$stm->execute();
 		$res = $stm->fetchAll(PDO::FETCH_ASSOC);
@@ -332,7 +329,7 @@ class FreshAPI_TTRSS {
 				'title' => $item->title(),
 				'link' => $item->link(),
 				'tags' => $item->tags(),
-				'author' => $item->author(),
+				'author' => $item->authors(true),
 				'feed_id' => $feed->id(),
 				'feed_title' => $feed->name(),
 			);

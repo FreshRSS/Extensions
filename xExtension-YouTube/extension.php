@@ -7,7 +7,7 @@
  *
  * @author Kevin Papst
  */
-class YouTubeExtension extends Minz_Extension
+final class YouTubeExtension extends Minz_Extension
 {
     /**
      * Video player width
@@ -26,25 +26,18 @@ class YouTubeExtension extends Minz_Extension
      */
 	private bool $useNoCookie = false;
 
-    public function install() {
-        return true;
-    }
-
-    public function uninstall() {
-        return true;
-    }
-
     /**
      * Initialize this extension
      */
-    public function init()
+	#[\Override]
+    public function init(): void
     {
-        $this->registerHook('entry_before_display', array($this, 'embedYouTubeVideo'));
-        $this->registerHook('check_url_before_add', array($this, 'convertYoutubeFeedUrl'));
+        $this->registerHook('entry_before_display', [$this, 'embedYouTubeVideo']);
+        $this->registerHook('check_url_before_add', [self::class, 'convertYoutubeFeedUrl']);
         $this->registerTranslates();
     }
 
-    public function convertYoutubeFeedUrl(string $url): string
+    public static function convertYoutubeFeedUrl(string $url): string
     {
         $matches = [];
 
@@ -250,6 +243,7 @@ class YouTubeExtension extends Minz_Extension
      *  - We save configuration in case of a post.
      *  - We (re)load configuration in all case, so they are in-sync after a save and before a page load.
      */
+	#[\Override]
     public function handleConfigureAction(): void
     {
         $this->registerTranslates();
