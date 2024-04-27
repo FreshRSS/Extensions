@@ -1,3 +1,7 @@
+.flux .flux_header .item {
+	vertical-align: top;
+}
+
 .flux .flux_header .item .title {
 	position: relative;
 }
