@@ -23,6 +23,9 @@ With activated Youtube extension:
 
 ## Changelog
 
+0.12:
+- Turkish language support added
+
 0.11:
 - Modernized codebase for latest FreshRSS release 1.23.1
 - Moved from [custom repo](https://github.com/kevinpapst/freshrss-youtube) to FreshRSS official extension repo

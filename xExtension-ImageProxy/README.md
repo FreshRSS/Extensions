@@ -4,20 +4,24 @@ This FreshRSS extension allows you to get rid of insecure content warnings or di
 
 To use it, upload this entire directory to the FreshRSS `./extensions` directory on your server and enable it on the extension panel in FreshRSS.
 
+## Changelog
+
+- 0.7.3 Turkish language support added
+
 ## Configuration settings
 
-* `proxy_url` (default: `https://images.example.com/?url=`): the URL that is prependended to the original image URL
+- `proxy_url` (default: `https://images.example.com/?url=`): the URL that is prependended to the original image URL
 
-* `scheme_http` (default: `1`): whether to proxy HTTP resources
+- `scheme_http` (default: `1`): whether to proxy HTTP resources
 
-* `scheme_https` (default: `0`): whether to proxy HTTPS resources
+- `scheme_https` (default: `0`): whether to proxy HTTPS resources
 
-* `scheme_default` (default: `auto`): which scheme to use for resources that do not include one; if set to `-`, those will not be proxied;
+- `scheme_default` (default: `auto`): which scheme to use for resources that do not include one; if set to `-`, those will not be proxied;
   if set along `scheme_include`, the scheme included in the URL will either be `auto`-matically derived from your current connection or the one explicitly specified
 
-* `scheme_include` (default: `0`): whether to include the scheme - `http*://` - in the proxied URL
+- `scheme_include` (default: `0`): whether to include the scheme - `http*://` - in the proxied URL
 
-* `url_encode` (default: `1`): whether to URL-encode (RFC 3986) the proxied URL
+- `url_encode` (default: `1`): whether to URL-encode (RFC 3986) the proxied URL
 
 ## Proxy Settings
 
@@ -31,11 +35,11 @@ The source code for the wsrv.nl proxy can be found at [github.com/weserv/images]
 
 In order to use Apache [mod_rewrite](https://httpd.apache.org/docs/current/mod/mod_rewrite.html), you will need to set the following settings:
 
-* `proxy_url` = **<https://www.example.org/proxy/>**
+- `proxy_url` = **<https://www.example.org/proxy/>**
 
-* `scheme_include` = **1**
+- `scheme_include` = **1**
 
-* `url_encode` = **0**
+- `url_encode` = **0**
 
 Along the following Apache configuration for the `www.example.org` virtual host:
 
@@ -74,9 +78,9 @@ In order to use nginx's [proxy
 module](https://nginx.org/en/docs/http/ngx_http_proxy_module.html), you will
 need to set the following settings:
 
-* `proxy_url` = **<https://www.example.org/proxy?key=changeme&url=>**
-* `scheme_include` = **1**
-* `url_encode` = **0**
+- `proxy_url` = **<https://www.example.org/proxy?key=changeme&url=>**
+- `scheme_include` = **1**
+- `url_encode` = **0**
 
 Add this to your nginx config:
 
