@@ -4,6 +4,10 @@ This FreshRSS extension allows you to get rid of insecure content warnings or di
 
 To use it, upload this entire directory to the FreshRSS `./extensions` directory on your server and enable it on the extension panel in FreshRSS.
 
+## Changelog
+
+* 0.7.3 Turkish language support added
+
 ## Configuration settings
 
 * `proxy_url` (default: `https://images.example.com/?url=`): the URL that is prependended to the original image URL
