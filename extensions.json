@@ -2,6 +2,17 @@
     "version": 0.1,
     "extensions": [
         {
+            "name": "Always togglable menu",
+            "author": "nicofrand",
+            "description": "This makes the icon to toggle the menu always shown, even on larger screens.",
+            "version": "1.2",
+            "entrypoint": "TogglableMenu",
+            "type": "user",
+            "url": "https://framagit.org/nicofrand/xextension-togglablemenu",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "Auto Refresh",
             "author": "Essa AlAwadi",
             "description": "Automatically refreshes the RSS feed when there is no activity",
@@ -328,6 +339,17 @@
             "entrypoint": "Readable",
             "type": "user",
             "url": "https://github.com/printfuck/xExtension-Readable",
+            "method": "git",
+            "directory": "."
+        },
+        {
+            "name": "Reading Time",
+            "author": "Lapineige",
+            "description": "Add a reading time estimation next to each article title",
+            "version": "1.5",
+            "entrypoint": "ReadingTime",
+            "type": "user",
+            "url": "https://framagit.org/Lapineige/FreshRSS_Extension-ReadingTime/",
             "method": "git",
             "directory": "."
         },
