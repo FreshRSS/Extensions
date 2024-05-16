@@ -24,15 +24,15 @@ if (url.searchParams.get('c') === 'subscription') {
 		});
 
 		const cats = document.querySelectorAll('div.box > ul.box-content');
-		
+
 		let catId;
 		let catname_elem;
-		cats.forEach(function(cat) {
+		cats.forEach(function (cat) {
 			catId = cat.dataset.catId;
 			catname_elem = cat.parentElement.querySelectorAll('div.box-title > h2')[0];
 			if (catname_elem) {
 				catname_elem.innerHTML = catname_elem.textContent + ' (ID: ' + catId + ')';
 			}
-		})
+		});
 	});
 }
