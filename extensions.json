@@ -509,6 +509,17 @@
             "directory": "."
         },
         {
+            "name": "Word Highlighter",
+            "author": "Lukas Melega",
+            "description": "Highlighting user-defined words",
+            "version": "0.0.1",
+            "entrypoint": "WordHighlighter",
+            "type": "user",
+            "url": "https://github.com/FreshRSS/Extensions",
+            "method": "git",
+            "directory": "xExtension-WordHighlighter"
+        },
+        {
             "name": "White List",
             "author": "Alexis Degrugillier",
             "description": "White list the accessible feeds to users",
