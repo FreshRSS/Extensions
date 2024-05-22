@@ -62,7 +62,7 @@ final class WordHighlighterExtension extends Minz_Extension
 			$this->case_sensitive = (bool) Minz_Request::paramString('case_sensitive');
 			$this->separate_word_search = (bool) Minz_Request::paramString('separate_word_search');
 
-			$lineSeparator = strpos($configWordList, "\r\n") ? "\r\n" : "\n";
+			$lineSeparator = ((bool) strpos($configWordList, "\r\n")) ? "\r\n" : "\n";
 			$configObj = [
 				'enable_in_article' => $this->enable_in_article,
 				'enable_logs' => $this->enable_logs,
@@ -78,11 +78,11 @@ final class WordHighlighterExtension extends Minz_Extension
 		if (file_exists($configFileJson)) {
 			try {
 				$confJson = json_decode(file_get_contents($configFileJson) ?: '', true, 8, JSON_THROW_ON_ERROR);
-				$this->enable_in_article = $confJson['enable_in_article'] ?: false;
-				$this->enable_logs = $confJson['enable_logs'] ?: false;
-				$this->case_sensitive = $confJson['case_sensitive'] ?: false;
-				$this->separate_word_search = $confJson['separate_word_search'] ?: false;
-				$this->word_highlighter_conf = implode("\n", $confJson['words']);
+				$this->enable_in_article = (bool) $confJson['enable_in_article'] ?: false;
+				$this->enable_logs = (bool) $confJson['enable_logs'] ?: false;
+				$this->case_sensitive = (bool) $confJson['case_sensitive'] ?: false;
+				$this->separate_word_search = (bool) $confJson['separate_word_search'] ?: false;
+				$this->word_highlighter_conf = (string) implode("\n", (array) $confJson['words']);
 
 			} catch (Exception $exception) {
 				// probably nothing to do needed
