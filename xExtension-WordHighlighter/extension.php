@@ -78,6 +78,9 @@ final class WordHighlighterExtension extends Minz_Extension
 		if (file_exists($configFileJson)) {
 			try {
 				$confJson = json_decode(file_get_contents($configFileJson) ?: '', true, 8, JSON_THROW_ON_ERROR);
+				if (json_last_error() !== JSON_ERROR_NONE || !is_array($confJson)) {
+					return;
+				}
 				$this->enable_in_article = (bool) ($confJson['enable_in_article'] ?? false);
 				$this->enable_logs = (bool) ($confJson['enable_logs'] ?? false);
 				$this->case_sensitive = (bool) ($confJson['case_sensitive'] ?? false);
