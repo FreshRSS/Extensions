@@ -82,7 +82,7 @@ final class WordHighlighterExtension extends Minz_Extension
 				$this->enable_logs = (bool) $confJson['enable_logs'] ?: false;
 				$this->case_sensitive = (bool) $confJson['case_sensitive'] ?: false;
 				$this->separate_word_search = (bool) $confJson['separate_word_search'] ?: false;
-				$this->word_highlighter_conf = (string) implode("\n", (array) $confJson['words']);
+				$this->word_highlighter_conf = implode("\n", (array) $confJson['words']);
 
 			} catch (Exception $exception) {
 				// probably nothing to do needed
