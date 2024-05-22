@@ -4,8 +4,14 @@ declare(strict_types=1);
 
 final class WordHighlighterExtension extends Minz_Extension
 {
-	public string $word_highlighter_conf;
+	const JSON_ENCODE_CONF = JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR;
+
+	public string $word_highlighter_conf = 'test';
 	public string $permission_problem = '';
+	public bool $enable_in_article = false;
+	public bool $enable_logs = false;
+	public bool $case_sensitive = false;
+	public bool $separate_word_search = false;
 
 	#[\Override]
 	public function init(): void
@@ -15,19 +21,18 @@ final class WordHighlighterExtension extends Minz_Extension
 		// register CSS for WordHighlighter:
 		Minz_View::appendStyle($this->getFileUrl('style.css', 'css'));
 
-		// register script for highlighting functionality:
-		Minz_View::appendScript($this->getFileUrl('word-highlighter.js', 'js'));
+		Minz_View::appendScript($this->getFileUrl('mark.min.js', 'js'), false, false, false);
 
 		$current_user = Minz_Session::paramString('currentUser');
-		// $filename = 'config-words.' . $current_user . '.js';
-		// $configFileWithWords = join_path($this->getPath(), 'static', $filename);
 
 		$staticPath = join_path($this->getPath(), 'static');
-		$configFileJs = join_path($staticPath, ('config-words.' . $current_user . '.js'));
+		$configFileJs = join_path($staticPath, ('config.' . $current_user . '.js'));
 
 		if (file_exists($configFileJs)) {
-			Minz_View::appendScript($this->getFileUrl(('config-words.' . $current_user . '.js'), 'js'));
+			Minz_View::appendScript($this->getFileUrl(('config.' . $current_user . '.js'), 'js'));
 		}
+
+		Minz_View::appendScript($this->getFileUrl('word-highlighter.js', 'js'));
 	}
 
 	#[\Override]
@@ -36,43 +41,60 @@ final class WordHighlighterExtension extends Minz_Extension
 		$this->registerTranslates();
 
 		$current_user = Minz_Session::paramString('currentUser');
-		$filename = 'config-words.' . $current_user . '.txt';
 		$staticPath = join_path($this->getPath(), 'static');
-		$configFileWithWords = join_path($staticPath, $filename);
 
-		if (!file_exists($configFileWithWords) && !is_writable($staticPath)) {
+		$configFileJson = join_path($staticPath, ('config.' . $current_user . '.json'));
+
+		if (!file_exists($configFileJson) && !is_writable($staticPath)) {
 			$tmpPath = explode(EXTENSIONS_PATH . '/', $staticPath);
 			$this->permission_problem = $tmpPath[1] . '/';
 
-		} elseif (file_exists($configFileWithWords) && !is_writable($configFileWithWords)) {
-			$tmpPath = explode(EXTENSIONS_PATH . '/', $configFileWithWords);
+		} elseif (file_exists($configFileJson) && !is_writable($configFileJson)) {
+			$tmpPath = explode(EXTENSIONS_PATH . '/', $configFileJson);
 			$this->permission_problem = $tmpPath[1];
 
 		} elseif (Minz_Request::isPost()) {
-			$config = html_entity_decode(Minz_Request::paramString('word-highlighter-conf'));
-			file_put_contents($configFileWithWords, $config);
-			file_put_contents(join_path($staticPath, ('config-words.' . $current_user . '.js')), $this->toJSArray($config));
+			$configWordList = html_entity_decode(Minz_Request::paramString('words_list'));
+
+			$this->word_highlighter_conf = $configWordList;
+			$this->enable_in_article = (bool) Minz_Request::paramString('enable-in-article');
+			$this->enable_logs = (bool) Minz_Request::paramString('enable_logs');
+			$this->case_sensitive = (bool) Minz_Request::paramString('case_sensitive');
+			$this->separate_word_search = (bool) Minz_Request::paramString('separate_word_search');
+
+			$lineSeparator = strpos($configWordList, "\r\n") ? "\r\n" : "\n";
+			$configObj = [
+				'enable_in_article' => $this->enable_in_article,
+				'enable_logs' => $this->enable_logs,
+				'case_sensitive' => $this->case_sensitive,
+				'separate_word_search' => $this->separate_word_search,
+				'words' => explode($lineSeparator, $configWordList),
+			];
+			$configJson = json_encode($configObj, WordHighlighterExtension::JSON_ENCODE_CONF);
+			file_put_contents(join_path($staticPath, ('config.' . $current_user . '.json')), $configJson . PHP_EOL);
+			file_put_contents(join_path($staticPath, ('config.' . $current_user . '.js')), $this->jsonToJs($configJson) . PHP_EOL);
 		}
 
-		$this->word_highlighter_conf = '';
-		if (file_exists($configFileWithWords)) {
-			$this->word_highlighter_conf = htmlentities(file_get_contents($configFileWithWords)) ?: '';
+		if (file_exists($configFileJson)) {
+			try {
+				$confJson = json_decode(file_get_contents($configFileJson) ?: '', true, 8, JSON_THROW_ON_ERROR);
+				$this->enable_in_article = $confJson['enable_in_article'] ?: false;
+				$this->enable_logs = $confJson['enable_logs'] ?: false;
+				$this->case_sensitive = $confJson['case_sensitive'] ?: false;
+				$this->separate_word_search = $confJson['separate_word_search'] ?: false;
+				$this->word_highlighter_conf = implode("\n", $confJson['words']);
+
+			} catch (Exception $exception) {
+				// probably nothing to do needed
+			}
 		}
 	}
 
-	private function toJSArray($inputString)
+	private function jsonToJs($jsonStr)
 	{
-		$array = explode("\n", $inputString);
-		$jsArray = array();
-		foreach ($array as $item) {
-			$trimmedItem = trim($item);
-			if (strlen($trimmedItem) > 1) {
-				array_push($jsArray, "'" . addslashes(trim($item)) . "',");
-			}
-		}
-		$js = "window.WordHighlighterConf = [\n" .
-			implode("\n", $jsArray) .
-			"\n]; console.log({ wordsLoaded: window.WHConfig })";
+		$js = "window.WordHighlighterConf = " .
+		$jsonStr . ";\n" .
+		"window.WordHighlighterConf.enable_logs && console.log('WordHighlighter: loaded user config:', window.WordHighlighterConf);";
 		return $js;
 	}
 }

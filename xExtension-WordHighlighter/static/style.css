@@ -1,4 +1,4 @@
-/* WordHighlighter v0.0.1 (FreshRSS Extension) CSS */
+/* WordHighlighter v0.0.2 (FreshRSS Extension) CSS */
 #stream mark {
 	padding: 2px;
 	padding-right: 0; /* because in case when part of word is higlighted */
