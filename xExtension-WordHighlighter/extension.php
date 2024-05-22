@@ -78,11 +78,11 @@ final class WordHighlighterExtension extends Minz_Extension
 		if (file_exists($configFileJson)) {
 			try {
 				$confJson = json_decode(file_get_contents($configFileJson) ?: '', true, 8, JSON_THROW_ON_ERROR);
-				$this->enable_in_article = (bool) $confJson['enable_in_article'] ?: false;
-				$this->enable_logs = (bool) $confJson['enable_logs'] ?: false;
-				$this->case_sensitive = (bool) $confJson['case_sensitive'] ?: false;
-				$this->separate_word_search = (bool) $confJson['separate_word_search'] ?: false;
-				$this->word_highlighter_conf = implode("\n", (array) $confJson['words']);
+				$this->enable_in_article = (bool) ($confJson['enable_in_article'] ?? false);
+				$this->enable_logs = (bool) ($confJson['enable_logs'] ?? false);
+				$this->case_sensitive = (bool) ($confJson['case_sensitive'] ?? false);
+				$this->separate_word_search = (bool) ($confJson['separate_word_search'] ?? false);
+				$this->word_highlighter_conf = implode("\n", (array) ($confJson['words'] ?? []));
 
 			} catch (Exception $exception) {
 				// probably nothing to do needed
@@ -90,7 +90,7 @@ final class WordHighlighterExtension extends Minz_Extension
 		}
 	}
 
-	private function jsonToJs($jsonStr)
+	private function jsonToJs(string $jsonStr): string
 	{
 		$js = "window.WordHighlighterConf = " .
 		$jsonStr . ";\n" .
