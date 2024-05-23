@@ -62,13 +62,12 @@ final class WordHighlighterExtension extends Minz_Extension
 			$this->case_sensitive = (bool) Minz_Request::paramString('case_sensitive');
 			$this->separate_word_search = (bool) Minz_Request::paramString('separate_word_search');
 
-			$lineSeparator = ((bool) strpos($configWordList, "\r\n")) ? "\r\n" : "\n";
 			$configObj = [
 				'enable_in_article' => $this->enable_in_article,
 				'enable_logs' => $this->enable_logs,
 				'case_sensitive' => $this->case_sensitive,
 				'separate_word_search' => $this->separate_word_search,
-				'words' => explode($lineSeparator, $configWordList),
+				'words' => preg_split("/\r\n|\n|\r/", $configWordList),
 			];
 			$configJson = json_encode($configObj, WordHighlighterExtension::JSON_ENCODE_CONF);
 			file_put_contents(join_path($staticPath, ('config.' . $current_user . '.json')), $configJson . PHP_EOL);
