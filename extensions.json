@@ -170,7 +170,7 @@
             "name": "FreshRss FlareSolverr",
             "author": "James Ravenscroft",
             "description": "Use a Flaresolverr instance to bypass cloudflare security checks",
-            "version": "0.1",
+            "version": "0.2",
             "entrypoint": "FlareSolverr",
             "type": "system",
             "url": "https://github.com/ravenscroftj/freshrss-flaresolverr-extension",
@@ -385,6 +385,17 @@
             "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
             "method": "git",
             "directory": "xExtension-RemoveEmojis"
+        },
+        {
+            "name": "SendToMyJD2",
+            "author": "CNTools | Clemens Neubauer",
+            "description": "Send links to a jDownloader2 instance with the myJDownloader2 API",
+            "version": "0.0.1-alpha",
+            "entrypoint": "SendToMyJD2",
+            "type": "user",
+            "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
+            "method": "git",
+            "directory": "xExtension-SendToMyJD2"
         },
         {
             "name": "Share By Email",
