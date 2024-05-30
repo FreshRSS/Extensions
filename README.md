@@ -56,11 +56,13 @@ There are some FreshRSS extensions out there, developed by community members:
 
 ### By [@CN-Tools](https://github.com/cn-tools)
 
+* [Black List](https://github.com/cn-tools/cntools_FreshRssExtensions/tree/master/xExtension-BlackList): Blacklist to block feeds for users
 * [Copy 2 Clipboard](https://github.com/cn-tools/cntools_FreshRssExtensions/tree/master/xExtension-Copy2Clipboard): Add a button in the navigation bar to copy the destination links of all visible entries into clipboard
 * [Feed Title Builder](https://github.com/cn-tools/cntools_FreshRssExtensions/tree/master/xExtension-FeedTitleBuilder): Build your own feed title based on url, the original feed title and the date the feed was added
 * [FilterTitle](https://github.com/cn-tools/cntools_FreshRssExtensions/tree/master/xExtension-FilterTitle): Filter out feed entries by keywords parsed by the feed entry title
-* [RemoveEmojis](https://github.com/cn-tools/cntools_FreshRssExtensions/tree/master/xExtension-RemoveEmojis): Remove emojis in the title of newly added feed entries.
-* [YouTube Channel 2 RSSFeed](https://github.com/cn-tools/cntools_FreshRssExtensions/tree/master/xExtension-YouTubeChannel2RssFeed): You can add a YouTube Channel URL and will get it as RSSFeed
+* [RemoveEmojis](https://github.com/cn-tools/cntools_FreshRssExtensions/tree/master/xExtension-RemoveEmojis): Remove emojis in the title of newly added feed entries
+* [SendToMyJD2](https://github.com/cn-tools/cntools_FreshRssExtensions/tree/master/xExtension-SendToMyJD2): Send links to a jDownloader2 instance with the myJDownloader2 API
+* [YouTube Channel 2 RSSFeed](https://github.com/cn-tools/cntools_FreshRssExtensions/tree/master/xExtension-YouTubeChannel2RssFeed): You can add a YouTube Channel URL and will get it as RSSFeed. Additional you can detect YouTube shorts.
 
 ### By [@DevonHess](https://github.com/DevonHess)
 
