@@ -2,14 +2,14 @@
 
 return array(
 	'word_highlighter' => array(
-		'write_words' => 'Words to highlight',
-		'write_words_more' => '(separated by newline)',
-		'enable_in_article' => 'Enable highlighting also in article',
-		'enable_in_article_more' => '(⚠️ may be slower with a lot of words)',
-		'enable_logs' => 'Enable logs',
-		'case_sensitive' => 'Case sensitive',
-		'separate_word_search' => 'Separate word search',
-		'test_highlighting_word' => 'highlight',
-		'permission_problem' => 'Your config file is not writable, please change the file permissions for %s',
+		'write_words' => 'Mots à surligner',
+		'write_words_more' => '(séparés par une nouvelle ligne)',
+		'enable_in_article' => 'Activer la mise en évidence également dans l’article',
+		'enable_in_article_more' => '(⚠️ peut être plus lent avec beaucoup de mots)',
+		'enable_logs' => 'Activer les journaux',
+		'case_sensitive' => 'Sensible à la casse',
+		'separate_word_search' => 'Recherche de mots séparés',
+		'test_highlighting_word' => 'surligner',
+		'permission_problem' => 'Votre fichier de configuration n’est pas accessible en écriture, veuillez modifier les permissions du fichier %s',
 	),
 );
