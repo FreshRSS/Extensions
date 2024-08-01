@@ -136,3 +136,7 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@kalvn](https://github.com/kalvn)
 
 * [Mark Previous as Read](https://github.com/kalvn/freshrss-mark-previous-as-read): Adds a button in the footer of each entry. Clicking this button will mark all previous entries belonging to the current feed, as read.
+
+### By [@lukasMega](https://github.com/lukasMega)
+
+* [Word Highlighter](https://github.com/lukasMega/Extensions-FreshRSS-): Gives you ability to highlight user-defined words (using [mark.js](https://github.com/julkue/mark.js))
