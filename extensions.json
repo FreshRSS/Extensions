@@ -520,17 +520,6 @@
             "directory": "."
         },
         {
-            "name": "Word Highlighter",
-            "author": "Lukas Melega",
-            "description": "Highlighting user-defined words",
-            "version": "0.0.2",
-            "entrypoint": "WordHighlighter",
-            "type": "user",
-            "url": "https://github.com/FreshRSS/Extensions",
-            "method": "git",
-            "directory": "xExtension-WordHighlighter"
-        },
-        {
             "name": "White List",
             "author": "Alexis Degrugillier",
             "description": "White list the accessible feeds to users",
@@ -540,6 +529,17 @@
             "url": "https://github.com/aledeg/xExtension-WhiteList",
             "method": "git",
             "directory": "."
+        },
+        {
+            "name": "Word highlighter",
+            "author": "Lukas Melega",
+            "description": "Highlight specific words",
+            "version": "0.0.2",
+            "entrypoint": "WordHighlighter",
+            "type": "user",
+            "url": "https://github.com/FreshRSS/Extensions",
+            "method": "git",
+            "directory": "xExtension-WordHighlighter"
         },
         {
             "name": "YouTube Video Feed",
