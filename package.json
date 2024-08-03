@@ -17,7 +17,7 @@
   },
   "license": "see each extension",
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "scripts": {
     "eslint": "eslint .",
