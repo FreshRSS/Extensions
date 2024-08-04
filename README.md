@@ -84,6 +84,10 @@ There are some FreshRSS extensions out there, developed by community members:
 
 * [Pocket Button](https://github.com/christian-putzke/freshrss-pocket-button): Add articles to Pocket with one simple button click or a keyboard shortcut.
 
+### By [@Joedmin](https://github.com/Joedmin/)
+
+* [Readeck Button](https://github.com/Joedmin/xExtension-readeck-button): Add articles to a selected Readeck instance with one simple button click or a keyboard shortcut.
+
 ### By [@printfuck](https://github.com/printfuck/)
 
 * [Readable](https://github.com/printfuck/xExtension-Readable): Fetch article content for selected feeds with [Readability](https://github.com/mozilla/readability) or [Mercury](https://github.com/postlight/mercury-parser)
