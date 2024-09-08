@@ -1,0 +1,220 @@
+<?php
+declare(strict_types=1);
+/** @var WebhookExtension $this */
+?>
+<small>
+	Webhooks allow external services to be notified when certain events happen.
+	When the specified events happen, we'll send a HTTP request (usually POST) to the URL you provide.
+</small>
+<form action="<?php echo _url('extension', 'configure', 'e', urlencode($this->getName())); ?>" method="post">
+	<input type="hidden" name="_csrf" value="<?php echo FreshRSS_Auth::csrfToken(); ?>" />
+
+	<fieldset>
+		<legend><?= _t('ext.webhook.event_settings') ?> ⚙️</legend>
+		<details open>
+			<summary class="stick"><small><?= _t('ext.webhook.show_hide') ?></small></summary>
+
+			<div class="form-group">
+				<label class="group-name" for="keywords">Keywords in the new article</label>
+				<div class="group-controls">
+					<textarea name="keywords" id="keywords"><?php echo $this->getKeywordsData(); ?></textarea>
+					<br />
+					<small>
+						Each line is checked individually. In addition to normal texts, RegEx expressions can also be
+						defined
+						(they are evaluated using the PHP function <code>preg_match</code>).
+					</small>
+				</div>
+			</div>
+
+			<!-- Search in article's: -->
+			<div class="form-group">
+				<label class="group-name" for="search_in">Search in article's:</label>
+				<div class="group-controls">
+					<table>
+						<tr>
+							<td class="group">
+								<input type="checkbox" name="search_in_title" id="search_in_title" value="1"
+									<?= $this->getSystemConfigurationValue('search_in_title') ? 'checked' : '' ?>>
+								<label for="search_in_title"><b>🪧 title * </b>&nbsp; </label>
+							</td>
+							<td class="group">
+								<input type="checkbox" name="search_in_feed" id="search_in_feed" value="1"
+									<?= $this->getSystemConfigurationValue('search_in_feed') ? 'checked' : '' ?>>
+								<label for="search_in_feed">💼 feed &nbsp;</label>
+							</td>
+							<td class="group">
+								<input type="checkbox" name="search_in_authors" id="search_in_authors" value="1"
+									<?= $this->getSystemConfigurationValue('search_in_authors') ? 'checked' : '' ?>>
+								<label for="search_in_authors">👥 authors &nbsp;</label>
+							</td>
+							<td class="group">
+								<input type="checkbox" name="search_in_content" id="search_in_content" value="1"
+									<?= $this->getSystemConfigurationValue('search_in_content') ? 'checked' : '' ?>>
+								<label for="search_in_content">📄 content &nbsp;</label>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="group-name" for="mark_as_read"><?= _t('ext.webhook.mark_as_read') ?></label>
+				<div class="group-controls">
+					<input type="checkbox" name="mark_as_read" id="mark_as_read" value="1"
+						<?= $this->getSystemConfigurationValue('mark_as_read') ? 'checked' : '' ?>>
+				</div>
+			</div>
+
+		</details>
+	</fieldset>
+
+	<!-- ---------------------[ HTTP settings ]-------------------------------------- -->
+
+	<fieldset>
+		<legend><?= _t('ext.webhook.webhook_settings') ?> 🌐</legend>
+		<details open>
+			<summary class="stick"> <small><?= _t('ext.webhook.show_hide') ?></small> </summary>
+
+			<div class="form-group">
+				<label class="group-name" for="webhook_url">Method / URL:</label>
+				<div class="group-controls">
+					<select id="webhook_method" name="webhook_method">
+						<?php if ($this->webhook_method === 'POST') { ?>
+							<option value="POST" selected>POST</option>
+						<?php } else { ?>
+							<option value="POST">POST</option>
+						<?php } ?>
+
+						<?php if ($this->webhook_method === 'GET') { ?>
+							<option value="GET" selected>GET</option>
+						<?php } else { ?>
+							<option value="GET">GET</option>
+						<?php } ?>
+
+						<?php if ($this->webhook_method === 'PUT') { ?>
+							<option value="PUT" selected>PUT</option>
+						<?php } else { ?>
+							<option value="PUT">PUT</option>
+						<?php } ?>
+					</select>
+					<input type="text" name="webhook_url" id="webhook_url"
+						value="<?= $this->getWebhookUrl() ?>"></input>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="group-name" for="webhook_body">HTTP Body</label>
+				<div class="group-controls">
+					<textarea name="webhook_body" id="webhook_body"><?= $this->getWebhookBody() ?></textarea>
+					<br />
+					<small>
+						Must be valid <b>JSON</b> or form data (<b>x-www-form-urlencoded</b>)
+					</small>
+
+					<details>
+						<summary><small><b class="">You can use special placeholders that will be replaced
+									by the actual values:</b></small>
+						</summary>
+						<div>
+							<div class="content">
+								<table>
+									<tr>
+										<th><b><code>Placeholder<code></b></th>
+										<th><b>Description</b></th>
+									</tr>
+									<tr>
+										<td><code>__TITLE__</code></td>
+										<td>Article title</td>
+									</tr>
+									<tr>
+										<td><code>__URL__</code></td>
+										<td>HTML-encoded link of the article</td>
+									</tr>
+									<tr>
+										<td><code>__CONTENT__</code></td>
+										<td>Content of the article (HTML format)</td>
+									</tr>
+									<tr>
+										<td><code>__DATE__</code></td>
+										<td>Date of the article (string)</td>
+									</tr>
+									<tr>
+										<td><code>__DATE_TIMESTAMP__</code></td>
+										<td>Date of the article as timestamp (number)</td>
+									</tr>
+									<tr>
+										<td><code>__AUTHORS__</code></td>
+										<td>Article authors</td>
+									</tr>
+									<tr>
+										<td><code>__THUMBNAIL_URL__</code></td>
+										<td>Thumbnail (image) URL</td>
+									</tr>
+									<tr>
+										<td><code>__FEED__</code></td>
+										<td>Feed name</td>
+									</tr>
+									<tr>
+										<td><code>__TAGS__</code></td>
+										<td>Article tags (string, separated by " #")</td>
+									</tr>
+								</table>
+							</div>
+
+						</div>
+					</details>
+
+				</div>
+			</div>
+
+			<!-- ---------------------[ More options ]-------------------------------------- -->
+
+			<details>
+				<summary><strong class=""><?= _t('ext.webhook.more_options') ?></strong></summary>
+
+				<div class="form-group">
+					<label class="group-name" for="webhook_headers">HTTP Headers<br />(one per line)</label>
+					<div class="group-controls">
+						<textarea name="webhook_headers"
+							id="webhook_headers"><?= $this->getWebhookHeaders() ?></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="group-name" for="webhook_body_type">HTTP Body type</label>
+					<div class="group-controls">
+						<input type="radio" id="webhook_body_type_json" name="webhook_body_type" value="json"
+							<?= $this->getWebhookBodyType() === 'json' ? 'checked' : '' ?>>
+						<label for="webhook_body_type_json" class="group"><code>JSON</code></label>
+
+						<input type="radio" id="webhook_body_type_form" name="webhook_body_type" value="form"
+							<?= $this->getWebhookBodyType() === 'form' ? 'checked' : '' ?>>
+						<label for="webhook_body_type_form" class="group"><code>x-www-form-urlencoded</code></label>
+
+						<details>
+							<summary><span class="">More info:</span></summary>
+							<small>When header contains
+								<b><code>Content-type: application/x-www-form-urlencoded</code></b>
+								the keys and values are encoded in key-value tuples separated by '&', with a '='
+								between the key and the value. Non-alphanumeric characters in both keys
+								and values are URL encoded
+							</small>
+						</details>
+					</div>
+				</div>
+			</details>
+
+		</details>
+	</fieldset>
+
+	<!-- ---------------------[ SUBMIT & CANCEL ]-------------------------------------- -->
+	<div class="form-group form-actions">
+		<div class="group-controls">
+            <button type="submit" class="btn btn-important"><?php echo _t('gen.action.submit'); ?></button>
+			<button type="reset" class="btn"><?php echo _t('gen.action.cancel'); ?></button>
+			<button type="menu" class="btn"><?= _t('ext.webhook.save_and_send_test_req') ?></button>
+		</div>
+	</div>
+
+</form>
+
