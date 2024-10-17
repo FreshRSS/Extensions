@@ -346,7 +346,7 @@
             "name": "Readeck Button",
             "author": "Joedmin",
             "description": "Add articles to Readeck with one simple button click or a keyboard shortcut.",
-            "version": "0.3",
+            "version": "0.4",
             "entrypoint": "ReadeckButton",
             "type": "user",
             "url": "https://github.com/Joedmin/xExtension-readeck-button",
