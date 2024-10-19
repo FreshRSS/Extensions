@@ -531,6 +531,17 @@
             "directory": "."
         },
         {
+            "name": "Wallabag Button",
+            "author": "Joedmin",
+            "description": "Add articles to Wallabag with one simple button click or a keyboard shortcut.",
+            "version": "0.1",
+            "entrypoint": "WallabagButton",
+            "type": "user",
+            "url": "https://github.com/Joedmin/xExtension-wallabag-button",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "White List",
             "author": "Alexis Degrugillier",
             "description": "White list the accessible feeds to users",
