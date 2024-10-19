@@ -87,6 +87,7 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@Joedmin](https://github.com/Joedmin/)
 
 * [Readeck Button](https://github.com/Joedmin/xExtension-readeck-button): Add articles to a selected Readeck instance with one simple button click or a keyboard shortcut.
+* [Wallabag Button](https://github.com/Joedmin/xExtension-wallabag-button): Add articles to a selected Wallabag instance with one simple button click or a keyboard shortcut.
 
 ### By [@printfuck](https://github.com/printfuck/)
 
