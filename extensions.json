@@ -475,17 +475,6 @@
             "directory": "."
         },
         {
-            "name": "TinyTinyRSS API",
-            "author": "Marien Fressinaud",
-            "description": "Provides an API compliant with TinyTinyRSS applications.",
-            "version": "0.1",
-            "entrypoint": "TTRSS_API",
-            "type": "system",
-            "url": "https://github.com/FreshRSS/Extensions",
-            "method": "git",
-            "directory": "xExtension-TTRSS_API"
-        },
-        {
             "name": "Title-Wrap",
             "author": "₣rans de Jonge, Joris Kinable",
             "description": "Applies a line-wrap to long article titles, as opposed to truncating the title when it overflows its display area.",

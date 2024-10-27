@@ -19,7 +19,6 @@
 	<exclude-pattern>./symbolic/</exclude-pattern>
 	<exclude-pattern>./third-party/</exclude-pattern>
 	<exclude-pattern>./tmp/</exclude-pattern>
-	<exclude-pattern>./xExtension-TTRSS_API</exclude-pattern>
 	<rule ref="PSR12">
 		<exclude name="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
 		<exclude name="Generic.Formatting.DisallowMultipleStatements.SameLine"/>
