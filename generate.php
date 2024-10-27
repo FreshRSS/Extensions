@@ -6,11 +6,12 @@
 // ------------------- //
 const VERSION = 0.1;
 const TYPE_GIT = 'git';
-$tempFolder = './tmp';
+$tempFolder = './third-party/';
 
 $extensions = [];
 $gitRepositories = [];
 if (file_exists($tempFolder)) {
+	// TODO: Improve by keeping git copy if possible (e.g. fetch + reset)
 	exec("rm -rf -- {$tempFolder}");
 }
 
@@ -53,6 +54,7 @@ foreach ($gitRepositories as $key => $gitRepository) {
 			}
 			$directory = basename(dirname($metadataFile));
 			$metadata['url'] = $gitRepository;
+			$metadata['version'] = strval($metadata['version']);
 			$metadata['method'] = TYPE_GIT;
 			$metadata['directory'] = ($directory === sha1($gitRepository)) ? '.' : $directory;
 			$extensions[] = $metadata;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-class FreshExtension_shareByEmail_Controller extends Minz_ActionController {
+final class FreshExtension_shareByEmail_Controller extends Minz_ActionController {
 	public ?Minz_Extension $extension;
 
 	/** @var ShareByEmail\mailers\View */
@@ -12,6 +12,7 @@ class FreshExtension_shareByEmail_Controller extends Minz_ActionController {
 		parent::__construct(ShareByEmail\mailers\View::class);
 	}
 
+	#[\Override]
 	public function init(): void {
 		$this->extension = Minz_ExtensionManager::findExtension('Share By Email');
 	}
@@ -34,13 +35,13 @@ class FreshExtension_shareByEmail_Controller extends Minz_ActionController {
 		}
 		$this->view->entry = $entry;
 
-		if (FreshRSS_Context::$system_conf === null) {
+		if (!FreshRSS_Context::hasSystemConf()) {
 			throw new FreshRSS_Context_Exception('System configuration not initialised!');
 		}
 
 		$username = Minz_Session::paramString('currentUser') ?: '_';
-		$service_name = FreshRSS_Context::$system_conf->title;
-		$service_url = FreshRSS_Context::$system_conf->base_url;
+		$service_name = FreshRSS_Context::systemConf()->title;
+		$service_url = FreshRSS_Context::systemConf()->base_url;
 
 		Minz_View::prependTitle(_t('shareByEmail.share.title') . ' · ');
 		if ($this->extension !== null) {

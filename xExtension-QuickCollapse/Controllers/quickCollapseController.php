@@ -1,6 +1,7 @@
 <?php
+declare(strict_types=1);
 
-class FreshExtension_quickCollapse_Controller extends Minz_ActionController {
+final class FreshExtension_quickCollapse_Controller extends Minz_ActionController {
 
 	/** @var QuickCollapse\View */
 	protected $view;

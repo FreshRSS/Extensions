@@ -2,15 +2,6 @@
 	"url": "https://github.com/FreshRSS/Extensions",
 	"type": "git"
 }, {
-	"url": "https://github.com/kevinpapst/freshrss-youtube",
-	"type": "git"
-}, {
-	"url": "https://github.com/kevinpapst/freshrss-dilbert",
-	"type": "git"
-}, {
-	"url": "https://github.com/kevinpapst/freshrss-teem",
-	"type": "git"
-}, {
 	"url": "https://github.com/oyox/FreshRSS-extensions",
 	"type": "git"
 }, {
@@ -53,7 +44,7 @@
 	"url": "https://github.com/babico/xExtension-TwitchChannel2RssFeed",
 	"type": "git"
 }, {
-	"url": "thttps://github.com/tunbridgep/freshrss-invidious",
+	"url": "https://github.com/tunbridgep/freshrss-invidious",
 	"type": "git"
 }, {
 	"url": "https://github.com/javerous/freshrss-greader-redate",
@@ -65,6 +56,12 @@
 	"url": "https://github.com/christian-putzke/freshrss-pocket-button",
 	"type": "git"
 }, {
+	"url": "https://github.com/Joedmin/xExtension-readeck-button",
+	"type": "git"
+}, {
+	"url": "https://github.com/Joedmin/xExtension-wallabag-button",
+	"type": "git"
+},{
 	"url": "https://github.com/printfuck/xExtension-Readable",
 	"type": "git"
 }, {
@@ -82,12 +79,13 @@
 }, {
 	"url": "https://github.com/reply2future/xExtension-NewsAssistant",
 	"type": "git"
-},
-{
+}, {
 	"url": "https://github.com/giventofly/freshrss-comicsinfeed",
 	"type": "git"
-},
-{
+}, {
 	"url": "https://code.sitosis.com/rudism/freshrss-kagi-summarizer",
+	"type": "git"
+}, {
+	"url": "https://github.com/kalvn/freshrss-mark-previous-as-read",
 	"type": "git"
 }]

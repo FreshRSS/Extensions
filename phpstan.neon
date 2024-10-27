@@ -1,7 +1,7 @@
 parameters:
 	# TODO: Increase rule-level https://phpstan.org/user-guide/rule-levels
 	level: 1
-	treatPhpDocTypesAsCertain: false
+	phpVersion: 80399	# TODO: Remove line when moving composer.json to PHP 8+
 	fileExtensions:
 		- php
 		- phtml
@@ -16,23 +16,33 @@ parameters:
 			- .git/
 			- node_modules/
 			- symbolic/
+			- third-party/
 			- tmp/
 	dynamicConstantNames:
 		- TYPE_GIT
+	checkMissingOverrideMethodAttribute: true
 	reportMaybesInPropertyPhpDocTypes: false
+	treatPhpDocTypesAsCertain: false
 	strictRules:
 		allRules: false
-		booleansInConditions: false	# TODO pass
+		booleansInConditions: true
 		closureUsesThis: true
 		disallowedConstructs: false
 		disallowedLooseComparison: false
 		matchingInheritedMethodNames: true
-		noVariableVariables: false	# TODO pass
+		noVariableVariables: true
 		numericOperandsInArithmeticOperators: true
 		overwriteVariablesWithLoop: true
 		requireParentConstructorCall: true
 		strictCalls: true
 		switchConditionsMatchingType: true
 		uselessCast: true
+	exceptions:
+		check:
+			missingCheckedExceptionInThrows: false	# TODO pass
+			tooWideThrowType: true
+		implicitThrows: false
+		checkedExceptionClasses:
+			- 'Minz_Exception'
 includes:
 	- vendor/phpstan/phpstan-strict-rules/rules.neon

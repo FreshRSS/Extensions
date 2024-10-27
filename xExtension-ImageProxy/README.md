@@ -4,6 +4,10 @@ This FreshRSS extension allows you to get rid of insecure content warnings or di
 
 To use it, upload this entire directory to the FreshRSS `./extensions` directory on your server and enable it on the extension panel in FreshRSS.
 
+## Changelog
+
+* 0.7.3 Turkish language support added
+
 ## Configuration settings
 
 * `proxy_url` (default: `https://images.example.com/?url=`): the URL that is prependended to the original image URL
@@ -21,11 +25,11 @@ To use it, upload this entire directory to the FreshRSS `./extensions` directory
 
 ## Proxy Settings
 
-By default this extension will use the [images.weserv.nl](https://images.weserv.nl) image caching and resizing proxy, but instead you can supply your own proxy URL in the settings. An example URL would look like ``https://images.example.com/?url=``.
+By default this extension will use the [wsrv.nl](https://wsrv.nl) image caching and resizing proxy, but instead you can supply your own proxy URL in the settings. An example URL would look like ``https://images.example.com/?url=``.
 
 By ticking the `scheme_https` checkbox, you can also force the use of the proxy, even for images coming through an encrypted channel. This makes the server that hosts your FreshRSS instance the only point of entry for images, preventing your client from connecting directly to the RSS sources to recover them (which could be a privacy concern in extreme cases).
 
-The source code for the images.weserv.nl proxy can be found at [github.com/andrieslouw/imagesweserv](https://github.com/andrieslouw/imagesweserv), but of course other methods are available. For example, in Apache you could [use `mod_rewrite` to set up a simple proxy](#apache-configuration) and similar methods are available in nginx and lighttpd. Alternatively you could use a simple PHP script, [along these lines](https://github.com/Alexxz/Simple-php-proxy-script). Keep in mind that too simple a proxy could introduce security risks, which is why the default proxy processes the images.
+The source code for the wsrv.nl proxy can be found at [github.com/weserv/images](https://github.com/weserv/images), but of course other methods are available. For example, in Apache you could [use `mod_rewrite` to set up a simple proxy](#apache-configuration) and similar methods are available in nginx and lighttpd. Alternatively you could use a simple PHP script, [along these lines](https://github.com/Alexxz/Simple-php-proxy-script). Keep in mind that too simple a proxy could introduce security risks, which is why the default proxy processes the images.
 
 ### Apache configuration
 

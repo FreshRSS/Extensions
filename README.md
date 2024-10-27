@@ -6,15 +6,24 @@ To install an extension, download [the extension archive](https://github.com/Fre
 Then, upload the specific extension(s) you want on your server.
 Extensions must be in the `./extensions` directory of your FreshRSS installation.
 
+## Commands for developers
+
+```sh
+# Test this repository and its extensions
+make test-all
+
+# Test compatibility between `../FreshRSS/` core and all known extensions from `./repositories.json`
+./generate.php
+composer run-script phpstan-third-party
+```
+
 ## Third-party extensions
 
 There are some FreshRSS extensions out there, developed by community members:
 
 ### By [@kevinpapst](https://github.com/kevinpapst), [Web](https://www.kevinpapst.de/)
 
-* [Dilbert](https://github.com/kevinpapst/freshrss-dilbert): Display your daily Dilbert comic in FreshRSS directly
-* [Teem](https://github.com/kevinpapst/freshrss-teem): Display videos from the skydiving website jointheteem.com inline
-
+* [Youtube](xExtension-YouTube) shows YouTube videos inline in the feed
 
 ### By [@oYoX](https://github.com/oyox), [Web](https://oyox.de/)
 
@@ -47,9 +56,13 @@ There are some FreshRSS extensions out there, developed by community members:
 
 ### By [@CN-Tools](https://github.com/cn-tools)
 
-* [YouTube Channel 2 RSSFeed](https://github.com/cn-tools/cntools_FreshRssExtensions/tree/master/xExtension-YouTubeChannel2RssFeed): You can add a YouTube Channel URL and will get it as RSSFeed
-* [Feed Title Builder](https://github.com/cn-tools/cntools_FreshRssExtensions/tree/master/xExtension-FeedTitleBuilder): Build your own feed title based on url, the original feed title and the date the feed was added
+* [Black List](https://github.com/cn-tools/cntools_FreshRssExtensions/tree/master/xExtension-BlackList): Blacklist to block feeds for users
 * [Copy 2 Clipboard](https://github.com/cn-tools/cntools_FreshRssExtensions/tree/master/xExtension-Copy2Clipboard): Add a button in the navigation bar to copy the destination links of all visible entries into clipboard
+* [Feed Title Builder](https://github.com/cn-tools/cntools_FreshRssExtensions/tree/master/xExtension-FeedTitleBuilder): Build your own feed title based on url, the original feed title and the date the feed was added
+* [FilterTitle](https://github.com/cn-tools/cntools_FreshRssExtensions/tree/master/xExtension-FilterTitle): Filter out feed entries by keywords parsed by the feed entry title
+* [RemoveEmojis](https://github.com/cn-tools/cntools_FreshRssExtensions/tree/master/xExtension-RemoveEmojis): Remove emojis in the title of newly added feed entries
+* [SendToMyJD2](https://github.com/cn-tools/cntools_FreshRssExtensions/tree/master/xExtension-SendToMyJD2): Send links to a jDownloader2 instance with the myJDownloader2 API
+* [YouTube Channel 2 RSSFeed](https://github.com/cn-tools/cntools_FreshRssExtensions/tree/master/xExtension-YouTubeChannel2RssFeed): You can add a YouTube Channel URL and will get it as RSSFeed. Additional you can detect YouTube shorts.
 
 ### By [@DevonHess](https://github.com/DevonHess)
 
@@ -70,6 +83,11 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@christian-putzke](https://github.com/christian-putzke/)
 
 * [Pocket Button](https://github.com/christian-putzke/freshrss-pocket-button): Add articles to Pocket with one simple button click or a keyboard shortcut.
+
+### By [@Joedmin](https://github.com/Joedmin/)
+
+* [Readeck Button](https://github.com/Joedmin/xExtension-readeck-button): Add articles to a selected Readeck instance with one simple button click or a keyboard shortcut.
+* [Wallabag Button](https://github.com/Joedmin/xExtension-wallabag-button): Add articles to a selected Wallabag instance with one simple button click or a keyboard shortcut.
 
 ### By [@printfuck](https://github.com/printfuck/)
 
@@ -119,3 +137,11 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@jacob2826](https://github.com/jacob2826)
 
 * [TranslateTitlesCN](https://github.com/jacob2826/FreshRSS-TranslateTitlesCN): Translate article titles of the specified feed into Chinese, using [DeepLX](https://github.com/OwO-Network/DeepLX) or Google Translate.
+
+### By [@kalvn](https://github.com/kalvn)
+
+* [Mark Previous as Read](https://github.com/kalvn/freshrss-mark-previous-as-read): Adds a button in the footer of each entry. Clicking this button will mark all previous entries belonging to the current feed, as read.
+
+### By [@lukasMega](https://github.com/lukasMega)
+
+* [Word Highlighter](https://github.com/lukasMega/Extensions-FreshRSS-): Gives you ability to highlight user-defined words (using [mark.js](https://github.com/julkue/mark.js))

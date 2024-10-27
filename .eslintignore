@@ -1,6 +1,0 @@
-.git/
-*.min.js
-node_modules/
-symbolic/
-tmp/
-vendor/
