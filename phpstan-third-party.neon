@@ -1,6 +1,5 @@
 parameters:
 	level: 0
-	treatPhpDocTypesAsCertain: false
 	fileExtensions:
 		- php
 		- phtml
@@ -22,3 +21,4 @@ parameters:
 	dynamicConstantNames:
 		- TYPE_GIT
 	reportMaybesInPropertyPhpDocTypes: false
+	treatPhpDocTypesAsCertain: false

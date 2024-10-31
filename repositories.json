@@ -56,6 +56,12 @@
 	"url": "https://github.com/christian-putzke/freshrss-pocket-button",
 	"type": "git"
 }, {
+	"url": "https://github.com/Joedmin/xExtension-readeck-button",
+	"type": "git"
+}, {
+	"url": "https://github.com/Joedmin/xExtension-wallabag-button",
+	"type": "git"
+},{
 	"url": "https://github.com/printfuck/xExtension-Readable",
 	"type": "git"
 }, {

@@ -7,4 +7,3 @@ parameters:
 		analyse:
 			- xExtension-ImageProxy/configure.phtml
 			- xExtension-ImageProxy/extension.php
-			- xExtension-TTRSS_API/ttrss.php
