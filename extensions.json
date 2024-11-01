@@ -90,28 +90,6 @@
             "directory": "xExtension-Copy2Clipboard"
         },
         {
-            "name": "Custom CSS",
-            "author": "Marien Fressinaud",
-            "description": "Give possibility to overwrite the CSS with a user-specific rules.",
-            "version": "0.5.2",
-            "entrypoint": "CustomCSS",
-            "type": "user",
-            "url": "https://github.com/FreshRSS/Extensions",
-            "method": "git",
-            "directory": "xExtension-CustomCSS"
-        },
-        {
-            "name": "Custom JS",
-            "author": "Frans de Jonge",
-            "description": "Apply custom JS.",
-            "version": "0.5.2",
-            "entrypoint": "CustomJS",
-            "type": "user",
-            "url": "https://github.com/FreshRSS/Extensions",
-            "method": "git",
-            "directory": "xExtension-CustomJS"
-        },
-        {
             "name": "Date Format",
             "author": "Alexis Degrugillier",
             "description": "Change how dates are displayed in the interface",

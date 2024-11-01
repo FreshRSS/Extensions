@@ -17,6 +17,10 @@ make test-all
 composer run-script phpstan-third-party
 ```
 
+## Core extensions
+
+*Custom CSS* and *Custom JS* are now a part of [core extensions shipped with FreshRSS](https://github.com/FreshRSS/FreshRSS/tree/edge/lib/core-extensions).
+
 ## Third-party extensions
 
 There are some FreshRSS extensions out there, developed by community members:
