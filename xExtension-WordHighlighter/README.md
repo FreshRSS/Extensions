@@ -24,7 +24,8 @@ Light theme:
 
 ## Changelog
 
+- 0.0.3 Turkish language support added.
 - 0.0.2 use `json` for storing configuration, add more configuration options
   (enable_in_article, enable_logs, case_sensitive, separate_word_search)
-  and refactored & simplified code
+  and refactored & simplified code.
 - 0.0.1 initial version (as a proper FreshRSS extension)
