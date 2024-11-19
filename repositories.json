@@ -88,4 +88,7 @@
 }, {
 	"url": "https://github.com/kalvn/freshrss-mark-previous-as-read",
 	"type": "git"
+}, {
+	"url": "https://github.com/LiangWei88/xExtension-ArticleSummary",
+	"type": "git"
 }]
