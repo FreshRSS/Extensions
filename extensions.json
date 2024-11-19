@@ -13,6 +13,17 @@
             "directory": "."
         },
         {
+            "name": "ArticleSummary",
+            "author": "Liang",
+            "description": "A powerful article summarization plugin for FreshRSS that allows users to generate summaries using a language model API conforming to the OpenAI API specification.",
+            "version": "0.1",
+            "entrypoint": "ArticleSummary",
+            "type": "user",
+            "url": "https://github.com/LiangWei88/xExtension-ArticleSummary",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "Auto Refresh",
             "author": "Essa AlAwadi",
             "description": "Automatically refreshes the RSS feed when there is no activity",
@@ -273,17 +284,6 @@
             "entrypoint": "NewsAssistant",
             "type": "system",
             "url": "https://github.com/reply2future/xExtension-NewsAssistant",
-            "method": "git",
-            "directory": "."
-        },
-        {
-            "name": "ArticleSummary",
-            "author": "Liang",
-            "description": "A powerful article summarization plugin for FreshRSS that allows users to generate summaries using a language model API conforming to the OpenAI API specification.",
-            "version": 0.1,
-            "entrypoint": "ArticleSummary",
-            "type": "user",
-            "url": "https://github.com/LiangWei88/xExtension-ArticleSummary",
             "method": "git",
             "directory": "."
         },
