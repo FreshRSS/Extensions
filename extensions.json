@@ -335,7 +335,7 @@
             "name": "Readeck Button",
             "author": "Joedmin",
             "description": "Add articles to Readeck with one simple button click or a keyboard shortcut.",
-            "version": "0.6",
+            "version": "0.7",
             "entrypoint": "ReadeckButton",
             "type": "user",
             "url": "https://github.com/Joedmin/xExtension-readeck-button",
@@ -431,6 +431,17 @@
             "directory": "xExtension-SmartMobileMenu"
         },
         {
+            "name": "StarToPocket",
+            "author": "Pat Hough",
+            "description": "An extension that sends an article to Pocket when you Star (Favorite) it.",
+            "version": "1",
+            "entrypoint": "StarToPocket",
+            "type": "user",
+            "url": "https://github.com/huffstler/xExtension-StarToPocket",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "Sticky Feeds",
             "author": "Marien Fressinaud",
             "description": "Set the feed aside in the main stream following the window scroll.",
@@ -512,7 +523,7 @@
             "name": "Wallabag Button",
             "author": "Joedmin",
             "description": "Add articles to Wallabag with one simple button click or a keyboard shortcut.",
-            "version": "0.3",
+            "version": "0.4",
             "entrypoint": "WallabagButton",
             "type": "user",
             "url": "https://github.com/Joedmin/xExtension-wallabag-button",
