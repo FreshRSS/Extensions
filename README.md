@@ -89,6 +89,7 @@ There are some FreshRSS extensions out there, developed by community members:
 * [Pocket Button](https://github.com/christian-putzke/freshrss-pocket-button): Add articles to Pocket with one simple button click or a keyboard shortcut.
 
 ### By [@huffstler](https://github.com/huffstler)
+
 * [Star To Pocket](https://github.com/huffstler/xExtension-StarToPocket): Like the extension above, but sends articles to Pocket when they are starred. Also works with FreshRSS client applications!
 
 ### By [@Joedmin](https://github.com/Joedmin/)
