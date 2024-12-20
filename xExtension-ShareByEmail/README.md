@@ -2,11 +2,11 @@
 
 This FreshRSS extension allows to share articles by email, in a more powerful way than the simple `mailto` solution.
 
-# How to install
+## How to install
 
 To install this extension, you must upload this directory in your `./extensions` directory and enable it on the extension panel in FreshRSS.
 
-# How to configure
+## How to configure
 
 After the installation the `Email` sharing service will added to the list of available sharing services. You need to add the `Email` sharing service to your individual sharing service list before it is available in the sharing menu.
 
