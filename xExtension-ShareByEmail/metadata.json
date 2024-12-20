@@ -2,7 +2,7 @@
   "name": "Share By Email",
   "author": "Marien Fressinaud",
   "description": "Improve the sharing by email system.",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "entrypoint": "ShareByEmail",
   "type": "user"
 }

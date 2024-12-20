@@ -13,5 +13,6 @@ After the installation the `Email` sharing service will added to the list of ava
 You will have to configure the mailing system in FreshRSS. [See the documentation](https://freshrss.github.io/FreshRSS/en/admins/05_Configuring_email_validation.html#configure-the-smtp-server)
 
 ## Changelog
+- 0.3.0 detail information about the mail system shown in the extension config
 - 0.2.3 Turkish language support added
 - 0.1 initial version
