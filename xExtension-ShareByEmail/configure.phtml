@@ -1,0 +1,23 @@
+<?php
+declare(strict_types=1);
+?>
+
+<div class="form-group">
+	<label class="group-name" for="words_list">
+		<?= _t('shareByEmail.share.manage.mailer') ?>
+	</label>
+	<div class="group-controls">
+		<?php
+		switch (FreshRSS_Context::systemConf()->mailer) {
+			case 'mail':
+				echo _t('shareByEmail.share.manage.mail');
+				break;
+			case 'smtp':
+				echo _t('shareByEmail.share.manage.smtp', FreshRSS_Context::systemConf()->smtp['from']);
+				break;
+			default:
+				echo _t('shareByEmail.share.manage.error');
+		} ?>
+		<p class="help"><?= _i('help') ?> <?= _t('shareByEmail.share.manage.help') ?></a></p>
+	</div>
+</div>
