@@ -18,5 +18,12 @@ return [
 		],
 		'intro' => 'Bu makaleyi e-posta yoluyla paylaşmak üzeresiniz: “<strong>%s</strong>”',
 		'title' => 'Bir makaleyi e-posta ile paylaşın',
+		'manage' => [
+			'mailer' => 'Mailing system',	// TODO
+			'mail' => 'PHP mailer',	// TODO
+			'smtp' => 'SMTP (send from %s)',	// TODO
+			'error' => 'Error',	// TODO
+			'help' => 'Switch PHP mailer/SMTP connection in <kbd>config.php</kbd>: see <a href="https://freshrss.github.io/FreshRSS/en/admins/05_Configuring_email_validation.html#configure-the-smtp-server" target="_blank">documentation</a>',	// TODO
+		]
 	],
 ];

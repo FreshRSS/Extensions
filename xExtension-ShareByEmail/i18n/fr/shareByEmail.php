@@ -18,5 +18,12 @@ return [
 		],
 		'intro' => 'Vous êtes sur le point de partager cet article par courriel : « <strong>%s</strong> »',
 		'title' => 'Partager un article par courriel',
+		'manage' => [
+			'mailer' => 'Mailing system',	// TODO
+			'mail' => 'PHP mailer',	// TODO
+			'smtp' => 'SMTP (send from %s)',	// TODO
+			'error' => 'Error',	// TODO
+			'help' => 'Switch PHP mailer/SMTP connection in <kbd>config.php</kbd>: see <a href="https://freshrss.github.io/FreshRSS/en/admins/05_Configuring_email_validation.html#configure-the-smtp-server" target="_blank">documentation</a>',	// TODO
+		]
 	],
 ];
