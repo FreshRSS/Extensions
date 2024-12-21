@@ -7,16 +7,10 @@ declare(strict_types=1);
 		<?= _t('shareByEmail.share.manage.mailer') ?>
 	</label>
 	<div class="group-controls">
-		<?php
-		switch (FreshRSS_Context::systemConf()->mailer) {
-			case 'mail':
-				echo _t('shareByEmail.share.manage.mail');
-				break;
-			case 'smtp':
-				echo _t('shareByEmail.share.manage.smtp', FreshRSS_Context::systemConf()->smtp['from']);
-				break;
-			default:
-				echo _t('shareByEmail.share.manage.error');
+		<?= match (FreshRSS_Context::systemConf()->mailer) {
+			'mail' => _t('shareByEmail.share.manage.mail'),
+			'smtp' => _t('shareByEmail.share.manage.smtp', FreshRSS_Context::systemConf()->smtp['from']),
+			default => _t('shareByEmail.share.manage.error')
 		} ?>
 		<p class="help"><?= _i('help') ?> <?= _t('shareByEmail.share.manage.help') ?></a></p>
 	</div>
