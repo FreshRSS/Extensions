@@ -20,10 +20,10 @@ return [
 		'title' => 'Bir makaleyi e-posta ile paylaşın',
 		'manage' => [
 			'mailer' => 'Mailing system',	// TODO
-			'mail' => 'PHP mailer',	// TODO
+			'mail' => 'PHP <code>mail()</code>',	// TODO
 			'smtp' => 'SMTP (send from %s)',	// TODO
 			'error' => 'Error',	// TODO
-			'help' => 'Switch PHP mailer/SMTP connection in <kbd>config.php</kbd>: see <a href="https://freshrss.github.io/FreshRSS/en/admins/05_Configuring_email_validation.html#configure-the-smtp-server" target="_blank">documentation</a>',	// TODO
+			'help' => 'Switch PHP <code>mail()</code>/SMTP connection in <kbd>config.php</kbd>: see <a href="https://freshrss.github.io/FreshRSS/en/admins/05_Configuring_email_validation.html#configure-the-smtp-server" target="_blank">documentation</a>',	// TODO
 		]
 	],
 ];

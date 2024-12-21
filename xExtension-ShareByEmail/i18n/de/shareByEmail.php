@@ -20,10 +20,10 @@ return [
 		'title' => 'Einen Artikel per Mail teilen.',
 		'manage' => [
 			'mailer' => 'E-Mail-Versand',
-			'mail' => 'via PHP',
+			'mail' => 'via PHP <code>mail()</code>',
 			'smtp' => 'via SMTP (versendet von %s)',
 			'error' => 'Fehler',
-			'help' => 'Versand zwischen PHP und SMTP in <kbd>config.php</kbd> wechseln: siehe <a href="https://freshrss.github.io/FreshRSS/en/admins/05_Configuring_email_validation.html#configure-the-smtp-server" target="_blank">Dokumentation</a>',
+			'help' => 'Versand zwischen PHP <code>mail()</code> und SMTP in <kbd>config.php</kbd> wechseln: siehe <a href="https://freshrss.github.io/FreshRSS/en/admins/05_Configuring_email_validation.html#configure-the-smtp-server" target="_blank">Dokumentation</a>',
 		]
 	],
 ];
