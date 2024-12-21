@@ -23,9 +23,9 @@
 					name="to"
 					id="to"
 					class="long"
-					placeholder="camille@dupuis-morizeau.com"
-					required
-					autofocus
+					placeholder="alice@example.net"
+					required="required"
+					autofocus="autofocus"
 					value="<?= $this->to ?>"
 				/>
 			</div>
@@ -42,7 +42,7 @@
 					name="subject"
 					id="subject"
 					class="long"
-					required
+					required="required"
 					value="<?= $this->subject ?>"
 				/>
 			</div>
@@ -57,7 +57,7 @@
 				<textarea
 					name="content"
 					id="content"
-					required
+					required="required"
 				><?= $this->content ?></textarea>
 			</div>
 		</div>
