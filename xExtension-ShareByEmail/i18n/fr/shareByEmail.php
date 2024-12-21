@@ -23,7 +23,7 @@ return [
 			'mail' => 'PHP <code>mail()</code>',
 			'smtp' => 'SMTP (envoyer en tant que %s)',
 			'error' => 'Erreur',
-			'help' => 'Éditer les paramètres SMTP dans <kbd>config.php</kbd> : voir <a href="https://freshrss.github.io/FreshRSS/en/admins/05_Configuring_email_validation.html#configure-the-smtp-server" target="_blank">la documentation</a>',
+			'help' => 'Éditer les paramètres SMTP ou PHP <code>mail()</code> dans <kbd>config.php</kbd> : voir <a href="https://freshrss.github.io/FreshRSS/en/admins/05_Configuring_email_validation.html#configure-the-smtp-server" target="_blank">la documentation</a>',
 		]
 	],
 ];
