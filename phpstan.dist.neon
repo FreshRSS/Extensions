@@ -12,15 +12,15 @@ parameters:
 	excludePaths:
 		analyse:
 			- ../FreshRSS
-			- vendor/
 			- xExtension-ImageProxy/configure.phtml	# TODO pass
 			- xExtension-ImageProxy/extension.php	# TODO pass
 		analyseAndScan:
-			- .git/
+			- .git/*?
 			- node_modules/*?
 			- symbolic/*?
 			- third-party/*?
 			- tmp/*?
+			- vendor/
 	dynamicConstantNames:
 		- TYPE_GIT
 	checkBenevolentUnionTypes: true
