@@ -1,7 +1,8 @@
 parameters:
-	# TODO: Increase rule-level https://phpstan.org/user-guide/rule-levels
-	level: 1
-	phpVersion: 80399	# TODO: Remove line when moving composer.json to PHP 8+
+	phpVersion:
+		min: 80100	# PHP 8.1
+		max: 80499	# PHP 8.4
+	level: 10	# https://phpstan.org/user-guide/rule-levels
 	fileExtensions:
 		- php
 		- phtml
@@ -12,34 +13,28 @@ parameters:
 		analyse:
 			- ../FreshRSS
 			- vendor/
+			- xExtension-ImageProxy/configure.phtml	# TODO pass
+			- xExtension-ImageProxy/extension.php	# TODO pass
 		analyseAndScan:
 			- .git/
-			- node_modules/
-			- symbolic/
-			- third-party/
-			- tmp/
+			- node_modules/*?
+			- symbolic/*?
+			- third-party/*?
+			- tmp/*?
 	dynamicConstantNames:
 		- TYPE_GIT
+	checkBenevolentUnionTypes: true
 	checkMissingOverrideMethodAttribute: true
-	reportMaybesInPropertyPhpDocTypes: false
+	checkTooWideReturnTypesInProtectedAndPublicMethods: true
+	reportAnyTypeWideningInVarTag: true
 	treatPhpDocTypesAsCertain: false
 	strictRules:
-		allRules: false
-		booleansInConditions: true
-		closureUsesThis: true
-		disallowedConstructs: false
+		disallowedEmpty: false
 		disallowedLooseComparison: false
-		matchingInheritedMethodNames: true
-		noVariableVariables: true
-		numericOperandsInArithmeticOperators: true
-		overwriteVariablesWithLoop: true
-		requireParentConstructorCall: true
-		strictCalls: true
-		switchConditionsMatchingType: true
-		uselessCast: true
+		disallowedShortTernary: false
 	exceptions:
 		check:
-			missingCheckedExceptionInThrows: false	# TODO pass
+			missingCheckedExceptionInThrows: true
 			tooWideThrowType: true
 		implicitThrows: false
 		checkedExceptionClasses:
