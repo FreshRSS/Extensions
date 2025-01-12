@@ -5,7 +5,10 @@ declare(strict_types=1);
 final class FreshExtension_shareByEmail_Controller extends Minz_ActionController {
 	public ?Minz_Extension $extension;
 
-	/** @var ShareByEmail\mailers\View */
+	/**
+	 * @var ShareByEmail\mailers\View
+	 * @phpstan-ignore property.phpDocType
+	 */
 	protected $view;
 
 	public function __construct() {
@@ -17,6 +20,12 @@ final class FreshExtension_shareByEmail_Controller extends Minz_ActionController
 		$this->extension = Minz_ExtensionManager::findExtension('Share By Email');
 	}
 
+	/**
+	 * @throws FreshRSS_Context_Exception
+	 * @throws Minz_ConfigurationException
+	 * @throws Minz_ConfigurationNamespaceException
+	 * @throws Minz_PDOConnectionException
+	 */
 	public function shareAction(): void {
 		if (!FreshRSS_Auth::hasAccess()) {
 			Minz_Error::error(403);
