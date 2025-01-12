@@ -1,0 +1,43 @@
+parameters:
+	phpVersion:
+		min: 80100	# PHP 8.1
+		max: 80499	# PHP 8.4
+	level: 10	# https://phpstan.org/user-guide/rule-levels
+	fileExtensions:
+		- php
+		- phtml
+	paths:
+		- ../FreshRSS
+		- .
+	excludePaths:
+		analyse:
+			- ../FreshRSS
+			- xExtension-ImageProxy/configure.phtml	# TODO pass
+			- xExtension-ImageProxy/extension.php	# TODO pass
+		analyseAndScan:
+			- .git/*?
+			- node_modules/*?
+			- symbolic/*?
+			- third-party/*?
+			- tmp/*?
+			- vendor/
+	dynamicConstantNames:
+		- TYPE_GIT
+	checkBenevolentUnionTypes: true
+	checkMissingOverrideMethodAttribute: true
+	checkTooWideReturnTypesInProtectedAndPublicMethods: true
+	reportAnyTypeWideningInVarTag: true
+	treatPhpDocTypesAsCertain: false
+	strictRules:
+		disallowedEmpty: false
+		disallowedLooseComparison: false
+		disallowedShortTernary: false
+	exceptions:
+		check:
+			missingCheckedExceptionInThrows: true
+			tooWideThrowType: true
+		implicitThrows: false
+		checkedExceptionClasses:
+			- 'Minz_Exception'
+includes:
+	- vendor/phpstan/phpstan-strict-rules/rules.neon
