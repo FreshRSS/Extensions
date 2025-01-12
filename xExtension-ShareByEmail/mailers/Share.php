@@ -6,13 +6,19 @@ namespace ShareByEmail\mailers;
 
 final class Share extends \Minz_Mailer {
 
-	/** @var View */
+	/**
+	 * @var View
+	 * @phpstan-ignore property.phpDocType
+	 */
 	protected $view;
 
 	public function __construct() {
 		parent::__construct(View::class);
 	}
 
+	/**
+	 * @throws \FreshRSS_Context_Exception
+	 */
 	public function send_article(string $to, string $subject, string $content): bool {
 		$this->view->_path('share_mailer/article.txt.php');
 

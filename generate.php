@@ -29,7 +29,7 @@ try {
 }
 
 foreach ($repositories as $repository) {
-	if (null === $url = ($repository['url'] ?? null)) {
+	if (!is_array($repository) || !is_string($url = ($repository['url'] ?? null))) {
 		continue;
 	}
 	if (TYPE_GIT === ($repository['type'] ?? null)) {
@@ -54,7 +54,7 @@ foreach ($gitRepositories as $key => $gitRepository) {
 			}
 			$directory = basename(dirname($metadataFile));
 			$metadata['url'] = $gitRepository;
-			$metadata['version'] = strval($metadata['version']);
+			$metadata['version'] = is_scalar($metadata['version'] ?? null) ? strval($metadata['version']) : '';
 			$metadata['method'] = TYPE_GIT;
 			$metadata['directory'] = ($directory === sha1($gitRepository)) ? '.' : $directory;
 			$extensions[] = $metadata;
