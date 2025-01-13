@@ -79,14 +79,14 @@ final class ImageProxyExtension extends Minz_Extension {
 			if (!FreshRSS_Context::userConf()->attributeBool('image_proxy_scheme_http')) {
 				return $url;
 			}
-			if (!FreshRSS_Context::userConf()->attributeBool('image_proxy_scheme_include') == '') {
+			if (!FreshRSS_Context::userConf()->attributeBool('image_proxy_scheme_include')) {
 				$url = substr($url, 7);	// http://
 			}
 		} elseif ($scheme === 'https') {
-			if (!FreshRSS_Context::userConf()->attributeBool('image_proxy_scheme_https') == '') {
+			if (!FreshRSS_Context::userConf()->attributeBool('image_proxy_scheme_https')) {
 				return $url;
 			}
-			if (!FreshRSS_Context::userConf()->attributeBool('image_proxy_scheme_include') == '') {
+			if (!FreshRSS_Context::userConf()->attributeBool('image_proxy_scheme_include')) {
 				$url = substr($url, 8);	// https://
 			}
 		} elseif ($scheme === '') {
