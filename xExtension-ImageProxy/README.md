@@ -6,6 +6,7 @@ To use it, upload this entire directory to the FreshRSS `./extensions` directory
 
 ## Changelog
 
+* 1.0 Breaking changes due to significant code upgrade: settings must be saved again
 * 0.7.3 Turkish language support added
 
 ## Configuration settings
