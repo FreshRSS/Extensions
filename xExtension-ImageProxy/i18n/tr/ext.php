@@ -8,5 +8,5 @@ return array(
 		'scheme_default' => 'Belirtilmemiş Vekil Sunucusu',
 		'scheme_include' => 'Bağlantıya http*:// ekle',
 		'url_encode' => 'Bağlantıyı kodla',
-	  ),
+	),
 );

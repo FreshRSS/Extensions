@@ -218,13 +218,13 @@ final class YouTubeExtension extends Minz_Extension
 				// but we keep it in the content anyway, so RSS clients can extract it to display a preview where it wants (in article listing,
 				// by example, like with Reeder).
 				if ($thumbnails->length > 0 && $thumbnails[0] instanceof DOMNode) {
-					$content .= '<p hidden><img class="enclosure-thumbnail" src="' . $thumbnails[0]->nodeValue . '" alt=""/></p>';
+					$content .= '<p hidden><img class="enclosure-thumbnail" src="' . $thumbnails[0]->nodeValue . '" alt="" /></p>';
 				}
 
 				$content .= $iframe;
 
 				if ($descriptions->length > 0 && $descriptions[0] instanceof DOMNode) {
-					$content .= '<p class="enclosure-description">' . nl2br(htmlentities($descriptions[0]->nodeValue ?? '')) . '</p>';
+					$content .= '<p class="enclosure-description">' . nl2br(htmlspecialchars($descriptions[0]->nodeValue ?? '', ENT_COMPAT, 'UTF-8'), use_xhtml: true) . '</p>';
 				}
 
 				$content .= "</div>\n";
