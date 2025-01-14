@@ -14,6 +14,7 @@ You will have to configure the mailing system in FreshRSS. [See the documentatio
 
 ## Changelog
 
+- 0.3.2 With the new feature, Turkish language deficiencies have been corrected.
 - 0.3.0 detail information about the mail system shown in the extension config
 - 0.2.3 Turkish language support added
 - 0.1 initial version

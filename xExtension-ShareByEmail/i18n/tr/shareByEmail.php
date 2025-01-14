@@ -19,11 +19,11 @@ return [
 		'intro' => 'Bu makaleyi e-posta yoluyla paylaşmak üzeresiniz: “<strong>%s</strong>”',
 		'title' => 'Bir makaleyi e-posta ile paylaşın',
 		'manage' => [
-			'mailer' => 'Mailing system',	// TODO
-			'mail' => 'PHP <code>mail()</code>',	// TODO
-			'smtp' => 'SMTP (send from %s)',	// TODO
-			'error' => 'Error',	// TODO
-			'help' => 'Switch PHP <code>mail()</code>/SMTP connection in <kbd>config.php</kbd>: see <a href="https://freshrss.github.io/FreshRSS/en/admins/05_Configuring_email_validation.html#configure-the-smtp-server" target="_blank">documentation</a>',	// TODO
+			'mailer' => 'Mail sistemi',
+			'mail' => 'PHP <code>mail()</code>',
+			'smtp' => 'SMTP (%s kaynağından gönder)',
+			'error' => 'Hata',
+			'help' => '<kbd>config.php</kbd> dosyasındaki PHP <code>mail()</code>/SMTP bağlantısını değiştirin: <a href="https://freshrss.github.io/FreshRSS/en/admins/05_Configuring_email_validation.html#configure-the-smtp-server" target="_blank">belgelere</a> bakın',
 		]
 	],
 ];
