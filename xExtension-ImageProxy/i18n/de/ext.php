@@ -5,7 +5,7 @@ return array(
 		'proxy_url' => 'Proxy-URL',
 		'scheme_http' => 'HTTP-Proxy',
 		'scheme_https' => 'HTTPS-Proxy',
-		'scheme_default' => 'Proxy unspezifiziertes Schema',
+		'scheme_default' => 'Proxy unspezifiziertes URL-Schema',
 		'scheme_include' => 'http*:// in die URL einfügen',
 		'url_encode' => 'URL-Prozentkodierung'
 	),
