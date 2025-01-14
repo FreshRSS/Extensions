@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 final class ShareByEmailExtension extends Minz_Extension {
 
+	/**
+	 * @throws Minz_ConfigurationException
+	 */
 	#[\Override]
 	public function init(): void {
 		$this->registerTranslates();

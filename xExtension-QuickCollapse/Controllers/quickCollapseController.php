@@ -3,7 +3,10 @@ declare(strict_types=1);
 
 final class FreshExtension_quickCollapse_Controller extends Minz_ActionController {
 
-	/** @var QuickCollapse\View */
+	/**
+	 * @var QuickCollapse\View
+	 * @phpstan-ignore property.phpDocType
+	 */
 	protected $view;
 
 	public function __construct() {

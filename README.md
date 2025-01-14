@@ -88,6 +88,10 @@ There are some FreshRSS extensions out there, developed by community members:
 
 * [Pocket Button](https://github.com/christian-putzke/freshrss-pocket-button): Add articles to Pocket with one simple button click or a keyboard shortcut.
 
+### By [@huffstler](https://github.com/huffstler)
+
+* [Star To Pocket](https://github.com/huffstler/xExtension-StarToPocket): Like the extension above, but sends articles to Pocket when they are starred. Also works with FreshRSS client applications!
+
 ### By [@Joedmin](https://github.com/Joedmin/)
 
 * [Readeck Button](https://github.com/Joedmin/xExtension-readeck-button): Add articles to a selected Readeck instance with one simple button click or a keyboard shortcut.
@@ -149,3 +153,7 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@lukasMega](https://github.com/lukasMega)
 
 * [Word Highlighter](https://github.com/lukasMega/Extensions-FreshRSS-): Gives you ability to highlight user-defined words (using [mark.js](https://github.com/julkue/mark.js))
+
+### By [@LiangWei88](https://github.com/LiangWei88)
+
+* [ArticleSummary](https://github.com/LiangWei88/xExtension-ArticleSummary): A powerful article summarization plugin for FreshRSS that allows users to generate summaries using a language model API conforming to the OpenAI API specification.

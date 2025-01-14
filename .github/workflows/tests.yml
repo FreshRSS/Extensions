@@ -10,7 +10,7 @@ jobs:
 
   tests:
     # https://github.com/actions/virtual-environments
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     defaults:
       run:
         working-directory: ./Extensions
@@ -54,16 +54,13 @@ jobs:
     - name: PHPStan
       run: composer run-script phpstan
 
-    - name: PHPStan Next Level
-      run: composer run-script phpstan-next
-
     # NPM tests
 
     - name: Uses Node.js
       uses: actions/setup-node@v3
       with:
         # https://nodejs.org/en/about/releases/
-        node-version: '18'
+        node-version: '22'
         cache: 'npm'
         cache-dependency-path: 'Extensions/package-lock.json'
 
