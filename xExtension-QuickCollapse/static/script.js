@@ -1,4 +1,4 @@
-/* globals context, quick_collapse_vars */
+/* globals context */
 
 (function () {
 	function toggleCollapse() {
@@ -26,15 +26,15 @@
 	}
 
 	function syncWithContext() {
-		if (!window.context || !window.quick_collapse_vars) {
+		if (!window.context) {
 			// The variables might not be available yet, so we need to wait for them.
 			return setTimeout(syncWithContext, 10);
 		}
 
 		const toggleElem = document.getElementById('toggle-collapse');
-		toggleElem.title = quick_collapse_vars.i18n.toggle_collapse;
-		toggleElem.innerHTML = `<img class="icon uncollapse" src="${quick_collapse_vars.icon_url_out}" alt="↕" />`;
-		toggleElem.innerHTML += `<img class="icon collapse" src="${quick_collapse_vars.icon_url_in}" alt="✖" />`;
+		toggleElem.title = context.extensions.i18n.toggle_collapse;
+		toggleElem.innerHTML = `<img class="icon uncollapse" src="${context.extensions.icon_url_out}" alt="↕" />`;
+		toggleElem.innerHTML += `<img class="icon collapse" src="${context.extensions.icon_url_in}" alt="✖" />`;
 
 		if (context.hide_posts) {
 			toggleElem.classList.add('collapsed');

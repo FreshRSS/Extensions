@@ -2,7 +2,7 @@
 	"name": "Quick Collapse",
 	"author": "romibi and Marien Fressinaud",
 	"description": "Quickly change from folded to unfolded articles",
-	"version": "0.2.3",
+	"version": "1.0",
 	"entrypoint": "QuickCollapse",
 	"type": "user"
 }
