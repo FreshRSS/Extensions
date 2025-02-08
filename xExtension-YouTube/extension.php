@@ -200,17 +200,14 @@ final class YouTubeExtension extends Minz_Extension
 	public function getHtml(FreshRSS_Entry $entry, string $url): string
 	{
 		$content = '';
-
+	
 		if ($this->autoSize) {
-			$class = "yt_autosize_true";
+			$iframe_attribute = 'class="yt_player_autosize"';
 		} else {
-			$class = "yt_autosize_false";
+			$iframe_attribute = 'width="' . $this->width . '" height="' . $this->height . '"';
 		}
 
-		$iframe = '<iframe class="' . $class . '"
-				style="height: ' . $this->height . 'px; width: ' . $this->width . 'px;"
-				width="' . $this->width . '"
-				height="' . $this->height . '"
+		$iframe = '<iframe ' . $iframe_attribute . '
 				src="' . $url . '"
 				frameborder="0"
 				allowFullScreen></iframe>';

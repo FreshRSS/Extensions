@@ -1,5 +1,4 @@
-.yt_autosize_true {
-    height: 100%;
+.yt_player_autosize {
     width:  100%;
     aspect-ratio: 16 / 9;
 }
