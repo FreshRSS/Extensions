@@ -69,7 +69,7 @@ final class YouTubeExtension extends Minz_Extension
 			return;
 		}
 
-		$autoSize = FreshRSS_Context::userConf()->attributeBool('yt_autosize');
+		$autoSize = FreshRSS_Context::userConf()->attributeBool('yt_player_autosize');
 		if ($autoSize !== null) {
 			$this->autoSize = $autoSize;
 		}
@@ -278,7 +278,7 @@ final class YouTubeExtension extends Minz_Extension
 		$this->registerTranslates();
 
 		if (Minz_Request::isPost()) {
-			FreshRSS_Context::userConf()->_attribute('yt_autosize', Minz_Request::paramBoolean('yt_autosize'));
+			FreshRSS_Context::userConf()->_attribute('yt_player_autosize', Minz_Request::paramBoolean('yt_autosize'));
 			FreshRSS_Context::userConf()->_attribute('yt_player_height', Minz_Request::paramInt('yt_height'));
 			FreshRSS_Context::userConf()->_attribute('yt_player_width', Minz_Request::paramInt('yt_width'));
 			FreshRSS_Context::userConf()->_attribute('yt_show_content', Minz_Request::paramBoolean('yt_show_content'));
