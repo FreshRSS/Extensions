@@ -6,6 +6,13 @@ declare(strict_types=1);
 	<input type="hidden" name="_csrf" value="<?php echo FreshRSS_Auth::csrfToken(); ?>" />
 	<div class="form-group">
 
+		<div class="group-controls">
+			<label class="checkbox" for="yt_autosize">
+				<input type="checkbox" id="yt_autosize" name="yt_autosize" value="1" <?php echo $this->isAutoSize() ? 'checked' : ''; ?>>
+				<?php echo _t('ext.yt_videos.autosize'); ?>
+			</label>
+		</div>
+
 		<label class="group-name" for="yt_height"><?php echo _t('ext.yt_videos.height'); ?></label>
 		<div class="group-controls">
 			<input type="number" id="yt_height" name="yt_height" value="<?php echo $this->getHeight(); ?>" min="50" data-leave-validation="1">
