@@ -181,7 +181,7 @@
             "name": "Image Cache",
             "author": "Victrid",
             "description": "Cache feed images on your own facility or Cloudflare cache.",
-            "version": "0.4.0",
+            "version": "0.4.1",
             "entrypoint": "ImageCache",
             "type": "user",
             "url": "https://github.com/Victrid/freshrss-image-cache-plugin",
