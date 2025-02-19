@@ -343,17 +343,6 @@
             "directory": "."
         },
         {
-            "name": "Reading Time",
-            "author": "Lapineige",
-            "description": "Add a reading time estimation next to each article title",
-            "version": "1.5",
-            "entrypoint": "ReadingTime",
-            "type": "user",
-            "url": "https://framagit.org/Lapineige/FreshRSS_Extension-ReadingTime/",
-            "method": "git",
-            "directory": "."
-        },
-        {
             "name": "ReadingTime",
             "author": "Lapineige",
             "description": "Add a reading time estimation next to each article",
