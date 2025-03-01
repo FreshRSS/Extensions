@@ -2,6 +2,7 @@
 
 return array(
 	'yt_videos' => array(
+		'autosize' => 'Oynatıcı otomatik boyutlandırma',
 		'height' => 'Oynatıcı yükseklik',
 		'width' => 'Oynatıcı genişlik',
 		'updates' => 'En son uzantı sürümünü şu adreste bulabilirsiniz:',
