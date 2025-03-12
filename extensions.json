@@ -222,17 +222,6 @@
             "directory": "xExtension-Invidious"
         },
         {
-            "name": "Kagi Summarizer",
-            "author": "Rudis Muiznieks",
-            "description": "Add buttons to summarize articles with the Kagi Universal Summarizer.",
-            "version": "0.3",
-            "entrypoint": "KagiSummarizer",
-            "type": "user",
-            "url": "https://code.sitosis.com/rudism/freshrss-kagi-summarizer",
-            "method": "git",
-            "directory": "."
-        },
-        {
             "name": "Keep Folder State",
             "author": "Marco Heizmann",
             "description": "Stores the state of the folders locally and expand them automatically if necessary.",
