@@ -4,7 +4,7 @@
 	const reading_time = {
 		flux_list: null,
 		flux: null,
-		textContent: null,
+		innerText: null,
 		count: null,
 		read_time: null,
 		reading_time: null,
@@ -44,25 +44,25 @@
 		},
 
 		flux_words_count: function flux_words_count(flux) {
-			// get textContent, from the article itself (not the header, not the bottom line):
-			reading_time.textContent = flux.querySelector('.flux_content .content').textContent;
+			// get innerText, from the article itself (not the header, not the bottom line):
+			reading_time.innerText = flux.querySelector('.flux_content .content').innerText;
 
 			// split the text to count the words correctly (source: http://www.mediacollege.com/internet/javascript/text/count-words.html)
-			reading_time.textContent = reading_time.textContent.replace(/(^\s*)|(\s*$)/gi, ''); // exclude  start and end white-space
-			reading_time.textContent = reading_time.textContent.replace(/[ ]{2,}/gi, ' '); // 2 or more space to 1
-			reading_time.textContent = reading_time.textContent.replace(/\n /, '\n'); // exclude newline with a start spacing
+			reading_time.innerText = reading_time.innerText.replace(/(^\s*)|(\s*$)/gi, ''); // exclude  start and end white-space
+			reading_time.innerText = reading_time.innerText.replace(/[ ]{2,}/gi, ' '); // 2 or more space to 1
+			reading_time.innerText = reading_time.innerText.replace(/\n /, '\n'); // exclude newline with a start spacing
 
-			return reading_time.textContent.split(' ').length;
+			return reading_time.innerText.split(' ').length;
 		},
 
 		flux_letters_count: function flux_letters_count(flux) {
-			// get textContent, from the article itself (not the header, not the bottom line):
-			reading_time.textContent = flux.querySelector('.flux_content .content').textContent;
+			// get innerText, from the article itself (not the header, not the bottom line):
+			reading_time.innerText = flux.querySelector('.flux_content .content').innerText;
 
 			// clean the text by removing excessive whitespace
-			reading_time.textContent = reading_time.textContent.replace(/\s/gi, ''); // exclude white-space
+			reading_time.innerText = reading_time.innerText.replace(/\s/gi, ''); // exclude white-space
 
-			return reading_time.textContent.length;
+			return reading_time.innerText.length;
 		},
 
 		calc_read_time: function calc_read_time(count, speed) {
