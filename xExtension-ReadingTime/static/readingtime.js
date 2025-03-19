@@ -1,4 +1,4 @@
-(function reading_time() {
+document.addEventListener('DOMContentLoaded', function reading_time() {
 	'use strict';
 
 	const reading_time = {
@@ -88,4 +88,4 @@
 	} else if (document.addEventListener) {
 		document.addEventListener('DOMContentLoaded', add_load_more_listener, false);
 	}
-}());
+});
