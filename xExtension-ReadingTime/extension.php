@@ -7,6 +7,7 @@ final class ReadingTimeExtension extends Minz_Extension {
 	private string $metrics = 'words';
 
 	#[\Override]
+	/** @throws FreshRSS_Context_Exception */
 	public function init(): void {
 		$this->registerTranslates();
 		if (!FreshRSS_Context::hasUserConf()) {
@@ -55,6 +56,10 @@ final class ReadingTimeExtension extends Minz_Extension {
 	}
 
 	#[\Override]
+	/**
+	 * @throws FreshRSS_Context_Exception
+	 * @throws Minz_ActionException
+	 */
 	public function handleConfigureAction(): void {
 		$this->registerTranslates();
 
@@ -65,6 +70,7 @@ final class ReadingTimeExtension extends Minz_Extension {
 		}
 	}
 
+	/** @throws Minz_ActionException */
 	private function validateSpeed(int $speed): int {
 		if ($speed <= 0) {
 			throw new Minz_ActionException(_t('ext.reading_time.speed.invalid'), Minz_Request::actionName());
@@ -72,6 +78,7 @@ final class ReadingTimeExtension extends Minz_Extension {
 		return $speed;
 	}
 
+	/** @throws Minz_ActionException */
 	private function validateMetrics(string $metrics): string {
 		switch ($metrics) {
 			case 'words':
