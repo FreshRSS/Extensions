@@ -25,7 +25,7 @@ final class ReadingTimeExtension extends Minz_Extension {
 		} else {
 			$this->metrics = $metrics;
 		}
-		if (in_array(null, [$speed, $metrics])) {
+		if (in_array(null, [$speed, $metrics], true)) {
 			FreshRSS_Context::userConf()->save();
 		}
 		$this->registerHook('js_vars', [$this, 'getParams']);
@@ -41,9 +41,10 @@ final class ReadingTimeExtension extends Minz_Extension {
 	}
 
 	/**
+	 * @param array<mixed> $vars
 	 * @return array{
-	 * 	speed: int,
-	 * 	metrics: string,
+	 * 	reading_time_speed: int,
+	 * 	reading_time_metrics: string,
 	 * }
 	 */
 	public function getParams(array $vars): array {
