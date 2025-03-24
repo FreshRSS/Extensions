@@ -97,36 +97,4 @@
 	} else {
 		document.addEventListener('freshrss:globalContextLoaded', add_load_more_listener, false);
 	}
-
-	const event = new Event('freshrss:globalContextLoaded');
-
-	function startDetectGlobalContextLoaded() {
-		const globalContextElement = document.getElementById('jsonVars');
-
-		if (globalContextElement !== null) {
-			// Wait until load global context
-			const observer = new MutationObserver((e) => {
-				if (e[0].removedNodes[0].id != 'jsonVars') {
-					return;
-				}
-				observer.disconnect();
-				document.dispatchEvent(event);
-			});
-
-			observer.observe(globalContextElement.parentElement, {
-				attributes: true,
-				childList: true,
-				subtree: true,
-			});
-		} else {
-			// Already loaded global context
-			document.dispatchEvent(event);
-		}
-	}
-
-	if (document.readyState && document.readyState !== 'loading') {
-		startDetectGlobalContextLoaded();
-	} else {
-		document.addEventListener('DOMContentLoaded', startDetectGlobalContextLoaded, false);
-	}
 }());
