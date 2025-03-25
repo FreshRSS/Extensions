@@ -4,7 +4,7 @@
 	const reading_time = {
 		flux_list: null,
 		flux: null,
-		innerText: null,
+		textContent: null,
 		count: null,
 		read_time: null,
 		reading_time: null,
@@ -47,27 +47,27 @@
 		flux_words_count: function flux_words_count(flux, language) {
 			const segmenter = new Intl.Segmenter(language, { granularity: 'grapheme' });
 
-			// get innerText, from the article itself (not the header, not the bottom line):
-			reading_time.innerText = flux.querySelector('.flux_content .content').innerText;
+			// get textContent, from the article itself (not the header, not the bottom line):
+			reading_time.textContent = flux.querySelector('.flux_content .content').textContent;
 
 			// split the text to count the words correctly (source: http://www.mediacollege.com/internet/javascript/text/count-words.html)
-			reading_time.innerText = reading_time.innerText.replace(/(^\s*)|(\s*$)/gi, ''); // exclude  start and end white-space
-			reading_time.innerText = reading_time.innerText.replace(/[ ]{2,}/gi, ' '); // 2 or more space to 1
-			reading_time.innerText = reading_time.innerText.replace(/\n /, '\n'); // exclude newline with a start spacing
+			reading_time.textContent = reading_time.textContent.replace(/(^\s*)|(\s*$)/gi, ''); // exclude  start and end white-space
+			reading_time.textContent = reading_time.textContent.replace(/[ ]{2,}/gi, ' '); // 2 or more space to 1
+			reading_time.textContent = reading_time.textContent.replace(/\n /, '\n'); // exclude newline with a start spacing
 
-			return [...segmenter.segment(reading_time.innerText.split(' '))].length;
+			return [...segmenter.segment(reading_time.textContent.split(' '))].length;
 		},
 
 		flux_letters_count: function flux_letters_count(flux, language) {
 			const segmenter = new Intl.Segmenter(language, { granularity: 'grapheme' });
 
-			// get innerText, from the article itself (not the header, not the bottom line):
-			reading_time.innerText = flux.querySelector('.flux_content .content').innerText;
+			// get textContent, from the article itself (not the header, not the bottom line):
+			reading_time.textContent = flux.querySelector('.flux_content .content').textContent;
 
 			// clean the text by removing excessive whitespace
-			reading_time.innerText = reading_time.innerText.replace(/\s/gi, ''); // exclude white-space
+			reading_time.textContent = reading_time.textContent.replace(/\s/gi, ''); // exclude white-space
 
-			return [...segmenter.segment(reading_time.innerText)].length;
+			return [...segmenter.segment(reading_time.textContent)].length;
 		},
 
 		calc_read_time: function calc_read_time(count, speed) {
