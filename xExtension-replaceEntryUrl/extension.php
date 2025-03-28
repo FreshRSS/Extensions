@@ -15,7 +15,7 @@ class replaceEntryUrlExtension extends Minz_Extension {
       /*If you want to replace it during refresh, uncomment this line and comment out the line below. it used in test*/
       // $this->registerHook('entry_before_display', [self::class, 'processEntry']);
       $this->registerHook('entry_before_insert', [self::class, 'processEntry']);
-      if (FreshRSS_Context::userConf()->attributeString('allow_url') == null) {
+      if (FreshRSS_Context::userConf()->attributeString('allow_url') === null) {
         FreshRSS_Context::userConf()->_attribute('allow_url', self::ALLOWED_LIST);
         $save = true;
       }
@@ -36,7 +36,6 @@ class replaceEntryUrlExtension extends Minz_Extension {
 
     /**
      * Process the feed content before inserting the feed
-     *
      * @param FreshRSS_Entry $entry RSS article
      * @return FreshRSS_Entry Processed entries
      * @throws FreshRSS_Context_Exception 
@@ -44,14 +43,16 @@ class replaceEntryUrlExtension extends Minz_Extension {
     public static function processEntry(FreshRSS_Entry $entry): FreshRSS_Entry {
         $allow_array = ""; 
         $allow_url_str = FreshRSS_Context::userConf()->attributeString('allow_url');
-        if ($allow_url_str !== null && $allow_url_str !== ''){
-          $allow_array = json_decode(FreshRSS_Context::userConf()->attributeString('allow_url'),true);
+        if (!is_string($allow_url_str) || $allow_url_str === '') {
+          return $entry;
         }
+          $allow_array = json_decode($allow_url_str,true);
+        
         $allow_url = [];
   
         if(json_last_error() === JSON_ERROR_NONE && is_array($allow_array)){
           foreach ($allow_array as $key => $value) {
-            array_push($allow_url,$key);
+            array_push($allow_url, (string)$key); 
           }
         }
         if(!is_array($allow_array)){
@@ -63,9 +64,9 @@ class replaceEntryUrlExtension extends Minz_Extension {
         $link = $entry->link();
         $my_xpath = self::isUrlAllowed($link,$allow_url,$allow_array);
         
-        if(!$my_xpath){
+        if (empty($my_xpath)) {
           return $entry;
-        }
+      }
         $response = self::curlDownloadContent($link);
         if($response != false){
           $article = self:: extractMainContent($response,$my_xpath);
@@ -75,22 +76,27 @@ class replaceEntryUrlExtension extends Minz_Extension {
       return $entry;
     }
 
-    public static function curlDownloadContent(string $link) {
+    public static function curlDownloadContent(string $link): string|false {
       
       $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, $link);
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-      curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0); 
-      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); 
-      curl_setopt($ch, CURLOPT_TIMEOUT, 10); // Optional: set timeout
-      $response = curl_exec($ch);
-      if (curl_errno($ch)) {
-        error_log('cURL Error: ' . curl_error($ch));
-        $response = false;
+      if ($ch === false) {
+        throw new RuntimeException('Failed to initialize cURL.');
       }
-      curl_close($ch);
-      if ($response) {
-           return($response);
+      if ($link !== '') {
+        curl_setopt($ch, CURLOPT_URL, $link);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        //curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0); 
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); 
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10); // Optional: set timeout
+        $response = curl_exec($ch);
+        if (curl_errno($ch)) {
+          error_log('cURL Error: ' . curl_error($ch));
+          $response = false;
+        }
+        curl_close($ch);
+        if ($response !== false && is_string($response)) {
+          return $response;
+        }
       }
       return false;
 
@@ -103,24 +109,34 @@ class replaceEntryUrlExtension extends Minz_Extension {
       
       $xpath = new DOMXPath($doc);
       $nodes = $xpath->query($my_xpath);
-      $mainContent = $nodes->length > 0 ?  $doc->saveHTML($nodes->item(0)) : $content;
-
-      libxml_clear_errors();
-      
-      return $mainContent;
+      if ($nodes instanceof DOMNodeList && $nodes->length > 0) {
+        $mainContent = $doc->saveHTML($nodes->item(0));
+      }else{
+        $mainContent = $content;
+      }
+      libxml_clear_errors();     
+      return  is_string($mainContent) ? $mainContent : '';
     }
-
+    /**
+     * @param string $url
+     * @param list<string> $allowed 
+     * @param array<mixed,mixed> $allow_array 
+     */
     public static function isUrlAllowed(string $url, array $allowed, array $allow_array): string {
       $host = parse_url($url, PHP_URL_HOST);
-      if (!$host) {
+      if (!is_string($host) || $host === ''){
           return "";
       }
-
-      if (strpos($host, 'www.') === 0) {
-          $host = substr($host, 4);
+      
+      if (preg_match('/([a-z0-9-]+\.[a-z]+)$/i', $host, $matches)) {
+          $host = $matches[1];
       }
-      if(in_array(strtolower($host), array_map('strtolower', $allowed), true)){
-        return $allow_array[$host];
+      if (in_array(strtolower($host), array_map('strtolower', $allowed), true)) {
+        $xpath_value = $allow_array[$host] ?? null; 
+        if (is_string($xpath_value)) {
+            return $xpath_value; 
+        }
+        return '';
       }
       return "";
     }
