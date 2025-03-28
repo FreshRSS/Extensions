@@ -5,6 +5,7 @@ Usually used to handle cases where the content retrieved via XPath from an artic
 
 To use it, upload this entire directory to the FreshRSS `./extensions` directory on your server and enable it on the extension panel in FreshRSS.
 
+Note: If an XPath expression error causes content to not be found, return the entire webpage retrieved by cURL by default.
 ## Changelog
 
 * 0.1
