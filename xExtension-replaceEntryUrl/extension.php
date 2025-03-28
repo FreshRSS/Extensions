@@ -4,12 +4,15 @@ declare(strict_types=1);
 class replaceEntryUrlExtension extends Minz_Extension {
     const ALLOWED_LIST = [];  
     
+   /**
+	  * @throws FreshRSS_Context_Exception
+	  */
     public function init() {
       if (!FreshRSS_Context::hasSystemConf()) {
         throw new FreshRSS_Context_Exception('System configuration not initialised!');
       }
       $save = false;
-      /*If you want to replace it during refresh, uncomment this line and comment out the line below*/
+      /*If you want to replace it during refresh, uncomment this line and comment out the line below. it used in test*/
       // $this->registerHook('entry_before_display', [self::class, 'processEntry']);
       $this->registerHook('entry_before_insert', [self::class, 'processEntry']);
       if (FreshRSS_Context::userConf()->attributeString('allow_url') == null) {
@@ -18,6 +21,10 @@ class replaceEntryUrlExtension extends Minz_Extension {
       }
             
     }
+
+    /**
+	  * @throws FreshRSS_Context_Exception
+	  */
     public function handleConfigureAction(): void {
       $this->registerTranslates();
   
@@ -27,8 +34,17 @@ class replaceEntryUrlExtension extends Minz_Extension {
       }
     }
 
+    /**
+     * Process the feed content before inserting the feed
+     *
+     * @param FreshRSS_Entry $entry RSS article
+     * @return FreshRSS_Entry Processed entries
+     * @throws FreshRSS_Context_Exception 
+     */
     public static function processEntry(FreshRSS_Entry $entry): FreshRSS_Entry {
-        if(FreshRSS_Context::userConf()->attributeString('allow_url')){
+        $allow_array = ""; 
+        $allow_url_str = FreshRSS_Context::userConf()->attributeString('allow_url');
+        if ($allow_url_str !== null && $allow_url_str !== ''){
           $allow_array = json_decode(FreshRSS_Context::userConf()->attributeString('allow_url'),true);
         }
         $allow_url = [];
