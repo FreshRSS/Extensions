@@ -2,7 +2,7 @@
 	"name": "replaceEntryUrl",
 	"author": "fiifff",
 	"description": "Replace the URL in the content of subscription entries with the actual content of the URL.",
-	"version": "0.1",
+	"version": "0.2",
 	"entrypoint": "replaceEntryUrl",
 	"type": "user"
 }
