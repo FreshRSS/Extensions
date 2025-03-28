@@ -5,12 +5,15 @@
 		flux_list: null,
 		flux: null,
 		textContent: null,
-		words_count: null,
+		count: null,
 		read_time: null,
 		reading_time: null,
 
 		init: function () {
 			const flux_list = document.querySelectorAll('[id^="flux_"]');
+			const speed = window.context.extensions.reading_time_speed;
+			const metrics = window.context.extensions.reading_time_metrics;
+			const language = window.context.i18n.language;
 
 			for (let i = 0; i < flux_list.length; i++) {
 				if ('readingTime' in flux_list[i].dataset) {
@@ -19,9 +22,12 @@
 
 				reading_time.flux = flux_list[i];
 
-				reading_time.words_count = reading_time.flux_words_count(flux_list[i]); // count the words
-				// change this number (in words) to your preferred reading speed:
-				reading_time.reading_time = reading_time.calc_read_time(reading_time.words_count, 300);
+				if (metrics == 'letters') {
+					reading_time.count = reading_time.flux_letters_count(flux_list[i], language);
+				} else {  // words
+					reading_time.count = reading_time.flux_words_count(flux_list[i], language);
+				}
+				reading_time.reading_time = reading_time.calc_read_time(reading_time.count, speed);
 
 				flux_list[i].dataset.readingTime = reading_time.reading_time;
 
@@ -38,7 +44,9 @@
 			}
 		},
 
-		flux_words_count: function flux_words_count(flux) {
+		flux_words_count: function flux_words_count(flux, language) {
+			const segmenter = new Intl.Segmenter(language, { granularity: 'grapheme' });
+
 			// get textContent, from the article itself (not the header, not the bottom line):
 			reading_time.textContent = flux.querySelector('.flux_content .content').textContent;
 
@@ -47,11 +55,23 @@
 			reading_time.textContent = reading_time.textContent.replace(/[ ]{2,}/gi, ' '); // 2 or more space to 1
 			reading_time.textContent = reading_time.textContent.replace(/\n /, '\n'); // exclude newline with a start spacing
 
-			return reading_time.textContent.split(' ').length;
+			return [...segmenter.segment(reading_time.textContent.split(' '))].length;
 		},
 
-		calc_read_time: function calc_read_time(wd_count, speed) {
-			reading_time.read_time = Math.round(wd_count / speed);
+		flux_letters_count: function flux_letters_count(flux, language) {
+			const segmenter = new Intl.Segmenter(language, { granularity: 'grapheme' });
+
+			// get textContent, from the article itself (not the header, not the bottom line):
+			reading_time.textContent = flux.querySelector('.flux_content .content').textContent;
+
+			// clean the text by removing excessive whitespace
+			reading_time.textContent = reading_time.textContent.replace(/\s/gi, ''); // exclude white-space
+
+			return [...segmenter.segment(reading_time.textContent)].length;
+		},
+
+		calc_read_time: function calc_read_time(count, speed) {
+			reading_time.read_time = Math.round(count / speed);
 
 			if (reading_time.read_time === 0) {
 				reading_time.read_time = '<1';
@@ -66,11 +86,15 @@
 		document.body.addEventListener('freshrss:load-more', function (e) {
 			reading_time.init();
 		});
+
+		if (window.console) {
+			console.log('ReadingTime init done.');
+		}
 	}
 
-	if (document.readyState && document.readyState !== 'loading') {
+	if (document.readyState && document.readyState !== 'loading' && typeof window.context !== 'undefined' && typeof window.context.extensions !== 'undefined') {
 		add_load_more_listener();
-	} else if (document.addEventListener) {
-		document.addEventListener('DOMContentLoaded', add_load_more_listener, false);
+	} else {
+		document.addEventListener('freshrss:globalContextLoaded', add_load_more_listener, false);
 	}
 }());
