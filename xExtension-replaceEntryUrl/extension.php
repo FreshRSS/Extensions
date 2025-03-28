@@ -5,8 +5,8 @@ class replaceEntryUrlExtension extends Minz_Extension {
     const ALLOWED_LIST = [];  
     
    /**
-	  * @throws FreshRSS_Context_Exception
-	  */
+	* @throws FreshRSS_Context_Exception
+	*/
     public function init() {
       if (!FreshRSS_Context::hasSystemConf()) {
         throw new FreshRSS_Context_Exception('System configuration not initialised!');
@@ -23,8 +23,8 @@ class replaceEntryUrlExtension extends Minz_Extension {
     }
 
     /**
-	  * @throws FreshRSS_Context_Exception
-	  */
+	 * @throws FreshRSS_Context_Exception
+	 */
     public function handleConfigureAction(): void {
       $this->registerTranslates();
   
