@@ -92,7 +92,7 @@
 		}
 	}
 
-	if (document.readyState && document.readyState !== 'loading' && typeof window.context !== 'undefined' && typeof window.context.extensions !== 'undefined') {
+	if (typeof window.context !== 'undefined' && typeof window.context.extensions !== 'undefined') {
 		add_load_more_listener();
 	} else {
 		document.addEventListener('freshrss:globalContextLoaded', add_load_more_listener, false);
