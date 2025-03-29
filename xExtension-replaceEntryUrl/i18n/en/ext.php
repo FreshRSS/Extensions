@@ -2,6 +2,7 @@
 
 return array(
 	'replaceEntryUrl' => array(
-		'allow_url' => 'replace domain:'
+		'matchUrlKeyValues' => 'domain json:',
+		'filterXPathContent' => 'Return full content by default'
 	),
 );

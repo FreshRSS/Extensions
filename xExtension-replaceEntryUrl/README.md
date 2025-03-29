@@ -5,11 +5,12 @@ Usually used to handle cases where the content retrieved via XPath from an artic
 
 To use it, upload this entire directory to the FreshRSS `./extensions` directory on your server and enable it on the extension panel in FreshRSS.
 
-Note: If an XPath expression error causes content to not be found, return the entire webpage retrieved by cURL by default.
+Note: If an XPath expression error causes content to not found, The default behavior is not to modify the feed if no content is matched.
 
 ## Changelog
 
 * 0.2.1 - The test can be used normally.
+* 0.2.2 - Add an option to decide whether to modify the feed when the XPath does not match and Modify the input field to a textarea.
 
 ## Configuration settings
 

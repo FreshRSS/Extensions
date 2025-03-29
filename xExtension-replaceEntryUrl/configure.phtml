@@ -5,13 +5,18 @@
 <form action="<?= _url('extension', 'configure', 'e', urlencode($this->getName())) ?>" method="post">
 	<input type="hidden" name="_csrf" value="<?= FreshRSS_Auth::csrfToken() ?>" />
 	<div class="form-group">
-		<label class="group-name" for="allow_url"><?= _t('ext.replaceEntryUrl.allow_url') ?></label>
+		<label class="group-name" for="replaceEntryUrl_matchUrlKeyValues"><?= _t('ext.replaceEntryUrl.matchUrlKeyValues') ?></label>
 		<div class="group-controls">
-			<input type="text" name="allow_url" id="allow_url"
-				value="<?= htmlspecialchars(FreshRSS_Context::userConf()->attributeString('allow_url') ?? '', ENT_COMPAT, 'UTF-8') ?>">
+			 <textarea  name="replaceEntryUrl_matchUrlKeyValues" id="replaceEntryUrl_matchUrlKeyValues" rows="5" cols="30"><?= htmlspecialchars(FreshRSS_Context::userConf()->attributeString('replaceEntryUrl_matchUrlKeyValues') ?? '', ENT_COMPAT, 'UTF-8') ?></textarea>
 		</div>
 	</div>
-
+	<div class="form-group">
+		<label class="group-name" for="replaceEntryUrl_filterXPathContent"><?= _t('ext.replaceEntryUrl.filterXPathContent') ?></label>
+		<div class="group-controls">
+			<input type="checkbox" name="replaceEntryUrl_filterXPathContent" id="replaceEntryUrl_filterXPathContent" value="1" 
+				<?= FreshRSS_Context::userConf()->attributeBool('replaceEntryUrl_filterXPathContent') ? 'checked' : '' ?>>
+		</div>
+	</div>
 
 	<div class="form-group form-actions">
 		<div class="group-controls">
