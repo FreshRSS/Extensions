@@ -41,17 +41,18 @@ final class ReadingTimeExtension extends Minz_Extension {
 	}
 
 	/**
-	 * @param array<mixed> $vars
-	 * @return array{
-	 * 	reading_time_speed: int,
-	 * 	reading_time_metrics: string,
-	 * }
+	 * Called from js_vars hook
+	 *
+	 * Pass dynamic parameters to readingtime.js via `window.context.extensions`.
+	 * Chain with other js_vars hooks via $vars.
+	 *
+	 * @param array<mixed> $vars is the result of hooks chained in the previous step.
+	 * @return array<mixed> is passed to the hook chained to the next step.
 	 */
 	public function getParams(array $vars): array {
-		return array(
-			'reading_time_speed' => $this->speed,
-			'reading_time_metrics' => $this->metrics,
-		);
+		$vars['reading_time_speed'] = $this->speed;
+		$vars['reading_time_metrics'] = $this->metrics;
+		return $vars;
 	}
 
 	#[\Override]
