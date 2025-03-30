@@ -12,7 +12,7 @@ class replaceEntryUrlExtension extends Minz_Extension {
         throw new FreshRSS_Context_Exception('System configuration not initialised!');
       }
       $save = false;
-      /*If you want to replace it during refresh, uncomment this line and comment out the line below. it used in test*/
+      /*If you want to replace it during refresh, uncomment next line and comment out the line below. it used in test*/
       //$this->registerHook('entry_before_display', [self::class, 'processEntry']);
       $this->registerHook('entry_before_insert', [self::class, 'processEntry']);
       if (FreshRSS_Context::userConf()->attributeString('replaceEntryUrl_matchUrlKeyValues') === null) {
@@ -45,7 +45,7 @@ class replaceEntryUrlExtension extends Minz_Extension {
      * @throws FreshRSS_Context_Exception 
      */
     public static function processEntry(FreshRSS_Entry $entry): FreshRSS_Entry {
-      $useDefaultIfEmpty = FreshRSS_Context::userConf()->attributeBool('replaceEntryUrl_filterXPathContent') ?? false;
+      $use_default_if_empty = FreshRSS_Context::userConf()->attributeBool('replaceEntryUrl_filterXPathContent') ?? self::GET_FULL_CONTENT;
       $allow_array = ""; 
       $allow_url_str = FreshRSS_Context::userConf()->attributeString('replaceEntryUrl_matchUrlKeyValues');
       if (!is_string($allow_url_str) || $allow_url_str === '') {
@@ -75,7 +75,7 @@ class replaceEntryUrlExtension extends Minz_Extension {
       $response = self::curlDownloadContent($link);
       $article = "";
       if($response != false){
-        $article = self:: extractMainContent($response,$my_xpath,$useDefaultIfEmpty);
+        $article = self:: extractMainContent($response,$my_xpath,$use_default_if_empty);
       }
       if($article != ""){
         $entry->_content ($article);
@@ -93,9 +93,9 @@ class replaceEntryUrlExtension extends Minz_Extension {
       if ($link !== '') {
         curl_setopt($ch, CURLOPT_URL, $link);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        //curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0); 
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); 
-        curl_setopt($ch, CURLOPT_TIMEOUT, 10); // Optional: set timeout
+        curl_setopt($ch, CURLOPT_ENCODING, "gzip, deflate");
+        //curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); 
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10); 
         $response = curl_exec($ch);
         if (curl_errno($ch)) {
           error_log('cURL Error: ' . curl_error($ch));
@@ -110,7 +110,7 @@ class replaceEntryUrlExtension extends Minz_Extension {
 
     }
 
-    public static function extractMainContent(string $content,string $my_xpath,bool $useDefaultIfEmpty): string {
+    public static function extractMainContent(string $content,string $my_xpath,bool $use_default_if_empty): string {
       $doc = new DOMDocument();
       libxml_use_internal_errors(true);
       $doc->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'));
@@ -121,7 +121,7 @@ class replaceEntryUrlExtension extends Minz_Extension {
       if ($nodes instanceof DOMNodeList && $nodes->length > 0) {
         $mainContent = $doc->saveHTML($nodes->item(0));
       }
-      elseif($useDefaultIfEmpty)
+      elseif($use_default_if_empty)
       {
         $mainContent = $content;
       }
