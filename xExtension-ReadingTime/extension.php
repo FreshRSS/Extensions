@@ -6,6 +6,9 @@ final class ReadingTimeExtension extends Minz_Extension {
 	private int $speed = 300;
 	private string $metrics = 'words';
 
+	/**
+	 * @throws FreshRSS_Context_Exception
+	 */
 	#[\Override]
 	public function init(): void {
 		$this->registerTranslates();
@@ -13,20 +16,20 @@ final class ReadingTimeExtension extends Minz_Extension {
 			return;
 		}
 		// Defaults
-		$speed = FreshRSS_Context::userConf()->attributeInt('reading_time_speed');	// @phpstan-ignore missingType.checkedException
+		$speed = FreshRSS_Context::userConf()->attributeInt('reading_time_speed');
 		if ($speed === null) {
-			FreshRSS_Context::userConf()->_attribute('reading_time_speed', $this->speed);	// @phpstan-ignore missingType.checkedException
+			FreshRSS_Context::userConf()->_attribute('reading_time_speed', $this->speed);
 		} else {
 			$this->speed = $speed;
 		}
-		$metrics = FreshRSS_Context::userConf()->attributeString('reading_time_metrics');	// @phpstan-ignore missingType.checkedException
+		$metrics = FreshRSS_Context::userConf()->attributeString('reading_time_metrics');
 		if ($metrics === null) {
-			FreshRSS_Context::userConf()->_attribute('reading_time_metrics', $this->metrics);	// @phpstan-ignore missingType.checkedException
+			FreshRSS_Context::userConf()->_attribute('reading_time_metrics', $this->metrics);
 		} else {
 			$this->metrics = $metrics;
 		}
 		if (in_array(null, [$speed, $metrics], true)) {
-			FreshRSS_Context::userConf()->save();	// @phpstan-ignore missingType.checkedException
+			FreshRSS_Context::userConf()->save();
 		}
 		$this->registerHook('js_vars', [$this, 'getParams']);
 		Minz_View::appendScript($this->getFileUrl('readingtime.js', 'js'));
@@ -55,16 +58,20 @@ final class ReadingTimeExtension extends Minz_Extension {
 		return $vars;
 	}
 
+	/**
+	 * @throws FreshRSS_Context_Exception
+	 * @throws Minz_ActionException
+	 */
 	#[\Override]
 	public function handleConfigureAction(): void {
 		$this->registerTranslates();
 
 		if (Minz_Request::isPost()) {
-			$speed = $this->validateSpeed(Minz_Request::paramInt('reading_time_speed'));	// @phpstan-ignore missingType.checkedException
-			FreshRSS_Context::userConf()->_attribute('reading_time_speed', $speed);	// @phpstan-ignore missingType.checkedException
-			$metrics = $this->validateMetrics(Minz_Request::paramString('reading_time_metrics'));	// @phpstan-ignore missingType.checkedException
-			FreshRSS_Context::userConf()->_attribute('reading_time_metrics', $metrics);	// @phpstan-ignore missingType.checkedException
-			FreshRSS_Context::userConf()->save();	// @phpstan-ignore missingType.checkedException
+			$speed = $this->validateSpeed(Minz_Request::paramInt('reading_time_speed'));
+			FreshRSS_Context::userConf()->_attribute('reading_time_speed', $speed);
+			$metrics = $this->validateMetrics(Minz_Request::paramString('reading_time_metrics'));
+			FreshRSS_Context::userConf()->_attribute('reading_time_metrics', $metrics);
+			FreshRSS_Context::userConf()->save();
 		}
 	}
 
