@@ -181,7 +181,7 @@
             "name": "Image Cache",
             "author": "Victrid",
             "description": "Cache feed images on your own facility or Cloudflare cache.",
-            "version": "0.4.0",
+            "version": "0.4.1",
             "entrypoint": "ImageCache",
             "type": "user",
             "url": "https://github.com/Victrid/freshrss-image-cache-plugin",
@@ -339,17 +339,6 @@
             "entrypoint": "ReadeckButton",
             "type": "user",
             "url": "https://github.com/Joedmin/xExtension-readeck-button",
-            "method": "git",
-            "directory": "."
-        },
-        {
-            "name": "Reading Time",
-            "author": "Lapineige",
-            "description": "Add a reading time estimation next to each article title",
-            "version": "1.5",
-            "entrypoint": "ReadingTime",
-            "type": "user",
-            "url": "https://framagit.org/Lapineige/FreshRSS_Extension-ReadingTime/",
             "method": "git",
             "directory": "."
         },
