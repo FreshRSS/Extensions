@@ -25,7 +25,7 @@
 				if (metrics == 'letters') {
 					reading_time.count = reading_time.flux_letters_count(flux_list[i], language);
 				} else {  // words
-					reading_time.count = reading_time.flux_words_count(flux_list[i], language);
+					reading_time.count = reading_time.flux_words_count(flux_list[i]);
 				}
 				reading_time.reading_time = reading_time.calc_read_time(reading_time.count, speed);
 
@@ -44,9 +44,7 @@
 			}
 		},
 
-		flux_words_count: function flux_words_count(flux, language) {
-			const segmenter = new Intl.Segmenter(language, { granularity: 'grapheme' });
-
+		flux_words_count: function flux_words_count(flux) {
 			// get textContent, from the article itself (not the header, not the bottom line):
 			reading_time.textContent = flux.querySelector('.flux_content .content').textContent;
 
@@ -55,7 +53,7 @@
 			reading_time.textContent = reading_time.textContent.replace(/[ ]{2,}/gi, ' '); // 2 or more space to 1
 			reading_time.textContent = reading_time.textContent.replace(/\n /, '\n'); // exclude newline with a start spacing
 
-			return [...segmenter.segment(reading_time.textContent.split(' '))].length;
+			return reading_time.textContent.split(' ').length;
 		},
 
 		flux_letters_count: function flux_letters_count(flux, language) {
