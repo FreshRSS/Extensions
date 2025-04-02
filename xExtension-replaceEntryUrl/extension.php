@@ -45,6 +45,7 @@ class replaceEntryUrlExtension extends Minz_Extension {
      * @throws FreshRSS_Context_Exception 
      */
     public static function processEntry(FreshRSS_Entry $entry): FreshRSS_Entry {
+      $old_hash = $entry->hash();
       $use_default_if_empty = FreshRSS_Context::userConf()->attributeBool('replaceEntryUrl_filterXPathContent') ?? self::GET_FULL_CONTENT;
       $allow_array = ""; 
       $allow_url_str = FreshRSS_Context::userConf()->attributeString('replaceEntryUrl_matchUrlKeyValues');
@@ -64,8 +65,6 @@ class replaceEntryUrlExtension extends Minz_Extension {
         return $entry;
       }
     
-
-    
       $link = $entry->link();
       $my_xpath = self::isUrlAllowed($link,$allow_url,$allow_array);
       
@@ -79,8 +78,8 @@ class replaceEntryUrlExtension extends Minz_Extension {
       }
       if($article != ""){
         $entry->_content ($article);
+        $entry->_hash($old_hash);
       }
-      
       return $entry;
     }
 
