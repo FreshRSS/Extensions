@@ -1,18 +1,3 @@
-Extension pour FreshRSS (<https://github.com/FreshRSS>)
-
-> **v1.6**
-
-Ajoute une estimation du temps de lecture à côté de chaque article.
-Fonctionne sur les affichages de bureau et mobile.
-
-S'installe comme toute les extensions, soit via l'outil intégré dans l'interface (icône des paramètres -> extensions) soit manuellement en copiant ce dépôt directement dans le dossier `extensions` de votre installation de FreshRSS.
-Aucune module externe. Une fois activée dans les préférences, l'extension doit fonctionner après avoir recharger la page.
-
-Un indicateur du temps de lecture doit s'afficher dans le nom du flux de chaque article.
-Pour le moment la vitesse de lecture est réglée manuellement à 300 mots/min. À changer si besoin ici: <https://framagit.org/Lapineige/FreshRSS_Extension-ReadingTime/blob/master/static/readingtime.js#L26>
-
----
-
 Extension for FressRSS (<https://github.com/FreshRSS>)
 
 > **v1.6**
