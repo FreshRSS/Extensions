@@ -60,7 +60,7 @@ final class ReadingTimeExtension extends Minz_Extension {
 
 	/**
 	 * @throws FreshRSS_Context_Exception
-	 * @throws Minz_ActionException
+	 * @throws Minz_ConfigurationParamException
 	 */
 	#[\Override]
 	public function handleConfigureAction(): void {
@@ -75,22 +75,22 @@ final class ReadingTimeExtension extends Minz_Extension {
 		}
 	}
 
-	/** @throws Minz_ActionException */
+	/** @throws Minz_ConfigurationParamException */
 	private function validateSpeed(int $speed): int {
 		if ($speed <= 0) {
-			throw new Minz_ActionException(_t('ext.reading_time.speed.invalid'), Minz_Request::actionName());
+			throw new Minz_ConfigurationParamException(_t('ext.reading_time.speed.invalid'));
 		}
 		return $speed;
 	}
 
-	/** @throws Minz_ActionException */
+	/** @throws Minz_ConfigurationParamException */
 	private function validateMetrics(string $metrics): string {
 		switch ($metrics) {
 			case 'words':
 			case 'letters':
 				return $metrics;
 			default:
-				throw new Minz_ActionException(_t('ext.reading_time.metrics.invalid'), Minz_Request::actionName());
+				throw new Minz_ConfigurationParamException(_t('ext.reading_time.metrics.invalid'));
 		}
 	}
 }
