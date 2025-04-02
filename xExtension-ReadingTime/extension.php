@@ -78,7 +78,7 @@ final class ReadingTimeExtension extends Minz_Extension {
 	/** @throws Minz_ConfigurationParamException */
 	private function validateSpeed(int $speed): int {
 		if ($speed <= 0) {
-			throw new Minz_ConfigurationParamException(_t('ext.reading_time.speed.invalid'));
+			throw new Minz_ConfigurationParamException('Reading speed must be greater than 0');
 		}
 		return $speed;
 	}
@@ -90,7 +90,7 @@ final class ReadingTimeExtension extends Minz_Extension {
 			case 'letters':
 				return $metrics;
 			default:
-				throw new Minz_ConfigurationParamException(_t('ext.reading_time.metrics.invalid'));
+				throw new Minz_ConfigurationParamException('Unsupported source metrics');
 		}
 	}
 }
