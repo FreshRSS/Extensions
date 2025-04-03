@@ -9,7 +9,7 @@ S'installe comme toute les extensions, soit via l'outil intégré dans l'interfa
 Aucune module externe. Une fois activée dans les préférences, l'extension doit fonctionner après avoir recharger la page.
 
 Un indicateur du temps de lecture doit s'afficher dans le nom du flux de chaque article.
-Pour le moment la vitesse de lecture est réglée manuellement à 300 mots/min. À changer si besoin ici: <https://framagit.org/Lapineige/FreshRSS_Extension-ReadingTime/blob/master/static/readingtime.js#L26>
+Vous pouvez définir la vitesse de lecture et la méthode de mesure du temps de lecture.
 
 ---
 
