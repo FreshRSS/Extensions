@@ -32,7 +32,7 @@ final class ReadingTimeExtension extends Minz_Extension {
 			FreshRSS_Context::userConf()->save();
 		}
 		$this->registerHook('js_vars', [$this, 'getParams']);
-		Minz_View::appendScript($this->getFileUrl('readingtime.js', 'js'));
+		Minz_View::appendScript($this->getFileUrl('readingtime.js'));
 	}
 
 	public function getSpeed(): int {
