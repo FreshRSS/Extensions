@@ -2,6 +2,7 @@
 
 return array(
 	'yt_videos' => array(
+		'autosize' => 'Taille automatique du lecteur',
 		'height' => 'Hauteur du lecteur',
 		'width' => 'Largeur du lecteur',
 		'updates' => 'Vous pouvez trouver la dernière mise à jour de l’extension sur ',
