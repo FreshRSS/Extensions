@@ -54,7 +54,7 @@ final class FreshExtension_shareByEmail_Controller extends Minz_ActionController
 
 		Minz_View::prependTitle(_t('shareByEmail.share.title') . ' · ');
 		if ($this->extension !== null) {
-			Minz_View::appendStyle($this->extension->getFileUrl('shareByEmail.css', 'css'));
+			Minz_View::appendStyle($this->extension->getFileUrl('shareByEmail.css'));
 		}
 		$this->view->_layout('simple');
 		$this->view->to = '';
