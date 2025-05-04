@@ -157,3 +157,7 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@LiangWei88](https://github.com/LiangWei88)
 
 * [ArticleSummary](https://github.com/LiangWei88/xExtension-ArticleSummary): A powerful article summarization plugin for FreshRSS that allows users to generate summaries using a language model API conforming to the OpenAI API specification.
+
+### By [@Rambomst](https://github.com/Rambomst)
+
+* [Custom Stylesheet](https://github.com/Rambomst/freshrss-extension-custom-stylesheet): This allows a user to add a custom stylesheet for personal styling tweaks.
