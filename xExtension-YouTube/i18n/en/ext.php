@@ -2,6 +2,7 @@
 
 return array(
 	'yt_videos' => array(
+		'autosize' => 'Player autosize',
 		'height' => 'Player height',
 		'width' => 'Player width',
 		'updates' => 'You can find the latest extension version at',
