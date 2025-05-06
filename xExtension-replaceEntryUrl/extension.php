@@ -118,7 +118,9 @@ class replaceEntryUrlExtension extends Minz_Extension {
       $nodes = $xpath->query($my_xpath);
       $mainContent = "";
       if ($nodes instanceof DOMNodeList && $nodes->length > 0) {
-        $mainContent = $doc->saveHTML($nodes->item(0));
+        foreach ($nodes as $node) {
+          $mainContent .= $doc->saveHTML($node); // Concatenate all node contents
+        }
       }
       elseif($use_default_if_empty)
       {
