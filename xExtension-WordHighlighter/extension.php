@@ -19,20 +19,20 @@ final class WordHighlighterExtension extends Minz_Extension
 		$this->registerTranslates();
 
 		// register CSS for WordHighlighter:
-		Minz_View::appendStyle($this->getFileUrl('style.css', 'css'));
+		Minz_View::appendStyle($this->getFileUrl('style.css'));
 
-		Minz_View::appendScript($this->getFileUrl('mark.min.js', 'js'), false, false, false);
+		Minz_View::appendScript($this->getFileUrl('mark.min.js'), cond: false, defer: false, async: false);
 
 		$current_user = Minz_Session::paramString('currentUser');
 
 		$staticPath = join_path($this->getPath(), 'static');
-		$configFileJs = join_path($staticPath, ('config.' . $current_user . '.js'));
+		$configFileJs = join_path($staticPath, 'config.' . $current_user . '.js');
 
 		if (file_exists($configFileJs)) {
-			Minz_View::appendScript($this->getFileUrl(('config.' . $current_user . '.js'), 'js'));
+			Minz_View::appendScript($this->getFileUrl('config.' . $current_user . '.js'));
 		}
 
-		Minz_View::appendScript($this->getFileUrl('word-highlighter.js', 'js'));
+		Minz_View::appendScript($this->getFileUrl('word-highlighter.js'));
 	}
 
 	#[\Override]
