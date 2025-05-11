@@ -13,7 +13,8 @@ final class QuickCollapseExtension extends Minz_Extension {
 	}
 
 	/**
-	 * @return array<string, string|array<string, string>>
+	 * @param array<mixed> $vars
+	 * @return array<mixed>
 	 */
 	public function jsVars(array $vars): array {
 		$vars['quick_collapse'] = [
