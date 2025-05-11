@@ -15,13 +15,14 @@ final class QuickCollapseExtension extends Minz_Extension {
 	/**
 	 * @return array<string, string|array<string, string>>
 	 */
-	public function jsVars(): array {
-		return [
+	public function jsVars(array $vars): array {
+		$vars['quick_collapse'] = [
 			'icon_url_in' => $this->getFileUrl('in.svg'),
 			'icon_url_out' => $this->getFileUrl('out.svg'),
 			'i18n' => [
 				'toggle_collapse' => _t('gen.js.toggle_collapse'),
-			],
+			]
 		];
+		return $vars;
 	}
 }
