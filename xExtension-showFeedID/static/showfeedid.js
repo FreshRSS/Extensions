@@ -1,38 +1,56 @@
 'use strict';
 
-const url = new URL(window.location);
-if (url.searchParams.get('c') === 'subscription') {
+window.addEventListener("load", function () {
+	// eslint-disable-next-line no-undef
+	const i18n = context.extensions.showfeedid_i18n;
+
 	const div = document.querySelector('h1 ~ div');
-	const button = document.createElement('Button');
+	const button = document.createElement('button');
 
 	button.classList.add('btn');
 	button.id = 'showFeedId';
-	button.innerHTML = '<img class="icon" src="../themes/icons/look.svg" /> Show IDs';
+	button.innerHTML = '<img class="icon" src="../themes/icons/look.svg" /> <span>' + i18n.show + '</span>';
+	if (location.href.includes('&error=1')) {
+		button.style.display = 'block';
+		button.style.marginTop = '1rem';
+	}
 	div.appendChild(button);
 
-	document.getElementById('showFeedId').addEventListener('click', function (e) {
+	const buttonText = button.querySelector('span');
+
+	button.addEventListener('click', function () {
+		if (document.querySelector('.feed-id, .cat-id')) {
+			buttonText.innerText = i18n.show;
+		} else {
+			buttonText.innerText = i18n.hide;
+		}
+
 		const feeds = document.querySelectorAll('li.item.feed');
 
-		let feedId;
-		let feedname_elem;
 		feeds.forEach(function (feed) {
-			feedId = feed.dataset.feedId;
-			feedname_elem = feed.getElementsByClassName('item-title')[0];
+			const feedId = feed.dataset.feedId;
+			const feedname_elem = feed.getElementsByClassName('item-title')[0];
 			if (feedname_elem) {
-				feedname_elem.innerHTML = feedname_elem.textContent + ' (ID: ' + feedId + ')';
+				if (!feedname_elem.querySelector('.feed-id')) {
+					feedname_elem.insertAdjacentHTML('beforeend', '<span class="feed-id"> (ID: ' + feedId + ')</span>');
+					return;
+				}
+				feedname_elem.querySelector('.feed-id').remove();
 			}
 		});
 
 		const cats = document.querySelectorAll('div.box > ul.box-content');
 
-		let catId;
-		let catname_elem;
 		cats.forEach(function (cat) {
-			catId = cat.dataset.catId;
-			catname_elem = cat.parentElement.querySelectorAll('div.box-title > h2')[0];
+			const catId = cat.dataset.catId;
+			const catname_elem = cat.parentElement.querySelectorAll('div.box-title > h2')[0];
 			if (catname_elem) {
-				catname_elem.innerHTML = catname_elem.textContent + ' (ID: ' + catId + ')';
+				if (!catname_elem.querySelector('.cat-id')) {
+					catname_elem.insertAdjacentHTML('beforeend', '<span class="cat-id"> (ID: ' + catId + ')</span>');
+					return;
+				}
+				catname_elem.querySelector('.cat-id').remove();
 			}
 		});
 	});
-}
+});

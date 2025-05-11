@@ -1,4 +1,4 @@
-Extension for FressRSS (<https://github.com/FreshRSS>)
+Extension for FreshRSS (<https://github.com/FreshRSS>)
 
 It helps to find the feed IDs of each feed.
 
