@@ -32,9 +32,9 @@
 		}
 
 		const toggleElem = document.getElementById('toggle-collapse');
-		toggleElem.title = context.extensions.i18n.toggle_collapse;
-		toggleElem.innerHTML = `<img class="icon uncollapse" src="${context.extensions.icon_url_out}" alt="↕" />`;
-		toggleElem.innerHTML += `<img class="icon collapse" src="${context.extensions.icon_url_in}" alt="✖" />`;
+		toggleElem.title = context.extensions.quick_collapse.i18n.toggle_collapse;
+		toggleElem.innerHTML = `<img class="icon uncollapse" src="${context.extensions.quick_collapse.icon_url_out}" alt="↕" />`;
+		toggleElem.innerHTML += `<img class="icon collapse" src="${context.extensions.quick_collapse.icon_url_in}" alt="✖" />`;
 
 		if (context.hide_posts) {
 			toggleElem.classList.add('collapsed');
