@@ -91,4 +91,7 @@
 }, {
 	"url": "https://github.com/LiangWei88/xExtension-ArticleSummary",
 	"type": "git"
+}, {
+	"url": "https://github.com/Niehztog/freshrss-af-readability",
+	"type": "git"
 }]
