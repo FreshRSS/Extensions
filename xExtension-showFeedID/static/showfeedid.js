@@ -10,7 +10,7 @@ window.addEventListener("load", function () {
 	button.classList.add('btn');
 	button.id = 'showFeedId';
 	button.innerHTML = '<img class="icon" src="../themes/icons/look.svg" /> <span>' + i18n.show + '</span>';
-	if (location.href.includes('&error=1')) {
+	if (new URLSearchParams(location.search).get('error')) {
 		button.style.display = 'block';
 		button.style.marginTop = '1rem';
 	}

@@ -13,8 +13,8 @@ final class ShowFeedIdExtension extends Minz_Extension {
 	}
 
 	/**
-	 * @param array<mixed> $vars
-	 * @return array<mixed>
+	 * @param array<string,mixed> $vars
+	 * @return array<string,mixed>
 	 */
 	public function jsVars(array $vars): array {
 		$vars['showfeedid_i18n'] = [
