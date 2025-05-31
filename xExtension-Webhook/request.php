@@ -18,6 +18,7 @@ declare(strict_types=1);
  *
  * @throws InvalidArgumentException When invalid parameters are provided
  * @throws JsonException When JSON encoding/decoding fails
+ * @throws Minz_PermissionDeniedException
  * @throws RuntimeException When cURL operations fail
  *
  * @return void
@@ -124,6 +125,7 @@ function configureHttpMethod(CurlHandle $ch, string $method): void {
  *
  * @throws JsonException When JSON processing fails
  * @throws InvalidArgumentException When unsupported body type is provided
+ * @throws Minz_PermissionDeniedException
  *
  * @return string|null Processed body content or null if no body needed
  */
@@ -183,6 +185,8 @@ function configureHeaders(array $headers, string $bodyType): array {
  * @param string|null $body Processed request body
  * @param string[] $headers Array of HTTP headers
  *
+ * @throws Minz_PermissionDeniedException
+ *
  * @return void
  */
 function logRequest(
@@ -217,6 +221,7 @@ function logRequest(
  * @param bool $logEnabled Whether logging is enabled
  *
  * @throws RuntimeException When cURL execution fails
+ * @throws Minz_PermissionDeniedException
  *
  * @return void
  */
@@ -244,6 +249,8 @@ function executeRequest(CurlHandle $ch, bool $logEnabled): void {
  * @param bool $logEnabled Whether logging is enabled
  * @param mixed $data Data to log (will be converted to string)
  *
+ * @throws Minz_PermissionDeniedException
+ *
  * @return void
  */
 function logWarning(bool $logEnabled, $data): void {
@@ -261,6 +268,8 @@ function logWarning(bool $logEnabled, $data): void {
  * @param bool $logEnabled Whether logging is enabled
  * @param mixed $data Data to log (will be converted to string)
  *
+ * @throws Minz_PermissionDeniedException
+ *
  * @return void
  */
 function logError(bool $logEnabled, $data): void {
@@ -276,6 +285,8 @@ function logError(bool $logEnabled, $data): void {
  * @param bool $logEnabled Whether logging is enabled
  * @param mixed $data Data to log
  *
+ * @throws Minz_PermissionDeniedException
+ *
  * @return void
  */
 function LOG_WARN(bool $logEnabled, $data): void {
@@ -288,6 +299,8 @@ function LOG_WARN(bool $logEnabled, $data): void {
  * @deprecated Use logError() instead
  * @param bool $logEnabled Whether logging is enabled
  * @param mixed $data Data to log
+ *
+ * @throws Minz_PermissionDeniedException
  *
  * @return void
  */

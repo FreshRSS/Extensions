@@ -5,8 +5,8 @@ declare(strict_types=1);
 <small>
 	<?= _t('ext.webhook.description') ?>
 </small>
-<form action="<?php echo _url('extension', 'configure', 'e', urlencode($this->getName())); ?>" method="post">
-	<input type="hidden" name="_csrf" value="<?php echo FreshRSS_Auth::csrfToken(); ?>" />
+<form action="<?= _url('extension', 'configure', 'e', urlencode($this->getName())) ?>" method="post">
+	<input type="hidden" name="_csrf" value="<?= FreshRSS_Auth::csrfToken() ?>" />
 
 	<fieldset>
 		<legend><?= _t('ext.webhook.event_settings') ?> ⚙️</legend>
@@ -16,7 +16,7 @@ declare(strict_types=1);
 			<div class="form-group">
 				<label class="group-name" for="keywords"><?= _t('ext.webhook.keywords') ?></label>
 				<div class="group-controls">
-					<textarea name="keywords" id="keywords"><?php echo $this->getKeywordsData(); ?></textarea>
+					<textarea name="keywords" id="keywords"><?= $this->getKeywordsData() ?></textarea>
 					<br />
 					<small>
 						<?= _t('ext.webhook.keywords_description') ?>
@@ -32,22 +32,22 @@ declare(strict_types=1);
 						<tr>
 							<td class="group">
 								<input type="checkbox" name="search_in_title" id="search_in_title" value="1"
-									<?= (bool)$this->getSystemConfigurationValue('search_in_title') ? 'checked' : '' ?>>
+									<?= FreshRSS_Context::userConf()->attributeBool('search_in_title') ? 'checked="checked"' : '' ?> />
 								<label for="search_in_title"><b><?= _t('ext.webhook.search_in_title_label') ?></b>&nbsp; </label>
 							</td>
 							<td class="group">
 								<input type="checkbox" name="search_in_feed" id="search_in_feed" value="1"
-									<?= (bool)$this->getSystemConfigurationValue('search_in_feed') ? 'checked' : '' ?>>
+									<?= FreshRSS_Context::userConf()->attributeBool('search_in_feed') ? 'checked="checked"' : '' ?> />
 								<label for="search_in_feed"><?= _t('ext.webhook.search_in_feed_label') ?></label>
 							</td>
 							<td class="group">
 								<input type="checkbox" name="search_in_authors" id="search_in_authors" value="1"
-									<?= (bool)$this->getSystemConfigurationValue('search_in_authors') ? 'checked' : '' ?>>
+									<?= FreshRSS_Context::userConf()->attributeBool('search_in_authors') ? 'checked="checked"' : '' ?> />
 								<label for="search_in_authors"><?= _t('ext.webhook.search_in_authors_label') ?></label>
 							</td>
 							<td class="group">
 								<input type="checkbox" name="search_in_content" id="search_in_content" value="1"
-									<?= (bool)$this->getSystemConfigurationValue('search_in_content') ? 'checked' : '' ?>>
+									<?= FreshRSS_Context::userConf()->attributeBool('search_in_content') ? 'checked="checked"' : '' ?> />
 								<label for="search_in_content"><?= _t('ext.webhook.search_in_content_label') ?></label>
 							</td>
 						</tr>
@@ -59,7 +59,7 @@ declare(strict_types=1);
 				<label class="group-name" for="mark_as_read"><?= _t('ext.webhook.mark_as_read') ?></label>
 				<div class="group-controls">
 					<input type="checkbox" name="mark_as_read" id="mark_as_read" value="1"
-						<?= (bool)$this->getSystemConfigurationValue('mark_as_read') ? 'checked' : '' ?>>
+						<?= FreshRSS_Context::userConf()->attributeBool('mark_as_read') ? 'checked="checked"' : '' ?> />
 				</div>
 			</div>
 
@@ -78,14 +78,14 @@ declare(strict_types=1);
 				<div class="group-controls">
 					<select id="webhook_method" name="webhook_method">
 						<?php
-						$currentMethod = $this->getSystemConfigurationValue('webhook_method') ?? $this->webhook_method->value;
+						$currentMethod = FreshRSS_Context::userConf()->attributeString('webhook_method') ?? $this->webhook_method->value;
 						$supportedMethods = [HTTP_METHOD::POST, HTTP_METHOD::GET, HTTP_METHOD::PUT];
 						foreach ($supportedMethods as $method): ?>
 							<option value="<?= $method->value ?>" <?= $currentMethod === $method->value ? 'selected' : '' ?>><?= $method->value ?></option>
 						<?php endforeach; ?>
 					</select>
 					<input type="text" name="webhook_url" id="webhook_url"
-						value="<?= $this->getWebhookUrl() ?>"></input>
+						value="<?= $this->getWebhookUrl() ?>" />
 				</div>
 			</div>
 
@@ -190,8 +190,8 @@ declare(strict_types=1);
 	<!-- ---------------------[ SUBMIT & CANCEL ]-------------------------------------- -->
 	<div class="form-group form-actions">
 		<div class="group-controls">
-			<button type="submit" class="btn btn-important"><?php echo _t('gen.action.submit'); ?></button>
-			<button type="reset" class="btn"><?php echo _t('gen.action.cancel'); ?></button>
+			<button type="submit" class="btn btn-important"><?= _t('gen.action.submit') ?></button>
+			<button type="reset" class="btn"><?= _t('gen.action.cancel') ?></button>
 			<button type="menu" class="btn"><?= _t('ext.webhook.save_and_send_test_req') ?></button>
 		</div>
 	</div>

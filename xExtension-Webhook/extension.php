@@ -110,6 +110,7 @@ class WebhookExtension extends Minz_Extension {
 	 * sends a test webhook request.
 	 *
 	 * @return void
+	 * @throws Minz_PermissionDeniedException
 	 */
 	public function handleConfigureAction(): void {
 		$this->registerTranslates();
@@ -164,6 +165,9 @@ class WebhookExtension extends Minz_Extension {
 	 *
 	 * @param FreshRSS_Entry $entry The RSS entry to process
 	 *
+	 * @throws FreshRSS_Context_Exception
+	 * @throws Minz_PermissionDeniedException
+	 *
 	 * @return FreshRSS_Entry The processed entry (potentially marked as read)
 	 */
 	public function processArticle($entry): FreshRSS_Entry {
@@ -171,19 +175,19 @@ class WebhookExtension extends Minz_Extension {
 			return $entry;
 		}
 
-		if ((bool)$this->getSystemConfigurationValue("ignore_updated") && $entry->isUpdated()) {
+		if (FreshRSS_Context::userConf()->attributeBool('ignore_updated') && $entry->isUpdated()) {
 			logWarning(true, "⚠️ ignore_updated: " . $entry->link() . " ♦♦ " . $entry->title());
 			return $entry;
 		}
 
-		$searchInTitle = (bool)($this->getSystemConfigurationValue("search_in_title") ?? false);
-		$searchInFeed = (bool)($this->getSystemConfigurationValue("search_in_feed") ?? false);
-		$searchInAuthors = (bool)($this->getSystemConfigurationValue("search_in_authors") ?? false);
-		$searchInContent = (bool)($this->getSystemConfigurationValue("search_in_content") ?? false);
+		$searchInTitle = FreshRSS_Context::userConf()->attributeBool('search_in_title') ?? false;
+		$searchInFeed = FreshRSS_Context::userConf()->attributeBool('search_in_feed') ?? false;
+		$searchInAuthors = FreshRSS_Context::userConf()->attributeBool('search_in_authors') ?? false;
+		$searchInContent = FreshRSS_Context::userConf()->attributeBool('search_in_content') ?? false;
 
-		$patterns = $this->getSystemConfigurationValue("keywords") ?? [];
-		$markAsRead = (bool)($this->getSystemConfigurationValue("mark_as_read") ?? false);
-		$logsEnabled = (bool)($this->getSystemConfigurationValue("enable_logging") ?? false);
+		$patterns = FreshRSS_Context::userConf()->attributeArray('keywords') ?? [];
+		$markAsRead = FreshRSS_Context::userConf()->attributeBool('mark_as_read') ?? false;
+		$logsEnabled = FreshRSS_Context::userConf()->attributeBool('enable_logging') ?? false;
 		$this->logsEnabled = $logsEnabled;
 
 		// Validate patterns
@@ -257,11 +261,13 @@ class WebhookExtension extends Minz_Extension {
 	 * @param FreshRSS_Entry $entry The RSS entry to send
 	 * @param string $additionalLog Additional context for logging
 	 *
+	 * @throws Minz_PermissionDeniedException
+	 *
 	 * @return void
 	 */
 	private function sendArticle(FreshRSS_Entry $entry, string $additionalLog = ""): void {
 		try {
-			$bodyStr = (string)$this->getSystemConfigurationValue("webhook_body");
+			$bodyStr = FreshRSS_Context::userConf()->attributeString('webhook_body');
 
 			// Replace placeholders with actual values
 			$replacements = [
@@ -278,12 +284,12 @@ class WebhookExtension extends Minz_Extension {
 			$bodyStr = str_replace(array_keys($replacements), array_values($replacements), $bodyStr);
 
 			sendReq(
-				(string)$this->getSystemConfigurationValue("webhook_url"),
-				(string)$this->getSystemConfigurationValue("webhook_method"),
-				(string)$this->getSystemConfigurationValue("webhook_body_type"),
+				FreshRSS_Context::userConf()->attributeString('webhook_url'),
+				FreshRSS_Context::userConf()->attributeString('webhook_method'),
+				FreshRSS_Context::userConf()->attributeString('webhook_body_type'),
 				$bodyStr,
-				(array)$this->getSystemConfigurationValue("webhook_headers"),
-				(bool)$this->getSystemConfigurationValue("enable_logging"),
+				FreshRSS_Context::userConf()->attributeArray('webhook_headers'),
+				FreshRSS_Context::userConf()->attributeBool('enable_logging'),
 				$additionalLog,
 			);
 		} catch (Throwable $err) {
@@ -348,11 +354,13 @@ class WebhookExtension extends Minz_Extension {
 	 * Returns the configured keywords as a newline-separated string
 	 * for display in the configuration form.
 	 *
+	 * @throws FreshRSS_Context_Exception
+	 *
 	 * @return string Keywords separated by newlines
 	 */
 	public function getKeywordsData(): string {
-		$keywords = $this->getSystemConfigurationValue("keywords");
-		return implode(PHP_EOL, is_array($keywords) ? $keywords : []);
+		$keywords = FreshRSS_Context::userConf()->attributeArray('keywords') ?? [];
+		return implode(PHP_EOL, $keywords);
 	}
 
 	/**
@@ -361,10 +369,12 @@ class WebhookExtension extends Minz_Extension {
 	 * Returns the configured HTTP headers as a newline-separated string
 	 * for display in the configuration form.
 	 *
+	 * @throws FreshRSS_Context_Exception
+	 *
 	 * @return string HTTP headers separated by newlines
 	 */
 	public function getWebhookHeaders(): string {
-		$headers = $this->getSystemConfigurationValue("webhook_headers");
+		$headers = FreshRSS_Context::userConf()->attributeArray('webhook_headers');
 		return implode(
 			PHP_EOL,
 			is_array($headers) ? $headers : ($this->webhook_headers ?? []),
@@ -376,10 +386,12 @@ class WebhookExtension extends Minz_Extension {
 	 *
 	 * Returns the configured webhook URL or the default if none is set.
 	 *
+	 * @throws FreshRSS_Context_Exception
+	 *
 	 * @return string The webhook URL
 	 */
 	public function getWebhookUrl(): string {
-		return (string)($this->getSystemConfigurationValue("webhook_url") ?? $this->webhook_url);
+		return FreshRSS_Context::userConf()->attributeString('webhook_url') ?? $this->webhook_url;
 	}
 
 	/**
@@ -387,11 +399,13 @@ class WebhookExtension extends Minz_Extension {
 	 *
 	 * Returns the configured webhook body template or the default if none is set.
 	 *
+	 * @throws FreshRSS_Context_Exception
+	 *
 	 * @return string The webhook body template
 	 */
 	public function getWebhookBody(): string {
-		$body = $this->getSystemConfigurationValue("webhook_body");
-		return (!$body || $body === "") ? $this->webhook_body : (string)$body;
+		$body = FreshRSS_Context::userConf()->attributeString('webhook_body');
+		return ($body === null || $body === '') ? $this->webhook_body : $body;
 	}
 
 	/**
@@ -399,10 +413,12 @@ class WebhookExtension extends Minz_Extension {
 	 *
 	 * Returns the configured body type (json/form) or the default if none is set.
 	 *
+	 * @throws FreshRSS_Context_Exception
+	 *
 	 * @return string The webhook body type
 	 */
 	public function getWebhookBodyType(): string {
-		return (string)($this->getSystemConfigurationValue("webhook_body_type") ?? $this->webhook_body_type->value);
+		return FreshRSS_Context::userConf()->attributeString('webhook_body_type') ?? $this->webhook_body_type->value;
 	}
 }
 
@@ -412,6 +428,8 @@ class WebhookExtension extends Minz_Extension {
  * @deprecated Use logWarning() instead
  * @param bool $logEnabled Whether logging is enabled
  * @param mixed $data Data to log
+ *
+ * @throws Minz_PermissionDeniedException
  *
  * @return void
  */
@@ -425,6 +443,8 @@ function _LOG(bool $logEnabled, $data): void {
  * @deprecated Use logError() instead
  * @param bool $logEnabled Whether logging is enabled
  * @param mixed $data Data to log
+ *
+ * @throws Minz_PermissionDeniedException
  *
  * @return void
  */
