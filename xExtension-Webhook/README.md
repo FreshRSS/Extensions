@@ -36,20 +36,24 @@ A powerful FreshRSS extension that automatically sends webhook notifications whe
 2. Configure the following settings:
 
 #### Keywords
+
 Enter keywords to match against RSS entries (one per line):
-```
+
+```text
 breaking news
 security alert
 your-project-name
 ```
 
 #### Search Options
+
 - **Search in Title**: Match keywords in article titles
 - **Search in Feed**: Match keywords in feed names
-- **Search in Authors**: Match keywords in author names  
+- **Search in Authors**: Match keywords in author names
 - **Search in Content**: Match keywords in article content
 
 #### Webhook Settings
+
 - **Webhook URL**: Your webhook endpoint URL
 - **HTTP Method**: Choose from GET, POST, PUT, DELETE, etc.
 - **Body Type**: JSON or Form-encoded
@@ -88,6 +92,7 @@ Customize the webhook payload using placeholders:
 ## 🎯 Use Cases
 
 ### Discord Webhook
+
 ```json
 {
     "content": "New article: **__TITLE__**",
@@ -104,6 +109,7 @@ Customize the webhook payload using placeholders:
 ```
 
 ### Slack Webhook
+
 ```json
 {
     "text": "New article from __FEED__",
@@ -117,6 +123,7 @@ Customize the webhook payload using placeholders:
 ```
 
 ### Custom API Integration
+
 ```json
 {
     "event": "new_article",
@@ -134,13 +141,15 @@ Customize the webhook payload using placeholders:
 The extension supports both regex patterns and simple string matching:
 
 ### Regex Patterns
-```
+
+```text
 /security.*/i
 /\b(urgent|critical)\b/i
 ```
 
 ### Simple Strings
-```
+
+```text
 breaking news
 security alert
 ```
@@ -148,19 +157,23 @@ security alert
 ## 🛠️ Advanced Configuration
 
 ### Custom Headers
+
 Add authentication or custom headers:
-```
+
+```text
 Authorization: Bearer your-token-here
 X-Custom-Header: custom-value
 User-Agent: FreshRSS-Webhook/1.0
 ```
 
 ### Error Handling
+
 - Failed webhooks are logged for debugging
 - Network timeouts are handled gracefully
 - Invalid configurations are validated
 
 ### Performance
+
 - Only sends webhooks when patterns match
 - Efficient pattern matching with fallbacks
 - Minimal impact on RSS processing
@@ -193,6 +206,7 @@ Enable logging in the extension settings to see detailed information about:
 ## 📝 Changelog
 
 ### Version 0.1.1
+
 - Initial release
 - Automated webhook notifications
 - Pattern matching in multiple fields
