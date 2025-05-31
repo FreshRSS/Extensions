@@ -77,7 +77,7 @@ declare(strict_types=1);
 				<label class="group-name" for="webhook_url">Method / URL:</label>
 				<div class="group-controls">
 					<select id="webhook_method" name="webhook_method">
-						<?php 
+						<?php
 						$currentMethod = $this->getSystemConfigurationValue('webhook_method') ?? $this->webhook_method->value;
 						$supportedMethods = [HTTP_METHOD::POST, HTTP_METHOD::GET, HTTP_METHOD::PUT];
 						foreach ($supportedMethods as $method): ?>
@@ -190,7 +190,7 @@ declare(strict_types=1);
 	<!-- ---------------------[ SUBMIT & CANCEL ]-------------------------------------- -->
 	<div class="form-group form-actions">
 		<div class="group-controls">
-            <button type="submit" class="btn btn-important"><?php echo _t('gen.action.submit'); ?></button>
+			<button type="submit" class="btn btn-important"><?php echo _t('gen.action.submit'); ?></button>
 			<button type="reset" class="btn"><?php echo _t('gen.action.cancel'); ?></button>
 			<button type="menu" class="btn"><?= _t('ext.webhook.save_and_send_test_req') ?></button>
 		</div>
