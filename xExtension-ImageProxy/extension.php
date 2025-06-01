@@ -128,7 +128,11 @@ final class ImageProxyExtension extends Minz_Extension {
 
 		$doc = new DOMDocument();
 		libxml_use_internal_errors(true);	// prevent tag soup errors from showing
-		$doc->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'));
+		$content = mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8');
+		if (!is_string($content)) {
+			return '';
+		}
+		$doc->loadHTML($content);
 		$imgs = $doc->getElementsByTagName('img');
 		foreach ($imgs as $img) {
 			if (!($img instanceof DOMElement)) {
