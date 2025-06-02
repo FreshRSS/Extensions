@@ -2,7 +2,7 @@
 	"name": "ShowFeedID",
 	"author": "math-GH, Inverle",
 	"description": "Show the ID of feed and category",
-	"version": "0.4.0",
+	"version": "0.4.1",
 	"entrypoint": "ShowFeedID",
 	"type": "user"
 }
