@@ -1,0 +1,89 @@
+<?php
+	declare(strict_types=1);
+	/** @var ImageCamoExtension $this */
+?>
+<div class="gocamo-security-notice">
+	<span class="icon">⚠️</span>
+	<strong><?= _t('ext.imagecamo.security_notice_title') ?>:</strong>
+	<?= _t('ext.imagecamo.security_notice_text') ?>
+</div>
+
+<form action="<?= _url('extension', 'configure', 'e', urlencode($this->getName())) ?>" method="post">
+	<input type="hidden" name="_csrf" value="<?= FreshRSS_Auth::csrfToken() ?>" />
+
+	<div class="form-group">
+		<label class="group-name" for="camo_proxy_url"><?= _t('ext.imagecamo.proxy_url') ?></label>
+		<div class="group-controls">
+			<input type="url" name="camo_proxy_url" id="camo_proxy_url"
+				value="<?= htmlspecialchars(FreshRSS_Context::userConf()->attributeString('camo_proxy_url') ?? '', ENT_COMPAT, 'UTF-8') ?>"
+				placeholder="https://your-camo-instance.example.com" required>
+			<div class="gocamo-help"><?= _t('ext.imagecamo.proxy_url_help') ?></div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="group-name" for="camo_hmac_key"><?= _t('ext.imagecamo.hmac_key') ?></label>
+		<div class="group-controls">
+			<input type="password" name="camo_hmac_key" id="camo_hmac_key"
+				value="<?= htmlspecialchars(FreshRSS_Context::userConf()->attributeString('camo_hmac_key') ?? '', ENT_COMPAT, 'UTF-8') ?>"
+				placeholder="Your HMAC key for the camo server" required>
+			<div class="gocamo-help"><?= _t('ext.imagecamo.hmac_key_help') ?></div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="group-name" for="camo_encoding"><?= _t('ext.imagecamo.encoding') ?></label>
+		<div class="group-controls">
+			<select name="camo_encoding" id="camo_encoding">
+				<option value="base64" <?= (FreshRSS_Context::userConf()->attributeString('camo_encoding') === 'base64') ? 'selected' : '' ?>>Base64 (<?= _t('ext.imagecamo.encoding_base64_desc') ?>)</option>
+				<option value="hex" <?= (FreshRSS_Context::userConf()->attributeString('camo_encoding') === 'hex') ? 'selected' : '' ?>>Hex (<?= _t('ext.imagecamo.encoding_hex_desc') ?>)</option>
+			</select>
+			<div class="gocamo-help"><?= _t('ext.imagecamo.encoding_help') ?></div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="group-name" for="camo_scheme_http"><?= _t('ext.imagecamo.scheme_http') ?></label>
+		<div class="group-controls">
+			<input type="checkbox" name="camo_scheme_http" id="camo_scheme_http" value="1"
+				<?= FreshRSS_Context::userConf()->attributeBool('camo_scheme_http') ? 'checked' : '' ?>>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="group-name" for="camo_scheme_https"><?= _t('ext.imagecamo.scheme_https'); ?></label>
+		<div class="group-controls">
+			<input type="checkbox" name="camo_scheme_https" id="camo_scheme_https" value="1"
+				<?= FreshRSS_Context::userConf()->attributeBool('camo_scheme_https') ? 'checked' : '' ?>>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="group-name" for="camo_scheme_default"><?= _t('ext.imagecamo.scheme_default'); ?></label>
+		<div class="group-controls">
+			<select name="camo_scheme_default" id="camo_scheme_default">
+				<option value="<?= htmlspecialchars(FreshRSS_Context::userConf()->attributeString('camo_scheme_default') ?? '', ENT_COMPAT, 'UTF-8') ?>" selected="selected"><?=
+					htmlspecialchars(FreshRSS_Context::userConf()->attributeString('camo_scheme_default') ?? '', ENT_COMPAT, 'UTF-8') ?></option>
+				<option value="-">-</option>
+				<option value="auto">auto</option>
+				<option value="http">http</option>
+				<option value="https">https</option>
+			</select>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="group-name" for="camo_scheme_include"><?= _t('ext.imagecamo.scheme_include'); ?></label>
+		<div class="group-controls">
+			<input type="checkbox" name="camo_scheme_include" id="camo_scheme_include" value="1"
+				<?= FreshRSS_Context::userConf()->attributeBool('camo_scheme_include') ? 'checked' : '' ?>>
+		</div>
+	</div>
+
+	<div class="form-group form-actions">
+		<div class="group-controls">
+			<button type="submit" class="btn btn-important"><?= _t('gen.action.submit') ?></button>
+			<button type="reset" class="btn"><?= _t('gen.action.cancel') ?></button>
+		</div>
+	</div>
+</form>
