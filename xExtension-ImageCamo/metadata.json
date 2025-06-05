@@ -1,0 +1,8 @@
+{
+	"name": "Image Camo Proxy",
+	"author": "Jade Ellis",
+	"description": "Proxy images using a camo proxy instance for secure image delivery without mixed content warnings.",
+	"version": "1.0.0",
+	"entrypoint": "ImageCamo",
+	"type": "user"
+}
