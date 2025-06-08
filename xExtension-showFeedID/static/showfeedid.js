@@ -4,7 +4,12 @@ window.addEventListener("load", function () {
 	// eslint-disable-next-line no-undef
 	const i18n = context.extensions.showfeedid_i18n;
 
-	const div = document.querySelector('h1 ~ div');
+	let div = document.querySelector('h1 ~ div');
+	if (div.classList.contains('drop-section')) {
+		div = document.createElement('div');
+		document.querySelector('h1').after(div);
+	}
+
 	const button = document.createElement('a');
 
 	button.classList.add('btn');
