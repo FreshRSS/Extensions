@@ -161,3 +161,7 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@Niehztog](https://github.com/Niehztog)
 
 * [Article Full Text](https://github.com/Niehztog/freshrss-af-readability): Fetches full article contents and adds them to feed items by using [Fivefilters Readability.php library](https://github.com/fivefilters/readability.php) (no docker containers required).
+
+### By [@tryallthethings](https://github.com/tryallthethings)
+
+* [FreshVibes](https://github.com/tryallthethings/freshvibes): A fully customizable iGoogle / Netvibes-like dashboard view
