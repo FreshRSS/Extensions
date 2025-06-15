@@ -167,6 +167,17 @@
             "directory": "xExtension-FixedNavMenu"
         },
         {
+            "name": "Fresh Vibes View",
+            "author": "Try all the things",
+            "description": "Provides a Netvibes-like dashboard view with draggable feed containers.",
+            "version": "1.5.0",
+            "entrypoint": "FreshVibesView",
+            "type": "user",
+            "url": "https://github.com/tryallthethings/freshvibes",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "FreshRss FlareSolverr",
             "author": "James Ravenscroft",
             "description": "Use a Flaresolverr instance to bypass cloudflare security checks",
