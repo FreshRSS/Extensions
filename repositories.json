@@ -97,4 +97,7 @@
 }, {
 	"url": "https://github.com/tryallthethings/freshvibes",
 	"type": "git"
+}, {
+	"url": "https://github.com/pe1uca/xExtension-RateLimiter",
+	"type": "git"
 }]
