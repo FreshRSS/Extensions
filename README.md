@@ -165,3 +165,7 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@tryallthethings](https://github.com/tryallthethings)
 
 * [FreshVibes](https://github.com/tryallthethings/freshvibes): A fully customizable iGoogle / Netvibes-like dashboard view
+
+### By [@pe1uca](https://github.com/pe1uca)  
+
+* [Rate limiter](https://github.com/pe1uca/xExtension-RateLimiter/): Prevents FreshRSS from making too many requests to the same site in a defined amount of time.  
