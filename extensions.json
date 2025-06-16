@@ -170,7 +170,7 @@
             "name": "Fresh Vibes View",
             "author": "Try all the things",
             "description": "Provides a Netvibes-like dashboard view with draggable feed containers.",
-            "version": "1.5.0",
+            "version": "1.8.0",
             "entrypoint": "FreshVibesView",
             "type": "user",
             "url": "https://github.com/tryallthethings/freshvibes",
@@ -341,6 +341,17 @@
             "url": "https://github.com/DevonHess/FreshRSS-Extensions",
             "method": "git",
             "directory": "xExtension-RssBridge"
+        },
+        {
+            "name": "RateLimitFeeds",
+            "author": "pe1uca",
+            "description": "Rate limit feed updates per site.",
+            "version": "3.2.0",
+            "entrypoint": "RateLimiter",
+            "type": "system",
+            "url": "https://github.com/pe1uca/xExtension-RateLimiter",
+            "method": "git",
+            "directory": "."
         },
         {
             "name": "Readable",
