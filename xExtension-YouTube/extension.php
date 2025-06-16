@@ -3,8 +3,6 @@
 /**
  * Class YouTubeExtension
  *
- * Latest version can be found at https://github.com/kevinpapst/freshrss-youtube
- *
  * @author Kevin Papst
  */
 final class YouTubeExtension extends Minz_Extension
@@ -22,6 +20,10 @@ final class YouTubeExtension extends Minz_Extension
 	 */
 	private bool $showContent = false;
 	/**
+	 * Wheter channel icons should be automatically downloaded and set for feeds
+	 */
+	private bool $downloadIcons = false;
+	/**
 	 * Switch to enable the Youtube No-Cookie domain
 	 */
 	private bool $useNoCookie = false;
@@ -34,7 +36,69 @@ final class YouTubeExtension extends Minz_Extension
 	{
 		$this->registerHook('entry_before_display', [$this, 'embedYouTubeVideo']);
 		$this->registerHook('check_url_before_add', [self::class, 'convertYoutubeFeedUrl']);
+		$this->registerHook('custom_favicon_hash', [$this, 'iconHash']);
+		$this->registerHook('feed_before_insert', [$this, 'setIconBeforeInsert']);
 		$this->registerTranslates();
+	}
+
+	public function iconHash(FreshRSS_Feed $feed): ?string {
+		if ($feed->attributeString('customFaviconExt') !== 'YouTube Video Feed') {
+			return null;
+		}
+		return 'yt' . $feed->website() . $feed->proxyParam();
+	}
+
+	public function setIconBeforeInsert(FreshRSS_Feed $feed): FreshRSS_Feed {
+		$this->loadConfigValues();
+
+		if (!$this->downloadIcons || !str_starts_with($feed->website(), 'https://www.youtube.com/')) {
+			return $feed;
+		}
+
+		require_once(LIB_PATH . '/favicons.php');
+
+		$url = $feed->website();
+		$html = downloadHttp($url, $feed->attributeArray('curl_params') ?? []);
+
+		$dom = new DOMDocument();
+
+		if ($html == '' || !@$dom->loadHTML($html, LIBXML_NONET | LIBXML_NOERROR | LIBXML_NOWARNING)) {
+			Minz_Log::warning('[xExtension-YouTube] fail while downloading icon for feed "' . $feed->name(true) . '": failed to load HTML');
+			return $feed;
+		}
+
+		$xpath = new DOMXPath($dom);
+		$iconElem = $xpath->query('//meta[@name="twitter:image"]');
+		if ($iconElem->length === 0) {
+			Minz_Log::warning('[xExtension-YouTube] fail while downloading icon for feed "' . $feed->name(true) . '": icon URL couldn\'t be found');
+			return $feed;
+		}
+		$iconUrl = $iconElem->item(0)->getAttribute('content');
+
+		$contents = downloadHttp($iconUrl, $feed->attributeArray('curl_params') ?? []);
+		if ($contents == '') {
+			Minz_Log::warning('[xExtension-YouTube] fail while downloading icon for feed "' . $feed->name(true) . '": empty contents');
+			return $feed;
+		}
+
+		$oldCustom = $feed->attributeBoolean('customFavicon');
+		$oldHash = $feed->hashFavicon();
+
+		try {
+			$feed->setCustomFavicon($contents, extName: 'YouTube Video Feed', disallowDelete: true);
+		} catch (FreshRSS_UnsupportedImageFormat_Exception $_) {
+			Minz_Log::warning('[xExtension-YouTube] failed to set custom favicon for feed "' . $feed->name(true) . '": unsupported image format');
+			return $feed;
+		} catch (FreshRSS_Feed_Exception $_) {
+			Minz_Log::warning('[xExtension-YouTube] failed to set custom favicon for feed "' . $feed->name(true) . '": feed error');
+			return $feed;
+		}
+
+		if ($oldCustom) {
+			FreshRSS_Feed::deleteFavicon($oldHash);
+		}
+
+		return $feed;
 	}
 
 	public static function convertYoutubeFeedUrl(string $url): string
@@ -78,6 +142,11 @@ final class YouTubeExtension extends Minz_Extension
 			$this->showContent = $showContent;
 		}
 
+		$downloadIcons = FreshRSS_Context::userConf()->attributeBool('yt_download_channel_icons');
+		if ($downloadIcons !== null) {
+			$this->downloadIcons = $downloadIcons;
+		}
+
 		$noCookie = FreshRSS_Context::userConf()->attributeBool('yt_nocookie');
 		if ($noCookie !== null) {
 			$this->useNoCookie = $noCookie;
@@ -109,6 +178,15 @@ final class YouTubeExtension extends Minz_Extension
 	public function isShowContent(): bool
 	{
 		return $this->showContent;
+	}
+
+	/**
+	 * Returns whether the automatic icon download option is enabled.
+	 * You have to call loadConfigValues() before this one, otherwise you get default values.
+	 */
+	public function isDownloadIcons(): bool
+	{
+		return $this->downloadIcons;
 	}
 
 	/**
@@ -255,6 +333,7 @@ final class YouTubeExtension extends Minz_Extension
 			FreshRSS_Context::userConf()->_attribute('yt_player_height', Minz_Request::paramInt('yt_height'));
 			FreshRSS_Context::userConf()->_attribute('yt_player_width', Minz_Request::paramInt('yt_width'));
 			FreshRSS_Context::userConf()->_attribute('yt_show_content', Minz_Request::paramBoolean('yt_show_content'));
+			FreshRSS_Context::userConf()->_attribute('yt_download_channel_icons', Minz_Request::paramBoolean('yt_download_channel_icons'));
 			FreshRSS_Context::userConf()->_attribute('yt_nocookie', Minz_Request::paramInt('yt_nocookie'));
 			FreshRSS_Context::userConf()->save();
 		}

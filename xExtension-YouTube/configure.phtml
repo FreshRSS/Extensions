@@ -24,6 +24,13 @@ declare(strict_types=1);
 		</div>
 
 		<div class="group-controls">
+			<label class="checkbox" for="yt_download_channel_icons">
+				<input type="checkbox" id="yt_download_channel_icons" name="yt_download_channel_icons" value="1" <?php echo $this->isDownloadIcons() ? 'checked' : ''; ?>>
+				<?php echo _t('ext.yt_videos.download_channel_icons'); ?>
+			</label>
+		</div>
+
+		<div class="group-controls">
 			<label class="checkbox" for="yt_nocookie">
 				<input type="checkbox" id="yt_nocookie" name="yt_nocookie" value="1" <?php echo $this->isUseNoCookieDomain() ? 'checked' : ''; ?>>
 				<?php echo _t('ext.yt_videos.use_nocookie'); ?>
@@ -38,8 +45,3 @@ declare(strict_types=1);
 		</div>
 	</div>
 </form>
-
-<p>
-	<?php echo _t('ext.yt_videos.updates'); ?>
-	<a href="https://github.com/kevinpapst/freshrss-youtube" target="_blank">GitHub</a>.
-</p>
