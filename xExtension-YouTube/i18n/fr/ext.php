@@ -5,7 +5,7 @@ return array(
 		'height' => 'Hauteur du lecteur',
 		'width' => 'Largeur du lecteur',
 		'show_content' => 'Afficher le contenu du flux',
-		'download_channel_icons' => 'Automatically download and set channel icons for feeds',
+		'download_channel_icons' => 'Utiliser automatiquement les icônes des chaînes',
 		'use_nocookie' => 'Utiliser le domaine www.youtube-nocookie.com pour éviter les cookies',
 	),
 );
