@@ -48,6 +48,10 @@ final class YouTubeExtension extends Minz_Extension
 		return 'yt' . $feed->website() . $feed->proxyParam();
 	}
 
+	/**
+	 * @throws FreshRSS_Context_Exception
+	 * @throws Minz_PermissionDeniedException
+	 */
 	public function setIconBeforeInsert(FreshRSS_Feed $feed): FreshRSS_Feed {
 		$this->loadConfigValues();
 
@@ -69,7 +73,8 @@ final class YouTubeExtension extends Minz_Extension
 
 		$xpath = new DOMXPath($dom);
 		$iconElem = $xpath->query('//meta[@name="twitter:image"]');
-		if ($iconElem->length === 0) {
+
+		if ($iconElem === false || $iconElem->length === 0) {
 			Minz_Log::warning('[xExtension-YouTube] fail while downloading icon for feed "' . $feed->name(true) . '": icon URL couldn\'t be found');
 			return $feed;
 		}
@@ -95,7 +100,7 @@ final class YouTubeExtension extends Minz_Extension
 		}
 
 		if ($oldCustom) {
-			FreshRSS_Feed::deleteFavicon($oldHash);
+			FreshRSS_Feed::faviconDelete($oldHash);
 		}
 
 		return $feed;
