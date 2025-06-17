@@ -7,6 +7,8 @@
  */
 final class YouTubeExtension extends Minz_Extension
 {
+	public const EXT_NAME = 'YouTube Video Feed';
+
 	/**
 	 * Video player width
 	 */
@@ -59,7 +61,13 @@ final class YouTubeExtension extends Minz_Extension
 			return $feed;
 		}
 
-		require_once(LIB_PATH . '/favicons.php');
+		// Return early if the icon had already been downloaded before
+		$oldAttributes = $feed->attributes();
+		if (file_exists($feed->setCustomFavicon(extName: self::EXT_NAME, disallowDelete: true))) {
+			Minz_Log::debug('[xExtension-YouTube] icon had already been downloaded before for feed "' . $feed->name(true) . '" - returning early!');
+			return $feed;
+		}
+		$feed->_attributes($oldAttributes);
 
 		$url = $feed->website();
 		/** @var $curlOptions array<int,int|bool|string> */
@@ -93,21 +101,14 @@ final class YouTubeExtension extends Minz_Extension
 			return $feed;
 		}
 
-		$oldCustom = $feed->attributeBoolean('customFavicon');
-		$oldHash = $feed->hashFavicon();
-
 		try {
-			$feed->setCustomFavicon($contents, extName: 'YouTube Video Feed', disallowDelete: true);
+			$feed->setCustomFavicon($contents, extName: self::EXT_NAME, disallowDelete: true);
 		} catch (FreshRSS_UnsupportedImageFormat_Exception $_) {
 			Minz_Log::warning('[xExtension-YouTube] failed to set custom favicon for feed "' . $feed->name(true) . '": unsupported image format');
 			return $feed;
 		} catch (FreshRSS_Feed_Exception $_) {
 			Minz_Log::warning('[xExtension-YouTube] failed to set custom favicon for feed "' . $feed->name(true) . '": feed error');
 			return $feed;
-		}
-
-		if ($oldCustom) {
-			FreshRSS_Feed::faviconDelete($oldHash);
 		}
 
 		return $feed;
