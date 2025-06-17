@@ -62,7 +62,9 @@ final class YouTubeExtension extends Minz_Extension
 		require_once(LIB_PATH . '/favicons.php');
 
 		$url = $feed->website();
-		$html = downloadHttp($url, $feed->attributeArray('curl_params') ?? []);
+		/** @var $curlOptions array<int,int|bool|string> */
+		$curlOptions = $feed->attributeArray('curl_params') ?? [];
+		$html = downloadHttp($url, $curlOptions);
 
 		$dom = new DOMDocument();
 
@@ -74,13 +76,18 @@ final class YouTubeExtension extends Minz_Extension
 		$xpath = new DOMXPath($dom);
 		$iconElem = $xpath->query('//meta[@name="twitter:image"]');
 
-		if ($iconElem === false || $iconElem->length === 0) {
+		if ($iconElem === false) {
 			Minz_Log::warning('[xExtension-YouTube] fail while downloading icon for feed "' . $feed->name(true) . '": icon URL couldn\'t be found');
 			return $feed;
 		}
-		$iconUrl = $iconElem->item(0)->getAttribute('content');
 
-		$contents = downloadHttp($iconUrl, $feed->attributeArray('curl_params') ?? []);
+		$iconUrl = $iconElem->item(0) !== null ? $iconElem->item(0)->getAttribute('content') : null;
+		if ($iconUrl === null) {
+			Minz_Log::warning('[xExtension-YouTube] fail while downloading icon for feed "' . $feed->name(true) . '": icon URL couldn\'t be found');
+			return $feed;
+		}
+
+		$contents = downloadHttp($iconUrl, $curlOptions);
 		if ($contents == '') {
 			Minz_Log::warning('[xExtension-YouTube] fail while downloading icon for feed "' . $feed->name(true) . '": empty contents');
 			return $feed;
