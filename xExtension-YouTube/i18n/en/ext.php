@@ -6,6 +6,8 @@ return array(
 		'width' => 'Player width',
 		'show_content' => 'Display the feeds content',
 		'download_channel_icons' => 'Automatically use the channels’ icons',
+		'fetch_channel_icons' => 'Fetch icons of all channels',
+		'reset_channel_icons' => 'Reset icons of all channels',
 		'use_nocookie' => 'Use the cookie-free domain www.youtube-nocookie.com',
 	),
 );
