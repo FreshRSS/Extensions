@@ -29,6 +29,11 @@ There are some FreshRSS extensions out there, developed by community members:
 
 * [Youtube](xExtension-YouTube) shows YouTube videos inline in the feed
 
+
+### By [@JadedBlueEyes](https://github.com/JadedBlueEyes), [Web](https://jade.ellis.link/)
+
+* [ImageCamo](xExtension-ImageCamo) Proxy images using a camo proxy instance for secure image delivery without mixed content warnings.
+
 ### By [@oYoX](https://github.com/oyox), [Web](https://oyox.de/)
 
 * [Keep Folder State](https://github.com/oyox/FreshRSS-extensions/tree/master/xExtension-KeepFolderState): Stores the state of the folders locally and expand them automatically if necessary.
@@ -166,6 +171,6 @@ There are some FreshRSS extensions out there, developed by community members:
 
 * [FreshVibes](https://github.com/tryallthethings/freshvibes): A fully customizable iGoogle / Netvibes-like dashboard view
 
-### By [@pe1uca](https://github.com/pe1uca)  
+### By [@pe1uca](https://github.com/pe1uca)
 
-* [Rate limiter](https://github.com/pe1uca/xExtension-RateLimiter/): Prevents FreshRSS from making too many requests to the same site in a defined amount of time.  
+* [Rate limiter](https://github.com/pe1uca/xExtension-RateLimiter/): Prevents FreshRSS from making too many requests to the same site in a defined amount of time.
