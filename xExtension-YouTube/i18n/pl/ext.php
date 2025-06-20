@@ -8,6 +8,8 @@ return array(
 		'download_channel_icons' => 'Automatycznie używaj ikon kanałów',
 		'fetch_channel_icons' => 'Pobierz ikony wszystkich kanałów',
 		'reset_channel_icons' => 'Przywróć domyślne ikony wszystkich kanałów',
+		'fetching_icons' => 'Pobieranie ikon',
+		'finished_fetching_icons' => 'Zakończono pobieranie ikon.',
 		'use_nocookie' => 'Używaj domeny bez ciasteczek www.youtube-nocookie.com',
 	),
 );
