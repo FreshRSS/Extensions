@@ -122,6 +122,7 @@ final class YouTubeExtension extends Minz_Extension
 	/**
 	 * @throws Minz_PDOConnectionException
 	 * @throws Minz_ConfigurationNamespaceException
+	 * @throws Minz_PermissionDeniedException
 	 */
 	public function resetAllIcons(): void {
 		$feedDAO = FreshRSS_Factory::createFeedDao();
@@ -156,6 +157,9 @@ final class YouTubeExtension extends Minz_Extension
 		Minz_Log::debug('[' . $this->getName() . '] ' . $s);
 	}
 
+	/**
+	 * @throws FreshRSS_Context_Exception
+	 */
 	public function feedBeforeInsert(FreshRSS_Feed $feed): FreshRSS_Feed {
 		$this->loadConfigValues();
 
@@ -166,6 +170,9 @@ final class YouTubeExtension extends Minz_Extension
 		return $feed;
 	}
 
+	/**
+	 * @throws Minz_PermissionDeniedException
+	 */
 	public function setIconForFeed(FreshRSS_Feed $feed, bool $setValues = false): FreshRSS_Feed {
 		if (!$this->isYtFeed($feed->website())) {
 			return $feed;
