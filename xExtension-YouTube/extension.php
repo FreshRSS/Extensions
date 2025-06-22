@@ -37,7 +37,8 @@ final class YouTubeExtension extends Minz_Extension
 		$this->registerHook('entry_before_display', [$this, 'embedYouTubeVideo']);
 		$this->registerHook('check_url_before_add', [self::class, 'convertYoutubeFeedUrl']);
 		$this->registerHook('custom_favicon_hash', [$this, 'iconHashParams']);
-		$this->registerHook('feed_before_insert', [$this, 'setIconForFeed']);
+		$this->registerHook('custom_favicon_btn_url', [$this, 'iconBtnUrl']);
+		$this->registerHook('feed_before_insert', [$this, 'feedBeforeInsert']);
 		if (Minz_Request::controllerName() === 'extension') {
 			$this->registerHook('js_vars', [self::class, 'jsVars']);
 			Minz_View::appendScript($this->getFileUrl('fetchIcons.js'));
@@ -50,6 +51,17 @@ final class YouTubeExtension extends Minz_Extension
 			'fetching_icons' => _t('ext.yt_videos.fetching_icons'),
 		];
 		return $vars;
+	}
+
+	public function isYtFeed(string $website): bool {
+		return str_starts_with($website, 'https://www.youtube.com/');
+	}
+
+	public function iconBtnUrl(FreshRSS_Feed $feed): ?string {
+		if (!$this->isYtFeed($feed->website()) || $feed->attributeString('customFaviconExt') === $this->getName()) {
+			return null;
+		}
+		return _url('extension', 'configure', 'e', urlencode($this->getName()));
 	}
 
 	public function iconHashParams(FreshRSS_Feed $feed): ?string {
@@ -70,7 +82,7 @@ final class YouTubeExtension extends Minz_Extension
 			if ($feed === null) {
 				continue;
 			}
-			if (str_starts_with($feed->website(), 'https://www.youtube.com/')) {
+			if ($this->isYtFeed($feed->website())) {
 				$feeds[] = [
 					'id' => $feed->id(),
 					'title' => $feed->name(true),
@@ -122,10 +134,18 @@ final class YouTubeExtension extends Minz_Extension
 		Minz_Log::debug('[' . $this->getName() . '] ' . $s);
 	}
 
-	public function setIconForFeed(FreshRSS_Feed $feed, bool $setValues = false): FreshRSS_Feed {
+	public function feedBeforeInsert(FreshRSS_Feed $feed): FreshRSS_Feed {
 		$this->loadConfigValues();
 
-		if (!($this->downloadIcons || $setValues) || !str_starts_with($feed->website(), 'https://www.youtube.com/')) {
+		if ($this->downloadIcons) {
+			return $this->setIconForFeed($feed);
+		}
+
+		return $feed;
+	}
+
+	public function setIconForFeed(FreshRSS_Feed $feed, bool $setValues = false): FreshRSS_Feed {
+		if (!$this->isYtFeed($feed->website())) {
 			return $feed;
 		}
 
@@ -424,6 +444,26 @@ final class YouTubeExtension extends Minz_Extension
 		$this->registerTranslates();
 
 		if (Minz_Request::isPost()) {
+			if (Minz_Request::paramBoolean('extBtn')) {
+				$feedDAO = FreshRSS_Factory::createFeedDao();
+				$feed = $feedDAO->searchById(Minz_Request::paramInt('id'));
+				if ($feed === null || !$this->isYtFeed($feed->website())) {
+					Minz_Error::error(404);
+					return;
+				}
+
+				$updateIcon = Minz_Request::paramBoolean('updateIcon');
+				$this->setIconForFeed($feed, setValues: $updateIcon);
+				if ($updateIcon) {
+					exit('OK');
+				}
+
+				header('Content-Type: application/json; charset=UTF-8');
+				exit(json_encode([
+					'extName' => $this->getName(),
+					'iconUrl' => $feed->favicon(),
+				]));
+			}
 			switch (Minz_Request::paramString('yt_action_btn')) {
 				case 'ajaxGetYtFeeds':
 					$this->ajaxGetYtFeeds();
