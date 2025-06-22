@@ -103,6 +103,7 @@ final class YouTubeExtension extends Minz_Extension
 	}
 
 	/**
+	 * @throws Minz_PDOConnectionException
 	 * @throws Minz_ConfigurationNamespaceException
 	 */
 	public function ajaxFetchIcon(): void {
@@ -118,7 +119,11 @@ final class YouTubeExtension extends Minz_Extension
 		exit('OK');
 	}
 
-	public function resetAllIcons() {
+	/**
+	 * @throws Minz_PDOConnectionException
+	 * @throws Minz_ConfigurationNamespaceException
+	 */
+	public function resetAllIcons(): void {
 		$feedDAO = FreshRSS_Factory::createFeedDao();
 		$ids = $feedDAO->listFeedsIds();
 
@@ -138,10 +143,16 @@ final class YouTubeExtension extends Minz_Extension
 		}
 	}
 
-	public function warnLog(string $s) {
+	/**
+	 * @throws Minz_PermissionDeniedException
+	 */
+	public function warnLog(string $s): void {
 		Minz_Log::warning('[' . $this->getName() . '] ' . $s);
 	}
-	public function debugLog(string $s) {
+	/**
+	 * @throws Minz_PermissionDeniedException
+	 */
+	public function debugLog(string $s): void {
 		Minz_Log::debug('[' . $this->getName() . '] ' . $s);
 	}
 
@@ -168,7 +179,7 @@ final class YouTubeExtension extends Minz_Extension
 			if ($path === null) {
 				$feed->_attributes($oldAttributes);
 				return $feed;
-			} elseif (file_exists($path)) {
+			} elseif (file_exists(is_string($path) ? $path : '')) {
 				$this->debugLog('icon had already been downloaded before for feed "' . $feed->name(true) . '" - returning early!');
 				return $feed;
 			}
@@ -182,7 +193,7 @@ final class YouTubeExtension extends Minz_Extension
 		$this->debugLog('downloading icon for feed "' . $feed->name(true) . '"');
 
 		$url = $feed->website();
-		/** @var $curlOptions array<int,int|bool|string> */
+		/** @var array<int, bool|int|string> */
 		$curlOptions = $feed->attributeArray('curl_params') ?? [];
 		$html = downloadHttp($url, $curlOptions);
 
@@ -201,12 +212,12 @@ final class YouTubeExtension extends Minz_Extension
 			return $feed;
 		}
 
-		$iconUrl = $iconElem->item(0) !== null ? $iconElem->item(0)->getAttribute('content') : null;
-		if ($iconUrl === null) {
+		if (!($iconElem->item(0) instanceof DOMElement)) {
 			$this->warnLog('fail while downloading icon for feed "' . $feed->name(true) . '": icon URL couldn\'t be found');
 			return $feed;
 		}
 
+		$iconUrl = $iconElem->item(0)->getAttribute('content');
 		$contents = downloadHttp($iconUrl, $curlOptions);
 		if ($contents == '') {
 			$this->warnLog('fail while downloading icon for feed "' . $feed->name(true) . '": empty contents');
@@ -448,6 +459,8 @@ final class YouTubeExtension extends Minz_Extension
 	 *  - We save configuration in case of a post.
 	 *  - We (re)load configuration in all case, so they are in-sync after a save and before a page load.
 	 * @throws FreshRSS_Context_Exception
+	 * @throws Minz_PDOConnectionException
+	 * @throws Minz_ConfigurationNamespaceException
 	 */
 	#[\Override]
 	public function handleConfigureAction(): void
