@@ -46,6 +46,10 @@ final class YouTubeExtension extends Minz_Extension
 		$this->registerTranslates();
 	}
 
+	/**
+	 * @param array<string,mixed> $vars
+	 * @return array<string,mixed>
+	 */
 	public static function jsVars(array $vars): array {
 		$vars['yt_i18n'] = [
 			'fetching_icons' => _t('ext.yt_videos.fetching_icons'),
@@ -71,7 +75,11 @@ final class YouTubeExtension extends Minz_Extension
 		return 'yt' . $feed->website() . $feed->proxyParam();
 	}
 
-	public function ajaxGetYtFeeds() {
+	/**
+	 * @throws Minz_PDOConnectionException
+	 * @throws Minz_ConfigurationNamespaceException
+	 */
+	public function ajaxGetYtFeeds(): void {
 		$feedDAO = FreshRSS_Factory::createFeedDao();
 		$ids = $feedDAO->listFeedsIds();
 
@@ -94,7 +102,10 @@ final class YouTubeExtension extends Minz_Extension
 		exit(json_encode($feeds));
 	}
 
-	public function ajaxFetchIcon() {
+	/**
+	 * @throws Minz_ConfigurationNamespaceException
+	 */
+	public function ajaxFetchIcon(): void {
 		$feedDAO = FreshRSS_Factory::createFeedDao();
 
 		$feed = $feedDAO->searchById(Minz_Request::paramInt('id'));
