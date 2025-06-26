@@ -186,7 +186,7 @@ final class YouTubeExtension extends Minz_Extension
 			if ($path === null) {
 				$feed->_attributes($oldAttributes);
 				return $feed;
-			} elseif (file_exists(is_string($path) ? $path : '')) {
+			} elseif (file_exists($path)) {
 				$this->debugLog('icon had already been downloaded before for feed "' . $feed->name(true) . '" - returning early!');
 				return $feed;
 			}
@@ -475,7 +475,9 @@ final class YouTubeExtension extends Minz_Extension
 		$this->registerTranslates();
 
 		if (Minz_Request::isPost()) {
-			if (Minz_Request::paramBoolean('extBtn')) {
+			// for handling requests from `custom_favicon_btn_url` hook
+			$extAction = Minz_Request::paramStringNull('extAction');
+			if ($extAction !== null) {
 				$feedDAO = FreshRSS_Factory::createFeedDao();
 				$feed = $feedDAO->searchById(Minz_Request::paramInt('id'));
 				if ($feed === null || !$this->isYtFeed($feed->website())) {
@@ -483,18 +485,19 @@ final class YouTubeExtension extends Minz_Extension
 					return;
 				}
 
-				$updateIcon = Minz_Request::paramBoolean('updateIcon');
-				$this->setIconForFeed($feed, setValues: $updateIcon);
-				if ($updateIcon) {
-					exit('OK');
+				$this->setIconForFeed($feed, setValues: $extAction === 'update_icon');
+				if ($extAction === 'query_icon_info') {
+					header('Content-Type: application/json; charset=UTF-8');
+					exit(json_encode([
+						'extName' => $this->getName(),
+						'iconUrl' => $feed->favicon(),
+					]));
 				}
 
-				header('Content-Type: application/json; charset=UTF-8');
-				exit(json_encode([
-					'extName' => $this->getName(),
-					'iconUrl' => $feed->favicon(),
-				]));
+				exit('OK');
 			}
+
+			// for handling configure page
 			switch (Minz_Request::paramString('yt_action_btn')) {
 				case 'ajaxGetYtFeeds':
 					$this->ajaxGetYtFeeds();
@@ -502,7 +505,8 @@ final class YouTubeExtension extends Minz_Extension
 				case 'ajaxFetchIcon':
 					$this->ajaxFetchIcon();
 					return;
-				case 'iconFetchFinish':
+				// non-ajax actions
+				case 'iconFetchFinish': // called after final ajaxFetchIcon call
 					Minz_Request::good(_t('ext.yt_videos.finished_fetching_icons'), ['c' => 'extension']);
 					break;
 				case 'resetIcons':
