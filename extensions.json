@@ -170,7 +170,7 @@
             "name": "Fresh Vibes View",
             "author": "Try all the things",
             "description": "Provides a Netvibes-like dashboard view with draggable feed containers.",
-            "version": "1.8.0",
+            "version": "1.8.5",
             "entrypoint": "FreshVibesView",
             "type": "user",
             "url": "https://github.com/tryallthethings/freshvibes",
