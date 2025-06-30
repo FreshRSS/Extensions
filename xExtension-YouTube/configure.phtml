@@ -32,7 +32,7 @@ declare(strict_types=1);
 
 		<div class="group-controls">
 			<label class="checkbox" for="yt_nocookie">
-				<input type="checkbox" id="yt_nocookie" name="yt_nocookie" value="1" data-leave-validation="<?= intval($this->isUseNoCookieDomain()) ?>" <?= $this->isUseNoCookieDomain() ? 'checked="checked"' : '' ?> />
+				<input type="checkbox" id="yt_nocookie" name="yt_nocookie" data-leave-validation="<?= intval($this->isUseNoCookieDomain()) ?>" <?= $this->isUseNoCookieDomain() ? 'checked="checked"' : '' ?> />
 				<?= _t('ext.yt_videos.use_nocookie') ?>
 			</label>
 		</div>

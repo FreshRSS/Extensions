@@ -517,7 +517,7 @@ final class YouTubeExtension extends Minz_Extension
 			FreshRSS_Context::userConf()->_attribute('yt_player_width', Minz_Request::paramInt('yt_width'));
 			FreshRSS_Context::userConf()->_attribute('yt_show_content', Minz_Request::paramBoolean('yt_show_content'));
 			FreshRSS_Context::userConf()->_attribute('yt_download_channel_icons', Minz_Request::paramBoolean('yt_download_channel_icons'));
-			FreshRSS_Context::userConf()->_attribute('yt_nocookie', Minz_Request::paramInt('yt_nocookie'));
+			FreshRSS_Context::userConf()->_attribute('yt_nocookie', Minz_Request::paramBoolean('yt_nocookie'));
 			FreshRSS_Context::userConf()->save();
 		}
 

@@ -1,14 +1,14 @@
 'use strict';
 
-/* globals context */
+/* globals context, slider */
 
 function initFetchBtn() {
+  const i18n = context.extensions.yt_i18n;
+
   const fetchIcons = document.querySelector('button[value="iconFetchFinish"]');
   if (!fetchIcons) {
     return;
   }
-
-  const i18n = context.extensions.yt_i18n;
 
   document.querySelectorAll('#yt_action_btn').forEach(el => el.style.marginBottom = '1rem');
 
@@ -18,9 +18,15 @@ function initFetchBtn() {
   fetchIcons.onclick = function(e) {
     e.preventDefault();
 
+    const closeSlider = document.querySelector('#close-slider');
+    if (closeSlider) {
+      closeSlider.onclick = (e) => e.preventDefault();
+      closeSlider.style.cursor = 'not-allowed';
+    }
+
+    fetchIcons.form.onsubmit = window.onbeforeunload = (e) => e.preventDefault();
     fetchIcons.onclick = null;
     fetchIcons.disabled = true;
-    fetchIcons.form.onsubmit = (e) => e.preventDefault();
     fetchIcons.parentElement.insertAdjacentHTML('afterend', `
     <hr><br>
     <center>
@@ -34,7 +40,7 @@ function initFetchBtn() {
     const configureUrl = fetchIcons.form.action;
 
     function ajaxBody(action, args) {
-      return new URLSearchParams({
+      return JSON.stringify({
         '_csrf': context.csrf,
         'yt_action_btn': 'ajax' + action,
         ...args
@@ -42,10 +48,10 @@ function initFetchBtn() {
     }
 
     fetch(configureUrl, {
-      method: "POST",
+      method: 'POST',
       body: ajaxBody('GetYtFeeds'),
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
+        'Content-Type': 'application/json; charset=UTF-8'
       }
     }).then(resp => {
       if (!resp.ok) {
@@ -56,17 +62,17 @@ function initFetchBtn() {
       let completed = 0;
       json.forEach(async (feed) => {
         await fetch(configureUrl, {
-          method: "POST",
+          method: 'POST',
           body: ajaxBody('FetchIcon', {'id': feed.id}),
           headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
+            'Content-Type': 'application/json; charset=UTF-8'
           }
         }).then(async () => {
           iconFetchChannel.innerText = feed.title;
           iconFetchCount.innerText = `${++completed}/${json.length}`;
           if (completed === json.length) {
             fetchIcons.disabled = false;
-            fetchIcons.form.onsubmit = null;
+            fetchIcons.form.onsubmit = window.onbeforeunload = null;
             fetchIcons.click();
           }
         });
@@ -76,8 +82,8 @@ function initFetchBtn() {
 }
 
 window.addEventListener('load', function() {
-  if (document.querySelector('#slider')) {
-    document.querySelector('#slider').addEventListener('freshrss:slider-load', initFetchBtn);
+  if (typeof slider !== 'undefined') {
+    slider.addEventListener('freshrss:slider-load', initFetchBtn);
   }
   initFetchBtn();
 });
