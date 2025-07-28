@@ -1,0 +1,8 @@
+{
+	"name": "Form Captcha",
+	"author": "Inverle",
+	"description": "Protect register/login forms with captcha",
+	"version": "1.0.0",
+	"entrypoint": "Captcha",
+	"type": "system"
+}
