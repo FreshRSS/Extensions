@@ -25,7 +25,9 @@ Available configuration settings:
 
 <details>
 <summary>Show configuration screenshot</summary>
+
 ![configuration](./screenshot.png)
+
 </details>
 
 ## Changelog
