@@ -1,6 +1,6 @@
 'use strict';
 
-/* globals slider, providerConfig, captchaReset, clearFields */
+/* globals slider, providerConfig, captchaReset, clearFields, init_password_observers */
 
 function initCaptchaConfig() {
 	const captchaProvider = document.querySelector('select#captchaProvider');
@@ -17,7 +17,7 @@ function initCaptchaConfig() {
 	}
 
 	captchaProvider.onchange = onChange;
-	captchaReset.onclick = function(e) {
+	captchaReset.onclick = function (e) {
 		e.preventDefault();
 		captchaReset.form.reset();
 		onChange();
@@ -25,7 +25,7 @@ function initCaptchaConfig() {
 
 	onChange();
 
-	clearFields.onclick = function(e) {
+	clearFields.onclick = function (e) {
 		e.preventDefault();
 		document.querySelectorAll('input[type="text"], input[type="password"]').forEach(el => {
 			el.value = '';
@@ -33,7 +33,7 @@ function initCaptchaConfig() {
 	};
 }
 
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
 	if (typeof slider !== 'undefined') {
 		slider.addEventListener('freshrss:slider-load', initCaptchaConfig);
 	}
