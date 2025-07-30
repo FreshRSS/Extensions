@@ -12,7 +12,7 @@ To see failed captcha solve attempts, look at the logs in: `data/users/_/log.txt
 
 ---
 
-*Warning: if you're protecting the login page and you have unsafe autologin enabled, it can allow anyone to bypass the captcha - it's recommended to disable this option*
+Warning: if you're protecting the login page and you have unsafe autologin enabled, it can allow anyone to bypass the captcha - it's recommended to disable this option
 
 ---
 
