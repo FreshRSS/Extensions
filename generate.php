@@ -57,6 +57,33 @@ foreach ($gitRepositories as $key => $gitRepository) {
 			$metadata['version'] = is_scalar($metadata['version'] ?? null) ? strval($metadata['version']) : '';
 			$metadata['method'] = TYPE_GIT;
 			$metadata['directory'] = ($directory === sha1($gitRepository)) ? '.' : $directory;
+
+			$required_keys = [
+				'name',
+				'author',
+				'description',
+				'version',
+				'entrypoint',
+				'type',
+				'url',
+				'method',
+				'directory',
+			];
+
+			// Sanitize extension values to prevent HTML injection (when rendered by FreshRSS)
+			// Also clean unnecessary keys
+			foreach ($metadata as $k => $v) {
+				if ($k === 'description') {
+					continue;
+				}
+				if (!in_array($k, $required_keys, true)) {
+					unset($metadata[$k]);
+					continue;
+				}
+				$metadata[$k] = htmlspecialchars(is_string($metadata[$k]) ? $metadata[$k] : '', ENT_COMPAT, 'UTF-8');
+			}
+			$metadata['description'] = strip_tags(is_string($metadata['description']) ? $metadata['description'] : '', allowed_tags: ['a']);
+
 			$extensions[] = $metadata;
 		} catch (Exception $exception) {
 			continue;
