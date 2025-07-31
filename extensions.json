@@ -534,7 +534,6 @@
             "version": "0.3.1",
             "description": "Translate article titles of the specified feed into Chinese.",
             "author": "jacob2826",
-            "website": "https://github.com/jacob2826/FreshRSS-TranslateTitlesCN",
             "entrypoint": "TranslateTitles",
             "type": "user",
             "url": "https://github.com/jacob2826/FreshRSS-TranslateTitlesCN",
