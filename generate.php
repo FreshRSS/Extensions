@@ -82,7 +82,7 @@ foreach ($gitRepositories as $key => $gitRepository) {
 				}
 				$metadata[$k] = htmlspecialchars(is_string($metadata[$k]) ? $metadata[$k] : '', ENT_COMPAT, 'UTF-8');
 			}
-			$metadata['description'] = strip_tags(is_string($metadata['description']) ? $metadata['description'] : '', allowed_tags: ['a']);
+			$metadata['description'] = strip_tags(is_string($metadata['description'] ?? null) ? $metadata['description'] : '', allowed_tags: ['a']);
 
 			$extensions[] = $metadata;
 		} catch (Exception $exception) {
