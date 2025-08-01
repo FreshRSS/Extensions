@@ -233,6 +233,17 @@
             "directory": "xExtension-ImageProxy"
         },
         {
+            "name": "Image Camo Proxy",
+            "author": "Jade Ellis",
+            "description": "Proxy images using a camo proxy instance for secure image delivery without mixed content warnings.",
+            "version": "1.0.0",
+            "entrypoint": "ImageCamo",
+            "type": "user",
+            "url": "https://github.com/FreshRSS/Extensions",
+            "method": "git",
+            "directory": "xExtension-ImageCamo"
+        },
+        {
             "name": "Invidious Video Feed",
             "author": "Korbak (forked from Kevin Papst)",
             "description": "Embed YouTube feeds inside article content, but with Invidious.",
