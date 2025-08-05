@@ -20,7 +20,7 @@ final class YouTubeExtension extends Minz_Extension
 	 */
 	private bool $showContent = false;
 	/**
-	 * Wheter channel icons should be automatically downloaded and set for feeds
+	 * Whether channel icons should be automatically downloaded and set for feeds
 	 */
 	private bool $downloadIcons = false;
 	/**
