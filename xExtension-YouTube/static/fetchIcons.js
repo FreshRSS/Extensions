@@ -12,7 +12,7 @@ function initFetchBtn() {
 
   document.querySelectorAll('#yt_action_btn').forEach(el => el.style.marginBottom = '1rem');
 
-  fetchIcons.removeAttribute('disabled');
+  fetchIcons.form.querySelectorAll('button').forEach(btn => btn.removeAttribute('disabled'));
   fetchIcons.removeAttribute('title');
 
   fetchIcons.onclick = function(e) {
@@ -22,16 +22,17 @@ function initFetchBtn() {
     if (closeSlider) {
       closeSlider.onclick = (e) => e.preventDefault();
       closeSlider.style.cursor = 'not-allowed';
+      closeSlider.querySelector('img.icon').remove();
     }
 
     fetchIcons.form.onsubmit = window.onbeforeunload = (e) => e.preventDefault();
     fetchIcons.onclick = null;
     fetchIcons.disabled = true;
     fetchIcons.parentElement.insertAdjacentHTML('afterend', `
-    <hr><br>
+    <hr /><br />
     <center>
         ${i18n.fetching_icons}: <b id="iconFetchCount">…</b> • <b id="iconFetchChannel">…</b>
-    </center><br>
+    </center><br /><br />
     `);
 
     const iconFetchCount = document.querySelector('b#iconFetchCount');

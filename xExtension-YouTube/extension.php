@@ -3,7 +3,7 @@
 /**
  * Class YouTubeExtension
  *
- * @author Kevin Papst
+ * @author Kevin Papst, Inverle
  */
 final class YouTubeExtension extends Minz_Extension
 {
@@ -105,6 +105,9 @@ final class YouTubeExtension extends Minz_Extension
 	/**
 	 * @throws Minz_PDOConnectionException
 	 * @throws Minz_ConfigurationNamespaceException
+	 * @throws Minz_PermissionDeniedException
+	 * @throws FreshRSS_UnsupportedImageFormat_Exception
+	 * @throws FreshRSS_Context_Exception
 	 */
 	public function ajaxFetchIcon(): void {
 		$feedDAO = FreshRSS_Factory::createFeedDao();
@@ -159,6 +162,8 @@ final class YouTubeExtension extends Minz_Extension
 
 	/**
 	 * @throws FreshRSS_Context_Exception
+	 * @throws Minz_PermissionDeniedException
+	 * @throws FreshRSS_UnsupportedImageFormat_Exception
 	 */
 	public function feedBeforeInsert(FreshRSS_Feed $feed): FreshRSS_Feed {
 		$this->loadConfigValues();
@@ -172,6 +177,8 @@ final class YouTubeExtension extends Minz_Extension
 
 	/**
 	 * @throws Minz_PermissionDeniedException
+	 * @throws FreshRSS_UnsupportedImageFormat_Exception
+	 * @throws FreshRSS_Context_Exception
 	 */
 	public function setIconForFeed(FreshRSS_Feed $feed, bool $setValues = false): FreshRSS_Feed {
 		if (!$this->isYtFeed($feed->website())) {
@@ -202,11 +209,26 @@ final class YouTubeExtension extends Minz_Extension
 		$url = $feed->website();
 		/** @var array<int, bool|int|string> */
 		$curlOptions = $feed->attributeArray('curl_params') ?? [];
-		$html = downloadHttp($url, $curlOptions);
+
+		$ch = curl_init();
+		if ($ch === false) {
+			return $feed;
+		}
+
+		curl_setopt_array($ch, [
+			CURLOPT_URL => $url,
+			CURLOPT_USERAGENT => FRESHRSS_USERAGENT,
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_FOLLOWLOCATION => true,
+		]);
+		curl_setopt_array($ch, FreshRSS_Context::systemConf()->curl_options);
+		curl_setopt_array($ch, $curlOptions);
+
+		$html = curl_exec($ch);
 
 		$dom = new DOMDocument();
 
-		if ($html == '' || !@$dom->loadHTML($html, LIBXML_NONET | LIBXML_NOERROR | LIBXML_NOWARNING)) {
+		if (!is_string($html) || !@$dom->loadHTML($html, LIBXML_NONET | LIBXML_NOERROR | LIBXML_NOWARNING)) {
 			$this->warnLog('fail while downloading icon for feed "' . $feed->name(true) . '": failed to load HTML');
 			return $feed;
 		}
@@ -225,8 +247,14 @@ final class YouTubeExtension extends Minz_Extension
 		}
 
 		$iconUrl = $iconElem->item(0)->getAttribute('content');
-		$contents = downloadHttp($iconUrl, $curlOptions);
-		if ($contents == '') {
+		if ($iconUrl == '') {
+			$this->warnLog('fail while downloading icon for feed "' . $feed->name(true) . '": icon URL is empty');
+			return $feed;
+		}
+
+		curl_setopt($ch, CURLOPT_URL, $iconUrl);
+		$contents = curl_exec($ch);
+		if (!is_string($contents)) {
 			$this->warnLog('fail while downloading icon for feed "' . $feed->name(true) . '": empty contents');
 			return $feed;
 		}
@@ -468,6 +496,8 @@ final class YouTubeExtension extends Minz_Extension
 	 * @throws FreshRSS_Context_Exception
 	 * @throws Minz_PDOConnectionException
 	 * @throws Minz_ConfigurationNamespaceException
+	 * @throws FreshRSS_UnsupportedImageFormat_Exception
+	 * @throws Minz_PermissionDeniedException
 	 */
 	#[\Override]
 	public function handleConfigureAction(): void
