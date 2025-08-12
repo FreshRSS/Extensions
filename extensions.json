@@ -200,17 +200,6 @@
             "directory": "."
         },
         {
-            "name": "GReader Redate",
-            "author": "Julien Avérous",
-            "description": "Use published date instead of fetching date.",
-            "version": "1.3",
-            "entrypoint": "GReaderRedate",
-            "type": "user",
-            "url": "https://github.com/javerous/freshrss-greader-redate",
-            "method": "git",
-            "directory": "xExtension-GReaderRedate"
-        },
-        {
             "name": "Image Cache",
             "author": "Victrid",
             "description": "Cache feed images on your own facility or Cloudflare cache.",
