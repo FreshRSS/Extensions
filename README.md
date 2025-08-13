@@ -169,3 +169,7 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@pe1uca](https://github.com/pe1uca)  
 
 * [Rate limiter](https://github.com/pe1uca/xExtension-RateLimiter/): Prevents FreshRSS from making too many requests to the same site in a defined amount of time.  
+
+### By [@daften](https://github.com/daften)  
+
+* [Share To Linkwarden](https://github.com/daften/xExtension-ShareToLinkwarden/): Allows sharing items directly to a self-hosted Linkwarden instance.

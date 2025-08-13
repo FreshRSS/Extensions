@@ -100,4 +100,7 @@
 }, {
 	"url": "https://github.com/pe1uca/xExtension-RateLimiter",
 	"type": "git"
+}, {
+	"url": "https://github.com/daften/xExtension-ShareToLinkwarden",
+	"type": "git"
 }]

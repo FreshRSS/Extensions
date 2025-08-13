@@ -431,6 +431,17 @@
             "directory": "xExtension-ShareByEmail"
         },
         {
+            "name": "Share To Linkwarden",
+            "author": "Dieter Blomme",
+            "description": "Share to a self-hosted Linkwarden instance directly.",
+            "version": "0.1.1",
+            "entrypoint": "ShareToLinkwarden",
+            "type": "user",
+            "url": "https://github.com/daften/xExtension-ShareToLinkwarden",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "ShowFeedID",
             "author": "math-GH, Inverle",
             "description": "Show the ID of feed and category",
