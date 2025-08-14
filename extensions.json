@@ -431,10 +431,10 @@
             "directory": "xExtension-ShareByEmail"
         },
         {
-            "name": "Share To Linkwarden",
+            "name": "Share to Linkwarden",
             "author": "Dieter Blomme",
-            "description": "Share to a self-hosted Linkwarden instance directly.",
-            "version": "0.1.1",
+            "description": "Adds a button to share articles to Linkwarden.",
+            "version": "0.1.0",
             "entrypoint": "ShareToLinkwarden",
             "type": "user",
             "url": "https://github.com/daften/xExtension-ShareToLinkwarden",
