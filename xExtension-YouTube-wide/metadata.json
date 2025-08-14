@@ -1,0 +1,8 @@
+{
+	"name": "YouTube Video Feed Wide",
+	"author": "George Dorn",
+	"description": "Embed YouTube feeds inside article content with less rigid sizing.",
+	"version": "0.14",
+	"entrypoint": "YouTubeWide",
+	"type": "user"
+}
