@@ -2,37 +2,37 @@
 declare(strict_types=1);
 /** @var YouTubeExtension $this */
 ?>
-<form action="<?= _url('extension', 'configure', 'e', urlencode($this->getName())) ?>" method="post">
+<form action="<?= _url('extension', 'configure', 'e', urlencode($this->getName())) ?>" method="post" data-auto-leave-validation="1">
 	<input type="hidden" name="_csrf" value="<?= FreshRSS_Auth::csrfToken() ?>" />
 	<div class="form-group">
 
 		<label class="group-name" for="yt_height"><?= _t('ext.yt_videos.height') ?></label>
 		<div class="group-controls">
-			<input type="number" id="yt_height" name="yt_height" value="<?= $this->getHeight() ?>" min="50" data-leave-validation="<?= $this->getHeight() ?>" />
+			<input type="number" id="yt_height" name="yt_height" value="<?= $this->getHeight() ?>" min="50" />
 		</div>
 
 		<label class="group-name" for="yt_width"><?= _t('ext.yt_videos.width') ?></label>
 		<div class="group-controls">
-			<input type="number" id="yt_width" name="yt_width" value="<?= $this->getWidth() ?>" min="100" data-leave-validation="<?= $this->getWidth() ?>" />
+			<input type="number" id="yt_width" name="yt_width" value="<?= $this->getWidth() ?>" min="100" />
 		</div>
 
 		<div class="group-controls">
 			<label class="checkbox" for="yt_show_content">
-				<input type="checkbox" id="yt_show_content" name="yt_show_content" data-leave-validation="<?= intval($this->isShowContent()) ?>" <?= $this->isShowContent() ? 'checked="checked"' : '' ?> />
+				<input type="checkbox" id="yt_show_content" name="yt_show_content" <?= $this->isShowContent() ? 'checked="checked"' : '' ?> />
 				<?= _t('ext.yt_videos.show_content') ?>
 			</label>
 		</div>
 
 		<div class="group-controls">
 			<label class="checkbox" for="yt_download_channel_icons">
-				<input type="checkbox" id="yt_download_channel_icons" name="yt_download_channel_icons" data-leave-validation="<?= intval($this->isDownloadIcons()) ?>" <?= $this->isDownloadIcons() ? 'checked="checked"' : '' ?> />
+				<input type="checkbox" id="yt_download_channel_icons" name="yt_download_channel_icons" <?= $this->isDownloadIcons() ? 'checked="checked"' : '' ?> />
 				<?= _t('ext.yt_videos.download_channel_icons') ?>
 			</label>
 		</div>
 
 		<div class="group-controls">
 			<label class="checkbox" for="yt_nocookie">
-				<input type="checkbox" id="yt_nocookie" name="yt_nocookie" data-leave-validation="<?= intval($this->isUseNoCookieDomain()) ?>" <?= $this->isUseNoCookieDomain() ? 'checked="checked"' : '' ?> />
+				<input type="checkbox" id="yt_nocookie" name="yt_nocookie" <?= $this->isUseNoCookieDomain() ? 'checked="checked"' : '' ?> />
 				<?= _t('ext.yt_videos.use_nocookie') ?>
 			</label>
 		</div>
