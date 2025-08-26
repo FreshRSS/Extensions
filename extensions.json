@@ -301,10 +301,10 @@
         {
             "name": "News Assistant",
             "author": "Mervyn Zhan",
-            "description": "Using the ai api of `OpenAI`, `Anthropic`, `Groq` by [Portkey-AI/gateway](https://github.com/Portkey-AI/gateway/) to summary the news.",
-            "version": "0.12.0",
+            "description": "Support OpenAI-Compatible API and the other AI api like `Anthropic`, `Groq` by [Portkey-AI/gateway](https://github.com/Portkey-AI/gateway/) to summary the news.",
+            "version": "0.13.1",
             "entrypoint": "NewsAssistant",
-            "type": "system",
+            "type": "user",
             "url": "https://github.com/reply2future/xExtension-NewsAssistant",
             "method": "git",
             "directory": "."
