@@ -44,9 +44,10 @@ There are some FreshRSS extensions out there, developed by community members:
 
 ### By [@aledeg](https://github.com/aledeg)
 
-* [Date Format](https://github.com/aledeg/FreshRSS-extensions/tree/master/xExtension-DateFormat): Change how dates are displayed in the interface
-* [Latex Support](https://github.com/aledeg/FreshRSS-extensions/tree/master/xExtension-LatexSupport): Add support for LaTeX notation rendering
-* [Reddit Image](https://github.com/aledeg/FreshRSS-extensions/tree/master/xExtension-RedditImage): Replace link to Reddit topic with resource link
+* [Date Format](https://github.com/aledeg/xExtension-DateFormat): Change how dates are displayed in the interface
+* [Latex Support](https://github.com/aledeg/xExtension-LatexSupport): Add support for LaTeX notation rendering
+* [Paywall](https://github.com/aledeg/xExtension-Paywall): Add title prefix on articles behind a paywall
+* [Reddit Image](https://github.com/aledeg/xExtension-RedditImage): Replace link to Reddit topic with resource link
 
 
 ### By [@Lapineige](https://github.com/lapineige), [@hkcomori](https://github.com/hkcomori)
