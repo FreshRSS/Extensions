@@ -310,6 +310,17 @@
             "directory": "."
         },
         {
+            "name": "Paywall",
+            "author": "Alexis Degrugillier",
+            "description": "Modify the title when matching the configured domains, paywalls are the primary target but can be use for different use-cases.",
+            "version": "0.0.1",
+            "entrypoint": "Paywall",
+            "type": "user",
+            "url": "https://github.com/aledeg/xExtension-Paywall",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "Pocket Button",
             "author": "Christian Putzke",
             "description": "Add articles to Pocket with one simple button click or a keyboard shortcut.",
