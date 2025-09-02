@@ -17,7 +17,7 @@ jobs:
 
     steps:
     - name: Git checkout source code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
       with:
         path: Extensions
 
@@ -46,7 +46,7 @@ jobs:
       run: composer run-script phpcs
 
     - name: Git checkout FreshRSS source code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
       with:
         repository: FreshRSS/FreshRSS
         path: FreshRSS
