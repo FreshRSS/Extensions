@@ -313,7 +313,7 @@
             "name": "Paywall",
             "author": "Alexis Degrugillier",
             "description": "Indicates if an article is behind a paywall",
-            "version": "0.0.1",
+            "version": "0.0.2",
             "entrypoint": "Paywall",
             "type": "user",
             "url": "https://github.com/aledeg/xExtension-Paywall",
