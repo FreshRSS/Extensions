@@ -2,6 +2,9 @@
 declare(strict_types=1);
 
 class FreshExtension_auth_Controller extends FreshRSS_auth_Controller {
+	/**
+	 * @throws Minz_ConfigurationException
+	 */
 	private static function redirectFormLogin(): void {
 		if (FreshRSS_Auth::hasAccess()) {
 			Minz_Request::forward(['c' => 'index', 'a' => 'index'], true);
@@ -10,6 +13,12 @@ class FreshExtension_auth_Controller extends FreshRSS_auth_Controller {
 		Minz_Request::forward(['c' => 'auth', 'a' => 'formLogin']);
 	}
 
+	/**
+	 * @throws FreshRSS_Context_Exception
+	 * @throws Minz_ConfigurationNamespaceException
+	 * @throws Minz_ConfigurationException
+	 * @throws Minz_PermissionDeniedException
+	 */
 	public function loginAction(): void {
 		if (FreshRSS_Context::systemConf()->auth_type !== 'form') {
 			parent::loginAction();
