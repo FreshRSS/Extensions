@@ -61,19 +61,19 @@ final class YouTubeExtension extends Minz_Extension
 		return str_starts_with($website, 'https://www.youtube.com/');
 	}
 
-    public function isShort(string $website): bool {
-            return str_starts_with($website, 'https://www.youtube.com/shorts');
-    }
-    public function convertShortToWatch(string $shortUrl): string {
-        $prefix = 'https://www.youtube.com/shorts/';
+	public function isShort(string $website): bool {
+		return str_starts_with($website, 'https://www.youtube.com/shorts');
+	}
+	public function convertShortToWatch(string $shortUrl): string {
+		$prefix = 'https://www.youtube.com/shorts/';
 
-        if (str_starts_with($shortUrl, $prefix)) {
-            $videoId = str_replace($prefix, '', $shortUrl);
-            return 'https://www.youtube.com/watch?v=' . $videoId;
-        }
+		if (str_starts_with($shortUrl, $prefix)) {
+			$videoId = str_replace($prefix, '', $shortUrl);
+			return 'https://www.youtube.com/watch?v=' . $videoId;
+		}
 
-        return $shortUrl;
-    }
+		return $shortUrl;
+	}
 
 	public function iconBtnUrl(FreshRSS_Feed $feed): ?string {
 		if (!$this->isYtFeed($feed->website()) || $feed->attributeString('customFaviconExt') === $this->getName()) {
@@ -387,34 +387,35 @@ final class YouTubeExtension extends Minz_Extension
 	 * Inserts the YouTube video iframe into the content of an entry, if the entries link points to a YouTube watch URL.
 	 * @throws FreshRSS_Context_Exception
 	 */
-public function embedYouTubeVideo(FreshRSS_Entry $entry): FreshRSS_Entry
-{
-    $link = $entry->link();
+	public function embedYouTubeVideo(FreshRSS_Entry $entry): FreshRSS_Entry
+	{
+		$link = $entry->link();
 
-    if ($this->isShort($link)) {
-        $link = $this->convertShortToWatch($link);
-    }
+		if ($this->isShort($link)) {
+			$link = $this->convertShortToWatch($link);
+		}
 
-    if (preg_match('#^https?://www\.youtube\.com/watch\?v=|/videos/watch/[0-9a-f-]{36}$#', $link) !== 1) {
-        return $entry;
-    }
+		if (preg_match('#^https?://www\.youtube\.com/watch\?v=|/videos/watch/[0-9a-f-]{36}$#', $link) !== 1) {
+			return $entry;
+		}
 
-    $this->loadConfigValues();
+		$this->loadConfigValues();
 
-    if (stripos($entry->content(), '<iframe class="youtube-plugin-video"') !== false) {
-        return $entry;
-    }
+		if (stripos($entry->content(), '<iframe class="youtube-plugin-video"') !== false) {
+			return $entry;
+		}
 
-    if (stripos($link, 'www.youtube.com/watch?v=') !== false) {
-        $html = $this->getHtmlContentForLink($entry, $link);
-    }
-    else { //peertube
-        $html = $this->getHtmlPeerTubeContentForLink($entry, $link);
-    }
+		if (stripos($link, 'www.youtube.com/watch?v=') !== false) {
+			$html = $this->getHtmlContentForLink($entry, $link);
+		}
+		else { //peertube
+			$html = $this->getHtmlPeerTubeContentForLink($entry, $link);
+		}
 
-    $entry->_content($html);
-    return $entry;
-}
+		$entry->_content($html);
+		return $entry;
+	}
+
 	/**
 	 * Returns an HTML <iframe> for a given Youtube watch URL (www.youtube.com/watch?v=)
 	 */
