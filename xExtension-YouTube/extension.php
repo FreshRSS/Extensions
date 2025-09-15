@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class YouTubeExtension
  *
@@ -59,6 +61,20 @@ final class YouTubeExtension extends Minz_Extension
 
 	public function isYtFeed(string $website): bool {
 		return str_starts_with($website, 'https://www.youtube.com/');
+	}
+
+	public function isShort(string $website): bool {
+		return str_starts_with($website, 'https://www.youtube.com/shorts');
+	}
+	public function convertShortToWatch(string $shortUrl): string {
+		$prefix = 'https://www.youtube.com/shorts/';
+
+		if (str_starts_with($shortUrl, $prefix)) {
+			$videoId = str_replace($prefix, '', $shortUrl);
+			return 'https://www.youtube.com/watch?v=' . $videoId;
+		}
+
+		return $shortUrl;
 	}
 
 	public function iconBtnUrl(FreshRSS_Feed $feed): ?string {
@@ -141,7 +157,7 @@ final class YouTubeExtension extends Minz_Extension
 				try {
 					$feed->resetCustomFavicon(values: $v);
 				} catch (FreshRSS_Feed_Exception $_) {
-					$this->warnLog('failed to reset favicon for feed "' . $feed->name(true) . '": feed error');
+					$this->warnLog('Failed to reset favicon for feed “' . $feed->name(true) . '”: feed error!');
 				}
 			}
 		}
@@ -194,17 +210,17 @@ final class YouTubeExtension extends Minz_Extension
 				$feed->_attributes($oldAttributes);
 				return $feed;
 			} elseif (file_exists($path)) {
-				$this->debugLog('icon had already been downloaded before for feed "' . $feed->name(true) . '" - returning early!');
+				$this->debugLog('Icon had already been downloaded before for feed “' . $feed->name(true) . '”: returning early!');
 				return $feed;
 			}
 		} catch (FreshRSS_Feed_Exception $_) {
-			$this->warnLog('failed to set custom favicon for feed "' . $feed->name(true) . '": feed error');
+			$this->warnLog('Failed to set custom favicon for feed “' . $feed->name(true) . '”: feed error!');
 			$feed->_attributes($oldAttributes);
 			return $feed;
 		}
 
 		$feed->_attributes($oldAttributes);
-		$this->debugLog('downloading icon for feed "' . $feed->name(true) . '"');
+		$this->debugLog('downloading icon for feed “' . $feed->name(true) . '"');
 
 		$url = $feed->website();
 		/** @var array<int, bool|int|string> */
@@ -229,43 +245,44 @@ final class YouTubeExtension extends Minz_Extension
 		$dom = new DOMDocument();
 
 		if (!is_string($html) || !@$dom->loadHTML($html, LIBXML_NONET | LIBXML_NOERROR | LIBXML_NOWARNING)) {
-			$this->warnLog('fail while downloading icon for feed "' . $feed->name(true) . '": failed to load HTML');
+			$this->warnLog('Fail while downloading icon for feed “' . $feed->name(true) . '”: failed to load HTML!');
 			return $feed;
 		}
 
 		$xpath = new DOMXPath($dom);
-		$iconElem = $xpath->query('//meta[@name="twitter:image"]');
+		$metaElem = $xpath->query('//meta[@name="twitter:image"]');
 
-		if ($iconElem === false) {
-			$this->warnLog('fail while downloading icon for feed "' . $feed->name(true) . '": icon URL couldn\'t be found');
+		if ($metaElem === false) {
+			$this->warnLog('Fail while downloading icon for feed “' . $feed->name(true) . '”: icon URL couldn’t be found!');
+			return $feed;
+		}
+		$iconElem = $metaElem->item(0);
+
+		if (!($iconElem instanceof DOMElement)) {
+			$this->warnLog('Fail while downloading icon for feed “' . $feed->name(true) . '”: icon URL couldn’t be found!');
 			return $feed;
 		}
 
-		if (!($iconElem->item(0) instanceof DOMElement)) {
-			$this->warnLog('fail while downloading icon for feed "' . $feed->name(true) . '": icon URL couldn\'t be found');
-			return $feed;
-		}
-
-		$iconUrl = $iconElem->item(0)->getAttribute('content');
+		$iconUrl = $iconElem->getAttribute('content');
 		if ($iconUrl == '') {
-			$this->warnLog('fail while downloading icon for feed "' . $feed->name(true) . '": icon URL is empty');
+			$this->warnLog('Fail while downloading icon for feed “' . $feed->name(true) . '”: icon URL is empty!');
 			return $feed;
 		}
 
 		curl_setopt($ch, CURLOPT_URL, $iconUrl);
 		$contents = curl_exec($ch);
 		if (!is_string($contents)) {
-			$this->warnLog('fail while downloading icon for feed "' . $feed->name(true) . '": empty contents');
+			$this->warnLog('Fail while downloading icon for feed “' . $feed->name(true) . '”: empty contents!');
 			return $feed;
 		}
 
 		try {
 			$feed->setCustomFavicon($contents, extName: $this->getName(), disallowDelete: true, values: $v, overrideCustomIcon: true);
 		} catch (FreshRSS_UnsupportedImageFormat_Exception $_) {
-			$this->warnLog('failed to set custom favicon for feed "' . $feed->name(true) . '": unsupported image format');
+			$this->warnLog('Failed to set custom favicon for feed “' . $feed->name(true) . '”: unsupported image format!');
 			return $feed;
 		} catch (FreshRSS_Feed_Exception $_) {
-			$this->warnLog('failed to set custom favicon for feed "' . $feed->name(true) . '": feed error');
+			$this->warnLog('Failed to set custom favicon for feed “' . $feed->name(true) . '”: feed error!');
 			return $feed;
 		}
 
@@ -377,6 +394,10 @@ final class YouTubeExtension extends Minz_Extension
 	{
 		$link = $entry->link();
 
+		if ($this->isShort($link)) {
+			$link = $this->convertShortToWatch($link);
+		}
+
 		if (preg_match('#^https?://www\.youtube\.com/watch\?v=|/videos/watch/[0-9a-f-]{36}$#', $link) !== 1) {
 			return $entry;
 		}
@@ -386,6 +407,7 @@ final class YouTubeExtension extends Minz_Extension
 		if (stripos($entry->content(), '<iframe class="youtube-plugin-video"') !== false) {
 			return $entry;
 		}
+
 		if (stripos($link, 'www.youtube.com/watch?v=') !== false) {
 			$html = $this->getHtmlContentForLink($entry, $link);
 		}
@@ -394,7 +416,6 @@ final class YouTubeExtension extends Minz_Extension
 		}
 
 		$entry->_content($html);
-
 		return $entry;
 	}
 
