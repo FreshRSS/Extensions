@@ -155,7 +155,7 @@ final class YouTubeExtension extends Minz_Extension
 				try {
 					$feed->resetCustomFavicon(values: $v);
 				} catch (FreshRSS_Feed_Exception $_) {
-					$this->warnLog('failed to reset favicon for feed "' . $feed->name(true) . '": feed error');
+					$this->warnLog('Failed to reset favicon for feed “' . $feed->name(true) . '”: feed error!');
 				}
 			}
 		}
@@ -208,17 +208,17 @@ final class YouTubeExtension extends Minz_Extension
 				$feed->_attributes($oldAttributes);
 				return $feed;
 			} elseif (file_exists($path)) {
-				$this->debugLog('icon had already been downloaded before for feed "' . $feed->name(true) . '" - returning early!');
+				$this->debugLog('Icon had already been downloaded before for feed “' . $feed->name(true) . '”: returning early!');
 				return $feed;
 			}
 		} catch (FreshRSS_Feed_Exception $_) {
-			$this->warnLog('failed to set custom favicon for feed "' . $feed->name(true) . '": feed error');
+			$this->warnLog('Failed to set custom favicon for feed “' . $feed->name(true) . '”: feed error!');
 			$feed->_attributes($oldAttributes);
 			return $feed;
 		}
 
 		$feed->_attributes($oldAttributes);
-		$this->debugLog('downloading icon for feed "' . $feed->name(true) . '"');
+		$this->debugLog('downloading icon for feed “' . $feed->name(true) . '"');
 
 		$url = $feed->website();
 		/** @var array<int, bool|int|string> */
@@ -243,7 +243,7 @@ final class YouTubeExtension extends Minz_Extension
 		$dom = new DOMDocument();
 
 		if (!is_string($html) || !@$dom->loadHTML($html, LIBXML_NONET | LIBXML_NOERROR | LIBXML_NOWARNING)) {
-			$this->warnLog('fail while downloading icon for feed "' . $feed->name(true) . '": failed to load HTML');
+			$this->warnLog('Fail while downloading icon for feed “' . $feed->name(true) . '”: failed to load HTML!');
 			return $feed;
 		}
 
@@ -251,36 +251,36 @@ final class YouTubeExtension extends Minz_Extension
 		$metaElem = $xpath->query('//meta[@name="twitter:image"]');
 
 		if ($metaElem === false) {
-			$this->warnLog('fail while downloading icon for feed "' . $feed->name(true) . '": icon URL couldn\'t be found');
+			$this->warnLog('Fail while downloading icon for feed “' . $feed->name(true) . '”: icon URL couldn’t be found!');
 			return $feed;
 		}
 		$iconElem = $metaElem->item(0);
 
 		if (!($iconElem instanceof DOMElement)) {
-			$this->warnLog('fail while downloading icon for feed "' . $feed->name(true) . '": icon URL couldn\'t be found');
+			$this->warnLog('Fail while downloading icon for feed “' . $feed->name(true) . '”: icon URL couldn’t be found!');
 			return $feed;
 		}
 
 		$iconUrl = $iconElem->getAttribute('content');
 		if ($iconUrl == '') {
-			$this->warnLog('fail while downloading icon for feed "' . $feed->name(true) . '": icon URL is empty');
+			$this->warnLog('Fail while downloading icon for feed “' . $feed->name(true) . '”: icon URL is empty!');
 			return $feed;
 		}
 
 		curl_setopt($ch, CURLOPT_URL, $iconUrl);
 		$contents = curl_exec($ch);
 		if (!is_string($contents)) {
-			$this->warnLog('fail while downloading icon for feed "' . $feed->name(true) . '": empty contents');
+			$this->warnLog('Fail while downloading icon for feed “' . $feed->name(true) . '”: empty contents!');
 			return $feed;
 		}
 
 		try {
 			$feed->setCustomFavicon($contents, extName: $this->getName(), disallowDelete: true, values: $v, overrideCustomIcon: true);
 		} catch (FreshRSS_UnsupportedImageFormat_Exception $_) {
-			$this->warnLog('failed to set custom favicon for feed "' . $feed->name(true) . '": unsupported image format');
+			$this->warnLog('Failed to set custom favicon for feed “' . $feed->name(true) . '”: unsupported image format!');
 			return $feed;
 		} catch (FreshRSS_Feed_Exception $_) {
-			$this->warnLog('failed to set custom favicon for feed "' . $feed->name(true) . '": feed error');
+			$this->warnLog('Failed to set custom favicon for feed “' . $feed->name(true) . '”: feed error!');
 			return $feed;
 		}
 
