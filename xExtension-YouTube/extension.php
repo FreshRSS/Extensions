@@ -248,19 +248,20 @@ final class YouTubeExtension extends Minz_Extension
 		}
 
 		$xpath = new DOMXPath($dom);
-		$iconElem = $xpath->query('//meta[@name="twitter:image"]');
+		$metaElem = $xpath->query('//meta[@name="twitter:image"]');
 
-		if ($iconElem === false) {
+		if ($metaElem === false) {
+			$this->warnLog('fail while downloading icon for feed "' . $feed->name(true) . '": icon URL couldn\'t be found');
+			return $feed;
+		}
+		$iconElem = $metaElem->item(0);
+
+		if (!($iconElem instanceof DOMElement)) {
 			$this->warnLog('fail while downloading icon for feed "' . $feed->name(true) . '": icon URL couldn\'t be found');
 			return $feed;
 		}
 
-		if (!($iconElem->item(0) instanceof DOMElement)) {
-			$this->warnLog('fail while downloading icon for feed "' . $feed->name(true) . '": icon URL couldn\'t be found');
-			return $feed;
-		}
-
-		$iconUrl = $iconElem->item(0)->getAttribute('content');
+		$iconUrl = $iconElem->getAttribute('content');
 		if ($iconUrl == '') {
 			$this->warnLog('fail while downloading icon for feed "' . $feed->name(true) . '": icon URL is empty');
 			return $feed;
