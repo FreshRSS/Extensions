@@ -22,6 +22,7 @@ return array(
 		'invalid_captcha' => 'Invalid captcha, try again.',
 		'clear_fields' => 'Clear fields',
 		'unsafe_login_warning' => 'Warning: Unsafe autologin is enabled, it is recommended to disable this option in order to prevent bypassing the captcha',
+		'ext_must_be_enabled' => 'The extension must be enabled for the configuration view to work properly.',
 		'help' => array(
 			'turnstile' => '<a target="_blank" href="https://www.cloudflare.com/application-services/products/turnstile/">Turnstile website</a> | <a target="_blank" href="https://www.cloudflare.com/privacypolicy/">Cloudflare privacy policy</a> | <a target="_blank" href="https://www.cloudflare.com/website-terms/">Cloudflare ToS</a>',
 			'recaptcha' => '<a target="_blank" href="https://developers.google.com/recaptcha">reCAPTCHA website</a> | <a target="_blank"href="https://policies.google.com/privacy">Google privacy policy</a> | <a target="_blank" href="https://policies.google.com/terms">Google ToS</a>',

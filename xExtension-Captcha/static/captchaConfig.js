@@ -1,6 +1,6 @@
 'use strict';
 
-/* globals slider, providerConfig, captchaReset, clearFields, init_password_observers */
+/* globals slider, providerConfig, captchaReset, clearFields, init_password_observers, data_auto_leave_validation */
 
 function initCaptchaConfig() {
 	const captchaProvider = document.querySelector('select#captchaProvider');
@@ -14,6 +14,7 @@ function initCaptchaConfig() {
 		const tmpl = document.querySelector(`.captchaTmpl#${provider}`);
 		providerConfig.innerHTML = provider !== 'none' ? commonTmpl.innerHTML + tmpl.innerHTML : '';
 		init_password_observers(document.body);
+		data_auto_leave_validation(document.body);
 	}
 
 	captchaProvider.onchange = onChange;
