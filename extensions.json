@@ -13,17 +13,6 @@
             "directory": "."
         },
         {
-            "name": "Always togglable menu",
-            "author": "nicofrand",
-            "description": "This makes the icon to toggle the menu always shown, even on larger screens.",
-            "version": "1.2",
-            "entrypoint": "TogglableMenu",
-            "type": "user",
-            "url": "https://framagit.org/nicofrand/xextension-togglablemenu",
-            "method": "git",
-            "directory": "."
-        },
-        {
             "name": "ArticleSummary",
             "author": "Liang",
             "description": "A powerful article summarization plugin for FreshRSS that allows users to generate summaries using a language model API conforming to the OpenAI API specification.",
@@ -280,7 +269,7 @@
             "name": "Mark Previous as Read",
             "author": "kalvn",
             "description": "This extension adds a button in the footer of each entry. Clicking this button will mark all previous entries as read.",
-            "version": "1.1.3",
+            "version": "1.1.5",
             "entrypoint": "MarkPreviousAsRead",
             "type": "user",
             "url": "https://github.com/kalvn/freshrss-mark-previous-as-read",
@@ -506,17 +495,6 @@
             "url": "https://github.com/aidistan/freshrss-extensions",
             "method": "git",
             "directory": "xExtension-ThemeModeSynchronizer"
-        },
-        {
-            "name": "ThreePanesView",
-            "author": "nicofrand",
-            "description": "Adds a third vertical pane along the articles list, to display the articles content.",
-            "version": "1.15",
-            "entrypoint": "ThreePanesView",
-            "type": "user",
-            "url": "https://framagit.org/nicofrand/xextension-threepanesview",
-            "method": "git",
-            "directory": "."
         },
         {
             "name": "Title-Wrap",
