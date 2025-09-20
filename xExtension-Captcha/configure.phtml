@@ -2,26 +2,34 @@
 declare(strict_types=1);
 /** @var CaptchaExtension $this */
 
-$config = CaptchaExtension::getConfig();
-
-function value(string $v): string {
-	return 'value="' . $v . '" data-leave-validation="' . $v .'"';
+if (!Minz_ExtensionManager::isExtensionEnabled($this->getName())) {
+	echo '<br /><b>' . _t('ext.form_captcha.ext_must_be_enabled') . '</b>';
+	return;
 }
+
+$config = CaptchaExtension::getConfig();
 ?>
-<form action="<?= _url('extension', 'configure', 'e', urlencode($this->getName())) ?>" method="post" autocomplete="off" spellcheck="false">
+<form
+	action="<?= _url('extension', 'configure', 'e', urlencode($this->getName())) ?>"
+	method="post"
+	autocomplete="off"
+	spellcheck="false"
+	data-auto-leave-validation="1">
+
 	<input type="hidden" name="_csrf" value="<?= FreshRSS_Auth::csrfToken() ?>" />
 
 	<div class="form-group">
 		<label class="group-name"><?= _t('ext.form_captcha.protected_pages') ?></label>
 		<div class="group-controls">
 			<div class="stick">
-				<input type="checkbox" name="protectedPages[0]" value="auth_register"<?= in_array('auth_register', $config['protectedPages'], true) ? 'checked="checked" data-leave-validation="1"' : '' ?> />
-				<label for="protectedPages[0]"><?= _t('ext.form_captcha.pages.register') ?></label>
+				<?php # `auth_register` also protects `user_create` ?>
+				<input type="checkbox" name="protectedPages[]" value="auth_register"<?= in_array('auth_register', $config['protectedPages'], true) ? 'checked="checked"' : '' ?> />
+				<label for="protectedPages[]"><?= _t('ext.form_captcha.pages.register') ?></label>
 			</div>
 			<br />
 			<div class="stick">
-				<input type="checkbox" name="protectedPages[1]" value="auth_formLogin"<?= in_array('auth_formLogin', $config['protectedPages'], true) ? 'checked="checked" data-leave-validation="1"' : '' ?> />
-				<label for="protectedPages[1]"><?= _t('ext.form_captcha.pages.login') ?></label>
+				<input type="checkbox" name="protectedPages[]" value="auth_formLogin"<?= in_array('auth_formLogin', $config['protectedPages'], true) ? 'checked="checked"' : '' ?> />
+				<label for="protectedPages[]"><?= _t('ext.form_captcha.pages.login') ?></label>
 			</div>
 		</div>
 	</div>
@@ -29,7 +37,7 @@ function value(string $v): string {
 	<div class="form-group">
 		<label class="group-name" for="captchaProvider"><?= _t('ext.form_captcha.captcha_provider') ?></label>
 		<div class="group-controls">
-			<select id="captchaProvider" name="captchaProvider" data-leave-validation="<?= $config['captchaProvider'] ?>">
+			<select id="captchaProvider" name="captchaProvider">
 				<option value="none"<?= $config['captchaProvider'] === 'none' ? ' selected="selected"' : '' ?>><?= _t('ext.form_captcha.providers.none') ?></option>
 				<option value="turnstile"<?= $config['captchaProvider'] === 'turnstile' ? ' selected="selected"' : '' ?>>Cloudflare Turnstile</option>
 				<option value="recaptcha-v2"<?= $config['captchaProvider'] === 'recaptcha-v2' ? ' selected="selected"' : '' ?>>reCAPTCHA v2</option>
@@ -43,7 +51,7 @@ function value(string $v): string {
 		<div class="form-group">
 			<label class="group-name" for="provider[siteKey]"><?= _t('ext.form_captcha.providers.site_key.label') ?></label>
 			<div class="group-controls">
-				<input type="text" name="provider[siteKey]" placeholder="<?= _t('ext.form_captcha.providers.site_key.placeholder') ?>" <?= value($config['provider']['siteKey'] ?? '') ?> />
+				<input type="text" name="provider[siteKey]" placeholder="<?= _t('ext.form_captcha.providers.site_key.placeholder') ?>" value="<?= $config['provider']['siteKey'] ?? '' ?>" />
 			</div>
 		</div>
 
@@ -51,8 +59,8 @@ function value(string $v): string {
 			<label class="group-name" for="provider[secretKey]"><?= _t('ext.form_captcha.providers.secret_key.label') ?></label>
 			<div class="group-controls">
 				<div class="stick">
-					<input id="commonSecretKey" type="password" name="provider[secretKey]" placeholder="<?= _t('ext.form_captcha.providers.secret_key.placeholder') ?>" <?= value($config['provider']['secretKey'] ?? '') ?> />
-					<button type="button" class="btn toggle-password" data-toggle="commonSecretKey"><?= _i('key') ?></button>
+					<input type="password" name="provider[secretKey]" placeholder="<?= _t('ext.form_captcha.providers.secret_key.placeholder') ?>" value="<?= $config['provider']['secretKey'] ?? '' ?>" />
+					<button type="button" class="btn toggle-password"><?= _i('key') ?></button>
 				</div>
 			</div>
 		</div>
@@ -60,7 +68,7 @@ function value(string $v): string {
 		<div class="form-group">
 			<label class="group-name" for="sendClientIp"><?= _t('ext.form_captcha.send_client_ip') ?></label>
 			<div class="group-controls">
-				<input type="checkbox" name="sendClientIp"<?= $config['sendClientIp'] ? ' checked="checked" data-leave-validation="1"' : '' ?> />
+				<input type="checkbox" name="sendClientIp"<?= $config['sendClientIp'] ? ' checked="checked"' : '' ?> />
 			</div>
 		</div>
 
