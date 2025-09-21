@@ -13,6 +13,17 @@
             "directory": "."
         },
         {
+            "name": "Always togglable menu",
+            "author": "nicofrand",
+            "description": "This makes the icon to toggle the menu always shown, even on larger screens.",
+            "version": "1.2",
+            "entrypoint": "TogglableMenu",
+            "type": "user",
+            "url": "https://framagit.org/nicofrand/xextension-togglablemenu",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "ArticleSummary",
             "author": "Liang",
             "description": "A powerful article summarization plugin for FreshRSS that allows users to generate summaries using a language model API conforming to the OpenAI API specification.",
@@ -159,7 +170,7 @@
             "name": "Form Captcha",
             "author": "Inverle",
             "description": "Protect register/login forms with captcha",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "entrypoint": "Captcha",
             "type": "system",
             "url": "https://github.com/FreshRSS/Extensions",
@@ -181,7 +192,7 @@
             "name": "FreshRss FlareSolverr",
             "author": "James Ravenscroft",
             "description": "Use a Flaresolverr instance to bypass cloudflare security checks",
-            "version": "0.4.2",
+            "version": "0.4.3",
             "entrypoint": "FlareSolverr",
             "type": "system",
             "url": "https://github.com/ravenscroftj/freshrss-flaresolverr-extension",
@@ -495,6 +506,17 @@
             "url": "https://github.com/aidistan/freshrss-extensions",
             "method": "git",
             "directory": "xExtension-ThemeModeSynchronizer"
+        },
+        {
+            "name": "ThreePanesView",
+            "author": "nicofrand",
+            "description": "Adds a third vertical pane along the articles list, to display the articles content.",
+            "version": "1.15",
+            "entrypoint": "ThreePanesView",
+            "type": "user",
+            "url": "https://framagit.org/nicofrand/xextension-threepanesview",
+            "method": "git",
+            "directory": "."
         },
         {
             "name": "Title-Wrap",
