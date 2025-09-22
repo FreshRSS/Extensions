@@ -13,4 +13,3 @@ return array(
 		'use_nocookie' => 'Używaj domeny bez ciasteczek www.youtube-nocookie.com',
 	),
 );
-

@@ -62,7 +62,8 @@ final class ImageProxyExtension extends Minz_Extension {
 			FreshRSS_Context::userConf()->_attribute('image_proxy_url', Minz_Request::paramString('image_proxy_url', plaintext: true) ?: self::PROXY_URL);
 			FreshRSS_Context::userConf()->_attribute('image_proxy_scheme_http', Minz_Request::paramBoolean('image_proxy_scheme_http'));
 			FreshRSS_Context::userConf()->_attribute('image_proxy_scheme_https', Minz_Request::paramBoolean('image_proxy_scheme_https'));
-			FreshRSS_Context::userConf()->_attribute('image_proxy_scheme_default', Minz_Request::paramString('image_proxy_scheme_default', plaintext: true) ?: self::SCHEME_DEFAULT);
+			FreshRSS_Context::userConf()->_attribute('image_proxy_scheme_default',
+				Minz_Request::paramString('image_proxy_scheme_default', plaintext: true) ?: self::SCHEME_DEFAULT);
 			FreshRSS_Context::userConf()->_attribute('image_proxy_scheme_include', Minz_Request::paramBoolean('image_proxy_scheme_include'));
 			FreshRSS_Context::userConf()->_attribute('image_proxy_url_encode', Minz_Request::paramBoolean('image_proxy_url_encode'));
 			FreshRSS_Context::userConf()->save();
@@ -143,7 +144,8 @@ final class ImageProxyExtension extends Minz_Extension {
 				$newSrc = self::getProxyImageUri($src);
 				/*
 				Due to the URL change, FreshRSS is not aware of already rendered enclosures.
-				Adding data-xextension-imageproxy-original-src / srcset ensures that original URLs are present in the content for the renderer check FreshRSS_Entry->containsLink.
+				Adding data-xextension-imageproxy-original-src / srcset ensures that
+				original URLs are present in the content for the renderer check FreshRSS_Entry->containsLink.
 				*/
 				$img->setAttribute('data-xextension-imageproxy-original-src', $src);
 				$img->setAttribute('src', $newSrc);
