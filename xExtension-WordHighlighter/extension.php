@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 final class WordHighlighterExtension extends Minz_Extension
 {
-	const JSON_ENCODE_CONF = JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR;
+	private const JSON_ENCODE_CONF = JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR;
 
 	public string $word_highlighter_conf = 'test';
 	public string $permission_problem = '';
@@ -14,8 +14,7 @@ final class WordHighlighterExtension extends Minz_Extension
 	public bool $separate_word_search = false;
 
 	#[\Override]
-	public function init(): void
-	{
+	public function init(): void {
 		$this->registerTranslates();
 
 		// register CSS for WordHighlighter:
@@ -36,8 +35,7 @@ final class WordHighlighterExtension extends Minz_Extension
 	}
 
 	#[\Override]
-	public function handleConfigureAction(): void
-	{
+	public function handleConfigureAction(): void {
 		$this->registerTranslates();
 
 		$current_user = Minz_Session::paramString('currentUser');
@@ -48,11 +46,9 @@ final class WordHighlighterExtension extends Minz_Extension
 		if (!file_exists($configFileJson) && !is_writable($staticPath)) {
 			$tmpPath = explode(EXTENSIONS_PATH . '/', $staticPath);
 			$this->permission_problem = $tmpPath[1] . '/';
-
 		} elseif (file_exists($configFileJson) && !is_writable($configFileJson)) {
 			$tmpPath = explode(EXTENSIONS_PATH . '/', $configFileJson);
 			$this->permission_problem = $tmpPath[1];
-
 		} elseif (Minz_Request::isPost()) {
 			$configWordList = html_entity_decode(Minz_Request::paramString('words_list'));
 
@@ -85,15 +81,13 @@ final class WordHighlighterExtension extends Minz_Extension
 				$this->case_sensitive = (bool) ($confJson['case_sensitive'] ?? false);
 				$this->separate_word_search = (bool) ($confJson['separate_word_search'] ?? false);
 				$this->word_highlighter_conf = implode("\n", (array) ($confJson['words'] ?? []));
-
-			} catch (Exception $exception) {
+			} catch (Exception $exception) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
 				// probably nothing to do needed
 			}
 		}
 	}
 
-	private function jsonToJs(string $jsonStr): string
-	{
+	private function jsonToJs(string $jsonStr): string {
 		$js = "window.WordHighlighterConf = " .
 		$jsonStr . ";\n" .
 		"window.WordHighlighterConf.enable_logs && console.log('WordHighlighter: loaded user config:', window.WordHighlighterConf);";

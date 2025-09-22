@@ -34,8 +34,7 @@ final class YouTubeExtension extends Minz_Extension
 	 * Initialize this extension
 	 */
 	#[\Override]
-	public function init(): void
-	{
+	public function init(): void {
 		$this->registerHook('entry_before_display', [$this, 'embedYouTubeVideo']);
 		$this->registerHook('check_url_before_add', [self::class, 'convertYoutubeFeedUrl']);
 		$this->registerHook('custom_favicon_hash', [$this, 'iconHashParams']);
@@ -289,8 +288,7 @@ final class YouTubeExtension extends Minz_Extension
 		return $feed;
 	}
 
-	public static function convertYoutubeFeedUrl(string $url): string
-	{
+	public static function convertYoutubeFeedUrl(string $url): string {
 		$matches = [];
 
 		if (preg_match('#^https?://www\.youtube\.com/channel/([0-9a-zA-Z_-]{6,36})#', $url, $matches) === 1) {
@@ -309,8 +307,7 @@ final class YouTubeExtension extends Minz_Extension
 	 * Do not call that in your extensions init() method, it can't be used there.
 	 * @throws FreshRSS_Context_Exception
 	 */
-	public function loadConfigValues(): void
-	{
+	public function loadConfigValues(): void {
 		if (!class_exists('FreshRSS_Context', false) || !FreshRSS_Context::hasUserConf()) {
 			return;
 		}
@@ -345,8 +342,7 @@ final class YouTubeExtension extends Minz_Extension
 	 * Returns the width in pixel for the YouTube player iframe.
 	 * You have to call loadConfigValues() before this one, otherwise you get default values.
 	 */
-	public function getWidth(): int
-	{
+	public function getWidth(): int {
 		return $this->width;
 	}
 
@@ -354,8 +350,7 @@ final class YouTubeExtension extends Minz_Extension
 	 * Returns the height in pixel for the YouTube player iframe.
 	 * You have to call loadConfigValues() before this one, otherwise you get default values.
 	 */
-	public function getHeight(): int
-	{
+	public function getHeight(): int {
 		return $this->height;
 	}
 
@@ -363,8 +358,7 @@ final class YouTubeExtension extends Minz_Extension
 	 * Returns whether this extension displays the content of the YouTube feed.
 	 * You have to call loadConfigValues() before this one, otherwise you get default values.
 	 */
-	public function isShowContent(): bool
-	{
+	public function isShowContent(): bool {
 		return $this->showContent;
 	}
 
@@ -372,8 +366,7 @@ final class YouTubeExtension extends Minz_Extension
 	 * Returns whether the automatic icon download option is enabled.
 	 * You have to call loadConfigValues() before this one, otherwise you get default values.
 	 */
-	public function isDownloadIcons(): bool
-	{
+	public function isDownloadIcons(): bool {
 		return $this->downloadIcons;
 	}
 
@@ -381,8 +374,7 @@ final class YouTubeExtension extends Minz_Extension
 	 * Returns if this extension should use youtube-nocookie.com instead of youtube.com.
 	 * You have to call loadConfigValues() before this one, otherwise you get default values.
 	 */
-	public function isUseNoCookieDomain(): bool
-	{
+	public function isUseNoCookieDomain(): bool {
 		return $this->useNoCookie;
 	}
 
@@ -390,8 +382,7 @@ final class YouTubeExtension extends Minz_Extension
 	 * Inserts the YouTube video iframe into the content of an entry, if the entries link points to a YouTube watch URL.
 	 * @throws FreshRSS_Context_Exception
 	 */
-	public function embedYouTubeVideo(FreshRSS_Entry $entry): FreshRSS_Entry
-	{
+	public function embedYouTubeVideo(FreshRSS_Entry $entry): FreshRSS_Entry {
 		$link = $entry->link();
 
 		if ($this->isShort($link)) {
@@ -410,8 +401,7 @@ final class YouTubeExtension extends Minz_Extension
 
 		if (stripos($link, 'www.youtube.com/watch?v=') !== false) {
 			$html = $this->getHtmlContentForLink($entry, $link);
-		}
-		else { //peertube
+		} else { //peertube
 			$html = $this->getHtmlPeerTubeContentForLink($entry, $link);
 		}
 
@@ -422,13 +412,12 @@ final class YouTubeExtension extends Minz_Extension
 	/**
 	 * Returns an HTML <iframe> for a given Youtube watch URL (www.youtube.com/watch?v=)
 	 */
-	public function getHtmlContentForLink(FreshRSS_Entry $entry, string $link): string
-	{
+	public function getHtmlContentForLink(FreshRSS_Entry $entry, string $link): string {
 		$domain = 'www.youtube.com';
 		if ($this->useNoCookie) {
 			$domain = 'www.youtube-nocookie.com';
 		}
-		$url = str_replace('//www.youtube.com/watch?v=', '//'.$domain.'/embed/', $link);
+		$url = str_replace('//www.youtube.com/watch?v=', '//' . $domain . '/embed/', $link);
 		$url = str_replace('http://', 'https://', $url);
 
 		return $this->getHtml($entry, $url);
@@ -437,8 +426,7 @@ final class YouTubeExtension extends Minz_Extension
 	/**
 	* Returns an HTML <iframe> for a given PeerTube watch URL
 	*/
-	public function getHtmlPeerTubeContentForLink(FreshRSS_Entry $entry, string $link): string
-	{
+	public function getHtmlPeerTubeContentForLink(FreshRSS_Entry $entry, string $link): string {
 		$url = str_replace('/watch', '/embed', $link);
 
 		return $this->getHtml($entry, $url);
@@ -447,8 +435,7 @@ final class YouTubeExtension extends Minz_Extension
 	/**
 	 * Returns an HTML <iframe> for a given URL for the configured width and height, with content ignored, appended or formatted.
 	 */
-	public function getHtml(FreshRSS_Entry $entry, string $url): string
-	{
+	public function getHtml(FreshRSS_Entry $entry, string $url): string {
 		$content = '';
 
 		$iframe = '<iframe class="youtube-plugin-video"
@@ -465,8 +452,7 @@ final class YouTubeExtension extends Minz_Extension
 			$doc->recover = true;
 			$doc->strictErrorChecking = false;
 
-			if ($doc->loadHTML('<?xml encoding="utf-8" ?>' . $entry->content()))
-			{
+			if ($doc->loadHTML('<?xml encoding="utf-8" ?>' . $entry->content())) {
 				$xpath = new DOMXPath($doc);
 
 				/** @var DOMNodeList<DOMElement> $titles */
@@ -494,16 +480,15 @@ final class YouTubeExtension extends Minz_Extension
 				$content .= $iframe;
 
 				if ($descriptions->length > 0 && $descriptions[0] instanceof DOMNode) {
-					$content .= '<p class="enclosure-description">' . nl2br(htmlspecialchars($descriptions[0]->nodeValue ?? '', ENT_COMPAT, 'UTF-8'), use_xhtml: true) . '</p>';
+					$content .= '<p class="enclosure-description">' .
+						nl2br(htmlspecialchars($descriptions[0]->nodeValue ?? '', ENT_COMPAT, 'UTF-8'), use_xhtml: true) . '</p>';
 				}
 
 				$content .= "</div>\n";
-			}
-			else {
+			} else {
 				$content = $iframe . $entry->content();
 			}
-		}
-		else {
+		} else {
 			$content = $iframe;
 		}
 
@@ -521,8 +506,7 @@ final class YouTubeExtension extends Minz_Extension
 	 * @throws Minz_PermissionDeniedException
 	 */
 	#[\Override]
-	public function handleConfigureAction(): void
-	{
+	public function handleConfigureAction(): void {
 		$this->registerTranslates();
 
 		if (Minz_Request::isPost()) {
