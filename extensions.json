@@ -508,6 +508,17 @@
             "directory": "xExtension-ThemeModeSynchronizer"
         },
         {
+            "name": "ThreePanesView",
+            "author": "nicofrand",
+            "description": "Adds a third vertical pane along the articles list, to display the articles content.",
+            "version": "1.15",
+            "entrypoint": "ThreePanesView",
+            "type": "user",
+            "url": "https://framagit.org/nicofrand/xextension-threepanesview",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "Title-Wrap",
             "author": "₣rans de Jonge, Joris Kinable",
             "description": "Applies a line-wrap to long article titles, as opposed to truncating the title when it overflows its display area.",
