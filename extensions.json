@@ -599,7 +599,7 @@
             "name": "YouTube Video Feed",
             "author": "Kevin Papst, Inverle",
             "description": "Embed YouTube feeds inside article content.",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "entrypoint": "YouTube",
             "type": "user",
             "url": "https://github.com/FreshRSS/Extensions",
