@@ -174,3 +174,7 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@daften](https://github.com/daften)  
 
 * [Share To Linkwarden](https://github.com/daften/xExtension-ShareToLinkwarden/): Allows sharing items directly to a self-hosted Linkwarden instance.
+
+### By [@fengchang](https://github.com/fengchang)
+
+* [Feed Digest](https://github.com/fengchang/xExtension-FeedDigest): Automatically summarize RSS articles using OpenAI-compatible LLM APIs.
