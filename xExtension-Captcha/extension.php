@@ -113,6 +113,10 @@ final class CaptchaExtension extends Minz_Extension {
 				'hcaptcha' => 'https://hcaptcha.com/siteverify',
 				default => '',
 			};
+			if ($siteverify_url === '') {
+				Minz_Error::error(500);
+				return false;
+			}
 			$response_param = match ($provider) {
 				'turnstile' => 'cf-turnstile-response',
 				'recaptcha-v2' => 'g-recaptcha-response',

@@ -226,7 +226,7 @@ final class YouTubeExtension extends Minz_Extension
 		$curlOptions = $feed->attributeArray('curl_params') ?? [];
 
 		$ch = curl_init();
-		if ($ch === false) {
+		if ($ch === false || $url === '') {
 			return $feed;
 		}
 
