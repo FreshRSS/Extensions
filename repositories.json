@@ -106,4 +106,7 @@
 }, {
 	"url": "https://github.com/daften/xExtension-ShareToLinkwarden",
 	"type": "git"
+}, {
+	"url": "https://github.com/fengchang/xExtension-FeedDigest",
+	"type": "git"
 }]
