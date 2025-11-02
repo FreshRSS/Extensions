@@ -123,6 +123,17 @@
             "directory": "."
         },
         {
+            "name": "Feed Digest",
+            "author": "Chang Feng",
+            "description": "Automatically summarizes newly retrieved RSS articles using LLM APIs (OpenAI-compatible)",
+            "version": "1.0.0",
+            "entrypoint": "FeedDigest",
+            "type": "system",
+            "url": "https://github.com/fengchang/xExtension-FeedDigest",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "Feed Priority Shortcut",
             "author": "Aidi Stan",
             "description": "Set up visibilities/priorities of your feeds easily",
