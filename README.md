@@ -2,7 +2,7 @@
 
 This repository contains all the official [FreshRSS](https://github.com/FreshRSS/FreshRSS) extensions.
 
-To install an extension, download [the extension archive](https://github.com/FreshRSS/Extensions/archive/master.zip) first and extract it on your PC.
+To install an extension, git clone or download [the extension archive](https://github.com/FreshRSS/Extensions/archive/refs/heads/main.zip) and extract it on your computer.
 Then, upload the specific extension(s) you want on your server.
 Extensions must be in the `./extensions` directory of your FreshRSS installation.
 
@@ -52,7 +52,7 @@ There are some FreshRSS extensions out there, developed by community members:
 
 ### By [@Lapineige](https://github.com/lapineige), [@hkcomori](https://github.com/hkcomori)
 
-* [Reading Time](https://github.com/FreshRSS/Extensions/tree/master/xExtension-ReadingTime): Add a reading time estimation next to each article.
+* [Reading Time](https://github.com/FreshRSS/Extensions/tree/main/xExtension-ReadingTime): Add a reading time estimation next to each article.
 
 
 ### By [@Korbak](https://github.com/Korbak)
@@ -167,11 +167,11 @@ There are some FreshRSS extensions out there, developed by community members:
 
 * [FreshVibes](https://github.com/tryallthethings/freshvibes): A fully customizable iGoogle / Netvibes-like dashboard view
 
-### By [@pe1uca](https://github.com/pe1uca)  
+### By [@pe1uca](https://github.com/pe1uca)
 
-* [Rate limiter](https://github.com/pe1uca/xExtension-RateLimiter/): Prevents FreshRSS from making too many requests to the same site in a defined amount of time.  
+* [Rate limiter](https://github.com/pe1uca/xExtension-RateLimiter/): Prevents FreshRSS from making too many requests to the same site in a defined amount of time.
 
-### By [@daften](https://github.com/daften)  
+### By [@daften](https://github.com/daften)
 
 * [Share To Linkwarden](https://github.com/daften/xExtension-ShareToLinkwarden/): Allows sharing items directly to a self-hosted Linkwarden instance.
 
