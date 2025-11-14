@@ -5,6 +5,9 @@ on:
     - cron: '11 11 * * *'
   workflow_dispatch: ~
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -12,7 +15,7 @@ jobs:
       FILE: extensions.json
 
     steps:
-      - name: Checkout source code
+      - name: Checkout source code # zizmor: ignore[artipacked] Credentials are needed later
         uses: actions/checkout@v5
 
       - name: Build JSON file
