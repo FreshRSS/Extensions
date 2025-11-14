@@ -36,7 +36,7 @@ If you are having trouble with logging in after configuring the extension, you c
 
 ## Changelog
 
-* 1.0.1 [2025-??-??]
+* 1.0.1 [2025-09-20]
 	* Improvements
 		* The user is now notified that the extension must be enabled for the configuration view to work properly. (due to JS)
 	* Security
