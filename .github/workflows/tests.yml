@@ -100,6 +100,7 @@ jobs:
       run: |
         cd bin ;
         wget -q 'https://github.com/crate-ci/typos/releases/download/v1.16.21/typos-v1.16.21-x86_64-unknown-linux-musl.tar.gz' &&
+        [[ "$(sha256sum *.tar.gz | cut -d " " -f 1)" == "a9bc4f49617409ed4ae0f253dd319f5871c6d7a16c6f35bb5fe687572e0f071f" ]] &&
         tar -xvf *.tar.gz './typos' &&
         chmod +x typos &&
         rm *.tar.gz ;
