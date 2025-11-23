@@ -6,6 +6,7 @@ class FreshExtension_user_Controller extends FreshRSS_user_Controller {
 	 * @throws FreshRSS_Context_Exception
 	 * @throws Minz_PermissionDeniedException
 	 */
+	#[\Override]
 	public function createAction(): void {
 		if (!CaptchaExtension::initCaptcha()) {
 			return;
