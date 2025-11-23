@@ -1,11 +1,14 @@
 <?php
 declare(strict_types=1);
 
+// TODO: Use another approach than class inheritance to allow multiple extensions to work with the same controller.
+// phpcs:ignore Generic.Classes.DuplicateClassName.Found
 class FreshExtension_auth_Controller extends FreshRSS_auth_Controller {
 	/**
 	 * @throws FreshRSS_Context_Exception
 	 * @throws Minz_PermissionDeniedException
 	 */
+	#[\Override]
 	public function formLoginAction(): void {
 		if (!CaptchaExtension::initCaptcha()) {
 			return;
@@ -19,6 +22,7 @@ class FreshExtension_auth_Controller extends FreshRSS_auth_Controller {
 	/**
 	 * @throws FreshRSS_Context_Exception
 	 */
+	#[\Override]
 	public function registerAction(): void {
 		// Checking for valid captcha is not needed here since this isn't a POST action
 		$csp = CaptchaExtension::loadDependencies();

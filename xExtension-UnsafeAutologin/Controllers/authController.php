@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+// TODO: Use another approach than class inheritance to allow multiple extensions to work with the same controller.
+// phpcs:ignore Generic.Classes.DuplicateClassName.Found
 class FreshExtension_auth_Controller extends FreshRSS_auth_Controller {
 	/**
 	 * @throws Minz_ConfigurationException
@@ -19,6 +21,7 @@ class FreshExtension_auth_Controller extends FreshRSS_auth_Controller {
 	 * @throws Minz_ConfigurationException
 	 * @throws Minz_PermissionDeniedException
 	 */
+	#[\Override]
 	public function loginAction(): void {
 		if (FreshRSS_Context::systemConf()->auth_type !== 'form') {
 			parent::loginAction();
@@ -41,7 +44,7 @@ class FreshExtension_auth_Controller extends FreshRSS_auth_Controller {
 			return;
 		}
 
-		$config = get_user_configuration($username);
+		$config = FreshRSS_UserConfiguration::getForUser($username);
 
 		$s = $config->passwordHash ?? '';
 		$ok = password_verify($password, $s);
@@ -66,7 +69,7 @@ class FreshExtension_auth_Controller extends FreshRSS_auth_Controller {
 			return;
 		}
 
-		Minz_Log::warning('Unsafe password mismatch for user ' . $username, USERS_PATH . '/' . $username . '/' . 'log.txt');
+		Minz_Log::warning('Unsafe password mismatch for user ' . $username, USERS_PATH . '/' . $username . '/log.txt');
 		Minz_Request::bad(
 			_t('feedback.auth.login.invalid'),
 			['c' => 'index', 'a' => 'index']
