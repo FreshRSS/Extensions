@@ -15,8 +15,8 @@ final class CaptchaExtension extends Minz_Extension {
 	public function init(): void {
 		$this->registerTranslates();
 		$this->registerHook('before_login_btn', [$this, 'captchaWidget']);
-		$this->registerController('authCaptcha');
-		$this->registerController('userCaptcha');
+		$this->registerController('auth');
+		$this->registerController('user');
 
 		self::$recaptcha_v3_js = $this->getFileUrl('recaptcha-v3.js');
 

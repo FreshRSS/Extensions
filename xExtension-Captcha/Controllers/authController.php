@@ -1,7 +1,9 @@
 <?php
 declare(strict_types=1);
 
-class FreshExtension_authCaptcha_Controller extends FreshRSS_auth_Controller {
+// TODO: Use another approach than class inheritance to allow multiple extensions to work with the same controller.
+// phpcs:ignore Generic.Classes.DuplicateClassName.Found
+class FreshExtension_auth_Controller extends FreshRSS_auth_Controller {
 	/**
 	 * @throws FreshRSS_Context_Exception
 	 * @throws Minz_PermissionDeniedException

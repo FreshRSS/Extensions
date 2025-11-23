@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+// TODO: Use another approach than class inheritance to allow multiple extensions to work with the same controller.
+// phpcs:ignore Generic.Classes.DuplicateClassName.Found
 class FreshExtension_auth_Controller extends FreshRSS_auth_Controller {
 	/**
 	 * @throws Minz_ConfigurationException
