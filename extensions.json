@@ -574,6 +574,17 @@
             "directory": "."
         },
         {
+            "name": "Unsafe Autologin",
+            "author": "Inverle",
+            "description": "Brings back removed unsafe autologin feature from FreshRSS",
+            "version": "1.0.0",
+            "entrypoint": "UnsafeAutologin",
+            "type": "system",
+            "url": "https://github.com/FreshRSS/Extensions",
+            "method": "git",
+            "directory": "xExtension-UnsafeAutologin"
+        },
+        {
             "name": "Wallabag Button",
             "author": "Joedmin",
             "description": "Add articles to Wallabag with one simple button click or a keyboard shortcut.",
