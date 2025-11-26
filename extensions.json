@@ -49,7 +49,7 @@
             "name": "AutoTTL",
             "author": "Magnus Kokk",
             "description": "A FreshRSS extension for automatic feed refresh TTL based on the average frequency of entries.",
-            "version": "0.5.9",
+            "version": "0.6.0",
             "entrypoint": "AutoTTL",
             "type": "user",
             "url": "https://github.com/mgnsk/FreshRSS-AutoTTL",
@@ -262,6 +262,17 @@
             "entrypoint": "KagiSummarizer",
             "type": "user",
             "url": "https://code.sitosis.com/rudism/freshrss-kagi-summarizer",
+            "method": "git",
+            "directory": "."
+        },
+        {
+            "name": "Karakeep Button",
+            "author": "veverkap",
+            "description": "Add FreshRSS articles to Karakeep with one simple button click/keyboard shortcut.",
+            "version": "0.11",
+            "entrypoint": "KarakeepButton",
+            "type": "user",
+            "url": "https://github.com/veverkap/xExtension-karakeep-button",
             "method": "git",
             "directory": "."
         },

@@ -109,4 +109,7 @@
 }, {
 	"url": "https://github.com/fengchang/xExtension-FeedDigest",
 	"type": "git"
+}, {
+	"url": "https://github.com/veverkap/xExtension-karakeep-button",
+	"type": "git"
 }]
