@@ -184,3 +184,7 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@fengchang](https://github.com/fengchang)
 
 * [Feed Digest](https://github.com/fengchang/xExtension-FeedDigest): Automatically summarize RSS articles using OpenAI-compatible LLM APIs.
+
+### By [@veverkap](https://github.com/veverkap/)
+
+* [Karakeep Button](https://github.com/veverkap/xExtension-karakeep-button): Add articles to a selected Karakeep instance with one simple button click or a keyboard shortcut.
