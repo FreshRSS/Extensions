@@ -25,6 +25,10 @@ composer run-script phpstan-third-party
 
 There are some FreshRSS extensions out there, developed by community members:
 
+### By [@georgedorn](https://github.com/georgedorn), [Web](https://gdorn.circuitlocution.com/)
+
+* [Youtube](xExtension-YouTube-wide) shows YouTube videos inline in the feed, with scaling width to fill the pane.
+
 ### By [@kevinpapst](https://github.com/kevinpapst), [Web](https://www.kevinpapst.de/)
 
 * [Youtube](xExtension-YouTube) shows YouTube videos inline in the feed

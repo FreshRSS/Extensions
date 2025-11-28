@@ -1,0 +1,9 @@
+div.content:has(div.text:has(iframe.youtube-plugin-video)) > header {
+	display: none;
+}
+
+iframe.youtube-plugin-video {
+	width: 100%;
+	height: 100%;
+	aspect-ratio: 16 / 9;
+}
