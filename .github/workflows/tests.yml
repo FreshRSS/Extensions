@@ -20,7 +20,7 @@ jobs:
 
     steps:
     - name: Git checkout source code
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
       with:
         path: Extensions
         persist-credentials: false
@@ -50,7 +50,7 @@ jobs:
       run: composer run-script phpcs
 
     - name: Git checkout FreshRSS source code
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
       with:
         repository: FreshRSS/FreshRSS
         path: FreshRSS
