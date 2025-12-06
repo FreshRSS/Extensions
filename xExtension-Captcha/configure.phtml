@@ -71,12 +71,6 @@ $config = CaptchaExtension::getConfig();
 				<input type="checkbox" name="sendClientIp"<?= $config['sendClientIp'] ? ' checked="checked"' : '' ?> />
 			</div>
 		</div>
-
-		<?php if (FreshRSS_Context::systemConf()->unsafe_autologin_enabled): ?>
-			<strong>
-				<font color="red"><?= _t('ext.form_captcha.unsafe_login_warning') ?></font>
-			</strong>
-		<?php endif ?>
 	</template>
 
 	<template class="captchaTmpl" id="turnstile">
