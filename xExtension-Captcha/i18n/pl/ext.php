@@ -21,7 +21,6 @@ return array(
 		),
 		'invalid_captcha' => 'Nieprawidłowa captcha. Spróbuj ponownie.',
 		'clear_fields' => 'Wyczyść pola',
-		'unsafe_login_warning' => 'Uwaga: Niebezpieczne automatyczne logowanie jest włączone, zalecane jest wyłączenie tej opcji, aby uniemożliwić obejście captchy',
 		'ext_must_be_enabled' => 'Rozszerzenie musi być włączone aby widok konfiguracji działał prawidłowo.',
 		'help' => array(
 			'turnstile' => '<a target="_blank" href="https://www.cloudflare.com/pl-pl/application-services/products/turnstile/">Witryna Turnstile</a> | <a target="_blank" href="https://www.cloudflare.com/pl-pl/privacypolicy/">Polityka prywatności Cloudflare</a> | <a target="_blank" href="https://www.cloudflare.com/pl-pl/website-terms/">Warunki użytkowania Cloudflare</a>',
