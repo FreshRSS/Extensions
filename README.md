@@ -53,7 +53,6 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [Nicolas Frandeboeuf](https://framagit.org/nicofrand)
 
 * [ThreePanesView](https://framagit.org/nicofrand/xextension-threepanesview): [Adds a third vertical pane along the articles list, to display the articles content](https://nicofrand.eu/freshrss-extension-threepanesview/).
-* [TogglableMenu](https://framagit.org/nicofrand/xextension-togglablemenu): Makes the menu always togglable, even on larger screens.
 
 
 ### By [@Lapineige](https://github.com/lapineige), [@hkcomori](https://github.com/hkcomori)
