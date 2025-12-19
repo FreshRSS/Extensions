@@ -38,7 +38,7 @@
             "name": "Auto Refresh",
             "author": "Essa AlAwadi",
             "description": "Automatically refreshes the RSS feed when there is no activity",
-            "version": "1.3",
+            "version": "1.4",
             "entrypoint": "AutoRefresh",
             "type": "user",
             "url": "https://github.com/Eisa01/FreshRSS---Auto-Refresh-Extension",
