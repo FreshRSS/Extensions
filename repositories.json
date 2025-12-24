@@ -112,4 +112,7 @@
 }, {
 	"url": "https://github.com/veverkap/xExtension-karakeep-button",
 	"type": "git"
+},  {
+	"url": "https://github.com/civilblur/youlag",
+	"type": "git"
 }]
