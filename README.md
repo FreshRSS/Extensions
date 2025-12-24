@@ -188,3 +188,7 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@veverkap](https://github.com/veverkap/)
 
 * [Karakeep Button](https://github.com/veverkap/xExtension-karakeep-button): Add articles to a selected Karakeep instance with one simple button click or a keyboard shortcut.
+
+### By [@civilblur](https://github.com/civilblur/)
+
+* [Youlag](https://github.com/civilblur/youlag): Browse your YouTube feed through a video-focused interface that includes quality-of-life features.
