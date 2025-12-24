@@ -629,17 +629,6 @@
             "directory": "xExtension-WordHighlighter"
         },
         {
-            "name": "Youlag",
-            "author": "civilblur",
-            "description": "Browse your YouTube feed through a video-focused interface that includes quality-of-life features.",
-            "version": "4.0.0",
-            "entrypoint": "Youlag",
-            "type": "user",
-            "url": "https://github.com/civilblur/youlag",
-            "method": "git",
-            "directory": "xExtension-Youlag"
-        },
-        {
             "name": "YouTube Video Feed",
             "author": "Kevin Papst, Inverle",
             "description": "Embed YouTube feeds inside article content.",
@@ -660,6 +649,17 @@
             "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
             "method": "git",
             "directory": "xExtension-YouTubeChannel2RssFeed"
+        },
+        {
+            "name": "Youlag",
+            "author": "civilblur",
+            "description": "Youlag delivers a video-focused browsing experience with a sleek theme and quality-of-life features.",
+            "version": "4.0.1",
+            "entrypoint": "Youlag",
+            "type": "user",
+            "url": "https://github.com/civilblur/youlag",
+            "method": "git",
+            "directory": "."
         }
     ]
 }
