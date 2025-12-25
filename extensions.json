@@ -653,8 +653,8 @@
         {
             "name": "Youlag",
             "author": "civilblur",
-            "description": "Youlag delivers a video-focused browsing experience with a sleek theme and quality-of-life features.",
-            "version": "4.0.1",
+            "description": "Browse YouTube RSS feeds through a modern video interface that incorporates quality-of-life features.",
+            "version": "4.0.2",
             "entrypoint": "Youlag",
             "type": "user",
             "url": "https://github.com/civilblur/youlag",
