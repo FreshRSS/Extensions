@@ -13,17 +13,6 @@
             "directory": "."
         },
         {
-            "name": "Always togglable menu",
-            "author": "nicofrand",
-            "description": "This makes the icon to toggle the menu always shown, even on larger screens.",
-            "version": "1.2",
-            "entrypoint": "TogglableMenu",
-            "type": "user",
-            "url": "https://framagit.org/nicofrand/xextension-togglablemenu",
-            "method": "git",
-            "directory": "."
-        },
-        {
             "name": "ArticleSummary",
             "author": "Liang",
             "description": "A powerful article summarization plugin for FreshRSS that allows users to generate summaries using a language model API conforming to the OpenAI API specification.",
