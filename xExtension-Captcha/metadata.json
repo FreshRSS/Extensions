@@ -2,7 +2,7 @@
 	"name": "Form Captcha",
 	"author": "Inverle",
 	"description": "Protect register/login forms with captcha",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"entrypoint": "Captcha",
 	"type": "system"
 }

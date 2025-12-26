@@ -50,6 +50,7 @@
         "ext-tokenizer": "*",
         "ext-xmlwriter": "*",
         "phpstan/phpstan": "^2",
+        "phpstan/phpstan-deprecation-rules": "^2",
         "phpstan/phpstan-strict-rules": "^2",
         "squizlabs/php_codesniffer": "^4"
     },
