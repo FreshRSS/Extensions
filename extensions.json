@@ -643,7 +643,7 @@
             "name": "Youlag",
             "author": "civilblur",
             "description": "Browse YouTube RSS feeds through a modern video interface that incorporates quality-of-life features.",
-            "version": "4.0.2",
+            "version": "4.0.3",
             "entrypoint": "Youlag",
             "type": "user",
             "url": "https://github.com/civilblur/youlag",
