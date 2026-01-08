@@ -162,7 +162,7 @@ There are some FreshRSS extensions out there, developed by community members:
 
 ### By [@LiangWei88](https://github.com/LiangWei88)
 
-* [ArticleSummary](https://github.com/LiangWei88/xExtension-ArticleSummary): A powerful article summarization plugin for FreshRSS that allows users to generate summaries using a language model API conforming to the OpenAI API specification.
+* [ArticleSummary](https://github.com/LiangWei88/xExtension-ArticleSummary): Generate article summaries using OpenAI-compatible language model APIs. Supports both OpenAI and Ollama providers with a user-friendly configuration interface.
 
 ### By [@Niehztog](https://github.com/Niehztog)
 
