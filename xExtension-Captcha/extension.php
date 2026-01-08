@@ -35,7 +35,8 @@ final class CaptchaExtension extends Minz_Extension {
 	}
 
 	public static function getClientIp(): string {
-		$ip = checkTrustedIP() ? ($_SERVER['HTTP_X_REAL_IP'] ?? connectionRemoteAddress()) : connectionRemoteAddress();
+		$ip = FreshRSS_http_Util::checkTrustedIP() ?
+			($_SERVER['HTTP_X_REAL_IP'] ?? Minz_Request::connectionRemoteAddress()) : Minz_Request::connectionRemoteAddress();
 		return is_string($ip) ? $ip : '';
 	}
 
