@@ -191,3 +191,7 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@civilblur](https://github.com/civilblur/)
 
 * [Youlag](https://github.com/civilblur/youlag): Browse your YouTube feed through a video-focused interface that includes quality-of-life features.
+
+### By [@sergiopvilar](https://github.com/sergiopvilar/)
+
+* [Instapaper Button](https://github.com/sergiopvilar/freshrss-instapaper-button): Add articles to Instapaper with one simple button click or a keyboard shortcut (based on Pocket Button extension)
