@@ -643,7 +643,7 @@
             "name": "Youlag",
             "author": "civilblur",
             "description": "Browse YouTube and articles feeds through a modern interface that incorporates quality-of-life features.",
-            "version": "4.1.1",
+            "version": "4.2.0",
             "entrypoint": "Youlag",
             "type": "user",
             "url": "https://github.com/civilblur/youlag",
