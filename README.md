@@ -164,6 +164,10 @@ There are some FreshRSS extensions out there, developed by community members:
 
 * [ArticleSummary](https://github.com/LiangWei88/xExtension-ArticleSummary): Generate article summaries using OpenAI-compatible language model APIs. Supports both OpenAI and Ollama providers with a user-friendly configuration interface.
 
+### By [@wogong](https://github.com/wogong)
+
+* [Article Translation & Summary](https://github.com/wogong/freshrss-translate-summary): Translate and summarize FreshRSS entry content into Chinese using an OpenAI-compatible API.
+
 ### By [@Niehztog](https://github.com/Niehztog)
 
 * [Article Full Text](https://github.com/Niehztog/freshrss-af-readability): Fetches full article contents and adds them to feed items by using [Fivefilters Readability.php library](https://github.com/fivefilters/readability.php) (no docker containers required).
