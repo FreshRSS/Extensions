@@ -2,9 +2,12 @@ name: Automated tests
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
+
+permissions:
+  contents: read
 
 jobs:
 
@@ -17,9 +20,10 @@ jobs:
 
     steps:
     - name: Git checkout source code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         path: Extensions
+        persist-credentials: false
 
     # Composer tests
 
@@ -31,7 +35,7 @@ jobs:
 
     - name: Use Composer cache
       id: composer-cache
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: Extensions/vendor
         key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
@@ -46,10 +50,11 @@ jobs:
       run: composer run-script phpcs
 
     - name: Git checkout FreshRSS source code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: FreshRSS/FreshRSS
         path: FreshRSS
+        persist-credentials: false
 
     - name: PHPStan
       run: composer run-script phpstan
@@ -57,7 +62,7 @@ jobs:
     # NPM tests
 
     - name: Uses Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
         # https://nodejs.org/en/about/releases/
         node-version: '22'
@@ -82,7 +87,7 @@ jobs:
 
     - name: Use shell cache
       id: shell-cache
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: Extensions/bin
         key: ${{ runner.os }}-typos@v1.16.21
@@ -95,6 +100,7 @@ jobs:
       run: |
         cd bin ;
         wget -q 'https://github.com/crate-ci/typos/releases/download/v1.16.21/typos-v1.16.21-x86_64-unknown-linux-musl.tar.gz' &&
+        [[ "$(sha256sum *.tar.gz | cut -d " " -f 1)" == "a9bc4f49617409ed4ae0f253dd319f5871c6d7a16c6f35bb5fe687572e0f071f" ]] &&
         tar -xvf *.tar.gz './typos' &&
         chmod +x typos &&
         rm *.tar.gz ;

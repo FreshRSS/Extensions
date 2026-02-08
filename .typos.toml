@@ -14,6 +14,7 @@ extend-exclude = [
 	"*.rtl.css",
 	"*/i18n/de",
 	"*/i18n/fr",
+	"*/i18n/pl",
 	"bin/",
 	"node_modules/",
 	"symbolic/",

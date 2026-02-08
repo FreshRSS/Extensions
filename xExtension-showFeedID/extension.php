@@ -5,7 +5,8 @@ declare(strict_types=1);
 final class ShowFeedIdExtension extends Minz_Extension {
 	#[\Override]
 	public function init(): void {
-		if (Minz_Request::paramString('c') === 'subscription') {
+		if (Minz_Request::paramString('c') === 'subscription'
+			&& Minz_Request::actionName() === 'index') {
 			$this->registerTranslates();
 			$this->registerHook('js_vars', [$this, 'jsVars']);
 			Minz_View::appendScript($this->getFileUrl('showfeedid.js'));

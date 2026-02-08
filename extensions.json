@@ -5,7 +5,7 @@
             "name": "Af_Readability",
             "author": "niehztog",
             "description": "Try to inline article content using Readability",
-            "version": "0.1",
+            "version": "0.2",
             "entrypoint": "Af_Readability",
             "type": "user",
             "url": "https://github.com/Niehztog/freshrss-af-readability",
@@ -13,21 +13,10 @@
             "directory": "."
         },
         {
-            "name": "Always togglable menu",
-            "author": "nicofrand",
-            "description": "This makes the icon to toggle the menu always shown, even on larger screens.",
-            "version": "1.2",
-            "entrypoint": "TogglableMenu",
-            "type": "user",
-            "url": "https://framagit.org/nicofrand/xextension-togglablemenu",
-            "method": "git",
-            "directory": "."
-        },
-        {
             "name": "ArticleSummary",
             "author": "Liang",
-            "description": "A powerful article summarization plugin for FreshRSS that allows users to generate summaries using a language model API conforming to the OpenAI API specification.",
-            "version": "0.1.2",
+            "description": "Generate article summaries using OpenAI-compatible language model APIs. Supports both OpenAI and Ollama providers with a user-friendly configuration interface.",
+            "version": "0.5.2",
             "entrypoint": "ArticleSummary",
             "type": "user",
             "url": "https://github.com/LiangWei88/xExtension-ArticleSummary",
@@ -38,7 +27,7 @@
             "name": "Auto Refresh",
             "author": "Essa AlAwadi",
             "description": "Automatically refreshes the RSS feed when there is no activity",
-            "version": "1.3",
+            "version": "1.4",
             "entrypoint": "AutoRefresh",
             "type": "user",
             "url": "https://github.com/Eisa01/FreshRSS---Auto-Refresh-Extension",
@@ -49,7 +38,7 @@
             "name": "AutoTTL",
             "author": "Magnus Kokk",
             "description": "A FreshRSS extension for automatic feed refresh TTL based on the average frequency of entries.",
-            "version": "0.5.8",
+            "version": "0.6.1",
             "entrypoint": "AutoTTL",
             "type": "user",
             "url": "https://github.com/mgnsk/FreshRSS-AutoTTL",
@@ -115,7 +104,7 @@
             "name": "Date Format",
             "author": "Alexis Degrugillier",
             "description": "Change how dates are displayed in the interface",
-            "version": "0.2.1",
+            "version": "0.2.2",
             "entrypoint": "DateFormat",
             "type": "user",
             "url": "https://github.com/aledeg/xExtension-DateFormat",
@@ -123,10 +112,21 @@
             "directory": "."
         },
         {
+            "name": "Feed Digest",
+            "author": "Chang Feng",
+            "description": "Automatically summarizes newly retrieved RSS articles using LLM APIs (OpenAI-compatible)",
+            "version": "1.0.0",
+            "entrypoint": "FeedDigest",
+            "type": "system",
+            "url": "https://github.com/fengchang/xExtension-FeedDigest",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "Feed Priority Shortcut",
             "author": "Aidi Stan",
             "description": "Set up visibilities/priorities of your feeds easily",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "entrypoint": "FeedPriorityShortcut",
             "type": "user",
             "url": "https://github.com/aidistan/freshrss-extensions",
@@ -167,26 +167,37 @@
             "directory": "xExtension-FixedNavMenu"
         },
         {
+            "name": "Form Captcha",
+            "author": "Inverle",
+            "description": "Protect register/login forms with captcha",
+            "version": "1.0.3",
+            "entrypoint": "Captcha",
+            "type": "system",
+            "url": "https://github.com/FreshRSS/Extensions",
+            "method": "git",
+            "directory": "xExtension-Captcha"
+        },
+        {
+            "name": "Fresh Vibes View",
+            "author": "Try all the things",
+            "description": "Provides a Netvibes-like dashboard view with draggable feed containers.",
+            "version": "1.9.3",
+            "entrypoint": "FreshVibesView",
+            "type": "user",
+            "url": "https://github.com/tryallthethings/freshvibes",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "FreshRss FlareSolverr",
             "author": "James Ravenscroft",
             "description": "Use a Flaresolverr instance to bypass cloudflare security checks",
-            "version": "0.3",
+            "version": "0.4.3",
             "entrypoint": "FlareSolverr",
             "type": "system",
             "url": "https://github.com/ravenscroftj/freshrss-flaresolverr-extension",
             "method": "git",
             "directory": "."
-        },
-        {
-            "name": "GReader Redate",
-            "author": "Julien Avérous",
-            "description": "Use published date instead of fetching date.",
-            "version": "1.3",
-            "entrypoint": "GReaderRedate",
-            "type": "user",
-            "url": "https://github.com/javerous/freshrss-greader-redate",
-            "method": "git",
-            "directory": "xExtension-GReaderRedate"
         },
         {
             "name": "Image Cache",
@@ -236,10 +247,21 @@
             "name": "Kagi Summarizer",
             "author": "Rudis Muiznieks",
             "description": "Add buttons to summarize articles with the Kagi Universal Summarizer.",
-            "version": "0.3",
+            "version": "0.4",
             "entrypoint": "KagiSummarizer",
             "type": "user",
             "url": "https://code.sitosis.com/rudism/freshrss-kagi-summarizer",
+            "method": "git",
+            "directory": "."
+        },
+        {
+            "name": "Karakeep Button",
+            "author": "veverkap",
+            "description": "Add FreshRSS articles to Karakeep with one simple button click/keyboard shortcut.",
+            "version": "0.11",
+            "entrypoint": "KarakeepButton",
+            "type": "user",
+            "url": "https://github.com/veverkap/xExtension-karakeep-button",
             "method": "git",
             "directory": "."
         },
@@ -269,7 +291,7 @@
             "name": "Mark Previous as Read",
             "author": "kalvn",
             "description": "This extension adds a button in the footer of each entry. Clicking this button will mark all previous entries as read.",
-            "version": "1.1.1",
+            "version": "1.1.5",
             "entrypoint": "MarkPreviousAsRead",
             "type": "user",
             "url": "https://github.com/kalvn/freshrss-mark-previous-as-read",
@@ -290,11 +312,22 @@
         {
             "name": "News Assistant",
             "author": "Mervyn Zhan",
-            "description": "Using the ai api of `OpenAI`, `Anthropic`, `Groq` by [Portkey-AI/gateway](https://github.com/Portkey-AI/gateway/) to summary the news.",
-            "version": "0.12.0",
+            "description": "Support OpenAI-Compatible API and the other AI api like Anthropic, Groq by <a href=\"https://github.com/Portkey-AI/gateway/\">Portkey-AI/gateway</a> to summary the news.",
+            "version": "0.13.1",
             "entrypoint": "NewsAssistant",
-            "type": "system",
+            "type": "user",
             "url": "https://github.com/reply2future/xExtension-NewsAssistant",
+            "method": "git",
+            "directory": "."
+        },
+        {
+            "name": "Paywall",
+            "author": "Alexis Degrugillier",
+            "description": "Indicates if an article is behind a paywall",
+            "version": "0.0.3",
+            "entrypoint": "Paywall",
+            "type": "user",
+            "url": "https://github.com/aledeg/xExtension-Paywall",
             "method": "git",
             "directory": "."
         },
@@ -330,6 +363,17 @@
             "url": "https://github.com/DevonHess/FreshRSS-Extensions",
             "method": "git",
             "directory": "xExtension-RssBridge"
+        },
+        {
+            "name": "RateLimitFeeds",
+            "author": "pe1uca",
+            "description": "Rate limit feed updates per site.",
+            "version": "3.2.0",
+            "entrypoint": "RateLimiter",
+            "type": "system",
+            "url": "https://github.com/pe1uca/xExtension-RateLimiter",
+            "method": "git",
+            "directory": "."
         },
         {
             "name": "Readable",
@@ -409,10 +453,21 @@
             "directory": "xExtension-ShareByEmail"
         },
         {
+            "name": "Share to Linkwarden",
+            "author": "Dieter Blomme",
+            "description": "Adds a button to share articles to Linkwarden.",
+            "version": "0.1.0",
+            "entrypoint": "ShareToLinkwarden",
+            "type": "user",
+            "url": "https://github.com/daften/xExtension-ShareToLinkwarden",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "ShowFeedID",
             "author": "math-GH, Inverle",
             "description": "Show the ID of feed and category",
-            "version": "0.4.0",
+            "version": "0.4.2",
             "entrypoint": "ShowFeedID",
             "type": "user",
             "url": "https://github.com/FreshRSS/Extensions",
@@ -467,7 +522,7 @@
             "name": "ThreePanesView",
             "author": "nicofrand",
             "description": "Adds a third vertical pane along the articles list, to display the articles content.",
-            "version": "1.15",
+            "version": "1.16",
             "entrypoint": "ThreePanesView",
             "type": "user",
             "url": "https://framagit.org/nicofrand/xextension-threepanesview",
@@ -501,7 +556,6 @@
             "version": "0.3.1",
             "description": "Translate article titles of the specified feed into Chinese.",
             "author": "jacob2826",
-            "website": "https://github.com/jacob2826/FreshRSS-TranslateTitlesCN",
             "entrypoint": "TranslateTitles",
             "type": "user",
             "url": "https://github.com/jacob2826/FreshRSS-TranslateTitlesCN",
@@ -520,6 +574,17 @@
             "directory": "."
         },
         {
+            "name": "Unsafe Autologin",
+            "author": "Inverle",
+            "description": "Brings back removed unsafe autologin feature from FreshRSS",
+            "version": "1.0.0",
+            "entrypoint": "UnsafeAutologin",
+            "type": "system",
+            "url": "https://github.com/FreshRSS/Extensions",
+            "method": "git",
+            "directory": "xExtension-UnsafeAutologin"
+        },
+        {
             "name": "Wallabag Button",
             "author": "Joedmin",
             "description": "Add articles to Wallabag with one simple button click or a keyboard shortcut.",
@@ -534,7 +599,7 @@
             "name": "White List",
             "author": "Alexis Degrugillier",
             "description": "White list the accessible feeds to users",
-            "version": "0.0.1",
+            "version": "0.0.2",
             "entrypoint": "WhiteList",
             "type": "system",
             "url": "https://github.com/aledeg/xExtension-WhiteList",
@@ -554,9 +619,9 @@
         },
         {
             "name": "YouTube Video Feed",
-            "author": "Kevin Papst",
+            "author": "Kevin Papst, Inverle",
             "description": "Embed YouTube feeds inside article content.",
-            "version": "0.13",
+            "version": "1.1.0",
             "entrypoint": "YouTube",
             "type": "user",
             "url": "https://github.com/FreshRSS/Extensions",
@@ -573,6 +638,17 @@
             "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
             "method": "git",
             "directory": "xExtension-YouTubeChannel2RssFeed"
+        },
+        {
+            "name": "Youlag",
+            "author": "civilblur",
+            "description": "Browse YouTube and articles feeds through a modern interface that incorporates quality-of-life features.",
+            "version": "4.2.0",
+            "entrypoint": "Youlag",
+            "type": "user",
+            "url": "https://github.com/civilblur/youlag",
+            "method": "git",
+            "directory": "."
         }
     ]
 }

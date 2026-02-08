@@ -4,17 +4,31 @@ window.addEventListener("load", function () {
 	// eslint-disable-next-line no-undef
 	const i18n = context.extensions.showfeedid_i18n;
 
-	const div = document.querySelector('h1 ~ div');
-	const button = document.createElement('button');
+	let div = document.querySelector('h1 ~ div');
+	if (div.classList.contains('drop-section')) {
+		div = document.createElement('div');
+		document.querySelector('h1').after(div);
+	}
+
+	const button = document.createElement('a');
 
 	button.classList.add('btn');
+	button.classList.add('btn-icon-text');
 	button.id = 'showFeedId';
 	button.innerHTML = '<img class="icon" src="../themes/icons/look.svg" /> <span>' + i18n.show + '</span>';
-	if (new URLSearchParams(location.search).get('error')) {
-		button.style.display = 'block';
-		button.style.marginTop = '1rem';
-	}
+
 	div.appendChild(button);
+
+	const parent = button.parentElement;
+	parent.style.display = 'inline-flex';
+	parent.style.flexWrap = 'wrap';
+	parent.style.gap = '0.5rem';
+
+	// Check if only feeds with errors are being shown
+	if (document.querySelector('main.post > p.alert.alert-warn')) {
+		parent.style.flexDirection = 'column';
+		button.style.marginTop = '0.5rem';
+	}
 
 	const buttonText = button.querySelector('span');
 

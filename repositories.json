@@ -14,6 +14,9 @@
 	"url": "https://github.com/aledeg/xExtension-LatexSupport",
 	"type": "git"
 }, {
+	"url": "https://github.com/aledeg/xExtension-Paywall",
+	"type": "git"
+}, {
 	"url": "https://github.com/aledeg/xExtension-RedditImage",
 	"type": "git"
 }, {
@@ -21,9 +24,6 @@
 	"type": "git"
 }, {
 	"url": "https://framagit.org/nicofrand/xextension-threepanesview",
-	"type": "git"
-}, {
-	"url": "https://framagit.org/nicofrand/xextension-togglablemenu",
 	"type": "git"
 }, {
 	"url": "https://github.com/Korbak/freshrss-invidious",
@@ -93,5 +93,23 @@
 	"type": "git"
 }, {
 	"url": "https://github.com/Niehztog/freshrss-af-readability",
+	"type": "git"
+}, {
+	"url": "https://github.com/tryallthethings/freshvibes",
+	"type": "git"
+}, {
+	"url": "https://github.com/pe1uca/xExtension-RateLimiter",
+	"type": "git"
+}, {
+	"url": "https://github.com/daften/xExtension-ShareToLinkwarden",
+	"type": "git"
+}, {
+	"url": "https://github.com/fengchang/xExtension-FeedDigest",
+	"type": "git"
+}, {
+	"url": "https://github.com/veverkap/xExtension-karakeep-button",
+	"type": "git"
+},  {
+	"url": "https://github.com/civilblur/youlag",
 	"type": "git"
 }]

@@ -2,7 +2,7 @@
 
 This repository contains all the official [FreshRSS](https://github.com/FreshRSS/FreshRSS) extensions.
 
-To install an extension, download [the extension archive](https://github.com/FreshRSS/Extensions/archive/master.zip) first and extract it on your PC.
+To install an extension, git clone or download [the extension archive](https://github.com/FreshRSS/Extensions/archive/refs/heads/main.zip) and extract it on your computer.
 Then, upload the specific extension(s) you want on your server.
 Extensions must be in the `./extensions` directory of your FreshRSS installation.
 
@@ -44,14 +44,20 @@ There are some FreshRSS extensions out there, developed by community members:
 
 ### By [@aledeg](https://github.com/aledeg)
 
-* [Date Format](https://github.com/aledeg/FreshRSS-extensions/tree/master/xExtension-DateFormat): Change how dates are displayed in the interface
-* [Latex Support](https://github.com/aledeg/FreshRSS-extensions/tree/master/xExtension-LatexSupport): Add support for LaTeX notation rendering
-* [Reddit Image](https://github.com/aledeg/FreshRSS-extensions/tree/master/xExtension-RedditImage): Replace link to Reddit topic with resource link
+* [Date Format](https://github.com/aledeg/xExtension-DateFormat): Change how dates are displayed in the interface
+* [Latex Support](https://github.com/aledeg/xExtension-LatexSupport): Add support for LaTeX notation rendering
+* [Paywall](https://github.com/aledeg/xExtension-Paywall): Add title prefix on articles behind a paywall
+* [Reddit Image](https://github.com/aledeg/xExtension-RedditImage): Replace link to Reddit topic with resource link
+
+
+### By [Nicolas Frandeboeuf](https://framagit.org/nicofrand)
+
+* [ThreePanesView](https://framagit.org/nicofrand/xextension-threepanesview): [Adds a third vertical pane along the articles list, to display the articles content](https://nicofrand.eu/freshrss-extension-threepanesview/).
 
 
 ### By [@Lapineige](https://github.com/lapineige), [@hkcomori](https://github.com/hkcomori)
 
-* [Reading Time](https://github.com/FreshRSS/Extensions/tree/master/xExtension-ReadingTime): Add a reading time estimation next to each article.
+* [Reading Time](https://github.com/FreshRSS/Extensions/tree/main/xExtension-ReadingTime): Add a reading time estimation next to each article.
 
 
 ### By [@Korbak](https://github.com/Korbak)
@@ -156,8 +162,32 @@ There are some FreshRSS extensions out there, developed by community members:
 
 ### By [@LiangWei88](https://github.com/LiangWei88)
 
-* [ArticleSummary](https://github.com/LiangWei88/xExtension-ArticleSummary): A powerful article summarization plugin for FreshRSS that allows users to generate summaries using a language model API conforming to the OpenAI API specification.
+* [ArticleSummary](https://github.com/LiangWei88/xExtension-ArticleSummary): Generate article summaries using OpenAI-compatible language model APIs. Supports both OpenAI and Ollama providers with a user-friendly configuration interface.
 
 ### By [@Niehztog](https://github.com/Niehztog)
 
 * [Article Full Text](https://github.com/Niehztog/freshrss-af-readability): Fetches full article contents and adds them to feed items by using [Fivefilters Readability.php library](https://github.com/fivefilters/readability.php) (no docker containers required).
+
+### By [@tryallthethings](https://github.com/tryallthethings)
+
+* [FreshVibes](https://github.com/tryallthethings/freshvibes): A fully customizable iGoogle / Netvibes-like dashboard view
+
+### By [@pe1uca](https://github.com/pe1uca)
+
+* [Rate limiter](https://github.com/pe1uca/xExtension-RateLimiter/): Prevents FreshRSS from making too many requests to the same site in a defined amount of time.
+
+### By [@daften](https://github.com/daften)
+
+* [Share To Linkwarden](https://github.com/daften/xExtension-ShareToLinkwarden/): Allows sharing items directly to a self-hosted Linkwarden instance.
+
+### By [@fengchang](https://github.com/fengchang)
+
+* [Feed Digest](https://github.com/fengchang/xExtension-FeedDigest): Automatically summarize RSS articles using OpenAI-compatible LLM APIs.
+
+### By [@veverkap](https://github.com/veverkap/)
+
+* [Karakeep Button](https://github.com/veverkap/xExtension-karakeep-button): Add articles to a selected Karakeep instance with one simple button click or a keyboard shortcut.
+
+### By [@civilblur](https://github.com/civilblur/)
+
+* [Youlag](https://github.com/civilblur/youlag): Browse your YouTube feed through a video-focused interface that includes quality-of-life features.
