@@ -39,7 +39,7 @@
     "neostandard": "^0.12.2",
     "rtlcss": "^4.3.0",
     "sass": "^1.97.3",
-    "stylelint": "^17.1.0",
+    "stylelint": "^17.4.0",
     "stylelint-config-recommended-scss": "^17.0.0",
     "stylelint-order": "^7.0.1",
     "@stylistic/stylelint-plugin": "^5.0.1"
