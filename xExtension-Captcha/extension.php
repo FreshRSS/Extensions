@@ -189,7 +189,7 @@ final class CaptchaExtension extends Minz_Extension {
 		$csp_hosts = 'https://' . ($csp_hosts['host'] ?? '');
 		if ($csp_hosts === 'https://www.google.com') {
 			// Original js_url injects script from www.gstatic.com therefore this is needed
-			$csp_hosts .= "/recaptcha/api.js https://www.gstatic.com/recaptcha/";
+			$csp_hosts .= "/recaptcha/ https://www.gstatic.com/recaptcha/";
 		} elseif ($csp_hosts === 'https://js.hcaptcha.com') {
 			$csp_hosts = 'https://hcaptcha.com https://*.hcaptcha.com';
 		}
