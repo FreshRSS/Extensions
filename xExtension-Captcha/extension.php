@@ -3,22 +3,18 @@ declare(strict_types=1);
 
 final class CaptchaExtension extends Minz_Extension {
 	 /** @var array{protectedPages:array<string,string>,captchaProvider:string,provider:array<string,string>,sendClientIp:bool} $default_config */
-	public static array $default_config = [
+	private static array $default_config = [
 		'protectedPages' => [],
 		'captchaProvider' => 'none',
 		'provider' => [],
 		'sendClientIp' => true,
 	];
-	public static string $recaptcha_v3_js;
 
 	#[\Override]
 	public function init(): void {
 		$this->registerTranslates();
-		$this->registerHook('before_login_btn', [$this, 'captchaWidget']);
-		$this->registerController('auth');
-		$this->registerController('user');
-
-		self::$recaptcha_v3_js = $this->getFileUrl('recaptcha-v3.js');
+		$this->registerHook(Minz_HookType::BeforeLoginBtn, [$this, 'captchaWidget']);
+		$this->registerHook(Minz_HookType::ActionExecute, [$this, 'handleProtectedPage']);
 
 		if (Minz_Request::controllerName() === 'extension') {
 			Minz_View::appendScript($this->getFileUrl('captchaConfig.js'));
@@ -28,13 +24,32 @@ final class CaptchaExtension extends Minz_Extension {
 	/**
 	 * @throws FreshRSS_Context_Exception
 	 */
-	public static function isProtectedPage(): bool {
+	private function isProtectedPage(): bool {
 		$config = self::getConfig();
 		$page = Minz_Request::controllerName() . '_' . Minz_Request::actionName();
 		return in_array($page, $config['protectedPages'], true);
 	}
 
-	public static function getClientIp(): string {
+	/**
+	 * @throws FreshRSS_Context_Exception
+	 * @throws Minz_PermissionDeniedException
+	 */
+	public function handleProtectedPage(Minz_ActionController $controller): bool {
+		if (Minz_Request::is('auth', 'formLogin') || Minz_Request::is('auth', 'register')) {
+			if (!$this->initCaptcha()) {
+				return false;
+			}
+			$csp = $this->loadDependencies();
+			if (!empty($csp)) $controller->_csp($csp);
+		} elseif (Minz_Request::is('user', 'create') && !FreshRSS_Auth::hasAccess('admin')) {
+			if (!CaptchaExtension::initCaptcha()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private function getClientIp(): string {
 		$ip = FreshRSS_http_Util::checkTrustedIP() ?
 			($_SERVER['HTTP_X_REAL_IP'] ?? Minz_Request::connectionRemoteAddress()) : Minz_Request::connectionRemoteAddress();
 		return is_string($ip) ? $ip : '';
@@ -43,9 +58,9 @@ final class CaptchaExtension extends Minz_Extension {
 	/**
 	 * @throws FreshRSS_Context_Exception
 	 */
-	public function captchaWidget(): string {
+	private function captchaWidget(): string {
 		$config = self::getConfig();
-		if (!self::isProtectedPage()) {
+		if (!$this->isProtectedPage()) {
 			return '';
 		}
 		$siteKey = $config['provider']['siteKey'] ?? '';
@@ -61,7 +76,7 @@ final class CaptchaExtension extends Minz_Extension {
 	/**
 	 * @throws Minz_PermissionDeniedException
 	 */
-	public static function warnLog(string $msg): void {
+	private function warnLog(string $msg): void {
 		Minz_Log::warning('[Form Captcha] ' . $msg, ADMIN_LOG);
 	}
 
@@ -83,17 +98,17 @@ final class CaptchaExtension extends Minz_Extension {
 	 * @throws FreshRSS_Context_Exception
 	 * @throws Minz_PermissionDeniedException
 	 */
-	public static function initCaptcha(): bool {
+	private function initCaptcha(): bool {
 		$username = Minz_Request::paramString('username');
 
-		$config = CaptchaExtension::getConfig();
+		$config = self::getConfig();
 		$provider = $config['captchaProvider'];
 
 		if ($provider === 'none') {
 			return true;
 		}
 
-		if (Minz_Request::isPost() && CaptchaExtension::isProtectedPage()) {
+		if (Minz_Request::isPost() && $this->isProtectedPage()) {
 			$ch = curl_init();
 			if ($ch === false) {
 				Minz_Error::error(500);
@@ -132,7 +147,7 @@ final class CaptchaExtension extends Minz_Extension {
 				'response' => $response_val,
 			];
 			if ($config['sendClientIp']) {
-				$fields['remoteip'] = CaptchaExtension::getClientIp();
+				$fields['remoteip'] = $this->getClientIp();
 			}
 			curl_setopt_array($ch, [
 				CURLOPT_URL => $siteverify_url,
@@ -168,9 +183,9 @@ final class CaptchaExtension extends Minz_Extension {
 	 * @throws FreshRSS_Context_Exception
 	 * @return array<string,string>
 	 */
-	public static function loadDependencies(): array {
+	private function loadDependencies(): array {
 		$cfg = self::getConfig();
-		$provider = self::isProtectedPage() ? $cfg['captchaProvider'] : '';
+		$provider = $this->isProtectedPage() ? $cfg['captchaProvider'] : '';
 		$js_url = match ($provider) {
 			'turnstile' => 'https://challenges.cloudflare.com/turnstile/v0/api.js',
 			'recaptcha-v2' => 'https://www.google.com/recaptcha/api.js',
@@ -205,7 +220,7 @@ final class CaptchaExtension extends Minz_Extension {
 		}
 		Minz_View::appendScript($js_url);
 		if ($provider === 'recaptcha-v3') {
-			Minz_View::appendScript(self::$recaptcha_v3_js);
+			Minz_View::appendScript($this->getFileUrl('recaptcha-v3.js'));
 		}
 		return $csp;
 	}
