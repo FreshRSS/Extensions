@@ -191,3 +191,7 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@civilblur](https://github.com/civilblur/)
 
 * [Youlag](https://github.com/civilblur/youlag): Browse your YouTube feed through a video-focused interface that includes quality-of-life features.
+
+### By [@deimosfr](https://github.com/deimosfr/)
+
+* [Ai Summary](https://github.com/deimosfr/xExtension-AiSummary): Summarize any article with one click using your favorite AI provider (OpenAI, Gemini, Claude and Ollama).

@@ -13,6 +13,17 @@
             "directory": "."
         },
         {
+            "name": "Ai Summary",
+            "author": "deimosfr",
+            "description": "Summarize any article with one click using your favorite AI provider (OpenAI, Gemini, Claude and Ollama).",
+            "version": "1.0.2",
+            "entrypoint": "AiSummary",
+            "type": "user",
+            "url": "https://github.com/deimosfr/xExtension-AiSummary",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "ArticleSummary",
             "author": "Liang",
             "description": "Generate article summaries using OpenAI-compatible language model APIs. Supports both OpenAI and Ollama providers with a user-friendly configuration interface.",
