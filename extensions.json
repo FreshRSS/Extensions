@@ -24,17 +24,6 @@
             "directory": "."
         },
         {
-            "name": "Article Translation & Summary",
-            "author": "wogong",
-            "description": "Translate and summarize FreshRSS entry content into Chinese using an OpenAI-compatible API.",
-            "version": "0.1.0",
-            "entrypoint": "TranslateSummary",
-            "type": "user",
-            "url": "https://github.com/wogong/freshrss-translate-summary",
-            "method": "git",
-            "directory": "."
-        },
-        {
             "name": "Auto Refresh",
             "author": "Essa AlAwadi",
             "description": "Automatically refreshes the RSS feed when there is no activity",
@@ -658,6 +647,17 @@
             "entrypoint": "Youlag",
             "type": "user",
             "url": "https://github.com/civilblur/youlag",
+            "method": "git",
+            "directory": "."
+        },
+        {
+            "name": "freshrss-translate-summary",
+            "author": "wogong",
+            "description": "Translate and summarize FreshRSS entry content into Chinese using an OpenAI-compatible API.",
+            "version": "0.1.0",
+            "entrypoint": "TranslateSummary",
+            "type": "user",
+            "url": "https://github.com/wogong/freshrss-translate-summary",
             "method": "git",
             "directory": "."
         }
