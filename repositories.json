@@ -115,4 +115,7 @@
 },  {
 	"url": "https://github.com/civilblur/youlag",
 	"type": "git"
+}, {
+	"url": "https://github.com/deimosfr/xExtension-AiSummary",
+	"type": "git"
 }]
