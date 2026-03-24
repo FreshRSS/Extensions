@@ -2,6 +2,17 @@
     "version": 0.1,
     "extensions": [
         {
+            "name": "AI Summary",
+            "author": "Pierre Mavro",
+            "description": "Summarize articles using AI providers (Gemini, Claude, ChatGPT, Ollama)",
+            "version": "1.0.2",
+            "entrypoint": "AiSummary",
+            "type": "user",
+            "url": "https://github.com/deimosfr/xExtension-AiSummary",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "Af_Readability",
             "author": "niehztog",
             "description": "Try to inline article content using Readability",
@@ -9,17 +20,6 @@
             "entrypoint": "Af_Readability",
             "type": "user",
             "url": "https://github.com/Niehztog/freshrss-af-readability",
-            "method": "git",
-            "directory": "."
-        },
-        {
-            "name": "Ai Summary",
-            "author": "deimosfr",
-            "description": "Summarize any article with one click using your favorite AI provider (OpenAI, Gemini, Claude and Ollama).",
-            "version": "1.0.2",
-            "entrypoint": "AiSummary",
-            "type": "user",
-            "url": "https://github.com/deimosfr/xExtension-AiSummary",
             "method": "git",
             "directory": "."
         },
@@ -654,7 +654,7 @@
             "name": "Youlag",
             "author": "civilblur",
             "description": "Browse YouTube and articles feeds through a modern interface that incorporates quality-of-life features.",
-            "version": "4.2.0",
+            "version": "4.3.0",
             "entrypoint": "Youlag",
             "type": "user",
             "url": "https://github.com/civilblur/youlag",
