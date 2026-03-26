@@ -118,4 +118,7 @@
 }, {
 	"url": "https://github.com/deimosfr/xExtension-AiSummary",
 	"type": "git"
+}, {
+	"url": "https://github.com/bullitt186/FreshRSS-MarkAsReadExisting",
+	"type": "git"
 }]

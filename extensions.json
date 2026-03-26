@@ -310,6 +310,17 @@
             "directory": "xExtension-MarkPreviousAsRead"
         },
         {
+            "name": "Mark As Read Existing",
+            "author": "bullitt",
+            "description": "Periodically re-applies 'Mark as read' filter rules to existing articles",
+            "version": "0.1.0",
+            "entrypoint": "MarkAsReadExisting",
+            "type": "user",
+            "url": "https://github.com/bullitt186/FreshRSS-MarkAsReadExisting",
+            "method": "git",
+            "directory": "xExtension-MarkAsReadExisting"
+        },
+        {
             "name": "Mobile Scroll Menu",
             "author": "Marco Heizmann",
             "description": "Automatically hides the header menu on mobile phones, when scrolling down and shows it when scrolling up.",
