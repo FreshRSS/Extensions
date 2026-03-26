@@ -299,17 +299,6 @@
             "directory": "."
         },
         {
-            "name": "Mark Previous as Read",
-            "author": "kalvn",
-            "description": "This extension adds a button in the footer of each entry. Clicking this button will mark all previous entries as read.",
-            "version": "1.1.6",
-            "entrypoint": "MarkPreviousAsRead",
-            "type": "user",
-            "url": "https://github.com/kalvn/freshrss-mark-previous-as-read",
-            "method": "git",
-            "directory": "xExtension-MarkPreviousAsRead"
-        },
-        {
             "name": "Mark As Read Existing",
             "author": "bullitt",
             "description": "Periodically re-applies 'Mark as read' filter rules to existing articles",
@@ -319,6 +308,17 @@
             "url": "https://github.com/bullitt186/FreshRSS-MarkAsReadExisting",
             "method": "git",
             "directory": "xExtension-MarkAsReadExisting"
+        },
+        {
+            "name": "Mark Previous as Read",
+            "author": "kalvn",
+            "description": "This extension adds a button in the footer of each entry. Clicking this button will mark all previous entries as read.",
+            "version": "1.1.6",
+            "entrypoint": "MarkPreviousAsRead",
+            "type": "user",
+            "url": "https://github.com/kalvn/freshrss-mark-previous-as-read",
+            "method": "git",
+            "directory": "xExtension-MarkPreviousAsRead"
         },
         {
             "name": "Mobile Scroll Menu",
