@@ -199,3 +199,7 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@deimosfr](https://github.com/deimosfr/)
 
 * [Ai Summary](https://github.com/deimosfr/xExtension-AiSummary): Summarize any article with one click using your favorite AI provider (OpenAI, Gemini, Claude and Ollama).
+
+### By [@bullitt186](https://github.com/bullitt186/)
+
+* [Mark As Read Existing](https://github.com/bullitt186/FreshRSS-MarkAsReadExisting): Periodically re-applies "Mark as read" filter rules to existing unread articles.
