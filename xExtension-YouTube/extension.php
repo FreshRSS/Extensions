@@ -433,6 +433,15 @@ final class YouTubeExtension extends Minz_Extension
 	}
 
 	/**
+	 * Returns true if the content string contains a YouTube enclosure structure as opposed to arbitrary feed content.
+	 */
+	private function hasEnclosureStructure(string $content): bool {
+		return stripos($content, 'class="enclosure"') !== false
+			|| stripos($content, 'enclosure-title') !== false
+			|| stripos($content, 'enclosure-description') !== false;
+	}
+
+	/**
 	 * Returns an HTML <iframe> for a given URL for the configured width and height, with content ignored, appended or formatted.
 	 */
 	public function getHtml(FreshRSS_Entry $entry, string $url): string {
@@ -486,11 +495,23 @@ final class YouTubeExtension extends Minz_Extension
 				}
 
 				$content .= "</div>\n";
+
+				// Append original content if it is not a YouTube enclosure structure
+				$originalContent = $entry->content();
+				if (!$this->hasEnclosureStructure($originalContent) && $originalContent !== '') {
+					$content .= $originalContent;
+				}
 			} else {
 				$content = $iframe . $entry->content();
 			}
 		} else {
-			$content = $iframe;
+			$originalContent = $entry->content();
+			// Preserve non-enclosure original content — wrap iframe in enclosure div and append it.
+			if (!$this->hasEnclosureStructure($originalContent) && $originalContent !== '') {
+				$content = '<div class="enclosure">' . $iframe . "</div>\n" . $originalContent;
+			} else {
+				$content = $iframe;
+			}
 		}
 
 		return $content;
