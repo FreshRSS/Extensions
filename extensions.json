@@ -354,17 +354,6 @@
             "directory": "."
         },
         {
-            "name": "Pocket Button",
-            "author": "Christian Putzke",
-            "description": "Add articles to Pocket with one simple button click or a keyboard shortcut.",
-            "version": "0.6",
-            "entrypoint": "PocketButton",
-            "type": "user",
-            "url": "https://github.com/christian-putzke/freshrss-pocket-button",
-            "method": "git",
-            "directory": "."
-        },
-        {
             "name": "Quick Collapse",
             "author": "romibi and Marien Fressinaud",
             "description": "Quickly change from folded to unfolded articles",
@@ -506,17 +495,6 @@
             "url": "https://github.com/oyox/FreshRSS-extensions",
             "method": "git",
             "directory": "xExtension-SmartMobileMenu"
-        },
-        {
-            "name": "StarToPocket",
-            "author": "Pat Hough",
-            "description": "An extension that sends an article to Pocket when you Star (Favorite) it.",
-            "version": "1",
-            "entrypoint": "StarToPocket",
-            "type": "user",
-            "url": "https://github.com/huffstler/xExtension-StarToPocket",
-            "method": "git",
-            "directory": "."
         },
         {
             "name": "Sticky Feeds",
