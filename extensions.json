@@ -123,6 +123,17 @@
             "directory": "."
         },
         {
+            "name": "Extension Manager",
+            "author": "featurecreep-cron",
+            "description": "Install, update, and remove extensions from the settings page",
+            "version": "0.2.4",
+            "entrypoint": "ExtensionManager",
+            "type": "user",
+            "url": "https://github.com/featurecreep-cron/freshrss-extensions",
+            "method": "git",
+            "directory": "xExtension-ExtensionManager"
+        },
+        {
             "name": "Feed Digest",
             "author": "Chang Feng",
             "description": "Automatically summarizes newly retrieved RSS articles using LLM APIs (OpenAI-compatible)",
@@ -398,6 +409,17 @@
             "directory": "."
         },
         {
+            "name": "Recently Read",
+            "author": "featurecreep-cron",
+            "description": "Adds a Recently Read view to quickly find articles you've already read",
+            "version": "0.1.2",
+            "entrypoint": "RecentlyRead",
+            "type": "user",
+            "url": "https://github.com/featurecreep-cron/freshrss-extensions",
+            "method": "git",
+            "directory": "xExtension-RecentlyRead"
+        },
+        {
             "name": "Readeck Button",
             "author": "Joedmin",
             "description": "Add articles to Readeck with one simple button click or a keyboard shortcut.",
@@ -429,6 +451,17 @@
             "url": "https://github.com/aledeg/xExtension-RedditImage",
             "method": "git",
             "directory": "."
+        },
+        {
+            "name": "Right-Click Actions",
+            "author": "featurecreep-cron",
+            "description": "Adds context menus to articles, feeds, and categories",
+            "version": "0.1.2",
+            "entrypoint": "RightClickActions",
+            "type": "user",
+            "url": "https://github.com/featurecreep-cron/freshrss-extensions",
+            "method": "git",
+            "directory": "xExtension-RightClickActions"
         },
         {
             "name": "Remove emojis",
@@ -486,6 +519,17 @@
             "directory": "xExtension-showFeedID"
         },
         {
+            "name": "Silent Refresh",
+            "author": "featurecreep-cron",
+            "description": "Updates unread counts without interrupting your reading",
+            "version": "0.1.1",
+            "entrypoint": "SilentRefresh",
+            "type": "user",
+            "url": "https://github.com/featurecreep-cron/freshrss-extensions",
+            "method": "git",
+            "directory": "xExtension-SilentRefresh"
+        },
+        {
             "name": "Smart Mobile Menu",
             "author": "Marco Heizmann",
             "description": "Minimizes the required button space and groups buttons.",
@@ -506,6 +550,17 @@
             "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
             "directory": "xExtension-StickyFeeds"
+        },
+        {
+            "name": "Sticky Reader",
+            "author": "featurecreep-cron",
+            "description": "Scroll straight to articles, keep controls within reach, read distraction-free",
+            "version": "0.2.4",
+            "entrypoint": "StickyReader",
+            "type": "user",
+            "url": "https://github.com/featurecreep-cron/freshrss-extensions",
+            "method": "git",
+            "directory": "xExtension-StickyReader"
         },
         {
             "name": "Theme Mode Synchronizer",

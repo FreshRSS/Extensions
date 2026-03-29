@@ -115,4 +115,7 @@
 }, {
 	"url": "https://github.com/bullitt186/FreshRSS-MarkAsReadExisting",
 	"type": "git"
+}, {
+	"url": "https://github.com/featurecreep-cron/freshrss-extensions",
+	"type": "git"
 }]
