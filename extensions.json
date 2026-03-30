@@ -409,17 +409,6 @@
             "directory": "."
         },
         {
-            "name": "Recently Read",
-            "author": "featurecreep-cron",
-            "description": "Adds a Recently Read view to quickly find articles you've already read",
-            "version": "0.1.2",
-            "entrypoint": "RecentlyRead",
-            "type": "user",
-            "url": "https://github.com/featurecreep-cron/freshrss-extensions",
-            "method": "git",
-            "directory": "xExtension-RecentlyRead"
-        },
-        {
             "name": "Readeck Button",
             "author": "Joedmin",
             "description": "Add articles to Readeck with one simple button click or a keyboard shortcut.",
@@ -442,6 +431,17 @@
             "directory": "xExtension-ReadingTime"
         },
         {
+            "name": "Recently Read",
+            "author": "featurecreep-cron",
+            "description": "Adds a Recently Read view to quickly find articles you've already read",
+            "version": "0.1.2",
+            "entrypoint": "RecentlyRead",
+            "type": "user",
+            "url": "https://github.com/featurecreep-cron/freshrss-extensions",
+            "method": "git",
+            "directory": "xExtension-RecentlyRead"
+        },
+        {
             "name": "Reddit Image",
             "author": "Alexis Degrugillier",
             "description": "Modify reddit entries by displaying known medias and easing access to the linked resource",
@@ -453,17 +453,6 @@
             "directory": "."
         },
         {
-            "name": "Right-Click Actions",
-            "author": "featurecreep-cron",
-            "description": "Adds context menus to articles, feeds, and categories",
-            "version": "0.1.2",
-            "entrypoint": "RightClickActions",
-            "type": "user",
-            "url": "https://github.com/featurecreep-cron/freshrss-extensions",
-            "method": "git",
-            "directory": "xExtension-RightClickActions"
-        },
-        {
             "name": "Remove emojis",
             "author": "CNTools | Clemens Neubauer",
             "description": "remove emojis in the title of newly added feed entries",
@@ -473,6 +462,17 @@
             "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
             "method": "git",
             "directory": "xExtension-RemoveEmojis"
+        },
+        {
+            "name": "Right-Click Actions",
+            "author": "featurecreep-cron",
+            "description": "Adds context menus to articles, feeds, and categories",
+            "version": "0.1.2",
+            "entrypoint": "RightClickActions",
+            "type": "user",
+            "url": "https://github.com/featurecreep-cron/freshrss-extensions",
+            "method": "git",
+            "directory": "xExtension-RightClickActions"
         },
         {
             "name": "SendToMyJD2",
@@ -676,7 +676,7 @@
             "name": "YouTube Video Feed",
             "author": "Kevin Papst, Inverle",
             "description": "Embed YouTube feeds inside article content.",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "entrypoint": "YouTube",
             "type": "user",
             "url": "https://github.com/FreshRSS/Extensions",
