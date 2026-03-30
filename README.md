@@ -176,6 +176,14 @@ There are some FreshRSS extensions out there, developed by community members:
 
 * [Share To Linkwarden](https://github.com/daften/xExtension-ShareToLinkwarden/): Allows sharing items directly to a self-hosted Linkwarden instance.
 
+### By [@featurecreep-cron](https://github.com/featurecreep-cron)
+
+* [Extension Manager](https://github.com/featurecreep-cron/freshrss-extensions/tree/main/xExtension-ExtensionManager): Install, update, and remove extensions from the settings page.
+* [Recently Read](https://github.com/featurecreep-cron/freshrss-extensions/tree/main/xExtension-RecentlyRead): Adds a Recently Read view to quickly find articles you've already read.
+* [Right-Click Actions](https://github.com/featurecreep-cron/freshrss-extensions/tree/main/xExtension-RightClickActions): Adds context menus to articles, feeds, and categories.
+* [Silent Refresh](https://github.com/featurecreep-cron/freshrss-extensions/tree/main/xExtension-SilentRefresh): Updates unread counts without interrupting your reading.
+* [Sticky Reader](https://github.com/featurecreep-cron/freshrss-extensions/tree/main/xExtension-StickyReader): Scroll straight to articles, keep controls within reach, read distraction-free.
+
 ### By [@fengchang](https://github.com/fengchang)
 
 * [Feed Digest](https://github.com/fengchang/xExtension-FeedDigest): Automatically summarize RSS articles using OpenAI-compatible LLM APIs.
