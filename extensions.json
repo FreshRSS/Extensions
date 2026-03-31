@@ -673,6 +673,17 @@
             "directory": "xExtension-WordHighlighter"
         },
         {
+            "name": "YouTube Embed Fix",
+            "author": "featurecreep-cron",
+            "description": "Fix YouTube embed playback in article content by adding origin parameter",
+            "version": "0.1.0",
+            "entrypoint": "YouTubeEmbed",
+            "type": "user",
+            "url": "https://github.com/featurecreep-cron/freshrss-extensions",
+            "method": "git",
+            "directory": "xExtension-YouTubeEmbed"
+        },
+        {
             "name": "YouTube Video Feed",
             "author": "Kevin Papst, Inverle",
             "description": "Embed YouTube feeds inside article content.",
