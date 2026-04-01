@@ -126,7 +126,7 @@
             "name": "Extension Manager",
             "author": "featurecreep-cron",
             "description": "Install, update, and remove extensions from the settings page",
-            "version": "0.2.7",
+            "version": "0.3.0",
             "entrypoint": "ExtensionManager",
             "type": "user",
             "url": "https://github.com/featurecreep-cron/freshrss-extensions",
@@ -374,6 +374,17 @@
             "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
             "directory": "xExtension-QuickCollapse"
+        },
+        {
+            "name": "QuickFilter",
+            "author": "featurecreep-cron",
+            "description": "Build filters from article context — star or hide articles by author, tag, or keyword",
+            "version": "0.1.0",
+            "entrypoint": "QuickFilter",
+            "type": "user",
+            "url": "https://github.com/featurecreep-cron/freshrss-extensions",
+            "method": "git",
+            "directory": "xExtension-QuickFilter"
         },
         {
             "name": "RSS-Bridge",
@@ -676,7 +687,7 @@
             "name": "YouTube Embed Fix",
             "author": "featurecreep-cron",
             "description": "Fix YouTube embed playback in article content by adding origin parameter",
-            "version": "0.1.0",
+            "version": "0.1.2",
             "entrypoint": "YouTubeEmbed",
             "type": "user",
             "url": "https://github.com/featurecreep-cron/freshrss-extensions",
