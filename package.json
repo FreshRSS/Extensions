@@ -1,48 +1,47 @@
 {
-  "name": "freshrss-extensions",
-  "type": "module",
-  "description": "Extensions for FreshRSS",
-  "homepage": "https://freshrss.org/",
-  "readmeFilename": "README.md",
-  "bugs": {
-    "url": "https://github.com/FreshRSS/Extensions/issues"
-  },
-  "keywords": [
-    "freshrss",
-    "extensions"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/FreshRSS/Extensions.git"
-  },
-  "license": "see each extension",
-  "engines": {
-    "node": ">=18"
-  },
-  "scripts": {
-    "eslint": "eslint .",
-    "eslint_fix": "eslint --fix .",
-    "markdownlint": "markdownlint '**/*.md'",
-    "markdownlint_fix": "markdownlint --fix '**/*.md'",
-    "rtlcss": "npm run symbolic && rtlcss -d symbolic/ && find -L symbolic/ -type f -name '*.rtl.rtl.css' -delete",
-    "stylelint": "stylelint '**/*.css'",
-    "stylelint_fix": "stylelint --fix '**/*.css'",
-    "symbolic": "rm -fr symbolic && mkdir symbolic && find . -maxdepth 1 -type d -name 'xExtension-*' -exec ln -sf \"$(pwd)/{}\" ./symbolic/ \\;",
-    "test": "npm run eslint && npm run stylelint && npm run markdownlint",
-    "fix": "npm run rtlcss && npm run stylelint_fix && npm run eslint_fix && npm run markdownlint_fix"
-  },
-  "devDependencies": {
-    "eslint": "^9.39.2",
-    "@eslint/js": "^9.8.0",
-    "globals": "^17.3.0",
-    "markdownlint-cli": "^0.48.0",
-    "neostandard": "^0.12.2",
-    "rtlcss": "^4.3.0",
-    "sass": "^1.97.3",
-    "stylelint": "^17.6.0",
-    "stylelint-config-recommended-scss": "^17.0.0",
-    "stylelint-order": "^8.1.1",
-    "@stylistic/stylelint-plugin": "^5.1.0"
-  },
-  "rtlcssConfig": {}
+	"name": "freshrss-extensions",
+	"type": "module",
+	"description": "Extensions for FreshRSS",
+	"homepage": "https://freshrss.org/",
+	"readmeFilename": "README.md",
+	"bugs": {
+		"url": "https://github.com/FreshRSS/Extensions/issues"
+	},
+	"keywords": [
+		"freshrss",
+		"extensions"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/FreshRSS/Extensions.git"
+	},
+	"license": "see each extension",
+	"engines": {
+		"node": ">=20"
+	},
+	"scripts": {
+		"eslint": "eslint .",
+		"eslint_fix": "eslint --fix .",
+		"markdownlint": "markdownlint '**/*.md'",
+		"markdownlint_fix": "markdownlint --fix '**/*.md'",
+		"rtlcss": "npm run symbolic && rtlcss -d symbolic/ && find -L symbolic/ -type f -name '*.rtl.rtl.css' -delete",
+		"stylelint": "stylelint '**/*.css'",
+		"stylelint_fix": "stylelint --fix '**/*.css'",
+		"symbolic": "rm -fr symbolic && mkdir symbolic && find . -maxdepth 1 -type d -name 'xExtension-*' -exec ln -sf \"$(pwd)/{}\" ./symbolic/ \\;",
+		"test": "npm run eslint && npm run stylelint && npm run markdownlint",
+		"fix": "npm run rtlcss && npm run stylelint_fix && npm run eslint_fix && npm run markdownlint_fix"
+	},
+	"devDependencies": {
+		"eslint": "^9.39.4",
+		"@eslint/js": "^9.39.4",
+		"globals": "^17.4.0",
+		"markdownlint-cli": "^0.48.0",
+		"neostandard": "^0.13.0",
+		"rtlcss": "^4.3.0",
+		"stylelint": "^17.6.0",
+		"stylelint-config-recommended": "^18.0.0",
+		"stylelint-order": "^8.1.1",
+		"@stylistic/stylelint-plugin": "^5.1.0"
+	},
+	"rtlcssConfig": {}
 }
