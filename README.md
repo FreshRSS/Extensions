@@ -90,14 +90,6 @@ There are some FreshRSS extensions out there, developed by community members:
 
 * [Youtube/Peertube](https://framagit.org/ImAReplicant/freshrss-youtube): Display videos from YouTube/PeerTube feeds inline
 
-### By [@christian-putzke](https://github.com/christian-putzke/)
-
-* [Pocket Button](https://github.com/christian-putzke/freshrss-pocket-button): Add articles to Pocket with one simple button click or a keyboard shortcut.
-
-### By [@huffstler](https://github.com/huffstler)
-
-* [Star To Pocket](https://github.com/huffstler/xExtension-StarToPocket): Like the extension above, but sends articles to Pocket when they are starred. Also works with FreshRSS client applications!
-
 ### By [@Joedmin](https://github.com/Joedmin/)
 
 * [Readeck Button](https://github.com/Joedmin/xExtension-readeck-button): Add articles to a selected Readeck instance with one simple button click or a keyboard shortcut.
@@ -164,6 +156,10 @@ There are some FreshRSS extensions out there, developed by community members:
 
 * [ArticleSummary](https://github.com/LiangWei88/xExtension-ArticleSummary): Generate article summaries using OpenAI-compatible language model APIs. Supports both OpenAI and Ollama providers with a user-friendly configuration interface.
 
+### By [@wogong](https://github.com/wogong)
+
+* [Article Translation & Summary](https://github.com/wogong/freshrss-translate-summary): Translate and summarize FreshRSS entry content into Chinese using an OpenAI-compatible API.
+
 ### By [@Niehztog](https://github.com/Niehztog)
 
 * [Article Full Text](https://github.com/Niehztog/freshrss-af-readability): Fetches full article contents and adds them to feed items by using [Fivefilters Readability.php library](https://github.com/fivefilters/readability.php) (no docker containers required).
@@ -180,6 +176,14 @@ There are some FreshRSS extensions out there, developed by community members:
 
 * [Share To Linkwarden](https://github.com/daften/xExtension-ShareToLinkwarden/): Allows sharing items directly to a self-hosted Linkwarden instance.
 
+### By [@featurecreep-cron](https://github.com/featurecreep-cron)
+
+* [Extension Manager](https://github.com/featurecreep-cron/freshrss-extensions/tree/main/xExtension-ExtensionManager): Install, update, and remove extensions from the settings page.
+* [Recently Read](https://github.com/featurecreep-cron/freshrss-extensions/tree/main/xExtension-RecentlyRead): Adds a Recently Read view to quickly find articles you've already read.
+* [Right-Click Actions](https://github.com/featurecreep-cron/freshrss-extensions/tree/main/xExtension-RightClickActions): Adds context menus to articles, feeds, and categories.
+* [Silent Refresh](https://github.com/featurecreep-cron/freshrss-extensions/tree/main/xExtension-SilentRefresh): Updates unread counts without interrupting your reading.
+* [Sticky Reader](https://github.com/featurecreep-cron/freshrss-extensions/tree/main/xExtension-StickyReader): Scroll straight to articles, keep controls within reach, read distraction-free.
+
 ### By [@fengchang](https://github.com/fengchang)
 
 * [Feed Digest](https://github.com/fengchang/xExtension-FeedDigest): Automatically summarize RSS articles using OpenAI-compatible LLM APIs.
@@ -191,3 +195,11 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@civilblur](https://github.com/civilblur/)
 
 * [Youlag](https://github.com/civilblur/youlag): Browse your YouTube feed through a video-focused interface that includes quality-of-life features.
+
+### By [@deimosfr](https://github.com/deimosfr/)
+
+* [Ai Summary](https://github.com/deimosfr/xExtension-AiSummary): Summarize any article with one click using your favorite AI provider (OpenAI, Gemini, Claude and Ollama).
+
+### By [@bullitt186](https://github.com/bullitt186/)
+
+* [Mark As Read Existing](https://github.com/bullitt186/FreshRSS-MarkAsReadExisting): Periodically re-applies "Mark as read" filter rules to existing unread articles.

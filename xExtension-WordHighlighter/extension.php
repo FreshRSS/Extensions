@@ -63,7 +63,7 @@ final class WordHighlighterExtension extends Minz_Extension
 				'enable_logs' => $this->enable_logs,
 				'case_sensitive' => $this->case_sensitive,
 				'separate_word_search' => $this->separate_word_search,
-				'words' => preg_split("/\r\n|\n|\r/", $configWordList),
+				'words' => preg_split("/\r\n|\n|\r/", $configWordList) ?: [],
 			];
 			$configJson = json_encode($configObj, WordHighlighterExtension::JSON_ENCODE_CONF);
 			file_put_contents(join_path($staticPath, ('config.' . $current_user . '.json')), $configJson . PHP_EOL);
@@ -80,7 +80,8 @@ final class WordHighlighterExtension extends Minz_Extension
 				$this->enable_logs = (bool) ($confJson['enable_logs'] ?? false);
 				$this->case_sensitive = (bool) ($confJson['case_sensitive'] ?? false);
 				$this->separate_word_search = (bool) ($confJson['separate_word_search'] ?? false);
-				$this->word_highlighter_conf = implode("\n", (array) ($confJson['words'] ?? []));
+				$words = is_array($confJson['words']) ? array_filter($confJson['words'], static fn($word) => is_string($word)) : [];
+				$this->word_highlighter_conf = implode("\n", $words);
 			} catch (Exception $exception) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
 				// probably nothing to do needed
 			}

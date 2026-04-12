@@ -36,6 +36,13 @@ If you are having trouble with logging in after configuring the extension, you c
 
 ## Changelog
 
+* 1.0.5 [2026-03-14]
+	* Ensure controller is hooked properly, even when other extensions are also hooking the same controller, by using new `Minz_HookType::ActionExecute` hook
+	* Fixed a bug where captcha was being verified when creating a user as admin
+* 1.0.4 [2026-03-11]
+	* Fixed wrong path in CSP causing reCAPTCHA to not work properly, regression from v1.0.1 [#434](https://github.com/FreshRSS/Extensions/discussions/434)
+* 1.0.3 [2025-12-17]
+	* Minor code changes [#406](https://github.com/FreshRSS/Extensions/pull/406)
 * 1.0.2 [2025-12-06]
 	* Remove warning about unsafe autologin, since it's been removed in FreshRSS 1.28.0
 * 1.0.1 [2025-09-20]

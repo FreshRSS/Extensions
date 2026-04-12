@@ -2,10 +2,21 @@
     "version": 0.1,
     "extensions": [
         {
+            "name": "AI Summary",
+            "author": "Pierre Mavro",
+            "description": "Summarize articles using AI providers (Gemini, Claude, ChatGPT, Ollama)",
+            "version": "1.0.2",
+            "entrypoint": "AiSummary",
+            "type": "user",
+            "url": "https://github.com/deimosfr/xExtension-AiSummary",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "Af_Readability",
             "author": "niehztog",
             "description": "Try to inline article content using Readability",
-            "version": "0.2",
+            "version": "0.3",
             "entrypoint": "Af_Readability",
             "type": "user",
             "url": "https://github.com/Niehztog/freshrss-af-readability",
@@ -38,7 +49,7 @@
             "name": "AutoTTL",
             "author": "Magnus Kokk",
             "description": "A FreshRSS extension for automatic feed refresh TTL based on the average frequency of entries.",
-            "version": "0.6.1",
+            "version": "0.6.2",
             "entrypoint": "AutoTTL",
             "type": "user",
             "url": "https://github.com/mgnsk/FreshRSS-AutoTTL",
@@ -112,6 +123,17 @@
             "directory": "."
         },
         {
+            "name": "Extension Manager",
+            "author": "featurecreep-cron",
+            "description": "Install, update, and remove extensions from the settings page",
+            "version": "0.3.2",
+            "entrypoint": "ExtensionManager",
+            "type": "user",
+            "url": "https://github.com/featurecreep-cron/freshrss-extensions",
+            "method": "git",
+            "directory": "xExtension-ExtensionManager"
+        },
+        {
             "name": "Feed Digest",
             "author": "Chang Feng",
             "description": "Automatically summarizes newly retrieved RSS articles using LLM APIs (OpenAI-compatible)",
@@ -170,7 +192,7 @@
             "name": "Form Captcha",
             "author": "Inverle",
             "description": "Protect register/login forms with captcha",
-            "version": "1.0.3",
+            "version": "1.0.5",
             "entrypoint": "Captcha",
             "type": "system",
             "url": "https://github.com/FreshRSS/Extensions",
@@ -288,10 +310,21 @@
             "directory": "."
         },
         {
+            "name": "Mark As Read Existing",
+            "author": "bullitt",
+            "description": "Periodically re-applies 'Mark as read' filter rules to existing articles",
+            "version": "0.1.0",
+            "entrypoint": "MarkAsReadExisting",
+            "type": "user",
+            "url": "https://github.com/bullitt186/FreshRSS-MarkAsReadExisting",
+            "method": "git",
+            "directory": "xExtension-MarkAsReadExisting"
+        },
+        {
             "name": "Mark Previous as Read",
             "author": "kalvn",
             "description": "This extension adds a button in the footer of each entry. Clicking this button will mark all previous entries as read.",
-            "version": "1.1.5",
+            "version": "1.1.6",
             "entrypoint": "MarkPreviousAsRead",
             "type": "user",
             "url": "https://github.com/kalvn/freshrss-mark-previous-as-read",
@@ -332,17 +365,6 @@
             "directory": "."
         },
         {
-            "name": "Pocket Button",
-            "author": "Christian Putzke",
-            "description": "Add articles to Pocket with one simple button click or a keyboard shortcut.",
-            "version": "0.6",
-            "entrypoint": "PocketButton",
-            "type": "user",
-            "url": "https://github.com/christian-putzke/freshrss-pocket-button",
-            "method": "git",
-            "directory": "."
-        },
-        {
             "name": "Quick Collapse",
             "author": "romibi and Marien Fressinaud",
             "description": "Quickly change from folded to unfolded articles",
@@ -352,6 +374,17 @@
             "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
             "directory": "xExtension-QuickCollapse"
+        },
+        {
+            "name": "QuickFilter",
+            "author": "featurecreep-cron",
+            "description": "Build filters from article context — star or hide articles by author, tag, or keyword",
+            "version": "0.1.3",
+            "entrypoint": "QuickFilter",
+            "type": "user",
+            "url": "https://github.com/featurecreep-cron/freshrss-extensions",
+            "method": "git",
+            "directory": "xExtension-QuickFilter"
         },
         {
             "name": "RSS-Bridge",
@@ -409,6 +442,17 @@
             "directory": "xExtension-ReadingTime"
         },
         {
+            "name": "Recently Read",
+            "author": "featurecreep-cron",
+            "description": "Adds a Recently Read view to quickly find articles you've already read",
+            "version": "0.1.2",
+            "entrypoint": "RecentlyRead",
+            "type": "user",
+            "url": "https://github.com/featurecreep-cron/freshrss-extensions",
+            "method": "git",
+            "directory": "xExtension-RecentlyRead"
+        },
+        {
             "name": "Reddit Image",
             "author": "Alexis Degrugillier",
             "description": "Modify reddit entries by displaying known medias and easing access to the linked resource",
@@ -429,6 +473,17 @@
             "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
             "method": "git",
             "directory": "xExtension-RemoveEmojis"
+        },
+        {
+            "name": "Right-Click Actions",
+            "author": "featurecreep-cron",
+            "description": "Adds context menus to articles, feeds, and categories",
+            "version": "0.1.5",
+            "entrypoint": "RightClickActions",
+            "type": "user",
+            "url": "https://github.com/featurecreep-cron/freshrss-extensions",
+            "method": "git",
+            "directory": "xExtension-RightClickActions"
         },
         {
             "name": "SendToMyJD2",
@@ -475,6 +530,17 @@
             "directory": "xExtension-showFeedID"
         },
         {
+            "name": "Silent Refresh",
+            "author": "featurecreep-cron",
+            "description": "Updates unread counts without interrupting your reading",
+            "version": "0.1.2",
+            "entrypoint": "SilentRefresh",
+            "type": "user",
+            "url": "https://github.com/featurecreep-cron/freshrss-extensions",
+            "method": "git",
+            "directory": "xExtension-SilentRefresh"
+        },
+        {
             "name": "Smart Mobile Menu",
             "author": "Marco Heizmann",
             "description": "Minimizes the required button space and groups buttons.",
@@ -486,17 +552,6 @@
             "directory": "xExtension-SmartMobileMenu"
         },
         {
-            "name": "StarToPocket",
-            "author": "Pat Hough",
-            "description": "An extension that sends an article to Pocket when you Star (Favorite) it.",
-            "version": "1",
-            "entrypoint": "StarToPocket",
-            "type": "user",
-            "url": "https://github.com/huffstler/xExtension-StarToPocket",
-            "method": "git",
-            "directory": "."
-        },
-        {
             "name": "Sticky Feeds",
             "author": "Marien Fressinaud",
             "description": "Set the feed aside in the main stream following the window scroll.",
@@ -506,6 +561,17 @@
             "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
             "directory": "xExtension-StickyFeeds"
+        },
+        {
+            "name": "Sticky Reader",
+            "author": "featurecreep-cron",
+            "description": "Scroll straight to articles, keep controls within reach, read distraction-free",
+            "version": "0.2.4",
+            "entrypoint": "StickyReader",
+            "type": "user",
+            "url": "https://github.com/featurecreep-cron/freshrss-extensions",
+            "method": "git",
+            "directory": "xExtension-StickyReader"
         },
         {
             "name": "Theme Mode Synchronizer",
@@ -577,7 +643,7 @@
             "name": "Unsafe Autologin",
             "author": "Inverle",
             "description": "Brings back removed unsafe autologin feature from FreshRSS",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "entrypoint": "UnsafeAutologin",
             "type": "system",
             "url": "https://github.com/FreshRSS/Extensions",
@@ -610,7 +676,7 @@
             "name": "Word highlighter",
             "author": "Lukas Melega",
             "description": "Highlight specific words",
-            "version": "0.0.3",
+            "version": "0.0.4",
             "entrypoint": "WordHighlighter",
             "type": "user",
             "url": "https://github.com/FreshRSS/Extensions",
@@ -618,10 +684,21 @@
             "directory": "xExtension-WordHighlighter"
         },
         {
+            "name": "YouTube Embed Fix",
+            "author": "featurecreep-cron",
+            "description": "Fix YouTube embed playback in article content by adding origin parameter",
+            "version": "0.1.2",
+            "entrypoint": "YouTubeEmbed",
+            "type": "user",
+            "url": "https://github.com/featurecreep-cron/freshrss-extensions",
+            "method": "git",
+            "directory": "xExtension-YouTubeEmbed"
+        },
+        {
             "name": "YouTube Video Feed",
             "author": "Kevin Papst, Inverle",
             "description": "Embed YouTube feeds inside article content.",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "entrypoint": "YouTube",
             "type": "user",
             "url": "https://github.com/FreshRSS/Extensions",
@@ -643,10 +720,21 @@
             "name": "Youlag",
             "author": "civilblur",
             "description": "Browse YouTube and articles feeds through a modern interface that incorporates quality-of-life features.",
-            "version": "4.2.0",
+            "version": "4.3.0",
             "entrypoint": "Youlag",
             "type": "user",
             "url": "https://github.com/civilblur/youlag",
+            "method": "git",
+            "directory": "."
+        },
+        {
+            "name": "freshrss-translate-summary",
+            "author": "wogong",
+            "description": "Translate and summarize FreshRSS entry content into Chinese using an OpenAI-compatible API.",
+            "version": "0.1.0",
+            "entrypoint": "TranslateSummary",
+            "type": "user",
+            "url": "https://github.com/wogong/freshrss-translate-summary",
             "method": "git",
             "directory": "."
         }

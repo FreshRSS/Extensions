@@ -50,12 +50,6 @@
 	"url": "https://github.com/kapdap/freshrss-extensions",
 	"type": "git"
 }, {
-	"url": "https://github.com/christian-putzke/freshrss-pocket-button",
-	"type": "git"
-}, {
-	"url": "https://github.com/huffstler/xExtension-StarToPocket",
-	"type": "git"
-}, {
 	"url": "https://github.com/Joedmin/xExtension-readeck-button",
 	"type": "git"
 }, {
@@ -92,6 +86,9 @@
 	"url": "https://github.com/LiangWei88/xExtension-ArticleSummary",
 	"type": "git"
 }, {
+	"url": "https://github.com/wogong/freshrss-translate-summary",
+	"type": "git"
+}, {
 	"url": "https://github.com/Niehztog/freshrss-af-readability",
 	"type": "git"
 }, {
@@ -111,5 +108,14 @@
 	"type": "git"
 },  {
 	"url": "https://github.com/civilblur/youlag",
+	"type": "git"
+}, {
+	"url": "https://github.com/deimosfr/xExtension-AiSummary",
+	"type": "git"
+}, {
+	"url": "https://github.com/bullitt186/FreshRSS-MarkAsReadExisting",
+	"type": "git"
+}, {
+	"url": "https://github.com/featurecreep-cron/freshrss-extensions",
 	"type": "git"
 }]
