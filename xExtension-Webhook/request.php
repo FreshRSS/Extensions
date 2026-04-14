@@ -33,7 +33,7 @@ function sendReq(
 	string $additionalLog = "",
 ): void {
 	// Validate inputs
-	if (empty($url) || !filter_var($url, FILTER_VALIDATE_URL)) {
+	if (empty($url) || filter_var($url, FILTER_VALIDATE_URL) === false) {
 		throw new InvalidArgumentException("Invalid URL provided: {$url}");
 	}
 
@@ -64,7 +64,7 @@ function sendReq(
 
 		// Configure headers
 		$finalHeaders = configureHeaders($headers, $bodyType);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, $finalHeaders);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array_values($finalHeaders));
 
 		// Log the request
 		logRequest($logEnabled, $additionalLog, $method, $url, $bodyType, $processedBody, $finalHeaders);
@@ -136,7 +136,7 @@ function processHttpBody(string $body, string $bodyType, string $method, bool $l
 
 		return match ($bodyType) {
 			'json' => json_encode($bodyObject, JSON_THROW_ON_ERROR),
-			'form' => http_build_query($bodyObject ?? []),
+			'form' => http_build_query(is_array($bodyObject) ? $bodyObject : []),
 			default => throw new InvalidArgumentException("Unsupported body type: {$bodyType}")
 		};
 	} catch (JsonException $err) {
@@ -200,7 +200,7 @@ function logRequest(
 	}
 
 	$cleanUrl = urldecode($url);
-	$cleanBody = $body ? str_replace('\/', '/', $body) : '';
+	$cleanBody = ($body !== null) ? str_replace('\/', '/', $body) : '';
 	$headersJson = json_encode($headers);
 
 	$logMessage = trim("{$additionalLog} ♦♦ sendReq ⏩ {$method}: {$cleanUrl} ♦♦ {$bodyType} ♦♦ {$cleanBody} ♦♦ {$headersJson}");
@@ -244,13 +244,13 @@ function executeRequest(CurlHandle $ch, bool $logEnabled): void {
  * with proper class existence checking.
  *
  * @param bool $logEnabled Whether logging is enabled
- * @param mixed $data Data to log (will be converted to string)
+ * @param string $data Data to log (will be converted to string)
  *
  * @throws Minz_PermissionDeniedException
  *
  * @return void
  */
-function logWarning(bool $logEnabled, $data): void {
+function logWarning(bool $logEnabled, string $data): void {
 	if ($logEnabled && class_exists('Minz_Log')) {
 		Minz_Log::warning("[WEBHOOK] " . $data);
 	}
@@ -263,13 +263,13 @@ function logWarning(bool $logEnabled, $data): void {
  * with proper class existence checking.
  *
  * @param bool $logEnabled Whether logging is enabled
- * @param mixed $data Data to log (will be converted to string)
+ * @param string $data Data to log (will be converted to string)
  *
  * @throws Minz_PermissionDeniedException
  *
  * @return void
  */
-function logError(bool $logEnabled, $data): void {
+function logError(bool $logEnabled, string $data): void {
 	if ($logEnabled && class_exists('Minz_Log')) {
 		Minz_Log::error("[WEBHOOK]❌ " . $data);
 	}
@@ -280,13 +280,13 @@ function logError(bool $logEnabled, $data): void {
  *
  * @deprecated Use logWarning() instead
  * @param bool $logEnabled Whether logging is enabled
- * @param mixed $data Data to log
+ * @param string $data Data to log
  *
  * @throws Minz_PermissionDeniedException
  *
  * @return void
  */
-function LOG_WARN(bool $logEnabled, $data): void {
+function LOG_WARN(bool $logEnabled, string $data): void {
 	logWarning($logEnabled, $data);
 }
 
@@ -295,12 +295,12 @@ function LOG_WARN(bool $logEnabled, $data): void {
  *
  * @deprecated Use logError() instead
  * @param bool $logEnabled Whether logging is enabled
- * @param mixed $data Data to log
+ * @param string $data Data to log
  *
  * @throws Minz_PermissionDeniedException
  *
  * @return void
  */
-function LOG_ERR(bool $logEnabled, $data): void {
+function LOG_ERR(bool $logEnabled, string $data): void {
 	logError($logEnabled, $data);
 }
