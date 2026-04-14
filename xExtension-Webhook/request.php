@@ -71,12 +71,9 @@ function sendReq(
 
 		// Execute request
 		executeRequest($ch, $logEnabled);
-
 	} catch (Throwable $err) {
 		logError($logEnabled, "Error in sendReq: {$err->getMessage()} | URL: {$url} | Body: {$body}");
 		throw $err;
-	} finally {
-		curl_close($ch);
 	}
 }
 

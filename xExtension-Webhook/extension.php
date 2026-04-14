@@ -244,7 +244,6 @@ class WebhookExtension extends Minz_Extension {
 			if (!empty($additionalLog)) {
 				$this->sendArticle($entry, $additionalLog);
 			}
-
 		} catch (Throwable $err) {
 			logError($logsEnabled, "Error during processing article ({$link} ❖ \"{$title}\") ERROR: {$err->getMessage()}");
 		}
@@ -341,7 +340,6 @@ class WebhookExtension extends Minz_Extension {
 			// Fallback to string search (remove regex delimiters)
 			$cleanPattern = trim($pattern, '/');
 			return str_contains($text, $cleanPattern);
-
 		} catch (Throwable $err) {
 			logError($this->logsEnabled, "ERROR in isPatternFound: (pattern: {$pattern}) {$err->getMessage()}");
 			return false;
