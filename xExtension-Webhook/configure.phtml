@@ -1,0 +1,199 @@
+<?php
+declare(strict_types=1);
+/** @var WebhookExtension $this */
+?>
+<small>
+	<?= _t('ext.webhook.description') ?>
+</small>
+<form action="<?= _url('extension', 'configure', 'e', urlencode($this->getName())) ?>" method="post">
+	<input type="hidden" name="_csrf" value="<?= FreshRSS_Auth::csrfToken() ?>" />
+
+	<fieldset>
+		<legend><?= _t('ext.webhook.event_settings') ?> ⚙️</legend>
+		<details open="open">
+			<summary class="stick"><small><?= _t('ext.webhook.show_hide') ?></small></summary>
+
+			<div class="form-group">
+				<label class="group-name" for="keywords"><?= _t('ext.webhook.keywords') ?></label>
+				<div class="group-controls">
+					<textarea name="keywords" id="keywords"><?= $this->getKeywordsData() ?></textarea>
+					<br />
+					<small>
+						<?= _t('ext.webhook.keywords_description') ?>
+					</small>
+				</div>
+			</div>
+
+			<!-- Search in article's: -->
+			<div class="form-group">
+				<label class="group-name" for="search_in"><?= _t('ext.webhook.search_in') ?></label>
+				<div class="group-controls">
+					<table>
+						<tr>
+							<td class="group">
+								<input type="checkbox" name="search_in_title" id="search_in_title" value="1"
+									<?= FreshRSS_Context::userConf()->attributeBool('search_in_title') ? 'checked="checked"' : '' ?> />
+								<label for="search_in_title"><b><?= _t('ext.webhook.search_in_title_label') ?></b>&nbsp; </label>
+							</td>
+							<td class="group">
+								<input type="checkbox" name="search_in_feed" id="search_in_feed" value="1"
+									<?= FreshRSS_Context::userConf()->attributeBool('search_in_feed') ? 'checked="checked"' : '' ?> />
+								<label for="search_in_feed"><?= _t('ext.webhook.search_in_feed_label') ?></label>
+							</td>
+							<td class="group">
+								<input type="checkbox" name="search_in_authors" id="search_in_authors" value="1"
+									<?= FreshRSS_Context::userConf()->attributeBool('search_in_authors') ? 'checked="checked"' : '' ?> />
+								<label for="search_in_authors"><?= _t('ext.webhook.search_in_authors_label') ?></label>
+							</td>
+							<td class="group">
+								<input type="checkbox" name="search_in_content" id="search_in_content" value="1"
+									<?= FreshRSS_Context::userConf()->attributeBool('search_in_content') ? 'checked="checked"' : '' ?> />
+								<label for="search_in_content"><?= _t('ext.webhook.search_in_content_label') ?></label>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="group-name" for="mark_as_read"><?= _t('ext.webhook.mark_as_read') ?></label>
+				<div class="group-controls">
+					<input type="checkbox" name="mark_as_read" id="mark_as_read" value="1"
+						<?= FreshRSS_Context::userConf()->attributeBool('mark_as_read') ? 'checked="checked"' : '' ?> />
+				</div>
+			</div>
+
+		</details>
+	</fieldset>
+
+	<!-- ---------------------[ HTTP settings ]-------------------------------------- -->
+
+	<fieldset>
+		<legend><?= _t('ext.webhook.webhook_settings') ?> 🌐</legend>
+		<details open="open">
+			<summary class="stick"> <small><?= _t('ext.webhook.show_hide') ?></small> </summary>
+
+			<div class="form-group">
+				<label class="group-name" for="webhook_url">Method / URL:</label>
+				<div class="group-controls">
+					<select id="webhook_method" name="webhook_method">
+						<?php
+						$currentMethod = FreshRSS_Context::userConf()->attributeString('webhook_method') ?? $this->webhook_method->value;
+						$supportedMethods = [HTTP_METHOD::POST, HTTP_METHOD::GET, HTTP_METHOD::PUT];
+						foreach ($supportedMethods as $method): ?>
+							<option value="<?= $method->value ?>" <?= $currentMethod === $method->value ? 'selected' : '' ?>><?= $method->value ?></option>
+						<?php endforeach; ?>
+					</select>
+					<input type="text" name="webhook_url" id="webhook_url"
+						value="<?= $this->getWebhookUrl() ?>" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="group-name" for="webhook_body"><?= _t('ext.webhook.http_body') ?></label>
+				<div class="group-controls">
+					<textarea name="webhook_body" id="webhook_body"><?= $this->getWebhookBody() ?></textarea>
+					<br />
+					<small>
+						<?= _t('ext.webhook.http_body_description') ?>
+					</small>
+
+					<details>
+						<summary><small><b class=""><?= _t('ext.webhook.http_body_placeholder_summary') ?></b></small>
+						</summary>
+						<div>
+							<div class="content">
+								<table>
+									<tr>
+										<th><b><code><?= _t('ext.webhook.http_body_placeholder_title') ?></code></b></th>
+										<th><b><?= _t('ext.webhook.http_body_placeholder_description') ?></b></th>
+									</tr>
+									<tr>
+										<td><code>__TITLE__</code></td>
+										<td><?= _t('ext.webhook.http_body_placeholder_title_description') ?></td>
+									</tr>
+									<tr>
+										<td><code>__URL__</code></td>
+										<td><?= _t('ext.webhook.http_body_placeholder_url_description') ?></td>
+									</tr>
+									<tr>
+										<td><code>__CONTENT__</code></td>
+										<td><?= _t('ext.webhook.http_body_placeholder_content_description') ?></td>
+									</tr>
+									<tr>
+										<td><code>__DATE__</code></td>
+										<td><?= _t('ext.webhook.http_body_placeholder_date_description') ?></td>
+									</tr>
+									<tr>
+										<td><code>__DATE_TIMESTAMP__</code></td>
+										<td><?= _t('ext.webhook.http_body_placeholder_date_timestamp_description') ?></td>
+									</tr>
+									<tr>
+										<td><code>__AUTHORS__</code></td>
+										<td><?= _t('ext.webhook.http_body_placeholder_authors_description') ?></td>
+									</tr>
+									<tr>
+										<td><code>__THUMBNAIL_URL__</code></td>
+										<td><?= _t('ext.webhook.http_body_placeholder_thumbnail_url_description') ?></td>
+									</tr>
+									<tr>
+										<td><code>__FEED__</code></td>
+										<td><?= _t('ext.webhook.http_body_placeholder_feed_description') ?></td>
+									</tr>
+									<tr>
+										<td><code>__TAGS__</code></td>
+										<td><?= _t('ext.webhook.http_body_placeholder_tags_description') ?></td>
+									</tr>
+								</table>
+							</div>
+
+						</div>
+					</details>
+
+				</div>
+			</div>
+
+			<!-- ---------------------[ More options ]-------------------------------------- -->
+
+			<details>
+				<summary><strong class=""><?= _t('ext.webhook.more_options') ?></strong></summary>
+
+				<div class="form-group">
+					<label class="group-name" for="webhook_headers"><?= _t('ext.webhook.webhook_headers') ?></label>
+					<div class="group-controls">
+						<textarea name="webhook_headers"
+							id="webhook_headers"><?= $this->getWebhookHeaders() ?></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="group-name" for="webhook_body_type"><?= _t('ext.webhook.http_body_type') ?></label>
+					<div class="group-controls">
+						<input type="radio" id="webhook_body_type_json" name="webhook_body_type" value="json"
+							<?= $this->getWebhookBodyType() === 'json' ? 'checked' : '' ?>>
+						<label for="webhook_body_type_json" class="group"><code>JSON</code></label>
+
+						<input type="radio" id="webhook_body_type_form" name="webhook_body_type" value="form"
+							<?= $this->getWebhookBodyType() === 'form' ? 'checked' : '' ?>>
+						<label for="webhook_body_type_form" class="group"><code>x-www-form-urlencoded</code></label>
+
+						<details>
+							<summary><span class=""><?= _t('ext.webhook.more_info') ?></span></summary>
+							<small><?= _t('ext.webhook.more_info_description') ?></small>
+						</details>
+					</div>
+				</div>
+			</details>
+
+		</details>
+	</fieldset>
+
+	<!-- ---------------------[ SUBMIT & CANCEL ]-------------------------------------- -->
+	<div class="form-group form-actions">
+		<div class="group-controls">
+			<button type="submit" class="btn btn-important"><?= _t('gen.action.submit') ?></button>
+			<button type="reset" class="btn"><?= _t('gen.action.cancel') ?></button>
+			<button type="menu" class="btn"><?= _t('ext.webhook.save_and_send_test_req') ?></button>
+		</div>
+	</div>
+
+</form>
