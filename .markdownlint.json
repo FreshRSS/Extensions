@@ -4,6 +4,7 @@
 	"blanks-around-lists": false,
 	"first-line-heading": false,
 	"line-length": false,
+	"no-blanks-blockquote": false,
 	"no-hard-tabs": false,
 	"no-inline-html": {
 		"allowed_elements": ["br", "img", "kbd", "details", "summary"]
