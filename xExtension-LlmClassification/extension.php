@@ -6,6 +6,9 @@ final class LlmClassificationExtension extends Minz_Extension {
 	private const DEFAULT_MODEL = 'gpt-4o-mini';
 	private const DEFAULT_TIMEOUT = 30;
 	private const DEFAULT_MAX_CONTENT_LENGTH = 4000;
+	private const PROMPT_FILENAME = 'prompt.md';
+
+	public string $user_prompt = '';
 
 	/**
 	 * @throws FreshRSS_Context_Exception
@@ -26,9 +29,6 @@ final class LlmClassificationExtension extends Minz_Extension {
 		}
 		if ($this->getUserConfigurationString('model') === null) {
 			$this->setUserConfigurationValue('model', self::DEFAULT_MODEL);
-		}
-		if ($this->getUserConfigurationString('user_prompt') === null) {
-			$this->setUserConfigurationValue('user_prompt', _t('ext.llm_classification.default_prompt'));
 		}
 		if ($this->getUserConfigurationInt('max_content_length') === null) {
 			$this->setUserConfigurationValue('max_content_length', self::DEFAULT_MAX_CONTENT_LENGTH);
@@ -61,8 +61,9 @@ final class LlmClassificationExtension extends Minz_Extension {
 				trim(Minz_Request::paramString('api_key', plaintext: true)));
 			$this->setUserConfigurationValue('model',
 				trim(Minz_Request::paramString('model', plaintext: true)) ?: self::DEFAULT_MODEL);
-			$this->setUserConfigurationValue('user_prompt',
-				trim(Minz_Request::paramString('user_prompt', plaintext: true)) ?: _t('ext.llm_classification.default_prompt'));
+			$userPrompt = trim(Minz_Request::paramString('user_prompt', plaintext: true))
+				?: _t('ext.llm_classification.default_prompt');
+			$this->saveFile(self::PROMPT_FILENAME, $userPrompt);
 			$this->setUserConfigurationValue('max_content_length',
 				Minz_Request::paramInt('max_content_length') ?: self::DEFAULT_MAX_CONTENT_LENGTH);
 			$this->setUserConfigurationValue('timeout',
@@ -77,6 +78,11 @@ final class LlmClassificationExtension extends Minz_Extension {
 
 			$this->setUserConfigurationValue('search_filter',
 				trim(Minz_Request::paramString('search_filter', plaintext: true)));
+		}
+
+		$this->user_prompt = '';
+		if ($this->hasFile(self::PROMPT_FILENAME)) {
+			$this->user_prompt = $this->getFile(self::PROMPT_FILENAME) ?? '';
 		}
 	}
 
@@ -110,7 +116,7 @@ final class LlmClassificationExtension extends Minz_Extension {
 	 * @throws FreshRSS_Context_Exception
 	 */
 	private function buildUserPrompt(FreshRSS_Entry $entry): string {
-		$template = $this->getUserConfigurationString('user_prompt') ?? '';
+		$template = $this->getFile(self::PROMPT_FILENAME) ?? '';
 		if ($template === '') {
 			return '';
 		}
@@ -289,8 +295,7 @@ final class LlmClassificationExtension extends Minz_Extension {
 	public function classifyEntry(FreshRSS_Entry $entry): FreshRSS_Entry {
 		$enableTags = $this->getUserConfigurationBool('enable_tags') ?? false;
 		$apiUrl = $this->getUserConfigurationString('api_url') ?? '';
-		$userPromptTemplate = $this->getUserConfigurationString('user_prompt') ?? '';
-		if (!$enableTags || $apiUrl === '' || $userPromptTemplate === '') {
+		if (!$enableTags || $apiUrl === '' || !$this->hasFile(self::PROMPT_FILENAME)) {
 			return $entry;
 		}
 

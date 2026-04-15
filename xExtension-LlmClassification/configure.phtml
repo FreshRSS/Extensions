@@ -57,7 +57,7 @@
 		<label class="group-name" for="user_prompt"><?= _t('ext.llm_classification.prompts.user') ?></label>
 		<div class="group-controls">
 			<textarea name="user_prompt" id="user_prompt" class="w100"><?=
-				htmlspecialchars($this->getUserConfigurationString('user_prompt') ?? '', ENT_COMPAT, 'UTF-8')
+				htmlspecialchars($this->user_prompt, ENT_COMPAT, 'UTF-8')
 			?></textarea>
 			<p class="help"><?= _t('ext.llm_classification.prompts.user_help') ?></p>
 		</div>
