@@ -220,3 +220,8 @@ There are some FreshRSS extensions out there, developed by community members.
 ### By [@bullitt186](https://github.com/bullitt186/)
 
 * [Mark As Read Existing](https://github.com/bullitt186/FreshRSS-MarkAsReadExisting): Periodically re-applies "Mark as read" filter rules to existing unread articles.
+
+### By [@Strubbl](https://codeberg.org/strubbl)
+
+* [Show URL](https://codeberg.org/strubbl/xExtension-ShowURL): Shows the current article's URL right before the article content starts
+
