@@ -118,4 +118,7 @@
 }, {
 	"url": "https://github.com/featurecreep-cron/freshrss-extensions",
 	"type": "git"
+}, {
+  "url": "https://codeberg.org/strubbl/xExtension-ShowURL",
+  "type": "git"
 }]
