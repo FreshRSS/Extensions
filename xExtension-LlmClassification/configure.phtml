@@ -1,0 +1,123 @@
+<?php
+	declare(strict_types=1);
+	/** @var LlmClassificationExtension $this */
+?>
+<form action="<?= _url('extension', 'configure', 'e', urlencode($this->getName())) ?>" method="post">
+	<input type="hidden" name="_csrf" value="<?= FreshRSS_Auth::csrfToken() ?>" />
+
+	<legend><?= _t('ext.llm_classification.api.title') ?></legend>
+
+	<div class="form-group">
+		<label class="group-name" for="api_url"><?= _t('ext.llm_classification.api.url') ?></label>
+		<div class="group-controls">
+			<input type="url" name="api_url" id="api_url" class="w100" placeholder="https://api.openai.com/v1" value="<?=
+				htmlspecialchars($this->getUserConfigurationString('api_url') ?? '', ENT_COMPAT, 'UTF-8') ?>" />
+			<p class="help"><?= _t('ext.llm_classification.api.url_help') ?></p>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="group-name" for="api_key"><?= _t('ext.llm_classification.api.key') ?></label>
+		<div class="group-controls">
+			<input type="password" name="api_key" id="api_key" class="w100" autocomplete="off" value="<?=
+				htmlspecialchars($this->getUserConfigurationString('api_key') ?? '', ENT_COMPAT, 'UTF-8') ?>" />
+			<p class="help"><?= _t('ext.llm_classification.api.key_help') ?></p>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="group-name" for="model"><?= _t('ext.llm_classification.api.model') ?></label>
+		<div class="group-controls">
+			<input type="text" name="model" id="model" class="w100" value="<?=
+				htmlspecialchars($this->getUserConfigurationString('model') ?? 'gpt-4o-mini', ENT_COMPAT, 'UTF-8') ?>" />
+			<p class="help"><?= _t('ext.llm_classification.api.model_help') ?></p>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="group-name" for="timeout"><?= _t('ext.llm_classification.api.timeout') ?></label>
+		<div class="group-controls">
+			<input type="number" name="timeout" id="timeout" min="1" max="300" value="<?=
+				$this->getUserConfigurationInt('timeout') ?? 30 ?>" />
+		</div>
+	</div>
+
+	<legend><?= _t('ext.llm_classification.prompts.title') ?></legend>
+
+	<div class="form-group">
+		<label class="group-name" for="system_prompt"><?= _t('ext.llm_classification.prompts.system') ?></label>
+		<div class="group-controls">
+			<textarea id="system_prompt" class="w100" readonly="readonly"><?=
+				htmlspecialchars($this->getSystemPrompt(), ENT_COMPAT, 'UTF-8')
+			?></textarea>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="group-name" for="user_prompt"><?= _t('ext.llm_classification.prompts.user') ?></label>
+		<div class="group-controls">
+			<textarea name="user_prompt" id="user_prompt" class="w100"><?=
+				htmlspecialchars($this->getUserConfigurationString('user_prompt') ?? '', ENT_COMPAT, 'UTF-8')
+			?></textarea>
+			<p class="help"><?= _t('ext.llm_classification.prompts.user_help') ?></p>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="group-name" for="max_content_length"><?= _t('ext.llm_classification.prompts.max_content_length') ?></label>
+		<div class="group-controls">
+			<input type="number" name="max_content_length" id="max_content_length" min="0" value="<?=
+				$this->getUserConfigurationInt('max_content_length') ?? 4000 ?>" />
+			<p class="help"><?= _t('ext.llm_classification.prompts.max_content_length_help') ?></p>
+		</div>
+	</div>
+
+	<legend><?= _t('ext.llm_classification.tags.title') ?></legend>
+
+	<div class="form-group">
+		<label class="group-name" for="enable_tags"><?= _t('ext.llm_classification.tags.enable') ?></label>
+		<div class="group-controls">
+			<input type="checkbox" name="enable_tags" id="enable_tags" value="1" <?=
+				$this->getUserConfigurationBool('enable_tags') ? 'checked' : '' ?> />
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="group-name" for="tag_prefix"><?= _t('ext.llm_classification.tags.prefix') ?></label>
+		<div class="group-controls">
+			<input type="text" name="tag_prefix" id="tag_prefix" class="w100" value="<?=
+				htmlspecialchars($this->getUserConfigurationString('tag_prefix') ?? '', ENT_COMPAT, 'UTF-8') ?>" />
+			<p class="help"><?= _t('ext.llm_classification.tags.prefix_help') ?></p>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="group-name" for="allowed_tags"><?= _t('ext.llm_classification.tags.allowed') ?></label>
+		<div class="group-controls">
+			<textarea name="allowed_tags" id="allowed_tags" class="w100"><?=
+				htmlspecialchars($this->getUserConfigurationString('allowed_tags') ?? '', ENT_COMPAT, 'UTF-8')
+			?></textarea>
+			<p class="help"><?= _t('ext.llm_classification.tags.allowed_help') ?></p>
+		</div>
+	</div>
+
+	<legend><?= _t('ext.llm_classification.filter.title') ?></legend>
+
+	<div class="form-group">
+		<label class="group-name" for="search_filter"><?= _t('ext.llm_classification.filter.search') ?></label>
+		<div class="group-controls">
+			<textarea name="search_filter" id="search_filter" class="w100"><?=
+				htmlspecialchars($this->getUserConfigurationString('search_filter') ?? '', ENT_COMPAT, 'UTF-8')
+			?></textarea>
+			<p class="help"><?= _t('ext.llm_classification.filter.search_help') ?></p>
+			<p class="help"><?= _i('help') ?> <?= _t('sub.feed.filteractions.help') ?></p>
+		</div>
+	</div>
+
+	<div class="form-group form-actions">
+		<div class="group-controls">
+			<button type="submit" class="btn btn-important"><?= _t('gen.action.submit') ?></button>
+			<button type="reset" class="btn"><?= _t('gen.action.cancel') ?></button>
+		</div>
+	</div>
+</form>
