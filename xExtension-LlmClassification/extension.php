@@ -89,7 +89,6 @@ final class LlmClassificationExtension extends Minz_Extension {
 
 	/**
 	 * Build the system prompt that constrains the LLM to return a specific JSON structure.
-	 * @throws FreshRSS_Context_Exception
 	 */
 	public function getSystemPrompt(): string {
 		$prompt = <<<'PROMPT'
@@ -114,7 +113,6 @@ final class LlmClassificationExtension extends Minz_Extension {
 
 	/**
 	 * Build the user prompt by replacing placeholders with entry values.
-	 * @throws FreshRSS_Context_Exception
 	 */
 	private function buildUserPrompt(FreshRSS_Entry $entry): string {
 		$template = $this->getFile(self::PROMPT_FILENAME) ?? '';
@@ -147,7 +145,6 @@ final class LlmClassificationExtension extends Minz_Extension {
 	/**
 	 * Check whether the entry matches the configured search filter.
 	 * Returns true if no filter is configured or the entry matches at least one filter line.
-	 * @throws FreshRSS_Context_Exception
 	 */
 	private function entryMatchesSearchFilter(FreshRSS_Entry $entry): bool {
 		$filterStr = $this->getUserConfigurationString('search_filter') ?? '';
@@ -167,7 +164,6 @@ final class LlmClassificationExtension extends Minz_Extension {
 	/**
 	 * Call the LLM API and return the parsed classification result.
 	 * @return array{tags:array<string>}|null
-	 * @throws FreshRSS_Context_Exception
 	 * @throws Minz_PermissionDeniedException
 	 */
 	private function callLlm(string $systemPrompt, string $userPrompt): ?array {
@@ -248,7 +244,6 @@ final class LlmClassificationExtension extends Minz_Extension {
 	/**
 	 * Apply classification results to an entry.
 	 * @param array<string,mixed> $classification
-	 * @throws FreshRSS_Context_Exception
 	 */
 	private function applyClassification(FreshRSS_Entry $entry, array $classification, bool $removeOldTags): FreshRSS_Entry {
 		if (is_array($classification['tags'] ?? null)) {
@@ -290,7 +285,6 @@ final class LlmClassificationExtension extends Minz_Extension {
 
 	/**
 	 * Hook for EntryBeforeInsert: classify a new entry.
-	 * @throws FreshRSS_Context_Exception
 	 * @throws Minz_PermissionDeniedException
 	 */
 	public function classifyEntry(FreshRSS_Entry $entry): FreshRSS_Entry {
