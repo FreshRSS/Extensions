@@ -519,6 +519,17 @@
             "directory": "."
         },
         {
+            "name": "Show entry URL",
+            "author": "Strubbl",
+            "description": "Shows the URL of the currently displayed entry right before its content.",
+            "version": "1.1",
+            "entrypoint": "ShowURL",
+            "type": "user",
+            "url": "https://codeberg.org/strubbl/xExtension-ShowURL",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "ShowFeedID",
             "author": "math-GH, Inverle",
             "description": "Show the ID of feed and category",
