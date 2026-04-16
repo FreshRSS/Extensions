@@ -55,8 +55,9 @@ final class LlmClassificationExtension extends Minz_Extension {
 		$this->registerTranslates();
 
 		if (Minz_Request::isPost()) {
-			$this->setUserConfigurationValue('api_url',
-				trim(Minz_Request::paramString('api_url', plaintext: true)));
+			$apiUrl = trim(Minz_Request::paramString('api_url', plaintext: true));
+			$apiUrl = preg_replace('#/chat/completions/?$#i', '', $apiUrl) ?? $apiUrl;
+			$this->setUserConfigurationValue('api_url', $apiUrl);
 			$this->setUserConfigurationValue('api_key',
 				trim(Minz_Request::paramString('api_key', plaintext: true)));
 			$this->setUserConfigurationValue('model',
