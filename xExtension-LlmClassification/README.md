@@ -23,6 +23,15 @@ To use it, ensure that the `./xExtension-LlmClassification/` directory can be fo
 
 ## Configuration
 
+### API Configuration
+
+| Setting | Default       | Description                                                       |
+| :------ | :------------ | :---------------------------------------------------------------- |
+| API URL | *(empty)*     | OpenAI-compatible API base URL (e.g. `https://api.openai.com/v1`) |
+| API Key | *(empty)*     | Bearer token for API authentication (optional for local APIs)     |
+| Model   | `gpt-4o-mini` | Model name                                                        |
+| Timeout | `30`          | HTTP request timeout in seconds (1–300)                           |
+
 ### Prompts
 
 The **system prompt** is read-only and constrains the LLM to return a JSON object with the structure `{"tags": ["tag1", "tag2"]}`.
