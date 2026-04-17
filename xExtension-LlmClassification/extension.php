@@ -162,6 +162,42 @@ final class LlmClassificationExtension extends Minz_Extension {
 	}
 
 	/**
+	 * Build the response_format payload for the API request.
+	 * Uses json_schema for strict structured output.
+	 * When allowed_tags is configured, the schema constrains tag values via an enum.
+	 * @return array<string,mixed>
+	 */
+	private function buildResponseFormat(): array {
+		$allowedTagsStr = $this->getUserConfigurationString('allowed_tags') ?? '';
+		$allowedTags = $allowedTagsStr !== ''
+			? array_values(array_filter(array_map('trim', explode("\n", $allowedTagsStr)), static fn(string $tag) => $tag !== ''))
+			: [];
+
+		if ($allowedTags === []) {
+			return ['type' => 'json_object'];
+		}
+
+		return [
+			'type' => 'json_schema',
+			'json_schema' => [
+				'name' => 'classification',
+				'strict' => true,
+				'schema' => [
+					'type' => 'object',
+					'properties' => [
+						'tags' => [
+							'type' => 'array',
+							'items' => ['type' => 'string', 'enum' => $allowedTags],
+						],
+					],
+					'required' => ['tags'],
+					'additionalProperties' => false,
+				],
+			],
+		];
+	}
+
+	/**
 	 * Call the LLM API and return the parsed classification result.
 	 * @return array{tags:array<string>}|null
 	 * @throws Minz_PermissionDeniedException
@@ -184,7 +220,7 @@ final class LlmClassificationExtension extends Minz_Extension {
 				['role' => 'system', 'content' => $systemPrompt],
 				['role' => 'user', 'content' => $userPrompt],
 			],
-			'response_format' => ['type' => 'json_object'],
+			'response_format' => $this->buildResponseFormat(),
 		], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
 		if ($requestBody === false) {
