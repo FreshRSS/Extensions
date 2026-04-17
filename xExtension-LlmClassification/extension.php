@@ -92,7 +92,7 @@ final class LlmClassificationExtension extends Minz_Extension {
 	 */
 	public function getSystemPrompt(): string {
 		$prompt = <<<'PROMPT'
-			You are a classification assistant. Analyse the article provided by the user and respond with a JSON object.
+			You are a classification assistant.
 			Your response MUST be valid JSON with exactly this structure: `{"tags": ["tag1", "tag2"]}`
 			Rules:
 			- "tags" is an array of short classification labels (UTF-8). It can be empty.
