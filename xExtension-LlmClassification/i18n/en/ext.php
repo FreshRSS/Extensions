@@ -11,6 +11,8 @@ return array(
 			'model' => 'Model',
 			'model_help' => 'Model name (e.g. gpt-4o-mini)',
 			'timeout' => 'Timeout (seconds)',
+			'max_retries' => 'Max retries',
+			'max_retries_help' => 'Number of retry attempts on transient errors (timeouts, invalid response, 500). 0 = no retry.',
 		),
 		'prompts' => array(
 			'title' => 'Prompts',

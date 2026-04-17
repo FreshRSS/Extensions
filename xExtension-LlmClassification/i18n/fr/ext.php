@@ -11,6 +11,8 @@ return array(
 			'model' => 'Modèle',
 			'model_help' => 'Nom du modèle (ex. gpt-4o-mini)',
 			'timeout' => 'Délai d’attente (secondes)',
+			'max_retries' => 'Tentatives max.',
+			'max_retries_help' => 'Nombre de nouvelles tentatives en cas d’erreur transitoire (délai dépassé, réponse invalide, 500). 0 = pas de nouvelle tentative.',
 		),
 		'prompts' => array(
 			'title' => 'Invites',

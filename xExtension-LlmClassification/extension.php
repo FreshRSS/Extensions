@@ -6,6 +6,8 @@ final class LlmClassificationExtension extends Minz_Extension {
 	private const DEFAULT_MODEL = 'gpt-4o-mini';
 	private const DEFAULT_TIMEOUT = 30;
 	private const DEFAULT_MAX_CONTENT_LENGTH = 4000;
+	private const DEFAULT_MAX_RETRIES = 2;
+	private const RETRYABLE_HTTP_STATUSES = [429, 500, 502, 503, 504];
 	private const PROMPT_FILENAME = 'prompt.md';
 
 	public string $user_prompt = '';
@@ -45,6 +47,9 @@ final class LlmClassificationExtension extends Minz_Extension {
 		if ($this->getUserConfigurationString('allowed_tags') === null) {
 			$this->setUserConfigurationValue('allowed_tags', '');
 		}
+		if ($this->getUserConfigurationInt('max_retries') === null) {
+			$this->setUserConfigurationValue('max_retries', self::DEFAULT_MAX_RETRIES);
+		}
 		if ($this->getUserConfigurationString('search_filter') === null) {
 			$this->setUserConfigurationValue('search_filter', '');
 		}
@@ -69,6 +74,8 @@ final class LlmClassificationExtension extends Minz_Extension {
 				Minz_Request::paramInt('max_content_length') ?: self::DEFAULT_MAX_CONTENT_LENGTH);
 			$this->setUserConfigurationValue('timeout',
 				Minz_Request::paramInt('timeout') ?: self::DEFAULT_TIMEOUT);
+			$this->setUserConfigurationValue('max_retries',
+				max(0, min(5, Minz_Request::paramInt('max_retries'))));
 
 			$this->setUserConfigurationValue('enable_tags',
 				Minz_Request::paramBoolean('enable_tags'));
@@ -198,6 +205,20 @@ final class LlmClassificationExtension extends Minz_Extension {
 	}
 
 	/**
+	 * Determine whether an HTTP failure is transient and worth retrying.
+	 * @param array{fail:bool,status:int,curl_error:string} $response
+	 */
+	private static function isRetryableFailure(array $response): bool {
+		if (!($response['fail'] ?? false)) {
+			return false;
+		}
+		if (($response['status'] ?? 0) === 0 && ($response['curl_error'] ?? '') !== '') {
+			return true;
+		}
+		return in_array($response['status'] ?? 0, self::RETRYABLE_HTTP_STATUSES, true);
+	}
+
+	/**
 	 * Call the LLM API and return the parsed classification result.
 	 * @return array{tags:array<string>}|null
 	 * @throws Minz_PermissionDeniedException
@@ -221,7 +242,7 @@ final class LlmClassificationExtension extends Minz_Extension {
 				['role' => 'user', 'content' => $userPrompt],
 			],
 			'response_format' => $this->buildResponseFormat(),
-		], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+		], JSON_INVALID_UTF8_SUBSTITUTE | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
 		if ($requestBody === false) {
 			Minz_Log::warning('LlmClassification: Failed to encode request body');
@@ -238,16 +259,41 @@ final class LlmClassificationExtension extends Minz_Extension {
 
 		$cachePath = CACHE_PATH . '/llm_classification_' . sha1($apiUrl . $requestBody) . '.json';
 
-		$response = FreshRSS_http_Util::httpGet($url, $cachePath, type: 'json', curl_options: [
-			CURLOPT_POST => true,
-			CURLOPT_POSTFIELDS => $requestBody,
-			CURLOPT_HTTPHEADER => $headers,
-			CURLOPT_CONNECTTIMEOUT => 5,
-			CURLOPT_TIMEOUT => $timeout,
-		]);
+		$maxRetries = $this->getUserConfigurationInt('max_retries') ?? self::DEFAULT_MAX_RETRIES;
+		$response = null;
 
-		if ($response['fail'] || $response['body'] === '') {
-			Minz_Log::warning('LlmClassification: API call failed for ' . $url);
+		for ($attempt = 0; $attempt <= $maxRetries; $attempt++) {
+			$response = FreshRSS_http_Util::httpGet($url, $cachePath, type: 'json', curl_options: [
+				CURLOPT_POST => true,
+				CURLOPT_POSTFIELDS => $requestBody,
+				CURLOPT_HTTPHEADER => $headers,
+				CURLOPT_CONNECTTIMEOUT => 5,
+				CURLOPT_TIMEOUT => $timeout,
+			]);
+
+			if (!($response['fail'] ?? false) && ($response['body'] ?? '') !== '') {
+				break;	// Success
+			}
+
+			if ($attempt < $maxRetries && self::isRetryableFailure($response)) {
+				$delay = (int)pow(2, $attempt);	// Exponential backoff: 1s, 2s, 4s...
+				Minz_Log::warning('LlmClassification: API call failed (HTTP ' . ($response['status'] ?? 0)
+					. (($response['curl_error'] ?? '') !== '' ? '; ' . ($response['curl_error'] ?? '') : '')
+					. '), retry ' . ($attempt + 1) . '/' . $maxRetries . ' after ' . $delay . 's');
+				sleep($delay);
+				@unlink($cachePath);
+				continue;
+			}
+
+			Minz_Log::warning('LlmClassification: API call failed for ' . $url
+				. ' (HTTP ' . ($response['status'] ?? 0)
+				. (($response['curl_error'] ?? '') !== '' ? '; ' . ($response['curl_error'] ?? '') : '')
+				. '), not retrying');
+			return null;
+		}
+
+		if ($response === null || ($response['fail'] ?? false) || ($response['body'] ?? '') === '') {
+			Minz_Log::warning('LlmClassification: API call failed after ' . (1 + $maxRetries) . ' attempt(s) for ' . $url);
 			return null;
 		}
 
