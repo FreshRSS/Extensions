@@ -371,7 +371,7 @@ final class LlmClassificationExtension extends Minz_Extension {
 				$newTags[] = htmlspecialchars($prefix . $tag, ENT_COMPAT, 'UTF-8');
 			}
 
-			$entry->_tags(array_unique(array_merge($existingTags, $newTags)));
+			$entry->_tags(array_values(array_unique(array_merge($existingTags, $newTags))));
 		}
 
 		return $entry;
