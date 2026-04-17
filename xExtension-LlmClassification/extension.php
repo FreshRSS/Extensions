@@ -105,7 +105,7 @@ final class LlmClassificationExtension extends Minz_Extension {
 			You are a classification assistant.
 			Your response MUST be valid JSON with exactly this structure: `{"tags": ["tag1", "tag2"]}`
 			Rules:
-			- "tags" is an array of unique short classification labels (UTF-8). It can be empty.
+			- "tags" is an array of short classification labels (UTF-8). It can be empty. Each label can only be used once.
 			- Do NOT include any text outside the JSON object.
 
 			PROMPT;
@@ -197,6 +197,8 @@ final class LlmClassificationExtension extends Minz_Extension {
 					'properties' => [
 						'tags' => [
 							'type' => 'array',
+							'uniqueItems' => true,
+							'maxItems' => count($allowedTags),
 							'items' => ['type' => 'string', 'enum' => $allowedTags],
 						],
 					],
