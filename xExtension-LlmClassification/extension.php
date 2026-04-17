@@ -6,6 +6,7 @@ final class LlmClassificationExtension extends Minz_Extension {
 	private const DEFAULT_MODEL = 'gpt-4o-mini';
 	private const DEFAULT_TIMEOUT = 30;
 	private const DEFAULT_MAX_CONTENT_LENGTH = 4000;
+	private const DEFAULT_MAX_TOKENS = 512;
 	private const DEFAULT_MAX_RETRIES = 2;
 	private const RETRYABLE_HTTP_STATUSES = [429, 500, 502, 503, 504];
 	private const PROMPT_FILENAME = 'prompt.md';
@@ -47,6 +48,9 @@ final class LlmClassificationExtension extends Minz_Extension {
 		if ($this->getUserConfigurationString('allowed_tags') === null) {
 			$this->setUserConfigurationValue('allowed_tags', '');
 		}
+		if ($this->getUserConfigurationInt('max_tokens') === null) {
+			$this->setUserConfigurationValue('max_tokens', self::DEFAULT_MAX_TOKENS);
+		}
 		if ($this->getUserConfigurationInt('max_retries') === null) {
 			$this->setUserConfigurationValue('max_retries', self::DEFAULT_MAX_RETRIES);
 		}
@@ -65,15 +69,14 @@ final class LlmClassificationExtension extends Minz_Extension {
 			$this->setUserConfigurationValue('api_url', $apiUrl);
 			$this->setUserConfigurationValue('api_key',
 				trim(Minz_Request::paramString('api_key', plaintext: true)));
-			$this->setUserConfigurationValue('model',
-				trim(Minz_Request::paramString('model', plaintext: true)) ?: self::DEFAULT_MODEL);
+			$this->setUserConfigurationValue('model', trim(Minz_Request::paramString('model', plaintext: true)));
 			$userPrompt = trim(Minz_Request::paramString('user_prompt', plaintext: true))
 				?: _t('ext.llm_classification.default_prompt');
 			$this->saveFile(self::PROMPT_FILENAME, $userPrompt);
-			$this->setUserConfigurationValue('max_content_length',
-				Minz_Request::paramInt('max_content_length') ?: self::DEFAULT_MAX_CONTENT_LENGTH);
+			$this->setUserConfigurationValue('max_content_length', Minz_Request::paramInt('max_content_length'));
 			$this->setUserConfigurationValue('timeout',
 				Minz_Request::paramInt('timeout') ?: self::DEFAULT_TIMEOUT);
+			$this->setUserConfigurationValue('max_tokens', Minz_Request::paramInt('max_tokens'));
 			$this->setUserConfigurationValue('max_retries',
 				max(0, min(5, Minz_Request::paramInt('max_retries'))));
 
@@ -206,13 +209,13 @@ final class LlmClassificationExtension extends Minz_Extension {
 
 	/**
 	 * Determine whether an HTTP failure is transient and worth retrying.
-	 * @param array{fail:bool,status:int,curl_error:string} $response
+	 * @param array{fail:bool,status:int,error:string} $response
 	 */
 	private static function isRetryableFailure(array $response): bool {
 		if (!($response['fail'] ?? false)) {
 			return false;
 		}
-		if (($response['status'] ?? 0) === 0 && ($response['curl_error'] ?? '') !== '') {
+		if (($response['status'] ?? 0) === 0 && ($response['error'] ?? '') !== '') {
 			return true;
 		}
 		return in_array($response['status'] ?? 0, self::RETRYABLE_HTTP_STATUSES, true);
@@ -235,14 +238,21 @@ final class LlmClassificationExtension extends Minz_Extension {
 
 		$url = rtrim($apiUrl, '/') . '/chat/completions';
 
-		$requestBody = json_encode([
+		$body = [
 			'model' => $model,
 			'messages' => [
 				['role' => 'system', 'content' => $systemPrompt],
 				['role' => 'user', 'content' => $userPrompt],
 			],
 			'response_format' => $this->buildResponseFormat(),
-		], JSON_INVALID_UTF8_SUBSTITUTE | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+		];
+
+		$maxTokens = $this->getUserConfigurationInt('max_tokens') ?? self::DEFAULT_MAX_TOKENS;
+		if ($maxTokens > 0) {
+			$body['max_completion_tokens'] = $maxTokens;
+		}
+
+		$requestBody = json_encode($body, JSON_INVALID_UTF8_SUBSTITUTE | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
 		if ($requestBody === false) {
 			Minz_Log::warning('LlmClassification: Failed to encode request body');
@@ -278,7 +288,7 @@ final class LlmClassificationExtension extends Minz_Extension {
 			if ($attempt < $maxRetries && self::isRetryableFailure($response)) {
 				$delay = (int)pow(2, $attempt);	// Exponential backoff: 1s, 2s, 4s...
 				Minz_Log::warning('LlmClassification: API call failed (HTTP ' . ($response['status'] ?? 0)
-					. (($response['curl_error'] ?? '') !== '' ? '; ' . ($response['curl_error'] ?? '') : '')
+					. (($response['error'] ?? '') !== '' ? '; ' . ($response['error'] ?? '') : '')
 					. '), retry ' . ($attempt + 1) . '/' . $maxRetries . ' after ' . $delay . 's');
 				sleep($delay);
 				@unlink($cachePath);
@@ -287,7 +297,7 @@ final class LlmClassificationExtension extends Minz_Extension {
 
 			Minz_Log::warning('LlmClassification: API call failed for ' . $url
 				. ' (HTTP ' . ($response['status'] ?? 0)
-				. (($response['curl_error'] ?? '') !== '' ? '; ' . ($response['curl_error'] ?? '') : '')
+				. (($response['error'] ?? '') !== '' ? '; ' . ($response['error'] ?? '') : '')
 				. '), not retrying');
 			return null;
 		}

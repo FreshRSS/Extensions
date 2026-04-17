@@ -43,6 +43,15 @@
 	</div>
 
 	<div class="form-group">
+		<label class="group-name" for="max_tokens"><?= _t('ext.llm_classification.api.max_tokens') ?></label>
+		<div class="group-controls">
+			<input type="number" name="max_tokens" id="max_tokens" min="0" value="<?=
+				$this->getUserConfigurationInt('max_tokens') ?? 256 ?>" />
+			<p class="help"><?= _t('ext.llm_classification.api.max_tokens_help') ?></p>
+		</div>
+	</div>
+
+	<div class="form-group">
 		<label class="group-name" for="max_retries"><?= _t('ext.llm_classification.api.max_retries') ?></label>
 		<div class="group-controls">
 			<input type="number" name="max_retries" id="max_retries" min="0" max="5" value="<?=

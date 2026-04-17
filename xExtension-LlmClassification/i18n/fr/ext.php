@@ -11,6 +11,8 @@ return array(
 			'model' => 'Modèle',
 			'model_help' => 'Nom du modèle (ex. gpt-4o-mini)',
 			'timeout' => 'Délai d’attente (secondes)',
+			'max_tokens' => 'Tokens max. de complétion',
+			'max_tokens_help' => 'Nombre maximum de tokens que le LLM peut générer (0 = valeur par défaut du fournisseur)',
 			'max_retries' => 'Tentatives max.',
 			'max_retries_help' => 'Nombre de nouvelles tentatives en cas d’erreur transitoire (délai dépassé, réponse invalide, 500). 0 = pas de nouvelle tentative.',
 		),
