@@ -292,7 +292,7 @@ final class LlmClassificationExtension extends Minz_Extension {
 			return null;
 		}
 
-		if ($response === null || ($response['fail'] ?? false) || ($response['body'] ?? '') === '') {
+		if ($response === null || ($response['fail'] ?? false) || !is_string($response['body'] ?? null) || ($response['body'] ?? '') === '') {
 			Minz_Log::warning('LlmClassification: API call failed after ' . (1 + $maxRetries) . ' attempt(s) for ' . $url);
 			return null;
 		}
