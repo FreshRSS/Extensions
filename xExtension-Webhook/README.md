@@ -3,12 +3,12 @@
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 [![FreshRSS](https://img.shields.io/badge/FreshRSS-1.20.0+-green.svg)](https://freshrss.org/)
 
-A powerful FreshRSS extension that automatically sends webhook notifications when RSS entries match specified keywords. Perfect for integrating with Discord, Slack, Telegram, or any service that supports webhooks.
+A powerful FreshRSS extension that automatically sends webhook notifications when RSS entries match configured search filters. Perfect for integrating with Discord, Slack, Telegram, or any service that supports webhooks.
 
 ## 🚀 Features
 
-- **Automated Notifications**: Automatically sends webhooks when new RSS entries match your keywords
-- **Flexible Pattern Matching**: Search in titles, feed names, authors, or content
+- **Automated Notifications**: Automatically sends webhooks when new RSS entries match your search filters
+- **Search Filters**: FreshRSS native search filter syntax for precise matching
 - **Multiple HTTP Methods**: Supports GET, POST, PUT, DELETE, PATCH, OPTIONS, and HEAD
 - **Configurable Formats**: Send data as JSON or form-encoded
 - **Template System**: Customizable webhook payloads with placeholders
@@ -33,22 +33,15 @@ A powerful FreshRSS extension that automatically sends webhook notifications whe
 1. Go to **Administration** → **Extensions** → **Webhook**
 2. Configure the following settings:
 
-#### Keywords
+#### Search Filter
 
-Enter keywords to match against RSS entries (one per line):
+Use [FreshRSS search filter syntax](https://freshrss.github.io/FreshRSS/en/users/10_filter.html) to match entries. Each line is an OR condition — if any line matches, the webhook fires. Leave empty to match all entries.
 
 ```text
-breaking news
-security alert
-your-project-name
+intitle:breaking news
+intitle:security alert
+#your-project-name
 ```
-
-#### Search Options
-
-- **Search in Title**: Match keywords in article titles
-- **Search in Feed**: Match keywords in feed names
-- **Search in Authors**: Match keywords in author names
-- **Search in Content**: Match keywords in article content
 
 #### Webhook Settings
 
@@ -134,22 +127,30 @@ Customize the webhook payload using placeholders:
 }
 ```
 
-## 🔍 Pattern Matching
+## 🔍 Search Filters
 
-The extension supports both regex patterns and simple string matching:
+The extension uses [FreshRSS search filter syntax](https://freshrss.github.io/FreshRSS/en/users/10_filter.html) to match entries:
 
-### Regex Patterns
+### Filter by Field
 
 ```text
-/security.*/i
-/\b(urgent|critical)\b/i
+intitle:security
+inurl:example.com
+author:John
 ```
 
-### Simple Strings
+### Tags and Feeds
 
 ```text
-breaking news
-security alert
+#breaking-news
+f:TechCrunch
+```
+
+### Boolean Logic
+
+```text
+intitle:urgent OR intitle:critical
+intitle:release -intitle:beta
 ```
 
 ## 🛠️ Advanced Configuration
@@ -172,8 +173,8 @@ User-Agent: FreshRSS-Webhook/1.0
 
 ### Performance
 
-- Only sends webhooks when patterns match
-- Efficient pattern matching with fallbacks
+- Only sends webhooks when filters match
+- Efficient filter evaluation via FreshRSS core
 - Minimal impact on RSS processing
 
 ## 🐛 Troubleshooting
@@ -181,14 +182,14 @@ User-Agent: FreshRSS-Webhook/1.0
 ### Common Issues
 
 **Webhooks not sending:**
-- Check that keywords are configured
+- Check that a search filter is configured (or leave empty to match all)
 - Verify webhook URL is accessible
 - Enable logging to see detailed information
 
-**Pattern not matching:**
-- Test with simple string patterns first
-- Check regex syntax if using regex patterns
-- Verify search options are enabled
+**Filter not matching:**
+- Try simple filters first (e.g., `intitle:test`)
+- Refer to the [FreshRSS filter documentation](https://freshrss.github.io/FreshRSS/en/users/10_filter.html) for syntax
+- Enable logging to see which entries are evaluated
 
 **Authentication errors:**
 - Check custom headers configuration
@@ -197,7 +198,7 @@ User-Agent: FreshRSS-Webhook/1.0
 ### Debugging
 
 Enable logging in the extension settings to see detailed information about:
-- Pattern matching results
+- Filter matching results
 - HTTP request details
 - Response codes and errors
 

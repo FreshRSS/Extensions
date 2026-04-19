@@ -33,8 +33,8 @@ enum HTTP_METHOD: string {
  * FreshRSS Webhook Extension
  *
  * This extension allows sending webhook notifications when RSS entries match
- * specified keywords. It supports pattern matching in titles, feeds, authors,
- * and content, with configurable HTTP methods and request formats.
+ * configured search filters. It supports FreshRSS native search filter syntax
+ * with configurable HTTP methods and request formats.
  *
  * @author Lukas Melega, Ryahn
  * @version 0.1.1
@@ -119,19 +119,15 @@ class WebhookExtension extends Minz_Extension {
 		$this->registerTranslates();
 
 		if (Minz_Request::isPost()) {
-			$this->setUserConfigurationValue('keywords', array_filter(Minz_Request::paramTextToArray('keywords'), static fn(string $v): bool => $v !== ''));
-			$this->setUserConfigurationValue('search_in_title', Minz_Request::paramBoolean('search_in_title'));
-			$this->setUserConfigurationValue('search_in_feed', Minz_Request::paramBoolean('search_in_feed'));
-			$this->setUserConfigurationValue('search_in_authors', Minz_Request::paramBoolean('search_in_authors'));
-			$this->setUserConfigurationValue('search_in_content', Minz_Request::paramBoolean('search_in_content'));
+			$this->setUserConfigurationValue('search_filter', trim(Minz_Request::paramString('search_filter', plaintext: true)));
 			$this->setUserConfigurationValue('mark_as_read', Minz_Request::paramBoolean('mark_as_read'));
 			$this->setUserConfigurationValue('ignore_updated', Minz_Request::paramBoolean('ignore_updated'));
-			$this->setUserConfigurationValue('webhook_url', Minz_Request::paramString('webhook_url'));
-			$this->setUserConfigurationValue('webhook_method', Minz_Request::paramString('webhook_method'));
+			$this->setUserConfigurationValue('webhook_url', trim(Minz_Request::paramString('webhook_url', plaintext: true)));
+			$this->setUserConfigurationValue('webhook_method', trim(Minz_Request::paramString('webhook_method', plaintext: true)));
 			$this->setUserConfigurationValue('webhook_headers',
 				array_filter(Minz_Request::paramTextToArray('webhook_headers'), static fn(string $v): bool => $v !== ''));
-			$this->setUserConfigurationValue('webhook_body', html_entity_decode(Minz_Request::paramString('webhook_body')));
-			$this->setUserConfigurationValue('webhook_body_type', Minz_Request::paramString('webhook_body_type'));
+			$this->setUserConfigurationValue('webhook_body', trim(Minz_Request::paramString('webhook_body', plaintext: true)));
+			$this->setUserConfigurationValue('webhook_body_type', trim(Minz_Request::paramString('webhook_body_type', plaintext: true)));
 			$this->setUserConfigurationValue('enable_logging', Minz_Request::paramBoolean('enable_logging'));
 
 			$logsEnabled = $this->getUserConfigurationBool('enable_logging') ?? false;
@@ -139,7 +135,7 @@ class WebhookExtension extends Minz_Extension {
 
 			logWarning($logsEnabled, 'saved config: ✅');
 
-			if (Minz_Request::paramString('test_request') !== '') {
+			if (Minz_Request::paramString('test_request', plaintext: true) !== '') {
 				try {
 					sendReq(
 						$this->getUserConfigurationString('webhook_url') ?? '',
@@ -158,11 +154,10 @@ class WebhookExtension extends Minz_Extension {
 	}
 
 	/**
-	 * Process article and send webhook if patterns match
+	 * Process article and send webhook if search filter matches
 	 *
-	 * Analyzes RSS entries against configured keyword patterns and sends
-	 * webhook notifications for matching entries. Supports pattern matching
-	 * in titles, feeds, authors, and content.
+	 * Evaluates RSS entries against configured search filters and sends
+	 * webhook notifications for matching entries.
 	 *
 	 * @param FreshRSS_Entry $entry The RSS entry to process
 	 *
@@ -180,75 +175,58 @@ class WebhookExtension extends Minz_Extension {
 			return $entry;
 		}
 
-		$searchInTitle = $this->getUserConfigurationBool('search_in_title') ?? false;
-		$searchInFeed = $this->getUserConfigurationBool('search_in_feed') ?? false;
-		$searchInAuthors = $this->getUserConfigurationBool('search_in_authors') ?? false;
-		$searchInContent = $this->getUserConfigurationBool('search_in_content') ?? false;
-
-		$patterns = array_values(array_filter($this->getUserConfigurationArray('keywords') ?? [], 'is_string'));
 		$markAsRead = $this->getUserConfigurationBool('mark_as_read') ?? false;
 		$logsEnabled = $this->getUserConfigurationBool('enable_logging') ?? false;
 		$this->logsEnabled = $logsEnabled;
 
-		// Validate patterns
-		if (empty($patterns)) {
-			logError($logsEnabled, '❗️ No keywords defined in Webhook extension settings.');
-			return $entry;
-		}
-
-		$title = '❗️ NOT INITIALIZED';
-		$link = '❗️ NOT INITIALIZED';
-		$additionalLog = '';
-
 		try {
+			if (!$this->entryMatchesSearchFilter($entry)) {
+				return $entry;
+			}
+
 			$title = $entry->title();
 			$link = $entry->link();
-
-			foreach ($patterns as $pattern) {
-				$matchFound = false;
-
-				if ($searchInTitle && $this->isPatternFound("/{$pattern}/", $title)) {
-					logWarning($logsEnabled, "matched item by title ✔️ \"{$title}\" ❖ link: {$link}");
-					$additionalLog = "✔️ matched item with pattern: /{$pattern}/ ❖ title \"{$title}\" ❖ link: {$link}";
-					$matchFound = true;
-				}
-
-				if (!$matchFound && $searchInFeed && is_object($entry->feed()) && $this->isPatternFound("/{$pattern}/", $entry->feed()->name())) {
-					logWarning($logsEnabled, "matched item with pattern: /{$pattern}/ ❖ feed \"{$entry->feed()->name()}\", (title: \"{$title}\") ❖ link: {$link}");
-					$additionalLog = "✔️ matched item with pattern: /{$pattern}/ ❖ feed \"{$entry->feed()->name()}\", (title: \"{$title}\") ❖ link: {$link}";
-					$matchFound = true;
-				}
-
-				if (!$matchFound && $searchInAuthors && $this->isPatternFound("/{$pattern}/", $entry->authors(true))) {
-					logWarning($logsEnabled, "✔️ matched item with pattern: /{$pattern}/ ❖ authors \"{$entry->authors(true)}\", (title: {$title}) ❖ link: {$link}");
-					$additionalLog = "✔️ matched item with pattern: /{$pattern}/ ❖ authors \"{$entry->authors(true)}\", (title: {$title}) ❖ link: {$link}";
-					$matchFound = true;
-				}
-
-				if (!$matchFound && $searchInContent && $this->isPatternFound("/{$pattern}/", $entry->content())) {
-					logWarning($logsEnabled, "✔️ matched item with pattern: /{$pattern}/ ❖ content (title: \"{$title}\") ❖ link: {$link}");
-					$additionalLog = "✔️ matched item with pattern: /{$pattern}/ ❖ content (title: \"{$title}\") ❖ link: {$link}";
-					$matchFound = true;
-				}
-
-				if ($matchFound) {
-					break;
-				}
-			}
+			$additionalLog = "✔️ matched entry: \"{$title}\" ❖ link: {$link}";
+			logWarning($logsEnabled, $additionalLog);
 
 			if ($markAsRead) {
-				$entry->_isRead($markAsRead);
+				$entry->_isRead(true);
 			}
 
-			// Only send webhook if a pattern was matched
-			if (!empty($additionalLog)) {
-				$this->sendArticle($entry, $additionalLog);
-			}
+			$this->sendArticle($entry, $additionalLog);
 		} catch (Throwable $err) {
-			logError($logsEnabled, "Error during processing article ({$link} ❖ \"{$title}\") ERROR: {$err->getMessage()}");
+			logError($logsEnabled, "Error during processing article: {$err->getMessage()}");
 		}
 
 		return $entry;
+	}
+
+	/**
+	 * Check if entry matches the configured search filter
+	 *
+	 * Evaluates the entry against each line of the search filter.
+	 * Lines act as OR conditions — the first match returns true.
+	 * An empty filter matches all entries.
+	 *
+	 * @param FreshRSS_Entry $entry The RSS entry to check
+	 *
+	 * @return bool True if the entry matches any filter line, or if no filter is configured
+	 */
+	private function entryMatchesSearchFilter(FreshRSS_Entry $entry): bool {
+		$searchFilter = $this->getUserConfigurationString('search_filter') ?? '';
+		if ($searchFilter === '') {
+			return true;
+		}
+
+		$lines = array_filter(array_map('trim', explode("\n", $searchFilter)), static fn(string $line): bool => $line !== '');
+		foreach ($lines as $line) {
+			$booleanSearch = new FreshRSS_BooleanSearch($line);
+			if ($entry->matches($booleanSearch)) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**
@@ -316,42 +294,14 @@ class WebhookExtension extends Minz_Extension {
 	}
 
 	/**
-	 * Check if pattern is found in text
+	 * Get configured search filter
 	 *
-	 * Attempts regex matching first, then falls back to simple string search.
-	 * Handles regex errors gracefully and logs issues.
+	 * Returns the configured search filter string for display in the configuration form.
 	 *
-	 * @param string $pattern Search pattern (may include regex delimiters)
-	 * @param string $text Text to search in
-	 *
-	 * @return bool True if pattern is found, false otherwise
+	 * @return string The search filter string
 	 */
-	private function isPatternFound(string $pattern, string $text): bool {
-		if (empty($text) || empty($pattern)) {
-			return false;
-		}
-
-		// Try regex match first
-		if (preg_match($pattern, $text) === 1) {
-			return true;
-		}
-
-		// Fallback to string search (remove regex delimiters)
-		$cleanPattern = trim($pattern, '/');
-		return str_contains($text, $cleanPattern);
-	}
-
-	/**
-	 * Get keywords configuration as formatted string
-	 *
-	 * Returns the configured keywords as a newline-separated string
-	 * for display in the configuration form.
-	 *
-	 * @return string Keywords separated by newlines
-	 */
-	public function getKeywordsData(): string {
-		$keywords = array_values(array_filter($this->getUserConfigurationArray('keywords') ?? [], 'is_string'));
-		return implode(PHP_EOL, $keywords);
+	public function getSearchFilter(): string {
+		return $this->getUserConfigurationString('search_filter') ?? '';
 	}
 
 	/**
