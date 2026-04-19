@@ -128,7 +128,8 @@ class WebhookExtension extends Minz_Extension {
 			$this->setUserConfigurationValue('ignore_updated', Minz_Request::paramBoolean('ignore_updated'));
 			$this->setUserConfigurationValue('webhook_url', Minz_Request::paramString('webhook_url'));
 			$this->setUserConfigurationValue('webhook_method', Minz_Request::paramString('webhook_method'));
-			$this->setUserConfigurationValue('webhook_headers', array_filter(Minz_Request::paramTextToArray('webhook_headers'), static fn(string $v): bool => $v !== ''));
+			$this->setUserConfigurationValue('webhook_headers',
+				array_filter(Minz_Request::paramTextToArray('webhook_headers'), static fn(string $v): bool => $v !== ''));
 			$this->setUserConfigurationValue('webhook_body', html_entity_decode(Minz_Request::paramString('webhook_body')));
 			$this->setUserConfigurationValue('webhook_body_type', Minz_Request::paramString('webhook_body_type'));
 			$this->setUserConfigurationValue('enable_logging', Minz_Request::paramBoolean('enable_logging'));
