@@ -18,9 +18,7 @@ A powerful FreshRSS extension that automatically sends webhook notifications whe
 
 ## 📋 Requirements
 
-- FreshRSS 1.20.0 or later
-- PHP 8.1 or later
-- cURL extension enabled
+- FreshRSS 1.28.2+
 
 ## 🔧 Installation
 

@@ -32,22 +32,22 @@ declare(strict_types=1);
 						<tr>
 							<td class="group">
 								<input type="checkbox" name="search_in_title" id="search_in_title" value="1"
-									<?= FreshRSS_Context::userConf()->attributeBool('search_in_title') ? 'checked="checked"' : '' ?> />
+									<?= $this->getUserConfigurationBool('search_in_title') ? 'checked="checked"' : '' ?> />
 								<label for="search_in_title"><b><?= _t('ext.webhook.search_in_title_label') ?></b>&nbsp; </label>
 							</td>
 							<td class="group">
 								<input type="checkbox" name="search_in_feed" id="search_in_feed" value="1"
-									<?= FreshRSS_Context::userConf()->attributeBool('search_in_feed') ? 'checked="checked"' : '' ?> />
+									<?= $this->getUserConfigurationBool('search_in_feed') ? 'checked="checked"' : '' ?> />
 								<label for="search_in_feed"><?= _t('ext.webhook.search_in_feed_label') ?></label>
 							</td>
 							<td class="group">
 								<input type="checkbox" name="search_in_authors" id="search_in_authors" value="1"
-									<?= FreshRSS_Context::userConf()->attributeBool('search_in_authors') ? 'checked="checked"' : '' ?> />
+									<?= $this->getUserConfigurationBool('search_in_authors') ? 'checked="checked"' : '' ?> />
 								<label for="search_in_authors"><?= _t('ext.webhook.search_in_authors_label') ?></label>
 							</td>
 							<td class="group">
 								<input type="checkbox" name="search_in_content" id="search_in_content" value="1"
-									<?= FreshRSS_Context::userConf()->attributeBool('search_in_content') ? 'checked="checked"' : '' ?> />
+									<?= $this->getUserConfigurationBool('search_in_content') ? 'checked="checked"' : '' ?> />
 								<label for="search_in_content"><?= _t('ext.webhook.search_in_content_label') ?></label>
 							</td>
 						</tr>
@@ -59,7 +59,7 @@ declare(strict_types=1);
 				<label class="group-name" for="mark_as_read"><?= _t('ext.webhook.mark_as_read') ?></label>
 				<div class="group-controls">
 					<input type="checkbox" name="mark_as_read" id="mark_as_read" value="1"
-						<?= FreshRSS_Context::userConf()->attributeBool('mark_as_read') ? 'checked="checked"' : '' ?> />
+					<?= $this->getUserConfigurationBool('mark_as_read') ? 'checked="checked"' : '' ?> />
 				</div>
 			</div>
 
@@ -78,7 +78,7 @@ declare(strict_types=1);
 				<div class="group-controls">
 					<select id="webhook_method" name="webhook_method">
 						<?php
-						$currentMethod = FreshRSS_Context::userConf()->attributeString('webhook_method') ?? $this->webhook_method->value;
+					$currentMethod = $this->getUserConfigurationString('webhook_method') ?? $this->webhook_method->value;
 						$supportedMethods = [HTTP_METHOD::POST, HTTP_METHOD::GET, HTTP_METHOD::PUT];
 						foreach ($supportedMethods as $method): ?>
 							<option value="<?= $method->value ?>" <?= $currentMethod === $method->value ? 'selected' : '' ?>><?= $method->value ?></option>
