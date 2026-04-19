@@ -222,6 +222,17 @@
             "directory": "."
         },
         {
+            "name": "GReader Redate",
+            "author": "Julien Avérous",
+            "description": "Use published date instead of fetching date.",
+            "version": "1.3",
+            "entrypoint": "GReaderRedate",
+            "type": "user",
+            "url": "https://codeberg.org/javerous/freshrss-greader-redate",
+            "method": "git",
+            "directory": "xExtension-GReaderRedate"
+        },
+        {
             "name": "Image Cache",
             "author": "Victrid",
             "description": "Cache feed images on your own facility or Cloudflare cache.",
@@ -297,6 +308,17 @@
             "url": "https://github.com/oyox/FreshRSS-extensions",
             "method": "git",
             "directory": "xExtension-KeepFolderState"
+        },
+        {
+            "name": "LLM Classification",
+            "author": "Alkarex",
+            "description": "Tag incoming articles by calling an OpenAI-compatible LLM API",
+            "version": "0.1",
+            "entrypoint": "LlmClassification",
+            "type": "user",
+            "url": "https://github.com/FreshRSS/Extensions",
+            "method": "git",
+            "directory": "xExtension-LlmClassification"
         },
         {
             "name": "LaTeX support",
@@ -423,7 +445,7 @@
             "name": "Readeck Button",
             "author": "Joedmin",
             "description": "Add articles to Readeck with one simple button click or a keyboard shortcut.",
-            "version": "0.11",
+            "version": "0.12",
             "entrypoint": "ReadeckButton",
             "type": "user",
             "url": "https://github.com/Joedmin/xExtension-readeck-button",
@@ -515,6 +537,17 @@
             "entrypoint": "ShareToLinkwarden",
             "type": "user",
             "url": "https://github.com/daften/xExtension-ShareToLinkwarden",
+            "method": "git",
+            "directory": "."
+        },
+        {
+            "name": "Show entry URL",
+            "author": "Strubbl",
+            "description": "Shows the URL of the currently displayed entry right before its content.",
+            "version": "1.1",
+            "entrypoint": "ShowURL",
+            "type": "user",
+            "url": "https://codeberg.org/strubbl/xExtension-ShowURL",
             "method": "git",
             "directory": "."
         },
@@ -654,7 +687,7 @@
             "name": "Wallabag Button",
             "author": "Joedmin",
             "description": "Add articles to Wallabag with one simple button click or a keyboard shortcut.",
-            "version": "0.5",
+            "version": "0.6",
             "entrypoint": "WallabagButton",
             "type": "user",
             "url": "https://github.com/Joedmin/xExtension-wallabag-button",

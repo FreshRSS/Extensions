@@ -44,7 +44,7 @@
 	"url": "https://github.com/tunbridgep/freshrss-invidious",
 	"type": "git"
 }, {
-	"url": "https://github.com/javerous/freshrss-greader-redate",
+	"url": "https://codeberg.org/javerous/freshrss-greader-redate",
 	"type": "git"
 }, {
 	"url": "https://github.com/kapdap/freshrss-extensions",
@@ -118,4 +118,7 @@
 }, {
 	"url": "https://github.com/featurecreep-cron/freshrss-extensions",
 	"type": "git"
+}, {
+  "url": "https://codeberg.org/strubbl/xExtension-ShowURL",
+  "type": "git"
 }]

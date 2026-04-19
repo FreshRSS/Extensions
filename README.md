@@ -21,9 +21,32 @@ composer run-script phpstan-third-party
 
 *Custom CSS* and *Custom JS* are now a part of [core extensions shipped with FreshRSS](https://github.com/FreshRSS/FreshRSS/tree/edge/lib/core-extensions).
 
+## Official extensions
+
+Those extensions are in the current official extension repository, with automatic tests and some level of reviewing from the FreshRSS team, making them more trusted than extensions from other sources.
+
+> 🙋 Help welcome to maintain those extensions.
+
+* [Colorful List](xExtension-ColorfulList/README.md): Colorful entry title based on RSS source
+* [Form Captcha](xExtension-Captcha/README.md): Protect register/login forms with captcha
+* [Image Proxy](xExtension-ImageProxy/README.md): Proxy to avoid insecure content warnings or disappearing images
+* [Quick Collapse](xExtension-QuickCollapse/README.md): Quickly change from folded to unfolded articles
+* [LLM Classification](xExtension-LlmClassification): Tag incoming articles by calling an OpenAI-compatible LLM API
+* [Reading Time](xExtension-ReadingTime/README.md): Add a reading time estimation next to each article
+* [Share By Email](xExtension-ShareByEmail/README.md): Improve the sharing by email system
+* [Show Feed ID](xExtension-showFeedID/README.md): Show the ID of feed and category
+* [Title-Wrap](xExtension-TitleWrap/README.md): Applies a line-wrap to long article titles instead of truncating them
+* [Unsafe Autologin](xExtension-UnsafeAutologin/README.md): Brings back removed unsafe autologin feature from FreshRSS
+* [Word Highlighter](xExtension-WordHighlighter/README.md): Highlight specific words
+* [YouTube Video Feed](xExtension-YouTube/README.md): Embed YouTube feeds inside article content
+
 ## Third-party extensions
 
-There are some FreshRSS extensions out there, developed by community members:
+There are some FreshRSS extensions out there, developed by community members.
+
+> ⚠️ Those extensions are not monitored by the FreshRSS team, so use at your own risk.
+
+> 👍 Developers of popular extensions are invited to promote them to the official repository and continue development and support there.
 
 ### By [@kevinpapst](https://github.com/kevinpapst), [Web](https://www.kevinpapst.de/)
 
@@ -36,11 +59,9 @@ There are some FreshRSS extensions out there, developed by community members:
 * [Mobile Scroll Menu](https://github.com/oyox/FreshRSS-extensions/tree/master/xExtension-MobileScrollMenu): (mobile) Automatically hides the header menu when scrolling down and shows it when scrolling up.
 * [Touch Control](https://github.com/oyox/FreshRSS-extensions/tree/master/xExtension-TouchControl): (mobile) Add touch gestures to FreshRSS.
 
-
 ### By [@Eisa01](https://github.com/Eisa01)
 
 * [FreshRSS Auto Refresh](https://github.com/Eisa01/FreshRSS---Auto-Refresh-Extension): Automatically refreshes FreshRSS page once in a minute.
-
 
 ### By [@aledeg](https://github.com/aledeg)
 
@@ -49,16 +70,13 @@ There are some FreshRSS extensions out there, developed by community members:
 * [Paywall](https://github.com/aledeg/xExtension-Paywall): Add title prefix on articles behind a paywall
 * [Reddit Image](https://github.com/aledeg/xExtension-RedditImage): Replace link to Reddit topic with resource link
 
-
 ### By [Nicolas Frandeboeuf](https://framagit.org/nicofrand)
 
 * [ThreePanesView](https://framagit.org/nicofrand/xextension-threepanesview): [Adds a third vertical pane along the articles list, to display the articles content](https://nicofrand.eu/freshrss-extension-threepanesview/).
 
-
 ### By [@Lapineige](https://github.com/lapineige), [@hkcomori](https://github.com/hkcomori)
 
 * [Reading Time](https://github.com/FreshRSS/Extensions/tree/main/xExtension-ReadingTime): Add a reading time estimation next to each article.
-
 
 ### By [@Korbak](https://github.com/Korbak)
 
@@ -203,3 +221,8 @@ There are some FreshRSS extensions out there, developed by community members:
 ### By [@bullitt186](https://github.com/bullitt186/)
 
 * [Mark As Read Existing](https://github.com/bullitt186/FreshRSS-MarkAsReadExisting): Periodically re-applies "Mark as read" filter rules to existing unread articles.
+
+### By [@Strubbl](https://codeberg.org/strubbl)
+
+* [Show URL](https://codeberg.org/strubbl/xExtension-ShowURL): Shows the current article's URL right before the article content starts
+
