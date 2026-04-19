@@ -31,6 +31,7 @@ Those extensions are in the current official extension repository, with automati
 * [Form Captcha](xExtension-Captcha/README.md): Protect register/login forms with captcha
 * [Image Proxy](xExtension-ImageProxy/README.md): Proxy to avoid insecure content warnings or disappearing images
 * [Quick Collapse](xExtension-QuickCollapse/README.md): Quickly change from folded to unfolded articles
+* [LLM Classification](xExtension-LlmClassification): Tag incoming articles by calling an OpenAI-compatible LLM API
 * [Reading Time](xExtension-ReadingTime/README.md): Add a reading time estimation next to each article
 * [Share By Email](xExtension-ShareByEmail/README.md): Improve the sharing by email system
 * [Show Feed ID](xExtension-showFeedID/README.md): Show the ID of feed and category
