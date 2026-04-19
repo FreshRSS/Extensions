@@ -56,14 +56,14 @@ Customize the webhook payload using placeholders:
 
 ```json
 {
-    "title": "__TITLE__",
-    "feed": "__FEED__",
-    "url": "__URL__",
-    "content": "__CONTENT__",
-    "date": "__DATE__",
-    "timestamp": "__DATE_TIMESTAMP__",
-    "authors": "__AUTHORS__",
-    "tags": "__TAGS__"
+    "title": "{title}",
+    "feed": "{feed_name}",
+    "url": "{url}",
+    "content": "{content}",
+    "date": "{date}",
+    "timestamp": "{date_timestamp}",
+    "author": "{author}",
+    "tags": "{tags}"
 }
 ```
 
@@ -71,14 +71,16 @@ Customize the webhook payload using placeholders:
 
 | Placeholder | Description |
 | ----------- | ----------- |
-| `__TITLE__` | Article title |
-| `__FEED__` | Feed name |
-| `__URL__` | Article URL |
-| `__CONTENT__` | Article content |
-| `__DATE__` | Publication date |
-| `__DATE_TIMESTAMP__` | Unix timestamp |
-| `__AUTHORS__` | Article authors |
-| `__TAGS__` | Article tags |
+| `{title}` | Article title |
+| `{url}` | Article URL |
+| `{content}` | Article content (HTML) |
+| `{date}` | Publication date (string) |
+| `{date_timestamp}` | Publication date as Unix timestamp |
+| `{author}` | Article authors |
+| `{feed_name}` | Feed name |
+| `{feed_url}` | Feed URL |
+| `{thumbnail_url}` | Thumbnail (image) URL |
+| `{tags}` | Article tags (separated by " #") |
 
 ## 🎯 Use Cases
 
@@ -86,14 +88,14 @@ Customize the webhook payload using placeholders:
 
 ```json
 {
-    "content": "New article: **__TITLE__**",
+    "content": "New article: **{title}**",
     "embeds": [{
-        "title": "__TITLE__",
-        "url": "__URL__",
-        "description": "__CONTENT__",
+        "title": "{title}",
+        "url": "{url}",
+        "description": "{content}",
         "color": 3447003,
         "footer": {
-            "text": "__FEED__"
+            "text": "{feed_name}"
         }
     }]
 }
@@ -103,11 +105,11 @@ Customize the webhook payload using placeholders:
 
 ```json
 {
-    "text": "New article from __FEED__",
+    "text": "New article from {feed_name}",
     "attachments": [{
-        "title": "__TITLE__",
-        "title_link": "__URL__",
-        "text": "__CONTENT__",
+        "title": "{title}",
+        "title_link": "{url}",
+        "text": "{content}",
         "color": "good"
     }]
 }
@@ -119,10 +121,10 @@ Customize the webhook payload using placeholders:
 {
     "event": "new_article",
     "data": {
-        "title": "__TITLE__",
-        "url": "__URL__",
-        "feed": "__FEED__",
-        "timestamp": "__DATE_TIMESTAMP__"
+        "title": "{title}",
+        "url": "{url}",
+        "feed": "{feed_name}",
+        "timestamp": "{date_timestamp}"
     }
 }
 ```

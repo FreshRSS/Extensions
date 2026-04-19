@@ -79,16 +79,16 @@ class WebhookExtension extends Minz_Extension {
 	/**
 	 * Default webhook request body template
 	 *
-	 * Supports placeholders like __TITLE__, __FEED__, __URL__, etc.
+	 * Supports placeholders like {title}, {url}, {feed_name}, etc.
 	 *
 	 * @var string
 	 */
 	public string $webhook_body = <<<'JSON'
 	{
-		"title": "__TITLE__",
-		"feed": "__FEED__",
-		"url": "__URL__",
-		"created": "__DATE_TIMESTAMP__"
+		"title": "{title}",
+		"feed": "{feed_name}",
+		"url": "{url}",
+		"created": "{date_timestamp}"
 	}
 	JSON;
 
@@ -248,17 +248,18 @@ class WebhookExtension extends Minz_Extension {
 
 			// Replace placeholders with actual values
 			$replacements = [
-				'__TITLE__' => $this->toSafeJsonStr($entry->title()),
-				'__FEED__' => $this->toSafeJsonStr($entry->feed()?->name() ?? ''),
-				'__URL__' => $this->toSafeJsonStr($entry->link()),
-				'__CONTENT__' => $this->toSafeJsonStr($entry->content()),
-				'__DATE__' => $this->toSafeJsonStr($entry->date()),
-				'__DATE_TIMESTAMP__' => $this->toSafeJsonStr($entry->date(true)),
-				'__AUTHORS__' => $this->toSafeJsonStr($entry->authors(true)),
-				'__TAGS__' => $this->toSafeJsonStr($entry->tags(true)),
+				'{title}' => $this->toSafeJsonStr($entry->title()),
+				'{feed_name}' => $this->toSafeJsonStr($entry->feed()?->name() ?? ''),
+				'{feed_url}' => $this->toSafeJsonStr($entry->feed()?->url() ?? ''),
+				'{url}' => $this->toSafeJsonStr($entry->link()),
+				'{content}' => $this->toSafeJsonStr($entry->content()),
+				'{date}' => $this->toSafeJsonStr($entry->date()),
+				'{date_timestamp}' => $this->toSafeJsonStr($entry->date(true)),
+				'{author}' => $this->toSafeJsonStr($entry->authors(true)),
+				'{tags}' => $this->toSafeJsonStr($entry->tags(true)),
 			];
 
-			$bodyStr = str_replace(array_keys($replacements), array_values($replacements), $bodyStr);
+			$bodyStr = strtr($bodyStr, $replacements);
 
 			sendReq(
 				$this->getUserConfigurationString('webhook_url') ?? '',
