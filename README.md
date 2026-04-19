@@ -37,6 +37,7 @@ Those extensions are in the current official extension repository, with automati
 * [Show Feed ID](xExtension-showFeedID/README.md): Show the ID of feed and category
 * [Title-Wrap](xExtension-TitleWrap/README.md): Applies a line-wrap to long article titles instead of truncating them
 * [Unsafe Autologin](xExtension-UnsafeAutologin/README.md): Brings back removed unsafe autologin feature from FreshRSS
+* [Webhook](xExtension-Webhook/README.md): Automatically sends webhook notifications when RSS entries match specified keywords
 * [Word Highlighter](xExtension-WordHighlighter/README.md): Highlight specific words
 * [YouTube Video Feed](xExtension-YouTube/README.md): Embed YouTube feeds inside article content
 
