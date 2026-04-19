@@ -3,10 +3,10 @@
 declare(strict_types=1);
 
 /**
- * Optimized HTTP request handler for Webhook extension
+ * HTTP request handler for Webhook extension
  *
- * This function sends HTTP requests with proper validation, error handling,
- * and logging capabilities for the FreshRSS Webhook extension.
+ * Sends HTTP requests using the FreshRSS framework's httpGet() utility
+ * with proper validation, error handling, and logging capabilities.
  *
  * @param string $url The target URL for the HTTP request
  * @param string $method HTTP method (GET, POST, PUT, DELETE, etc.)
@@ -19,7 +19,7 @@ declare(strict_types=1);
  * @throws InvalidArgumentException When invalid parameters are provided
  * @throws JsonException When JSON encoding/decoding fails
  * @throws Minz_PermissionDeniedException
- * @throws RuntimeException When cURL operations fail
+ * @throws RuntimeException When the HTTP request fails
  *
  * @return void
  */
@@ -30,7 +30,7 @@ function sendReq(
 	string $body,
 	array $headers = [],
 	bool $logEnabled = true,
-	string $additionalLog = "",
+	string $additionalLog = '',
 ): void {
 	// Validate inputs
 	if (empty($url) || filter_var($url, FILTER_VALIDATE_URL) === false) {
@@ -38,7 +38,8 @@ function sendReq(
 	}
 
 	$allowedMethods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS', 'HEAD'];
-	if (!in_array(strtoupper($method), $allowedMethods, true)) {
+	$method = strtoupper($method);
+	if (!in_array($method, $allowedMethods, true)) {
 		throw new InvalidArgumentException("Invalid HTTP method: {$method}");
 	}
 
@@ -47,65 +48,43 @@ function sendReq(
 		throw new InvalidArgumentException("Invalid body type: {$bodyType}");
 	}
 
-	$ch = curl_init($url);
-	if ($ch === false) {
-		throw new RuntimeException('Failed to initialize cURL session');
+	// Process body and headers
+	$processedBody = processHttpBody($body, $bodyType, $method, $logEnabled);
+	$finalHeaders = configureHeaders($headers, $bodyType);
+
+	// Log the request
+	logRequest($logEnabled, $additionalLog, $method, $url, $bodyType, $processedBody, $finalHeaders);
+
+	// Build cURL options for httpGet()
+	$curlOptions = [
+		CURLOPT_HTTPHEADER => array_values($finalHeaders),
+		CURLOPT_TIMEOUT => 10,
+	];
+
+	if ($method === 'POST') {
+		$curlOptions[CURLOPT_POST] = true;
+	} elseif ($method !== 'GET') {
+		$curlOptions[CURLOPT_CUSTOMREQUEST] = $method;
+	}
+
+	if ($processedBody !== null && $method !== 'GET') {
+		$curlOptions[CURLOPT_POSTFIELDS] = $processedBody;
 	}
 
 	try {
-		// Configure HTTP method
-		configureHttpMethod($ch, strtoupper($method));
+		$response = FreshRSS_http_Util::httpGet($url, cachePath: null, type: 'json', curl_options: $curlOptions);
 
-		// Process and set HTTP body
-		$processedBody = processHttpBody($body, $bodyType, $method, $logEnabled);
-		if ($processedBody !== null && $method !== 'GET') {
-			curl_setopt($ch, CURLOPT_POSTFIELDS, $processedBody);
+		if ($response['fail']) {
+			logError($logEnabled, "Request failed for URL: {$url}");
+			throw new RuntimeException("HTTP request failed for URL: {$url}");
 		}
 
-		// Configure headers
-		$finalHeaders = configureHeaders($headers, $bodyType);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array_values($finalHeaders));
-
-		// Log the request
-		logRequest($logEnabled, $additionalLog, $method, $url, $bodyType, $processedBody, $finalHeaders);
-
-		// Execute request
-		executeRequest($ch, $logEnabled);
+		logWarning($logEnabled, "Response ✅ {$response['body']}");
+	} catch (RuntimeException $err) {
+		throw $err;
 	} catch (Throwable $err) {
 		logError($logEnabled, "Error in sendReq: {$err->getMessage()} | URL: {$url} | Body: {$body}");
 		throw $err;
-	}
-}
-
-/**
- * Configure cURL HTTP method settings
- *
- * Sets the appropriate cURL options based on the HTTP method.
- *
- * @param CurlHandle $ch The cURL handle
- * @param string $method HTTP method in uppercase
- *
- * @return void
- */
-function configureHttpMethod(CurlHandle $ch, string $method): void {
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-	switch ($method) {
-		case 'POST':
-			curl_setopt($ch, CURLOPT_POST, true);
-			break;
-		case 'PUT':
-			curl_setopt($ch, CURLOPT_PUT, true);
-			break;
-		case 'GET':
-			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-			break;
-		case 'DELETE':
-		case 'PATCH':
-		case 'OPTIONS':
-		case 'HEAD':
-			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
-			break;
 	}
 }
 
@@ -206,35 +185,6 @@ function logRequest(
 	$logMessage = trim("{$additionalLog} ♦♦ sendReq ⏩ {$method}: {$cleanUrl} ♦♦ {$bodyType} ♦♦ {$cleanBody} ♦♦ {$headersJson}");
 
 	logWarning($logEnabled, $logMessage);
-}
-
-/**
- * Execute cURL request and handle response
- *
- * Executes the configured cURL request and handles both success
- * and error responses with appropriate logging.
- *
- * @param CurlHandle $ch The configured cURL handle
- * @param bool $logEnabled Whether logging is enabled
- *
- * @throws RuntimeException When cURL execution fails
- * @throws Minz_PermissionDeniedException
- *
- * @return void
- */
-function executeRequest(CurlHandle $ch, bool $logEnabled): void {
-	$response = curl_exec($ch);
-
-	if (curl_errno($ch)) {
-		$error = curl_error($ch);
-		logError($logEnabled, "cURL error: {$error}");
-		throw new RuntimeException("cURL error: {$error}");
-	}
-
-	$info = curl_getinfo($ch);
-	$httpCode = $info['http_code'] ?? 'unknown';
-
-	logWarning($logEnabled, "Response ✅ ({$httpCode}) {$response}");
 }
 
 /**
