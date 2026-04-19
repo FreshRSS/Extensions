@@ -400,33 +400,3 @@ class WebhookExtension extends Minz_Extension {
 		return $this->getUserConfigurationString('webhook_body_type') ?? $this->webhook_body_type->value;
 	}
 }
-
-/**
- * Backward compatibility alias for logWarning function
- *
- * @deprecated Use logWarning() instead
- * @param bool $logEnabled Whether logging is enabled
- * @param string $data Data to log
- *
- * @throws Minz_PermissionDeniedException
- *
- * @return void
- */
-function _LOG(bool $logEnabled, string $data): void {
-	logWarning($logEnabled, $data);
-}
-
-/**
- * Backward compatibility alias for logError function
- *
- * @deprecated Use logError() instead
- * @param bool $logEnabled Whether logging is enabled
- * @param string $data Data to log
- *
- * @throws Minz_PermissionDeniedException
- *
- * @return void
- */
-function _LOG_ERR(bool $logEnabled, string $data): void {
-	logError($logEnabled, $data);
-}
