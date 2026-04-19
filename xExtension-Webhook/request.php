@@ -49,7 +49,7 @@ function sendReq(
 
 	$ch = curl_init($url);
 	if ($ch === false) {
-		throw new RuntimeException("Failed to initialize cURL session");
+		throw new RuntimeException('Failed to initialize cURL session');
 	}
 
 	try {
@@ -252,7 +252,7 @@ function executeRequest(CurlHandle $ch, bool $logEnabled): void {
  */
 function logWarning(bool $logEnabled, string $data): void {
 	if ($logEnabled && class_exists('Minz_Log')) {
-		Minz_Log::warning("[WEBHOOK] " . $data);
+		Minz_Log::warning('[WEBHOOK] ' . $data);
 	}
 }
 
@@ -271,7 +271,7 @@ function logWarning(bool $logEnabled, string $data): void {
  */
 function logError(bool $logEnabled, string $data): void {
 	if ($logEnabled && class_exists('Minz_Log')) {
-		Minz_Log::error("[WEBHOOK]❌ " . $data);
+		Minz_Log::error('[WEBHOOK]❌ ' . $data);
 	}
 }
 

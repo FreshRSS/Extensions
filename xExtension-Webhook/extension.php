@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-include __DIR__ . "/request.php";
+include __DIR__ . '/request.php';
 
 /**
  * Enumeration for HTTP request body types
@@ -10,8 +10,8 @@ include __DIR__ . "/request.php";
  * Defines the supported content types for webhook request bodies.
  */
 enum BODY_TYPE: string {
-	case JSON = "json";
-	case FORM = "form";
+	case JSON = 'json';
+	case FORM = 'form';
 }
 
 /**
@@ -20,13 +20,13 @@ enum BODY_TYPE: string {
  * Defines the supported HTTP methods for webhook requests.
  */
 enum HTTP_METHOD: string {
-	case GET = "GET";
-	case POST = "POST";
-	case PUT = "PUT";
-	case DELETE = "DELETE";
-	case PATCH = "PATCH";
-	case OPTIONS = "OPTIONS";
-	case HEAD = "HEAD";
+	case GET = 'GET';
+	case POST = 'POST';
+	case PUT = 'PUT';
+	case DELETE = 'DELETE';
+	case PATCH = 'PATCH';
+	case OPTIONS = 'OPTIONS';
+	case HEAD = 'HEAD';
 }
 
 /**
@@ -67,14 +67,14 @@ class WebhookExtension extends Minz_Extension {
 	 *
 	 * @var string
 	 */
-	public string $webhook_url = "http://<WRITE YOUR URL HERE>";
+	public string $webhook_url = 'http://<WRITE YOUR URL HERE>';
 
 	/**
 	 * Default HTTP headers for webhook requests
 	 *
 	 * @var string[]
 	 */
-	public array $webhook_headers = ["User-Agent: FreshRSS", "Content-Type: application/x-www-form-urlencoded"];
+	public array $webhook_headers = ['User-Agent: FreshRSS', 'Content-Type: application/x-www-form-urlencoded'];
 
 	/**
 	 * Default webhook request body template
@@ -83,12 +83,14 @@ class WebhookExtension extends Minz_Extension {
 	 *
 	 * @var string
 	 */
-	public string $webhook_body = '{
-	"title": "__TITLE__",
-	"feed": "__FEED__",
-	"url": "__URL__",
-	"created": "__DATE_TIMESTAMP__"
-}';
+	public string $webhook_body = <<<'JSON'
+	{
+		"title": "__TITLE__",
+		"feed": "__FEED__",
+		"url": "__URL__",
+		"created": "__DATE_TIMESTAMP__"
+	}
+	JSON;
 
 	/**
 	 * Initialize the extension
@@ -100,7 +102,7 @@ class WebhookExtension extends Minz_Extension {
 	#[\Override]
 	public function init(): void {
 		$this->registerTranslates();
-		$this->registerHook("entry_before_insert", [$this, "processArticle"]);
+		$this->registerHook('entry_before_insert', [$this, 'processArticle']);
 	}
 
 	/**
@@ -118,37 +120,37 @@ class WebhookExtension extends Minz_Extension {
 
 		if (Minz_Request::isPost()) {
 			$conf = [
-				"keywords" => array_filter(Minz_Request::paramTextToArray("keywords"), static fn(string $v): bool => $v !== ''),
-				"search_in_title" => Minz_Request::paramString("search_in_title"),
-				"search_in_feed" => Minz_Request::paramString("search_in_feed"),
-				"search_in_authors" => Minz_Request::paramString("search_in_authors"),
-				"search_in_content" => Minz_Request::paramString("search_in_content"),
-				"mark_as_read" => Minz_Request::paramBoolean("mark_as_read"),
-				"ignore_updated" => Minz_Request::paramBoolean("ignore_updated"),
+				'keywords' => array_filter(Minz_Request::paramTextToArray('keywords'), static fn(string $v): bool => $v !== ''),
+				'search_in_title' => Minz_Request::paramString('search_in_title'),
+				'search_in_feed' => Minz_Request::paramString('search_in_feed'),
+				'search_in_authors' => Minz_Request::paramString('search_in_authors'),
+				'search_in_content' => Minz_Request::paramString('search_in_content'),
+				'mark_as_read' => Minz_Request::paramBoolean('mark_as_read'),
+				'ignore_updated' => Minz_Request::paramBoolean('ignore_updated'),
 
-				"webhook_url" => Minz_Request::paramString("webhook_url"),
-				"webhook_method" => Minz_Request::paramString("webhook_method"),
-				"webhook_headers" => array_filter(Minz_Request::paramTextToArray("webhook_headers"), static fn(string $v): bool => $v !== ''),
-				"webhook_body" => html_entity_decode(Minz_Request::paramString("webhook_body")),
-				"webhook_body_type" => Minz_Request::paramString("webhook_body_type"),
-				"enable_logging" => Minz_Request::paramBoolean("enable_logging"),
+				'webhook_url' => Minz_Request::paramString('webhook_url'),
+				'webhook_method' => Minz_Request::paramString('webhook_method'),
+				'webhook_headers' => array_filter(Minz_Request::paramTextToArray('webhook_headers'), static fn(string $v): bool => $v !== ''),
+				'webhook_body' => html_entity_decode(Minz_Request::paramString('webhook_body')),
+				'webhook_body_type' => Minz_Request::paramString('webhook_body_type'),
+				'enable_logging' => Minz_Request::paramBoolean('enable_logging'),
 			];
 			$this->setSystemConfiguration($conf);
-			$logsEnabled = $conf["enable_logging"];
-			$this->logsEnabled = $conf["enable_logging"];
+			$logsEnabled = $conf['enable_logging'];
+			$this->logsEnabled = $conf['enable_logging'];
 
-			logWarning($logsEnabled, "saved config: ✅ " . json_encode($conf));
+			logWarning($logsEnabled, 'saved config: ✅ ' . json_encode($conf));
 
-			if (Minz_Request::paramString("test_request") !== '') {
+			if (Minz_Request::paramString('test_request') !== '') {
 				try {
 					sendReq(
-						$conf["webhook_url"],
-						$conf["webhook_method"],
-						$conf["webhook_body_type"],
-						$conf["webhook_body"],
-						$conf["webhook_headers"],
-						$conf["enable_logging"],
-						"Test request from configuration"
+						$conf['webhook_url'],
+						$conf['webhook_method'],
+						$conf['webhook_body_type'],
+						$conf['webhook_body'],
+						$conf['webhook_headers'],
+						$conf['enable_logging'],
+						'Test request from configuration'
 					);
 				} catch (Throwable $err) {
 					logError($logsEnabled, "Test request failed: {$err->getMessage()}");
@@ -177,7 +179,7 @@ class WebhookExtension extends Minz_Extension {
 		}
 
 		if (FreshRSS_Context::userConf()->attributeBool('ignore_updated') && $entry->isUpdated()) {
-			logWarning(true, "⚠️ ignore_updated: " . $entry->link() . " ♦♦ " . $entry->title());
+			logWarning(true, '⚠️ ignore_updated: ' . $entry->link() . ' ♦♦ ' . $entry->title());
 			return $entry;
 		}
 
@@ -193,13 +195,13 @@ class WebhookExtension extends Minz_Extension {
 
 		// Validate patterns
 		if (empty($patterns)) {
-			logError($logsEnabled, "❗️ No keywords defined in Webhook extension settings.");
+			logError($logsEnabled, '❗️ No keywords defined in Webhook extension settings.');
 			return $entry;
 		}
 
-		$title = "❗️NOT INITIALIZED";
-		$link = "❗️NOT INITIALIZED";
-		$additionalLog = "";
+		$title = '❗️NOT INITIALIZED';
+		$link = '❗️NOT INITIALIZED';
+		$additionalLog = '';
 
 		try {
 			$title = $entry->title();
@@ -265,20 +267,20 @@ class WebhookExtension extends Minz_Extension {
 	 *
 	 * @return void
 	 */
-	private function sendArticle(FreshRSS_Entry $entry, string $additionalLog = ""): void {
+	private function sendArticle(FreshRSS_Entry $entry, string $additionalLog = ''): void {
 		try {
 			$bodyStr = FreshRSS_Context::userConf()->attributeString('webhook_body') ?? '';
 
 			// Replace placeholders with actual values
 			$replacements = [
-				"__TITLE__" => $this->toSafeJsonStr($entry->title()),
-				"__FEED__" => $this->toSafeJsonStr($entry->feed()?->name() ?? ''),
-				"__URL__" => $this->toSafeJsonStr($entry->link()),
-				"__CONTENT__" => $this->toSafeJsonStr($entry->content()),
-				"__DATE__" => $this->toSafeJsonStr($entry->date()),
-				"__DATE_TIMESTAMP__" => $this->toSafeJsonStr($entry->date(true)),
-				"__AUTHORS__" => $this->toSafeJsonStr($entry->authors(true)),
-				"__TAGS__" => $this->toSafeJsonStr($entry->tags(true)),
+				'__TITLE__' => $this->toSafeJsonStr($entry->title()),
+				'__FEED__' => $this->toSafeJsonStr($entry->feed()?->name() ?? ''),
+				'__URL__' => $this->toSafeJsonStr($entry->link()),
+				'__CONTENT__' => $this->toSafeJsonStr($entry->content()),
+				'__DATE__' => $this->toSafeJsonStr($entry->date()),
+				'__DATE_TIMESTAMP__' => $this->toSafeJsonStr($entry->date(true)),
+				'__AUTHORS__' => $this->toSafeJsonStr($entry->authors(true)),
+				'__TAGS__' => $this->toSafeJsonStr($entry->tags(true)),
 			];
 
 			$bodyStr = str_replace(array_keys($replacements), array_values($replacements), $bodyStr);
