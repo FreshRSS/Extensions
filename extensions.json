@@ -310,6 +310,17 @@
             "directory": "xExtension-KeepFolderState"
         },
         {
+            "name": "LLM Classification",
+            "author": "Alkarex",
+            "description": "Tag incoming articles by calling an OpenAI-compatible LLM API",
+            "version": "0.1",
+            "entrypoint": "LlmClassification",
+            "type": "user",
+            "url": "https://github.com/FreshRSS/Extensions",
+            "method": "git",
+            "directory": "xExtension-LlmClassification"
+        },
+        {
             "name": "LaTeX support",
             "author": "Alexis Degrugillier",
             "description": "Add support for LaTeX notation rendering",
