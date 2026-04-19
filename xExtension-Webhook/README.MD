@@ -79,7 +79,7 @@ Customize the webhook payload using placeholders:
 #### Available Placeholders
 
 | Placeholder | Description |
-|-------------|-------------|
+| ----------- | ----------- |
 | `__TITLE__` | Article title |
 | `__FEED__` | Feed name |
 | `__URL__` | Article URL |
