@@ -3,16 +3,12 @@
 return array(
 	'webhook' => array(
 		'event_settings' => 'Event settings',
-		'show_hide' => 'show/hide',
+		'show_hide' => 'Show/hide',
 		'webhook_settings' => 'Webhook settings',
-		'more_options' => 'More options (headers, format,…):',
 		'save_and_send_test_req' => 'Save and send test request',
-		'description' => 'Webhooks allow external services to be notified when certain events happen.\nWhen the specified events happen, we’ll send a HTTP request (usually POST) to the URL you provide.',
+		'description' => 'Webhooks allow external services to be notified when certain events happen.<br />When the specified events happen, we’ll send a HTTP request (usually POST) to the URL you provide.',
 		'search_filter' => 'Search filter',
 		'search_filter_description' => 'Uses <a href="https://freshrss.github.io/FreshRSS/en/users/10_filter.html" target="_blank" rel="noopener">FreshRSS search filter syntax</a>. Each line is an OR condition. Leave empty to match all entries.',
-		'mark_as_read' => 'Mark as read',
-		'mark_as_read_description' => 'Mark the article as read after sending the webhook.',
-		'mark_as_read_label' => 'Mark as read',
 		'http_body' => 'HTTP Body',
 		'http_body_description' => 'Must be valid <b>JSON</b> or form data (<b>x-www-form-urlencoded</b>)',
 		'http_body_placeholder_summary' => 'You can use special placeholders that will be replaced by the actual values:',
@@ -31,7 +27,10 @@ return array(
 		'http_body_placeholder_date_user_modified_description' => 'Last user-modified date (ISO 8601, null if never modified)',
 		'webhook_headers' => 'HTTP Headers<br />(one per line)',
 		'http_body_type' => 'HTTP Body type',
-		'more_info' => 'More info:',
-		'more_info_description' => 'When header contains <b><code>Content-type: application/x-www-form-urlencoded</code></b> the keys and values are encoded in key-value tuples separated by "&", with a "=" between the key and the value. Non-alphanumeric characters in both keys and values are URL encoded'
+		'http_content_type' => 'Content encoding',
+		'custom_body_type' => 'Custom',
+		'greader_body_type' => 'GReader API (JSON)',
+		'greader_body_type_description' => 'Sends the full article as a GReader API-compatible JSON object.',
+		'rss_body_type' => 'RSS (XML)',
 	),
 );

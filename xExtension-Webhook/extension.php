@@ -20,7 +20,7 @@ class WebhookExtension extends Minz_Extension {
 	/**
 	 * Default body type for webhook requests
 	 */
-	public string $webhook_body_type = 'json';
+	public string $webhook_body_type = 'custom';
 
 	/**
 	 * Default webhook URL
@@ -34,7 +34,7 @@ class WebhookExtension extends Minz_Extension {
 	 *
 	 * @var list<string>
 	 */
-	public array $webhook_headers = ['Content-Type: application/x-www-form-urlencoded'];
+	public array $webhook_headers = [];
 
 	/**
 	 * Default webhook request body template
@@ -70,6 +70,7 @@ class WebhookExtension extends Minz_Extension {
 	 * sends a test webhook request.
 	 *
 	 * @return void
+	 * @throws Minz_ConfigurationException
 	 * @throws Minz_PermissionDeniedException
 	 */
 	#[\Override]
@@ -78,7 +79,6 @@ class WebhookExtension extends Minz_Extension {
 
 		if (Minz_Request::isPost()) {
 			$this->setUserConfigurationValue('search_filter', trim(Minz_Request::paramString('search_filter', plaintext: true)));
-			$this->setUserConfigurationValue('mark_as_read', Minz_Request::paramBoolean('mark_as_read'));
 			$this->setUserConfigurationValue('ignore_updated', Minz_Request::paramBoolean('ignore_updated'));
 			$this->setUserConfigurationValue('webhook_url', trim(Minz_Request::paramString('webhook_url', plaintext: true)));
 			$this->setUserConfigurationValue('webhook_method', trim(Minz_Request::paramString('webhook_method', plaintext: true)));
@@ -88,13 +88,14 @@ class WebhookExtension extends Minz_Extension {
 			$webhookBodyArray = $webhookBodyJson === '' ? [] : json_decode($webhookBodyJson, true, 256, JSON_INVALID_UTF8_SUBSTITUTE);
 			$this->setUserConfigurationValue('webhook_body', is_array($webhookBodyArray) ? $webhookBodyArray : []);
 			$this->setUserConfigurationValue('webhook_body_type', trim(Minz_Request::paramString('webhook_body_type', plaintext: true)));
+			$this->setUserConfigurationValue('webhook_content_type', trim(Minz_Request::paramString('webhook_content_type', plaintext: true)));
 
 			if (Minz_Request::paramString('test_request', plaintext: true) !== '') {
 				try {
 					$this->sendRequest(
 						$this->getUserConfigurationString('webhook_url') ?? '',
 						$this->getUserConfigurationString('webhook_method') ?? '',
-						$this->getUserConfigurationString('webhook_body_type') ?? '',
+						$this->getUserConfigurationString('webhook_content_type') ?? 'json',
 						$this->getUserConfigurationArray('webhook_body') ?? [],
 						array_values(array_filter($this->getUserConfigurationArray('webhook_headers') ?? [], 'is_string')),
 					);
@@ -120,16 +121,10 @@ class WebhookExtension extends Minz_Extension {
 			return $entry;
 		}
 
-		$markAsRead = $this->getUserConfigurationBool('mark_as_read') ?? false;
-
 		try {
 			if (!$this->entryMatchesSearchFilter($entry)) {
 				return $entry;
 			}
-			if ($markAsRead) {
-				$entry->_isRead(true);
-			}
-
 			$this->sendArticle($entry);
 		} catch (Throwable $err) {
 			Minz_Log::warning('[Webhook] Error processing article: ' . $err->getMessage());
@@ -196,38 +191,81 @@ class WebhookExtension extends Minz_Extension {
 	 * Send article data via webhook
 	 *
 	 * Prepares and sends webhook notification with article data.
-	 * Replaces template placeholders with actual entry values.
+	 * Supports custom body templates, GReader API JSON, and RSS XML formats.
 	 *
 	 * @param FreshRSS_Entry $entry The RSS entry to send
 	 * @throws \RuntimeException
+	 * @throws Minz_ConfigurationException
 	 */
 	private function sendArticle(FreshRSS_Entry $entry): void {
-		$body = $this->getUserConfigurationArray('webhook_body') ?? $this->webhook_body;
+		$bodyType = $this->getUserConfigurationString('webhook_body_type') ?? '';
 
-		// Replace placeholders with actual values
-		$replacements = [
-			'{title}' => htmlspecialchars_decode($entry->title(), ENT_QUOTES),
-			'{feed_name}' => htmlspecialchars_decode($entry->feed()?->name() ?? '', ENT_QUOTES),
-			'{feed_url}' => htmlspecialchars_decode($entry->feed()?->url() ?? '', ENT_QUOTES),
-			'{url}' => htmlspecialchars_decode($entry->link(), ENT_QUOTES),
-			'{content}' => htmlspecialchars_decode($entry->content(), ENT_QUOTES),
-			'{date_published}' => timestampToMachineDate($entry->date(raw: true)),
-			'{date_received}' => timestampToMachineDate($entry->dateAdded(raw: true)),
-			'{date_modified}' => $entry->lastModified() === null ? null : timestampToMachineDate($entry->lastModified()),
-			'{date_user_modified}' => $entry->lastUserModified() === null ? null : timestampToMachineDate($entry->lastUserModified()),
-			'{author}' => htmlspecialchars_decode($entry->authors(true), ENT_QUOTES),
-			'{tags}' => htmlspecialchars_decode($entry->tags(true), ENT_QUOTES),
-		];
+		switch ($bodyType) {
+			case 'greader':
+				$body = $entry->toGReader();
+				$contentType = 'json';
+				break;
+			case 'rss':
+				$body = $this->renderEntryAsRss($entry);
+				$contentType = 'rss';
+				break;
+			default:
+				$contentType = $this->getUserConfigurationString('webhook_content_type') ?? 'json';
+				$body = $this->getUserConfigurationArray('webhook_body') ?? $this->webhook_body;
 
-		$body = $this->replacePlaceholdersRecursive($body, $replacements);
+				// Replace placeholders with actual values
+				$replacements = [
+					'{title}' => htmlspecialchars_decode($entry->title(), ENT_QUOTES),
+					'{feed_name}' => htmlspecialchars_decode($entry->feed()?->name() ?? '', ENT_QUOTES),
+					'{feed_url}' => htmlspecialchars_decode($entry->feed()?->url() ?? '', ENT_QUOTES),
+					'{url}' => htmlspecialchars_decode($entry->link(), ENT_QUOTES),
+					'{content}' => htmlspecialchars_decode($entry->content(), ENT_QUOTES),
+					'{date_published}' => timestampToMachineDate($entry->date(raw: true)),
+					'{date_received}' => timestampToMachineDate($entry->dateAdded(raw: true)),
+					'{date_modified}' => $entry->lastModified() === null ? null : timestampToMachineDate($entry->lastModified()),
+					'{date_user_modified}' => $entry->lastUserModified() === null ? null : timestampToMachineDate($entry->lastUserModified()),
+					'{author}' => htmlspecialchars_decode($entry->authors(true), ENT_QUOTES),
+					'{tags}' => htmlspecialchars_decode($entry->tags(true), ENT_QUOTES),
+				];
+
+				$body = $this->replacePlaceholdersRecursive($body, $replacements);
+				break;
+		}
 
 		$this->sendRequest(
 			$this->getUserConfigurationString('webhook_url') ?? '',
 			$this->getUserConfigurationString('webhook_method') ?? '',
-			$this->getUserConfigurationString('webhook_body_type') ?? '',
+			$contentType,
 			$body,
 			array_values(array_filter($this->getUserConfigurationArray('webhook_headers') ?? [], 'is_string')),
 		);
+	}
+
+	/**
+	 * Render an entry as RSS XML using the FreshRSS RSS view template
+	 *
+	 * @param FreshRSS_Entry $entry The RSS entry to render
+	 * @return string The rendered RSS XML string
+	 * @throws Minz_ConfigurationException
+	 */
+	private function renderEntryAsRss(FreshRSS_Entry $entry): string {
+		$view = new FreshRSS_View();
+		$view->entries = [$entry];
+		$view->internal_rendering = true;
+		$view->publishLabelsInsteadOfTags = false;
+		$view->entryIdsTagNames = [];
+		$view->rss_base = '';
+		$view->image_url = '';
+
+		$feed = $entry->feed();
+		$view->rss_title = $feed !== null ? htmlspecialchars_decode($feed->name(), ENT_QUOTES) : '';
+		$view->html_url = $feed !== null ? htmlspecialchars_decode($feed->website()) : '';
+		$view->rss_url = $feed !== null ? htmlspecialchars_decode($feed->url()) : '';
+		$view->description = '';
+
+		$view->_layout(null);
+		$view->_path('index/rss.phtml');
+		return $view->renderToString();
 	}
 
 	/**
@@ -235,27 +273,32 @@ class WebhookExtension extends Minz_Extension {
 	 *
 	 * @param string $url Target URL
 	 * @param string $method HTTP method (GET, POST, PUT, etc.)
-	 * @param string $bodyType Content type ('json' or 'form')
-	 * @param array<array-key,mixed> $body Request body as an array
+	 * @param string $contentType Content type ('json', 'form', or 'rss')
+	 * @param array<array-key,mixed>|string $body Request body as an array or string
 	 * @param list<string> $headers HTTP headers
 	 * @throws \RuntimeException
 	 */
-	private function sendRequest(string $url, string $method, string $bodyType, array $body, array $headers = []): void {
+	private function sendRequest(string $url, string $method, string $contentType, array|string $body, array $headers = []): void {
 		if ($url === '') {
 			throw new RuntimeException('Webhook URL is empty');
 		}
 
 		$processedBody = null;
-		if ($body !== [] && $method !== 'GET') {
-			$processedBody = match ($bodyType) {
-				'form' => http_build_query($body),
-				default => json_encode($body, JSON_INVALID_UTF8_SUBSTITUTE | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
-			};
+		if ($body !== '' && $body !== [] && $method !== 'GET') {
+			if (is_string($body)) {
+				$processedBody = $body;
+			} else {
+				$processedBody = match ($contentType) {
+					'form' => http_build_query($body),
+					default => json_encode($body, JSON_INVALID_UTF8_SUBSTITUTE | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+				};
+			}
 		}
 
 		if (empty($headers)) {
-			$headers = match ($bodyType) {
+			$headers = match ($contentType) {
 				'form' => ['Content-Type: application/x-www-form-urlencoded'],
+				'rss' => ['Content-Type: application/rss+xml; charset=utf-8'],
 				default => ['Content-Type: application/json'],
 			};
 		}
