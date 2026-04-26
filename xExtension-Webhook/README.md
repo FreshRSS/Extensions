@@ -9,10 +9,9 @@ A powerful FreshRSS extension that automatically sends webhook notifications whe
 
 - **Automated Notifications**: Automatically sends webhooks when new RSS entries match your search filters
 - **Search Filters**: FreshRSS native search filter syntax for precise matching
-- **Multiple HTTP Methods**: Supports GET, POST, PUT, DELETE, PATCH, OPTIONS, and HEAD
+- **Multiple HTTP Methods**: Supports GET, POST, PUT
 - **Configurable Formats**: Send data as JSON or form-encoded
 - **Template System**: Customizable webhook payloads with placeholders
-- **Comprehensive Logging**: Detailed logging for debugging and monitoring
 - **Error Handling**: Robust error handling with graceful fallbacks
 - **Test Functionality**: Built-in test feature to verify webhook configuration
 
@@ -56,14 +55,14 @@ Customize the webhook payload using placeholders:
 
 ```json
 {
-    "title": "{title}",
-    "feed": "{feed_name}",
-    "url": "{url}",
-    "content": "{content}",
-    "date": "{date}",
-    "timestamp": "{date_timestamp}",
-    "author": "{author}",
-    "tags": "{tags}"
+	"title": "{title}",
+	"feed": "{feed_name}",
+	"url": "{url}",
+	"content": "{content}",
+	"date": "{date}",
+	"timestamp": "{date_timestamp}",
+	"author": "{author}",
+	"tags": "{tags}"
 }
 ```
 
@@ -88,16 +87,16 @@ Customize the webhook payload using placeholders:
 
 ```json
 {
-    "content": "New article: **{title}**",
-    "embeds": [{
-        "title": "{title}",
-        "url": "{url}",
-        "description": "{content}",
-        "color": 3447003,
-        "footer": {
-            "text": "{feed_name}"
-        }
-    }]
+	"content": "New article: **{title}**",
+	"embeds": [{
+		"title": "{title}",
+		"url": "{url}",
+		"description": "{content}",
+		"color": 3447003,
+		"footer": {
+			"text": "{feed_name}"
+		}
+	}]
 }
 ```
 
@@ -105,13 +104,13 @@ Customize the webhook payload using placeholders:
 
 ```json
 {
-    "text": "New article from {feed_name}",
-    "attachments": [{
-        "title": "{title}",
-        "title_link": "{url}",
-        "text": "{content}",
-        "color": "good"
-    }]
+	"text": "New article from {feed_name}",
+	"attachments": [{
+		"title": "{title}",
+		"title_link": "{url}",
+		"text": "{content}",
+		"color": "good"
+	}]
 }
 ```
 
@@ -119,38 +118,26 @@ Customize the webhook payload using placeholders:
 
 ```json
 {
-    "event": "new_article",
-    "data": {
-        "title": "{title}",
-        "url": "{url}",
-        "feed": "{feed_name}",
-        "timestamp": "{date_timestamp}"
-    }
+	"event": "new_article",
+	"data": {
+		"title": "{title}",
+		"url": "{url}",
+		"feed": "{feed_name}",
+		"timestamp": "{date_timestamp}"
+	}
 }
 ```
 
 ## 🔍 Search Filters
 
-The extension uses [FreshRSS search filter syntax](https://freshrss.github.io/FreshRSS/en/users/10_filter.html) to match entries:
-
-### Filter by Field
+The extension uses [FreshRSS search filter syntax](https://freshrss.github.io/FreshRSS/en/users/10_filter.html) to match entries.
+Examples:
 
 ```text
 intitle:security
 inurl:example.com
 author:John
-```
-
-### Tags and Feeds
-
-```text
 #breaking-news
-f:TechCrunch
-```
-
-### Boolean Logic
-
-```text
 intitle:urgent OR intitle:critical
 intitle:release -intitle:beta
 ```
@@ -186,12 +173,11 @@ User-Agent: FreshRSS-Webhook/1.0
 **Webhooks not sending:**
 - Check that a search filter is configured (or leave empty to match all)
 - Verify webhook URL is accessible
-- Enable logging to see detailed information
+- Check the FreshRSS logs for `[Webhook]` entries
 
 **Filter not matching:**
 - Try simple filters first (e.g., `intitle:test`)
 - Refer to the [FreshRSS filter documentation](https://freshrss.github.io/FreshRSS/en/users/10_filter.html) for syntax
-- Enable logging to see which entries are evaluated
 
 **Authentication errors:**
 - Check custom headers configuration
@@ -199,10 +185,9 @@ User-Agent: FreshRSS-Webhook/1.0
 
 ### Debugging
 
-Enable logging in the extension settings to see detailed information about:
-- Filter matching results
-- HTTP request details
-- Response codes and errors
+The extension logs to the FreshRSS log file with the `[Webhook]` prefix:
+- **Debug level**: filter matches, HTTP requests sent (visible in `DEVELOPMENT` environment)
+- **Warning level**: errors during article processing or failed requests (always visible)
 
 ## 📝 Changelog
 
@@ -212,7 +197,7 @@ Enable logging in the extension settings to see detailed information about:
 - Automated webhook notifications
 - Pattern matching in multiple fields
 - Configurable HTTP methods and formats
-- Comprehensive error handling and logging
+- Comprehensive error handling
 - Template-based webhook payloads
 
 ## 🤝 Contributing

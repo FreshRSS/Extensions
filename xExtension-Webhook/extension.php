@@ -2,33 +2,6 @@
 
 declare(strict_types=1);
 
-include __DIR__ . '/request.php';
-
-/**
- * Enumeration for HTTP request body types
- *
- * Defines the supported content types for webhook request bodies.
- */
-enum BODY_TYPE: string {
-	case JSON = 'json';
-	case FORM = 'form';
-}
-
-/**
- * Enumeration for HTTP methods
- *
- * Defines the supported HTTP methods for webhook requests.
- */
-enum HTTP_METHOD: string {
-	case GET = 'GET';
-	case POST = 'POST';
-	case PUT = 'PUT';
-	case DELETE = 'DELETE';
-	case PATCH = 'PATCH';
-	case OPTIONS = 'OPTIONS';
-	case HEAD = 'HEAD';
-}
-
 /**
  * FreshRSS Webhook Extension
  *
@@ -37,60 +10,45 @@ enum HTTP_METHOD: string {
  * with configurable HTTP methods and request formats.
  *
  * @author Lukas Melega, Ryahn
- * @version 0.1.1
- * @since FreshRSS 1.20.0
  */
 class WebhookExtension extends Minz_Extension {
 	/**
-	 * Whether logging is enabled for this extension
-	 *
-	 * @var bool
-	 */
-	public bool $logsEnabled = false;
-
-	/**
 	 * Default HTTP method for webhook requests
-	 *
-	 * @var HTTP_METHOD
 	 */
-	public HTTP_METHOD $webhook_method = HTTP_METHOD::POST;
+	public string $webhook_method = 'POST';
 
 	/**
 	 * Default body type for webhook requests
-	 *
-	 * @var BODY_TYPE
 	 */
-	public BODY_TYPE $webhook_body_type = BODY_TYPE::JSON;
+	public string $webhook_body_type = 'json';
 
 	/**
 	 * Default webhook URL
 	 *
 	 * @var string
 	 */
-	public string $webhook_url = 'http://<WRITE YOUR URL HERE>';
+	public string $webhook_url = 'https://example.net/webhook';
 
 	/**
 	 * Default HTTP headers for webhook requests
 	 *
-	 * @var string[]
+	 * @var list<string>
 	 */
-	public array $webhook_headers = ['User-Agent: FreshRSS', 'Content-Type: application/x-www-form-urlencoded'];
+	public array $webhook_headers = ['Content-Type: application/x-www-form-urlencoded'];
 
 	/**
 	 * Default webhook request body template
 	 *
 	 * Supports placeholders like {title}, {url}, {feed_name}, etc.
 	 *
-	 * @var string
+	 * @var array<string,string>
 	 */
-	public string $webhook_body = <<<'JSON'
-	{
-		"title": "{title}",
-		"feed": "{feed_name}",
-		"url": "{url}",
-		"created": "{date_timestamp}"
-	}
-	JSON;
+	public array $webhook_body = [
+		'title' => '{title}',
+		'feed' => '{feed_name}',
+		'url' => '{url}',
+		'created' => '{date_published}',
+	];
 
 	/**
 	 * Initialize the extension
@@ -126,28 +84,22 @@ class WebhookExtension extends Minz_Extension {
 			$this->setUserConfigurationValue('webhook_method', trim(Minz_Request::paramString('webhook_method', plaintext: true)));
 			$this->setUserConfigurationValue('webhook_headers',
 				array_filter(Minz_Request::paramTextToArray('webhook_headers'), static fn(string $v): bool => $v !== ''));
-			$this->setUserConfigurationValue('webhook_body', trim(Minz_Request::paramString('webhook_body', plaintext: true)));
+			$webhookBodyJson = trim(Minz_Request::paramString('webhook_body', plaintext: true));
+			$webhookBodyArray = $webhookBodyJson === '' ? [] : json_decode($webhookBodyJson, true, 256, JSON_INVALID_UTF8_SUBSTITUTE);
+			$this->setUserConfigurationValue('webhook_body', is_array($webhookBodyArray) ? $webhookBodyArray : []);
 			$this->setUserConfigurationValue('webhook_body_type', trim(Minz_Request::paramString('webhook_body_type', plaintext: true)));
-			$this->setUserConfigurationValue('enable_logging', Minz_Request::paramBoolean('enable_logging'));
-
-			$logsEnabled = $this->getUserConfigurationBool('enable_logging') ?? false;
-			$this->logsEnabled = $logsEnabled;
-
-			logWarning($logsEnabled, 'saved config: ✅');
 
 			if (Minz_Request::paramString('test_request', plaintext: true) !== '') {
 				try {
-					sendReq(
+					$this->sendRequest(
 						$this->getUserConfigurationString('webhook_url') ?? '',
 						$this->getUserConfigurationString('webhook_method') ?? '',
 						$this->getUserConfigurationString('webhook_body_type') ?? '',
-						$this->getUserConfigurationString('webhook_body') ?? '',
+						$this->getUserConfigurationArray('webhook_body') ?? [],
 						array_values(array_filter($this->getUserConfigurationArray('webhook_headers') ?? [], 'is_string')),
-						$logsEnabled,
-						'Test request from configuration'
 					);
 				} catch (Throwable $err) {
-					logError($logsEnabled, "Test request failed: {$err->getMessage()}");
+					Minz_Log::warning('[Webhook] Test request failed: ' . $err->getMessage());
 				}
 			}
 		}
@@ -160,42 +112,27 @@ class WebhookExtension extends Minz_Extension {
 	 * webhook notifications for matching entries.
 	 *
 	 * @param FreshRSS_Entry $entry The RSS entry to process
-	 *
 	 * @throws Minz_PermissionDeniedException
-	 *
 	 * @return FreshRSS_Entry The processed entry (potentially marked as read)
 	 */
-	public function processArticle($entry): FreshRSS_Entry {
-		if (!is_object($entry)) {
-			return $entry;
-		}
-
+	public function processArticle(FreshRSS_Entry $entry): FreshRSS_Entry {
 		if ($this->getUserConfigurationBool('ignore_updated') && $entry->isUpdated()) {
-			logWarning(true, '⚠️ ignore_updated: ' . $entry->link() . ' ♦♦ ' . $entry->title());
 			return $entry;
 		}
 
 		$markAsRead = $this->getUserConfigurationBool('mark_as_read') ?? false;
-		$logsEnabled = $this->getUserConfigurationBool('enable_logging') ?? false;
-		$this->logsEnabled = $logsEnabled;
 
 		try {
 			if (!$this->entryMatchesSearchFilter($entry)) {
 				return $entry;
 			}
-
-			$title = $entry->title();
-			$link = $entry->link();
-			$additionalLog = "✔️ matched entry: \"{$title}\" ❖ link: {$link}";
-			logWarning($logsEnabled, $additionalLog);
-
 			if ($markAsRead) {
 				$entry->_isRead(true);
 			}
 
-			$this->sendArticle($entry, $additionalLog);
+			$this->sendArticle($entry);
 		} catch (Throwable $err) {
-			logError($logsEnabled, "Error during processing article: {$err->getMessage()}");
+			Minz_Log::warning('[Webhook] Error processing article: ' . $err->getMessage());
 		}
 
 		return $entry;
@@ -209,7 +146,6 @@ class WebhookExtension extends Minz_Extension {
 	 * An empty filter matches all entries.
 	 *
 	 * @param FreshRSS_Entry $entry The RSS entry to check
-	 *
 	 * @return bool True if the entry matches any filter line, or if no filter is configured
 	 */
 	private function entryMatchesSearchFilter(FreshRSS_Entry $entry): bool {
@@ -230,79 +166,120 @@ class WebhookExtension extends Minz_Extension {
 	}
 
 	/**
+	 * Recursively replace placeholders in an array structure
+	 *
+	 * Walks the array and applies placeholder replacement to string leaf values.
+	 * If a replacement value is null and the placeholder is the entire string value,
+	 * the value becomes null (preserving null semantics in JSON output).
+	 *
+	 * @param array<array-key,mixed> $data The array to process
+	 * @param array<string,string|null> $replacements Placeholder => replacement value map
+	 * @return array<array-key,mixed> The array with placeholders replaced
+	 */
+	private function replacePlaceholdersRecursive(array $data, array $replacements): array {
+		foreach ($data as $key => $value) {
+			if (is_array($value)) {
+				$data[$key] = $this->replacePlaceholdersRecursive($value, $replacements);
+			} elseif (is_string($value)) {
+				// If the entire value is a single placeholder that maps to null, keep null
+				if (isset($replacements[$value]) || (array_key_exists($value, $replacements) && $replacements[$value] === null)) {
+					$data[$key] = $replacements[$value];
+				} else {
+					$data[$key] = strtr($value, array_filter($replacements, static fn($v): bool => $v !== null));
+				}
+			}
+		}
+		return $data;
+	}
+
+	/**
 	 * Send article data via webhook
 	 *
 	 * Prepares and sends webhook notification with article data.
 	 * Replaces template placeholders with actual entry values.
 	 *
 	 * @param FreshRSS_Entry $entry The RSS entry to send
-	 * @param string $additionalLog Additional context for logging
-	 *
-	 * @throws Minz_PermissionDeniedException
-	 *
-	 * @return void
+	 * @throws \RuntimeException
 	 */
-	private function sendArticle(FreshRSS_Entry $entry, string $additionalLog = ''): void {
-		try {
-			$bodyStr = $this->getUserConfigurationString('webhook_body') ?? '';
+	private function sendArticle(FreshRSS_Entry $entry): void {
+		$body = $this->getUserConfigurationArray('webhook_body') ?? $this->webhook_body;
 
-			// Replace placeholders with actual values
-			$replacements = [
-				'{title}' => $this->toSafeJsonStr($entry->title()),
-				'{feed_name}' => $this->toSafeJsonStr($entry->feed()?->name() ?? ''),
-				'{feed_url}' => $this->toSafeJsonStr($entry->feed()?->url() ?? ''),
-				'{url}' => $this->toSafeJsonStr($entry->link()),
-				'{content}' => $this->toSafeJsonStr($entry->content()),
-				'{date}' => $this->toSafeJsonStr($entry->date()),
-				'{date_timestamp}' => $this->toSafeJsonStr($entry->date(true)),
-				'{author}' => $this->toSafeJsonStr($entry->authors(true)),
-				'{tags}' => $this->toSafeJsonStr($entry->tags(true)),
-			];
+		// Replace placeholders with actual values
+		$replacements = [
+			'{title}' => htmlspecialchars_decode($entry->title(), ENT_QUOTES),
+			'{feed_name}' => htmlspecialchars_decode($entry->feed()?->name() ?? '', ENT_QUOTES),
+			'{feed_url}' => htmlspecialchars_decode($entry->feed()?->url() ?? '', ENT_QUOTES),
+			'{url}' => htmlspecialchars_decode($entry->link(), ENT_QUOTES),
+			'{content}' => htmlspecialchars_decode($entry->content(), ENT_QUOTES),
+			'{date_published}' => timestampToMachineDate($entry->date(raw: true)),
+			'{date_received}' => timestampToMachineDate($entry->dateAdded(raw: true)),
+			'{date_modified}' => $entry->lastModified() === null ? null : timestampToMachineDate($entry->lastModified()),
+			'{date_user_modified}' => $entry->lastUserModified() === null ? null : timestampToMachineDate($entry->lastUserModified()),
+			'{author}' => htmlspecialchars_decode($entry->authors(true), ENT_QUOTES),
+			'{tags}' => htmlspecialchars_decode($entry->tags(true), ENT_QUOTES),
+		];
 
-			$bodyStr = strtr($bodyStr, $replacements);
+		$body = $this->replacePlaceholdersRecursive($body, $replacements);
 
-			sendReq(
-				$this->getUserConfigurationString('webhook_url') ?? '',
-				$this->getUserConfigurationString('webhook_method') ?? '',
-				$this->getUserConfigurationString('webhook_body_type') ?? '',
-				$bodyStr,
-				array_values(array_filter($this->getUserConfigurationArray('webhook_headers') ?? [], 'is_string')),
-				$this->getUserConfigurationBool('enable_logging') ?? false,
-				$additionalLog,
-			);
-		} catch (Throwable $err) {
-			logError($this->logsEnabled, "ERROR in sendArticle: {$err->getMessage()}");
-		}
+		$this->sendRequest(
+			$this->getUserConfigurationString('webhook_url') ?? '',
+			$this->getUserConfigurationString('webhook_method') ?? '',
+			$this->getUserConfigurationString('webhook_body_type') ?? '',
+			$body,
+			array_values(array_filter($this->getUserConfigurationArray('webhook_headers') ?? [], 'is_string')),
+		);
 	}
 
 	/**
-	 * Convert string/int to safe JSON string
+	 * Send an HTTP request via the FreshRSS HTTP utility
 	 *
-	 * Sanitizes input values for safe inclusion in JSON payloads
-	 * by removing quotes and decoding HTML entities.
-	 *
-	 * @param string|int $str Input value to sanitize
-	 *
-	 * @return string Sanitized string safe for JSON inclusion
+	 * @param string $url Target URL
+	 * @param string $method HTTP method (GET, POST, PUT, etc.)
+	 * @param string $bodyType Content type ('json' or 'form')
+	 * @param array<array-key,mixed> $body Request body as an array
+	 * @param list<string> $headers HTTP headers
+	 * @throws \RuntimeException
 	 */
-	private function toSafeJsonStr(string|int $str): string {
-		if (is_numeric($str)) {
-			return (string)$str;
+	private function sendRequest(string $url, string $method, string $bodyType, array $body, array $headers = []): void {
+		if ($url === '') {
+			throw new RuntimeException('Webhook URL is empty');
 		}
 
-		// Remove quotes and decode HTML entities
-		return str_replace('"', '', html_entity_decode($str));
-	}
+		$processedBody = null;
+		if ($body !== [] && $method !== 'GET') {
+			$processedBody = match ($bodyType) {
+				'form' => http_build_query($body),
+				default => json_encode($body, JSON_INVALID_UTF8_SUBSTITUTE | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+			};
+		}
 
-	/**
-	 * Get configured search filter
-	 *
-	 * Returns the configured search filter string for display in the configuration form.
-	 *
-	 * @return string The search filter string
-	 */
-	public function getSearchFilter(): string {
-		return $this->getUserConfigurationString('search_filter') ?? '';
+		if (empty($headers)) {
+			$headers = match ($bodyType) {
+				'form' => ['Content-Type: application/x-www-form-urlencoded'],
+				default => ['Content-Type: application/json'],
+			};
+		}
+
+		$curlOptions = [
+			CURLOPT_HTTPHEADER => array_values($headers),
+			CURLOPT_TIMEOUT => 10,
+		];
+
+		if ($method === 'POST') {
+			$curlOptions[CURLOPT_POST] = true;
+		} elseif ($method !== 'GET') {
+			$curlOptions[CURLOPT_CUSTOMREQUEST] = $method;
+		}
+
+		if ($processedBody !== null && $method !== 'GET') {
+			$curlOptions[CURLOPT_POSTFIELDS] = $processedBody;
+		}
+
+		$response = FreshRSS_http_Util::httpGet($url, cachePath: null, type: 'json', curl_options: $curlOptions);
+
+		if ($response['fail'] ?? false) {
+			throw new RuntimeException('HTTP request failed for URL: ' . $url);
+		}
 	}
 
 	/**
@@ -316,39 +293,5 @@ class WebhookExtension extends Minz_Extension {
 	public function getWebhookHeaders(): string {
 		$headers = array_values(array_filter($this->getUserConfigurationArray('webhook_headers') ?? $this->webhook_headers, 'is_string'));
 		return implode(PHP_EOL, $headers);
-	}
-
-	/**
-	 * Get configured webhook URL
-	 *
-	 * Returns the configured webhook URL or the default if none is set.
-	 *
-	 * @return string The webhook URL
-	 */
-	public function getWebhookUrl(): string {
-		return $this->getUserConfigurationString('webhook_url') ?? $this->webhook_url;
-	}
-
-	/**
-	 * Get configured webhook body template
-	 *
-	 * Returns the configured webhook body template or the default if none is set.
-	 *
-	 * @return string The webhook body template
-	 */
-	public function getWebhookBody(): string {
-		$body = $this->getUserConfigurationString('webhook_body');
-		return ($body === null || $body === '') ? $this->webhook_body : $body;
-	}
-
-	/**
-	 * Get configured webhook body type
-	 *
-	 * Returns the configured body type (json/form) or the default if none is set.
-	 *
-	 * @return string The webhook body type
-	 */
-	public function getWebhookBodyType(): string {
-		return $this->getUserConfigurationString('webhook_body_type') ?? $this->webhook_body_type->value;
 	}
 }
