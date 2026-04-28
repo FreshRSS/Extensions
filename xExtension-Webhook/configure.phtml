@@ -1,0 +1,151 @@
+<?php
+declare(strict_types=1);
+/** @var WebhookExtension $this */
+?>
+<small><?= _t('ext.webhook.description') ?></small>
+<form action="<?= _url('extension', 'configure', 'e', urlencode($this->getName())) ?>" method="post">
+	<input type="hidden" name="_csrf" value="<?= FreshRSS_Auth::csrfToken() ?>" />
+
+	<fieldset>
+		<legend><?= _t('ext.webhook.event_settings') ?> ⚙️</legend>
+		<details open="open">
+			<summary class="stick"><small><?= _t('ext.webhook.show_hide') ?></small></summary>
+
+			<div class="form-group">
+				<label class="group-name" for="search_filter"><?= _t('ext.webhook.search_filter') ?></label>
+				<div class="group-controls">
+					<textarea name="search_filter" id="search_filter"><?=
+						htmlspecialchars($this->getUserConfigurationString('search_filter') ?? '', ENT_COMPAT, 'UTF-8')
+					?></textarea>
+					<br />
+					<small><?= _t('ext.webhook.search_filter_description') ?></small>
+				</div>
+			</div>
+		</details>
+	</fieldset>
+
+	<fieldset>
+		<legend><?= _t('ext.webhook.webhook_settings') ?> 🌐</legend>
+		<div class="form-group">
+			<label class="group-name" for="webhook_url">Method / URL:</label>
+			<div class="group-controls">
+				<select id="webhook_method" name="webhook_method">
+					<option value="GET" <?= $this->getUserConfigurationString('webhook_method') === 'GET' ? 'selected="selected"' : '' ?>>GET</option>
+					<option value="POST" <?= $this->getUserConfigurationString('webhook_method') === 'POST' ? 'selected="selected"' : '' ?>>POST</option>
+					<option value="PUT" <?= $this->getUserConfigurationString('webhook_method') === 'PUT' ? 'selected="selected"' : '' ?>>PUT</option>
+				</select>
+				<input type="text" name="webhook_url" id="webhook_url" value="<?=
+					htmlspecialchars($this->getUserConfigurationString('webhook_url') ?? '', ENT_COMPAT, 'UTF-8') ?>" />
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="group-name" for="webhook_body_type"><?= _t('ext.webhook.http_body_type') ?></label>
+			<div class="group-controls">
+				<select id="webhook_body_type" name="webhook_body_type" class="select-input-changer" data-name="webhook_body">
+					<option value="custom" data-input-visible="true" <?= $this->getUserConfigurationString('webhook_body_type') === 'custom' ? 'selected="selected"' : '' ?>><?= _t('ext.webhook.custom_body_type') ?></option>
+					<option value="greader" data-input-visible="false" <?= $this->getUserConfigurationString('webhook_body_type') === 'greader' ? 'selected="selected"' : '' ?>><?= _t('ext.webhook.greader_body_type') ?></option>
+					<option value="rss" data-input-visible="false" <?= $this->getUserConfigurationString('webhook_body_type') === 'rss' ? 'selected="selected"' : '' ?>><?= _t('ext.webhook.rss_body_type') ?></option>
+				</select>
+			</div>
+		</div>
+
+		<div class="form-group" id="webhook_body-block">
+			<label class="group-name" for="webhook_body"><?= _t('ext.webhook.http_body') ?></label>
+			<div class="group-controls">
+				<textarea name="webhook_body" id="webhook_body" class="valid-json"><?= htmlspecialchars(
+					json_encode($this->getUserConfigurationArray('webhook_body') ?: $this->webhook_body, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?: '',
+					ENT_COMPAT, 'UTF-8')
+				?></textarea>
+				<br />
+				<small><?= _t('ext.webhook.http_body_description') ?></small>
+
+				<details>
+					<summary><small><?= _t('ext.webhook.http_body_placeholder_summary') ?></small></summary>
+					<div>
+						<div class="content">
+							<table>
+								<tr>
+									<th><b><code><?= _t('ext.webhook.http_body_placeholder_title') ?></code></b></th>
+									<th><b><?= _t('ext.webhook.http_body_placeholder_description') ?></b></th>
+								</tr>
+								<tr>
+									<td><code>{title}</code></td>
+									<td><?= _t('ext.webhook.http_body_placeholder_title_description') ?></td>
+								</tr>
+								<tr>
+									<td><code>{url}</code></td>
+									<td><?= _t('ext.webhook.http_body_placeholder_url_description') ?></td>
+								</tr>
+								<tr>
+									<td><code>{content}</code></td>
+									<td><?= _t('ext.webhook.http_body_placeholder_content_description') ?></td>
+								</tr>
+								<tr>
+									<td><code>{date_published}</code></td>
+										<td><?= _t('ext.webhook.http_body_placeholder_date_published_description') ?></td>
+								</tr>
+								<tr>
+									<td><code>{date_received}</code></td>
+									<td><?= _t('ext.webhook.http_body_placeholder_date_received_description') ?></td>
+								</tr>
+								<tr>
+									<td><code>{date_modified}</code></td>
+									<td><?= _t('ext.webhook.http_body_placeholder_date_modified_description') ?></td>
+								</tr>
+								<tr>
+									<td><code>{date_user_modified}</code></td>
+									<td><?= _t('ext.webhook.http_body_placeholder_date_user_modified_description') ?></td>
+								</tr>
+								<tr>
+									<td><code>{author}</code></td>
+									<td><?= _t('ext.webhook.http_body_placeholder_authors_description') ?></td>
+								</tr>
+								<tr>
+									<td><code>{feed_name}</code></td>
+									<td><?= _t('ext.webhook.http_body_placeholder_feed_description') ?></td>
+								</tr>
+								<tr>
+									<td><code>{feed_url}</code></td>
+									<td><?= _t('ext.webhook.http_body_placeholder_feed_url_description') ?></td>
+								</tr>
+								<tr>
+									<td><code>{tags}</code></td>
+									<td><?= _t('ext.webhook.http_body_placeholder_tags_description') ?></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</details>
+			</div>
+
+			<label class="group-name" for="webhook_content_type"><?= _t('ext.webhook.http_content_type') ?></label>
+			<div class="group-controls">
+				<input type="radio" id="webhook_content_type_json" name="webhook_content_type" value="json"
+					<?= $this->getUserConfigurationString('webhook_content_type') === 'json' ? 'checked="checked"' : '' ?> />
+				<label for="webhook_content_type_json" class="group"><code>JSON</code></label>
+
+				<input type="radio" id="webhook_content_type_form" name="webhook_content_type" value="form"
+					<?= $this->getUserConfigurationString('webhook_content_type') === 'form' ? 'checked="checked"' : '' ?> />
+				<label for="webhook_content_type_form" class="group"><code>x-www-form-urlencoded</code></label>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="group-name" for="webhook_headers"><?= _t('ext.webhook.webhook_headers') ?></label>
+			<div class="group-controls">
+				<textarea name="webhook_headers" id="webhook_headers"><?=
+					htmlspecialchars($this->getWebhookHeaders(), ENT_COMPAT, 'UTF-8')
+				?></textarea>
+			</div>
+		</div>
+	</fieldset>
+
+	<div class="form-group form-actions">
+		<div class="group-controls">
+			<button type="submit" class="btn btn-important"><?= _t('gen.action.submit') ?></button>
+			<button type="reset" class="btn"><?= _t('gen.action.cancel') ?></button>
+			<button type="menu" class="btn"><?= _t('ext.webhook.save_and_send_test_req') ?></button>
+		</div>
+	</div>
+</form>
