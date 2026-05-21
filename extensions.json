@@ -698,7 +698,7 @@
             "name": "Webhook",
             "author": "Lukas Melega, Ryahn",
             "description": "Send custom webhook when new article appears (and matches custom criteria)",
-            "version": "0.2.0",
+            "version": "0.2.1",
             "entrypoint": "Webhook",
             "type": "user",
             "url": "https://github.com/FreshRSS/Extensions",
