@@ -122,6 +122,9 @@
   "url": "https://codeberg.org/strubbl/xExtension-ShowURL",
   "type": "git"
 }, {
+  "url": "https://github.com/juherr/xExtension-KillTheNews",
+  "type": "git"
+}, {
   "url": "https://github.com/caglaryalcin/xExtension-ThreePaneReader",
   "type": "git"
 }]

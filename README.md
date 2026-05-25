@@ -227,6 +227,10 @@ There are some FreshRSS extensions out there, developed by community members.
 
 * [Show URL](https://codeberg.org/strubbl/xExtension-ShowURL): Shows the current article's URL right before the article content starts
 
+### By [@juherr](https://github.com/juherr), [Web](https://juherr.dev/)
+
+* [KillTheNews](https://github.com/juherr/xExtension-KillTheNews): Read email newsletters as feeds, powered by your own [kill-the-news](https://kill-the.news/) instance.
+
 ### By [@caglaryalcin](https://github.com/caglaryalcin)
 
 * [Three Pane Reader](https://github.com/caglaryalcin/xExtension-ThreePaneReader): An Inoreader-style three-pane reading layout (navigation, article list, and article content side by side)
