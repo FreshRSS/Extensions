@@ -121,4 +121,7 @@
 }, {
   "url": "https://codeberg.org/strubbl/xExtension-ShowURL",
   "type": "git"
+}, {
+  "url": "https://github.com/caglaryalcin/xExtension-ThreePaneReader",
+  "type": "git"
 }]
