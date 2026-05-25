@@ -227,3 +227,7 @@ There are some FreshRSS extensions out there, developed by community members.
 
 * [Show URL](https://codeberg.org/strubbl/xExtension-ShowURL): Shows the current article's URL right before the article content starts
 
+### By [@caglaryalcin](https://github.com/caglaryalcin)
+
+* [Three Pane Reader](https://github.com/caglaryalcin/xExtension-ThreePaneReader): An Inoreader-style three-pane reading layout (navigation, article list, and article content side by side)
+
