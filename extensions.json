@@ -101,6 +101,17 @@
             "directory": "."
         },
         {
+            "name": "Compact Reader",
+            "author": "featurecreep-cron",
+            "description": "NewsBlur-inspired dense layout — smaller fonts, tighter spacing, full-width titles",
+            "version": "0.1.0",
+            "entrypoint": "CompactReader",
+            "type": "user",
+            "url": "https://github.com/featurecreep-cron/freshrss-extensions",
+            "method": "git",
+            "directory": "xExtension-CompactReader"
+        },
+        {
             "name": "Copy2Clipboard",
             "author": "CNTools | Clemens Neubauer",
             "description": "Copy the destination links of all visible entries into clipboard",
@@ -126,7 +137,7 @@
             "name": "Extension Manager",
             "author": "featurecreep-cron",
             "description": "Install, update, and remove extensions from the settings page",
-            "version": "0.4.0",
+            "version": "0.4.1",
             "entrypoint": "ExtensionManager",
             "type": "user",
             "url": "https://github.com/featurecreep-cron/freshrss-extensions",
@@ -308,6 +319,17 @@
             "url": "https://github.com/oyox/FreshRSS-extensions",
             "method": "git",
             "directory": "xExtension-KeepFolderState"
+        },
+        {
+            "name": "KillTheNews",
+            "author": "Julien Herr",
+            "description": "Subscribe to email newsletters as RSS feeds via a kill-the-news instance.",
+            "version": "0.1.1",
+            "entrypoint": "KillTheNews",
+            "type": "user",
+            "url": "https://github.com/juherr/xExtension-KillTheNews",
+            "method": "git",
+            "directory": "."
         },
         {
             "name": "LLM Classification",
@@ -599,7 +621,7 @@
             "name": "Sticky Reader",
             "author": "featurecreep-cron",
             "description": "Scroll straight to articles, keep controls within reach, read distraction-free",
-            "version": "0.2.4",
+            "version": "0.2.6",
             "entrypoint": "StickyReader",
             "type": "user",
             "url": "https://github.com/featurecreep-cron/freshrss-extensions",
@@ -616,6 +638,17 @@
             "url": "https://github.com/aidistan/freshrss-extensions",
             "method": "git",
             "directory": "xExtension-ThemeModeSynchronizer"
+        },
+        {
+            "name": "Three Pane Reader",
+            "author": "caglaryalcin",
+            "description": "An Inoreader-style three-pane reading layout for FreshRSS: navigation, article list, and article content side by side.",
+            "version": "1.17",
+            "entrypoint": "ThreePaneReader",
+            "type": "user",
+            "url": "https://github.com/caglaryalcin/xExtension-ThreePaneReader",
+            "method": "git",
+            "directory": "."
         },
         {
             "name": "ThreePanesView",
