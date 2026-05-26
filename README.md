@@ -235,3 +235,6 @@ There are some FreshRSS extensions out there, developed by community members.
 
 * [Three Pane Reader](https://github.com/caglaryalcin/xExtension-ThreePaneReader): An Inoreader-style three-pane reading layout (navigation, article list, and article content side by side)
 
+### By [@sanpo](https://codeberg.org/sanpo), [Web](https://sanpo.land)
+
+* [Apple Music Artist](https://codeberg.org/sanpo/xExtension-AppleMusicArtist): Subscribe to an artist's releases by their Apple Music artist page URL.
