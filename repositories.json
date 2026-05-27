@@ -127,4 +127,7 @@
 }, {
   "url": "https://github.com/caglaryalcin/xExtension-ThreePaneReader",
   "type": "git"
+}, {
+  "url": "https://github.com/chenhaoc/freshrss-dedup-extension",
+  "type": "git"
 }]
