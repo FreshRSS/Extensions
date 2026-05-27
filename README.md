@@ -235,3 +235,6 @@ There are some FreshRSS extensions out there, developed by community members.
 
 * [Three Pane Reader](https://github.com/caglaryalcin/xExtension-ThreePaneReader): An Inoreader-style three-pane reading layout (navigation, article list, and article content side by side)
 
+### By [@chenhaoc](https://github.com/chenhaoc)
+
+* [Title Dedup](https://github.com/chenhaoc/freshrss-dedup-extension): Mark target feed entries as read when the same title already exists in source feeds.
