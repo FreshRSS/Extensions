@@ -662,6 +662,17 @@
             "directory": "."
         },
         {
+            "name": "Title Dedup",
+            "author": "hao.chen",
+            "description": "Mark target feed entries as read when their title already exists in source feeds.",
+            "version": "0.1.0",
+            "entrypoint": "TitleDedup",
+            "type": "system",
+            "url": "https://github.com/chenhaoc/freshrss-dedup-extension",
+            "method": "git",
+            "directory": "xExtension-TitleDedup"
+        },
+        {
             "name": "Title-Wrap",
             "author": "₣rans de Jonge, Joris Kinable",
             "description": "Applies a line-wrap to long article titles, as opposed to truncating the title when it overflows its display area.",
