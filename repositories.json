@@ -128,6 +128,6 @@
   "url": "https://github.com/caglaryalcin/xExtension-ThreePaneReader",
   "type": "git"
 }, {
-	"url": "git.sanpo.land/joe/xExtension-AppleMusicArtist",
+	"url": "https://codeberg.org/sanpo/xExtension-AppleMusicArtist",
 	"type": "git"
 }]
