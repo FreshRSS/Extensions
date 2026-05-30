@@ -10,6 +10,9 @@ final class LlmClassificationExtension extends Minz_Extension {
 	private const DEFAULT_MAX_RETRIES = 2;
 	private const RETRYABLE_HTTP_STATUSES = [429, 500, 502, 503, 504];
 	private const PROMPT_FILENAME = 'prompt.md';
+	private const ATTRIBUTE_NAMESPACE = 'llm_classification';
+	private const ATTRIBUTE_KEY_PROMPT_HASH = 'prompt_hash';
+	private const ATTRIBUTE_KEY_TAGS = 'tags';
 
 	public string $user_prompt = '';
 
@@ -57,6 +60,9 @@ final class LlmClassificationExtension extends Minz_Extension {
 		if ($this->getUserConfigurationString('search_filter') === null) {
 			$this->setUserConfigurationValue('search_filter', '');
 		}
+		if ($this->getUserConfigurationBool('reclassify_on_change') === null) {
+			$this->setUserConfigurationValue('reclassify_on_change', true);
+		}
 	}
 
 	#[\Override]
@@ -89,6 +95,9 @@ final class LlmClassificationExtension extends Minz_Extension {
 
 			$this->setUserConfigurationValue('search_filter',
 				trim(Minz_Request::paramString('search_filter', plaintext: true)));
+
+			$this->setUserConfigurationValue('reclassify_on_change',
+				Minz_Request::paramBoolean('reclassify_on_change'));
 		}
 
 		$this->user_prompt = '';
@@ -337,48 +346,134 @@ final class LlmClassificationExtension extends Minz_Extension {
 
 	/**
 	 * Apply classification results to an entry.
+	 *
 	 * @param array<string,mixed> $classification
+	 * @param list<string>|null $previousLlmTags Exact list of tags previously assigned by this extension.
+	 *                                          When provided, these tags are removed from the entry
+	 *                                          before re-adding new ones (used on the update path).
+	 *                                          When null, falls back to prefix-based removal for
+	 *                                          backwards compatibility on the insert path.
+	 * @return array{entry: FreshRSS_Entry, llm_tags: list<string>} The entry with merged tags and the
+	 *                                                              new list of LLM-assigned tags.
 	 */
-	private function applyClassification(FreshRSS_Entry $entry, array $classification, bool $removeOldTags): FreshRSS_Entry {
-		if (is_array($classification['tags'] ?? null)) {
-			$prefix = $this->getUserConfigurationString('tag_prefix') ?? '';
-			$allowedTagsStr = $this->getUserConfigurationString('allowed_tags') ?? '';
-			$allowedTags = $allowedTagsStr !== ''
-				? array_filter(array_map('trim', explode("\n", $allowedTagsStr)), static fn(string $tag) => $tag !== '')
-				: [];
-
-			$existingTags = $entry->tags();
-
-			if ($removeOldTags && $prefix !== '') {
-				$existingTags = array_values(array_filter(
-					$existingTags,
-					static fn(string $tag) => !str_starts_with($tag, $prefix)
-				));
-			}
-
-			$newTags = [];
-			foreach ($classification['tags'] as $tag) {
-				if (!is_string($tag)) {
-					continue;
-				}
-				$tag = trim($tag);
-				if ($tag === '') {
-					continue;
-				}
-				if (!empty($allowedTags) && !in_array($tag, $allowedTags, true)) {
-					continue;
-				}
-				$newTags[] = htmlspecialchars($prefix . $tag, ENT_COMPAT, 'UTF-8');
-			}
-
-			$entry->_tags(array_values(array_unique(array_merge($existingTags, $newTags))));
+	private function applyClassification(FreshRSS_Entry $entry, array $classification, ?array $previousLlmTags = null): array {
+		$llmTags = [];
+		if (!is_array($classification['tags'] ?? null)) {
+			return ['entry' => $entry, 'llm_tags' => $llmTags];
 		}
 
+		$prefix = $this->getUserConfigurationString('tag_prefix') ?? '';
+		$allowedTagsStr = $this->getUserConfigurationString('allowed_tags') ?? '';
+		$allowedTags = $allowedTagsStr !== ''
+			? array_filter(array_map('trim', explode("\n", $allowedTagsStr)), static fn(string $tag) => $tag !== '')
+			: [];
+
+		$existingTags = $entry->tags();
+
+		if ($previousLlmTags !== null && $previousLlmTags !== []) {
+			$existingTags = array_values(array_filter(
+				$existingTags,
+				static fn(string $tag) => !in_array($tag, $previousLlmTags, true)
+			));
+		} elseif ($previousLlmTags === null && $prefix !== '') {
+			$existingTags = array_values(array_filter(
+				$existingTags,
+				static fn(string $tag) => !str_starts_with($tag, $prefix)
+			));
+		}
+
+		foreach ($classification['tags'] as $tag) {
+			if (!is_string($tag)) {
+				continue;
+			}
+			$tag = trim($tag);
+			if ($tag === '') {
+				continue;
+			}
+			if (!empty($allowedTags) && !in_array($tag, $allowedTags, true)) {
+				continue;
+			}
+			$llmTags[] = htmlspecialchars($prefix . $tag, ENT_COMPAT, 'UTF-8');
+		}
+		$llmTags = array_values(array_unique($llmTags));
+
+		$entry->_tags(array_values(array_unique(array_merge($existingTags, $llmTags))));
+
+		return ['entry' => $entry, 'llm_tags' => $llmTags];
+	}
+
+	/**
+	 * Look up the previously stored classification for an entry being updated.
+	 *
+	 * Returns the prompt hash and the exact list of tags this extension assigned the last time
+	 * the entry was classified. Returns null if the entry was never classified by this extension
+	 * (e.g., it predates the extension being enabled, or the namespaced attribute is missing).
+	 *
+	 * @return array{hash: string, llm_tags: list<string>}|null
+	 * @throws Minz_ConfigurationNamespaceException
+	 * @throws Minz_PDOConnectionException
+	 */
+	private function loadPreviousClassification(FreshRSS_Entry $entry): ?array {
+		$feedId = $entry->feedId();
+		$guid = $entry->guid();
+		if ($feedId <= 0 || $guid === '') {
+			return null;
+		}
+
+		$entryDAO = FreshRSS_Factory::createEntryDao();
+		$previous = $entryDAO->searchByGuid($feedId, $guid);
+		if ($previous === null) {
+			return null;
+		}
+
+		$namespaced = $previous->attributeArray(self::ATTRIBUTE_NAMESPACE);
+		if ($namespaced === null) {
+			return null;
+		}
+
+		$previousHash = $namespaced[self::ATTRIBUTE_KEY_PROMPT_HASH] ?? null;
+		if (!is_string($previousHash) || $previousHash === '') {
+			return null;
+		}
+
+		$storedTags = $namespaced[self::ATTRIBUTE_KEY_TAGS] ?? null;
+		$llmTags = is_array($storedTags)
+			? array_values(array_filter(
+				array_map(static fn($t) => is_string($t) ? $t : '', $storedTags),
+				static fn(string $t) => $t !== ''
+			))
+			: [];
+
+		return ['hash' => $previousHash, 'llm_tags' => $llmTags];
+	}
+
+	/**
+	 * Reuse a previous classification on an updated entry: merge the prior LLM tags back into the
+	 * (otherwise fresh) entry and re-attach the namespaced classification attribute so it survives
+	 * the upcoming `updateEntry` write.
+	 *
+	 * @param list<string> $previousLlmTags
+	 */
+	private function reusePreviousClassification(FreshRSS_Entry $entry, array $previousLlmTags, string $previousHash): FreshRSS_Entry {
+		if ($previousLlmTags !== []) {
+			$existingTags = $entry->tags();
+			$entry->_tags(array_values(array_unique(array_merge($existingTags, $previousLlmTags))));
+		}
+		$entry->_attribute(self::ATTRIBUTE_NAMESPACE, [
+			self::ATTRIBUTE_KEY_PROMPT_HASH => $previousHash,
+			self::ATTRIBUTE_KEY_TAGS => $previousLlmTags,
+		]);
 		return $entry;
 	}
 
 	/**
-	 * Hook for EntryBeforeInsert: classify a new entry.
+	 * Hook for EntryBeforeInsert: classify a new entry, or reuse the prior classification when an
+	 * existing entry is detected as updated by FreshRSS but its classification-relevant inputs have
+	 * not changed (or the user opted out of re-classifying updates). This avoids hitting the LLM
+	 * every time a feed publishes a no-op refresh of an article.
+	 *
+	 * @throws Minz_ConfigurationNamespaceException
+	 * @throws Minz_PDOConnectionException
 	 * @throws Minz_PermissionDeniedException
 	 */
 	public function classifyEntry(FreshRSS_Entry $entry): FreshRSS_Entry {
@@ -398,11 +493,32 @@ final class LlmClassificationExtension extends Minz_Extension {
 			return $entry;
 		}
 
+		$promptHash = sha1($systemPrompt . "\n" . $userPrompt);
+
+		$previous = null;
+		if ($entry->isUpdated() === true) {
+			$previous = $this->loadPreviousClassification($entry);
+			if ($previous !== null) {
+				$reclassifyOnChange = $this->getUserConfigurationBool('reclassify_on_change') ?? true;
+				$promptUnchanged = hash_equals($previous['hash'], $promptHash);
+				if ($promptUnchanged || !$reclassifyOnChange) {
+					return $this->reusePreviousClassification($entry, $previous['llm_tags'], $previous['hash']);
+				}
+			}
+		}
+
 		$classification = $this->callLlm($systemPrompt, $userPrompt);
 		if ($classification === null) {
 			return $entry;
 		}
 
-		return $this->applyClassification($entry, $classification, removeOldTags: true);
+		$previousLlmTags = $previous !== null ? $previous['llm_tags'] : null;
+		$result = $this->applyClassification($entry, $classification, $previousLlmTags);
+		$entry = $result['entry'];
+		$entry->_attribute(self::ATTRIBUTE_NAMESPACE, [
+			self::ATTRIBUTE_KEY_PROMPT_HASH => $promptHash,
+			self::ATTRIBUTE_KEY_TAGS => $result['llm_tags'],
+		]);
+		return $entry;
 	}
 }
