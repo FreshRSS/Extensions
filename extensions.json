@@ -24,6 +24,17 @@
             "directory": "."
         },
         {
+            "name": "Apple Music Artist Feed",
+            "version": "0.0.1",
+            "entrypoint": "AppleMusicArtist",
+            "type": "system",
+            "author": "Joseph Bushell",
+            "description": "Subscribe to an Apple Music artist's releases by pasting their Apple Music artist page URL.",
+            "url": "https://codeberg.org/sanpo/xExtension-AppleMusicArtist",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "ArticleSummary",
             "author": "Liang",
             "description": "Generate article summaries using OpenAI-compatible language model APIs. Supports both OpenAI and Ollama providers with a user-friendly configuration interface.",
