@@ -36,6 +36,8 @@ If you are having trouble with logging in after configuring the extension, you c
 
 ## Changelog
 
+* 1.0.6 [2026-06-04]
+	* Fixed captcha widget not loading due to wrong method visibility on the `Minz_HookType::BeforeLoginBtn` hook, this was a regression introduced in the last (v1.0.5) version [#475](https://github.com/FreshRSS/Extensions/issues/475)
 * 1.0.5 [2026-03-14]
 	* Ensure controller is hooked properly, even when other extensions are also hooking the same controller, by using new `Minz_HookType::ActionExecute` hook
 	* Fixed a bug where captcha was being verified when creating a user as admin
