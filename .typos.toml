@@ -1,5 +1,6 @@
 [default.extend-identifiers]
 ot = "ot"
+Stroe = "Stroe"
 Ths2 = "Ths2"
 
 [default.extend-words]
