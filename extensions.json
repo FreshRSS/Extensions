@@ -280,7 +280,7 @@
             "name": "Invidious Video Feed",
             "author": "Geekshere (forked from Korbak)",
             "description": "Embed YouTube feeds inside article content, but with Invidious.",
-            "version": "1.0",
+            "version": "1.2",
             "entrypoint": "Invidious",
             "type": "system",
             "url": "https://github.com/Geekshere/freshrss-invidious",
