@@ -278,12 +278,12 @@
         },
         {
             "name": "Invidious Video Feed",
-            "author": "Geekshere (forked from Korbak)",
+            "author": "Korbak (forked from Kevin Papst)",
             "description": "Embed YouTube feeds inside article content, but with Invidious.",
-            "version": "1.2",
+            "version": "1.1",
             "entrypoint": "Invidious",
             "type": "system",
-            "url": "https://github.com/Geekshere/freshrss-invidious",
+            "url": "https://github.com/Korbak/freshrss-invidious",
             "method": "git",
             "directory": "xExtension-Invidious"
         },
