@@ -22,6 +22,20 @@ A card/grid view extension for [FreshRSS](https://github.com/FreshRSS/FreshRSS) 
 - **Persistent preference**: Your grid view state is saved locally across sessions
 - **No flash of list view**: Seamless transitions during AJAX feed navigation with FOLV prevention
 
+## Screenshots
+
+**Grid view — 3 columns (single feed)**
+
+<img src="screenshots/FreshRSSGrid1.jpg" alt="Grid view with 3 columns showing Apple feed articles" width="700">
+
+**Grid view — 4 columns (Main Stream)**
+
+<img src="screenshots/FreshRSSGrid3.jpg" alt="Grid view with 4 columns showing Main Stream news articles" width="700">
+
+**Extension configuration**
+
+<img src="screenshots/FreshRSSGrid2.jpg" alt="Extension settings page" width="450">
+
 ## Installation
 
 1. Download or clone this repository
