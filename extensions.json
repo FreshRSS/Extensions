@@ -16,7 +16,7 @@
             "name": "Af_Readability",
             "author": "niehztog",
             "description": "Try to inline article content using Readability",
-            "version": "0.3",
+            "version": "0.4",
             "entrypoint": "Af_Readability",
             "type": "user",
             "url": "https://github.com/Niehztog/freshrss-af-readability",
