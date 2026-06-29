@@ -275,6 +275,7 @@ final class LlmClassificationExtension extends Minz_Extension {
 
 		$maxRetries = $this->getUserConfigurationInt('max_retries') ?? self::DEFAULT_MAX_RETRIES;
 		$response = null;
+		$httpStatus = 0;
 
 		for ($attempt = 0; $attempt <= $maxRetries; $attempt++) {
 			$response = FreshRSS_http_Util::httpGet($url, $cachePath, type: 'json', curl_options: [
@@ -285,13 +286,16 @@ final class LlmClassificationExtension extends Minz_Extension {
 				CURLOPT_TIMEOUT => $timeout,
 			]);
 
+			$httpStatus = $response['status'] ?? null;
+			$httpStatus = is_numeric($httpStatus) ? (int)$httpStatus : 0;
+
 			if (!($response['fail'] ?? false) && ($response['body'] ?? '') !== '') {
 				break;	// Success
 			}
 
 			if ($attempt < $maxRetries && self::isRetryableFailure($response)) {
 				$delay = (int)pow(2, $attempt);	// Exponential backoff: 1s, 2s, 4s...
-				Minz_Log::warning('LlmClassification: API call failed (HTTP ' . ($response['status'] ?? 0)
+				Minz_Log::warning('LlmClassification: API call failed (HTTP ' . $httpStatus
 					. (($response['error'] ?? '') !== '' ? '; ' . ($response['error'] ?? '') : '')
 					. '), retry ' . ($attempt + 1) . '/' . $maxRetries . ' after ' . $delay . 's');
 				sleep($delay);
@@ -300,7 +304,7 @@ final class LlmClassificationExtension extends Minz_Extension {
 			}
 
 			Minz_Log::warning('LlmClassification: API call failed for ' . $url
-				. ' (HTTP ' . ($response['status'] ?? 0)
+				. ' (HTTP ' . $httpStatus
 				. (($response['error'] ?? '') !== '' ? '; ' . ($response['error'] ?? '') : '')
 				. '), not retrying');
 			return null;
@@ -308,13 +312,13 @@ final class LlmClassificationExtension extends Minz_Extension {
 
 		if ($response === null || ($response['fail'] ?? false) || !is_string($response['body'] ?? null) || ($response['body'] ?? '') === '') {
 			Minz_Log::warning('LlmClassification: API call failed after ' .
-				(1 + $maxRetries) . ' attempt(s) for ' . $url . ' (HTTP ' . ($response['status'] ?? 0) . ')');
+				(1 + $maxRetries) . ' attempt(s) for ' . $url . ' (HTTP ' . $httpStatus . ')');
 			return null;
 		}
 
 		$responseData = json_decode($response['body'], true);
 		if (!is_array($responseData)) {
-			Minz_Log::warning('LlmClassification: Invalid JSON response from API! (HTTP ' . ($response['status'] ?? 0) . ')');
+			Minz_Log::warning('LlmClassification: Invalid JSON response from API! (HTTP ' . $httpStatus . ')');
 			return null;
 		}
 
@@ -322,13 +326,14 @@ final class LlmClassificationExtension extends Minz_Extension {
 		$choice = is_array($choices) && is_array($choices[0] ?? null) ? $choices[0] : null;
 		$content = is_array($choice) && is_array($choice['message'] ?? null) ? ($choice['message']['content'] ?? null) : null;
 		if (!is_string($content)) {
-			Minz_Log::warning('LlmClassification: Missing `choices[0].message.content` in API response! (HTTP ' . ($response['status'] ?? 0) . ')');
+			Minz_Log::warning('LlmClassification: Missing `choices[0].message.content` in API response! (HTTP ' . $httpStatus . ')');
 			return null;
 		}
 
 		$finishReason = is_array($choice) ? ($choice['finish_reason'] ?? 'stop') : null;
 		if ($finishReason !== 'stop') {
-			Minz_Log::warning('LlmClassification: API terminated prematurely with finish_reason “' . $finishReason . '”! (HTTP ' . ($response['status'] ?? 0) . ')');
+			$finishReason = is_scalar($finishReason) ? (string)$finishReason : '?';
+			Minz_Log::warning('LlmClassification: API terminated prematurely with finish_reason “' . $finishReason . '”! (HTTP ' . $httpStatus . ')');
 		}
 
 		$classification = json_decode($content, true);
@@ -338,7 +343,7 @@ final class LlmClassificationExtension extends Minz_Extension {
 			];
 		}
 
-		Minz_Log::warning('LlmClassification: LLM returned invalid JSON structure! `' . ($response['body'] ?? '') . '` (HTTP ' . ($response['status'] ?? 0) . ')');
+		Minz_Log::warning('LlmClassification: LLM returned invalid JSON structure! `' . ($response['body'] ?? '') . '` (HTTP ' . $httpStatus . ')');
 		return null;
 	}
 
