@@ -255,6 +255,17 @@
             "directory": "xExtension-GReaderRedate"
         },
         {
+            "name": "Grid View",
+            "author": "Marius Stroe &lt;https://github.com/mstroe&gt;",
+            "description": "A grid/card view for displaying feeds with images, configurable 2-4 columns, FreshRSS native share integration, and browser reader mode support",
+            "version": "1.1.0",
+            "entrypoint": "GridView",
+            "type": "user",
+            "url": "https://github.com/FreshRSS/Extensions",
+            "method": "git",
+            "directory": "xExtension-GridView"
+        },
+        {
             "name": "Image Cache",
             "author": "Victrid",
             "description": "Cache feed images on your own facility or Cloudflare cache.",
@@ -346,7 +357,7 @@
             "name": "LLM Classification",
             "author": "Alkarex",
             "description": "Tag incoming articles by calling an OpenAI-compatible LLM API",
-            "version": "0.1",
+            "version": "0.2",
             "entrypoint": "LlmClassification",
             "type": "user",
             "url": "https://github.com/FreshRSS/Extensions",
