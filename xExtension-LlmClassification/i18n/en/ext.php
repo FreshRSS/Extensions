@@ -38,8 +38,6 @@ return array(
 			'title' => 'Conditions for tagging',
 			'search' => 'Search filters',
 			'search_help' => 'Only classify entries matching at least one of these filters. Leave empty to classify all entries.',
-			'reclassify_on_change' => 'Re-classify when content changes',
-			'reclassify_on_change_help' => 'When a feed re-publishes an existing article, call the LLM again only if the prompt (title, content, etc.) has actually changed. When disabled, previously-classified articles are never re-classified on update. Articles updated without prompt changes always reuse their previous tags without calling the LLM, regardless of this setting.',
 		),
 		'default_prompt' => 'Classify the following article.
 

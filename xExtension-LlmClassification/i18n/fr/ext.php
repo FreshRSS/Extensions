@@ -38,8 +38,6 @@ return array(
 			'title' => 'Conditions pour l’étiquetage',
 			'search' => 'Filtres de recherche',
 			'search_help' => 'Classifier uniquement les articles correspondant à au moins un de ces filtres. Laisser vide pour classifier tous les articles.',
-			'reclassify_on_change' => 'Re-classifier lorsque le contenu change',
-			'reclassify_on_change_help' => 'Lorsqu’un flux republie un article existant, ne rappeler le LLM que si l’invite (titre, contenu, etc.) a réellement changé. Si désactivé, les articles déjà classifiés ne sont jamais re-classifiés lors d’une mise à jour. Les articles mis à jour sans changement d’invite réutilisent toujours leurs tags précédents sans appeler le LLM, indépendamment de ce réglage.',
 		),
 		'default_prompt' => 'Classifie l’article suivant.
 
@@ -48,7 +46,7 @@ Auteur : {author}
 Date : {date}
 URL : {url}
 Flux : {feed_name} ({feed_url})
-tags existantes : {tags}
+Tags existants : {tags}
 
 Contenu :
 {content}',

@@ -11,7 +11,7 @@ It classifies articles on insertion using a customizable prompt, and applies tag
 - Entry filtering via FreshRSS Boolean search syntax
 - Response caching to avoid redundant API calls
 - Content truncation to control token usage
-- Skips re-classifying articles that the feed republishes without any prompt-relevant change, avoiding duplicate LLM API calls
+- Skips re-classifying updated articles without any prompt-relevant change, avoiding redundant LLM API calls
 
 ## Requirements
 
@@ -64,12 +64,6 @@ The **user prompt** is an editable template. The following placeholders are repl
 
 **Search filters** (one per line): Only entries matching at least one filter are classified. Uses [FreshRSS Boolean search syntax](https://freshrss.github.io/FreshRSS/en/users/10_filter.html). Leave empty to classify all entries.
 
-**Re-classify when content changes** (default: on): When a feed republishes an existing article, FreshRSS treats it as updated even if nothing semantically changed (e.g. a tweaked date, a reformatted author, a new enclosure attribute). To avoid wasted API calls, the extension stores a hash of the prompt it sent for each classified entry. On a feed update:
-
-- If the prompt would be identical, the previous tags are restored and the LLM is **not** called.
-- If the prompt has actually changed and this option is **on**, the LLM is called again to refresh the tags.
-- If the prompt has changed and this option is **off**, the previous tags are kept and the LLM is **not** called.
-
 ## How it works
 
 1. A new article arrives in FreshRSS
@@ -78,8 +72,4 @@ The **user prompt** is an editable template. The following placeholders are repl
 4. For updates of previously-classified articles, the new prompt is compared against the stored hash; if unchanged, the previous tags are restored and no API call is made
 5. Otherwise, the LLM API is called with the system prompt and the user prompt
 6. The returned tags are validated (prefix prepended, whitelist enforced) and applied to the article
-7. The prompt hash and the list of LLM-assigned tags are stored on the entry so future updates can be deduplicated
-
-## Changelog
-
-- 0.1: Initial version
+7. The prompt hash is stored along the entry
