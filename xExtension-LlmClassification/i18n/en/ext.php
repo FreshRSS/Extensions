@@ -15,6 +15,8 @@ return array(
 			'max_tokens_help' => 'Maximum number of tokens the LLM may generate (0 = provider default)',
 			'max_retries' => 'Max retries',
 			'max_retries_help' => 'Number of retry attempts on transient errors (timeouts, invalid response, 500). 0 = no retry.',
+			'allow_thinking' => 'Allow thinking mode<br />(if available)',
+			'allow_thinking_help' => 'Allow thinking mode (<i>reasoning</i>) for models that support it. Uncheck to disable, e.g. to make output length shorter.',
 		),
 		'prompts' => array(
 			'title' => 'Prompts',

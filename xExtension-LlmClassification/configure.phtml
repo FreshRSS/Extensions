@@ -133,12 +133,20 @@
 	</div>
 
 	<div class="form-group">
+		<label class="group-name" for="allow_thinking"><?= _t('ext.llm_classification.api.allow_thinking') ?></label>
+		<div class="group-controls">
+			<input type="checkbox" name="allow_thinking" id="allow_thinking" value="1" <?=
+				$this->getUserConfigurationBool('allow_thinking') ? 'checked' : '' ?> />
+			<p class="help"><?= _t('ext.llm_classification.api.allow_thinking_help') ?></p>
+		</div>
+	</div>
+
+	<div class="form-group">
 		<label class="group-name" for="reclassify_on_change"><?= _t('ext.llm_classification.filter.reclassify_on_change') ?></label>
 		<div class="group-controls">
 			<input type="checkbox" name="reclassify_on_change" id="reclassify_on_change" value="1" <?=
 				($this->getUserConfigurationBool('reclassify_on_change') ?? true) ? 'checked' : '' ?> />
 			<p class="help"><?= _t('ext.llm_classification.filter.reclassify_on_change_help') ?></p>
-		</div>
 	</div>
 
 	<div class="form-group form-actions">
