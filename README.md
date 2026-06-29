@@ -79,9 +79,9 @@ There are some FreshRSS extensions out there, developed by community members.
 
 * [Reading Time](https://github.com/FreshRSS/Extensions/tree/main/xExtension-ReadingTime): Add a reading time estimation next to each article.
 
-### By [@Korbak](https://github.com/Korbak)
+### By [@Geekshere](https://github.com/Geekshere)
 
-* [Invidious](https://github.com/Korbak/freshrss-invidious): Displays videos from YouTube feeds inline and replaces every source by the Invidious instance of your choice for an enhanced privacy (no tracking or limitation)
+* [Invidious](https://github.com/Geekshere/freshrss-invidious): Displays videos from YouTube feeds inline and replaces every source by the Invidious instance of your choice for an enhanced privacy (no tracking or limitation)
 
 ### By [@CN-Tools](https://github.com/cn-tools)
 

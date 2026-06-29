@@ -2,7 +2,7 @@
 	"name": "LLM Classification",
 	"author": "Alkarex",
 	"description": "Tag incoming articles by calling an OpenAI-compatible LLM API",
-	"version": "0.1",
+	"version": "0.2",
 	"entrypoint": "LlmClassification",
 	"type": "user",
 	"compatibility": "1.28.2"
