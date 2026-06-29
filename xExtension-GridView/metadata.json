@@ -4,5 +4,6 @@
 	"description": "A grid/card view for displaying feeds with images, configurable 2-4 columns, FreshRSS native share integration, and browser reader mode support",
 	"version": "1.1.0",
 	"entrypoint": "GridView",
-	"type": "user"
+	"type": "user",
+	"compatibility": "1.20.0"
 }

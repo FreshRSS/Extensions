@@ -9,7 +9,7 @@ A card/grid view extension for [FreshRSS](https://github.com/FreshRSS/FreshRSS) 
 - **Responsive design**: Automatically adjusts to fewer columns on tablets and mobile
 - **Smart thumbnail extraction**: Uses feed thumbnails when available, falls back to extracting images from content (filters out small images <400x400, logos, icons, and theme assets)
 - **Open Graph image fetching**: Optionally fetches OG images from article pages that have no thumbnail in the RSS feed (async with max 3 concurrent fetches)
-- **Category/feed header**: Shows the current category or feed name at the top of the grid ("Main Stream" when viewing all feeds)
+- **Category/feed header**: Shows the current category or feed name at the top of the grid (“Main Stream” when viewing all feeds)
 - **Action bar overlay**: Action buttons (mark read, star, share, open) appear as a transparent overlay on the card thumbnail on hover (desktop) or tap (mobile)
 - **Mobile-friendly**: Tapping the article title opens the link directly without requiring card selection first; tapping elsewhere on the card toggles the action bar
 - **Mobile sidebar toggle**: Optional floating hamburger button on mobile screens to open the FreshRSS sidebar without scrolling to the top
@@ -17,36 +17,27 @@ A card/grid view extension for [FreshRSS](https://github.com/FreshRSS/FreshRSS) 
 - **FreshRSS Native Share**: Integrated share dropdown using your configured sharing services
 - **Star/Favorite support**: Mark articles as favorites directly from the card with AJAX sync
 - **Sort by publication date**: Optional setting to default sorting to publication date (newest first)
-- **Keyboard shortcut**: Press "G" to toggle grid view on/off
+- **Keyboard shortcut**: Press <kbd>G</kbd> to toggle grid view on/off
 - **Dark theme support**: Works seamlessly with FreshRSS dark themes
 - **Persistent preference**: Your grid view state is saved locally across sessions
 - **No flash of list view**: Seamless transitions during AJAX feed navigation with FOLV prevention
 
 ## Screenshots
 
-**Grid view — 3 columns (single feed)**
-
-<img src="screenshots/FreshRSSGrid1.jpg" alt="Grid view with 3 columns showing Apple feed articles" width="700">
-
-**Grid view — 4 columns (Main Stream)**
-
-<img src="screenshots/FreshRSSGrid3.jpg" alt="Grid view with 4 columns showing Main Stream news articles" width="700">
-
-**Extension configuration**
-
-<img src="screenshots/FreshRSSGrid2.jpg" alt="Extension settings page" width="450">
+Grid view — 3 columns (single feed):
+![Grid view with 3 columns showing Apple feed articles](screenshots/FreshRSSGrid1.jpg)
 
 ## Installation
 
 1. Download or clone this repository
 2. Copy the `xExtension-GridView` folder to your FreshRSS `extensions/` directory
 3. In FreshRSS, go to **Settings → Extensions**
-4. Enable the "Grid View" extension
+4. Enable the “Grid View” extension
 
 ## Usage
 
 1. After enabling the extension, go to its configuration page to set your preferred options
-2. Click the **grid icon (▦)** in the header area or press **"G"** on your keyboard to toggle grid view
+2. Click the **grid icon (▦)** in the header area or press <kbd>G</kbd> on your keyboard to toggle grid view
 3. Click on any card to open the article in browser Reader Mode (Firefox) or a new tab
 4. Hover over a card (or tap on mobile) to reveal the action buttons:
    - **✓ Mark as Read**: Toggle read/unread state
@@ -70,7 +61,6 @@ Your grid view preference is saved locally and persists across sessions.
 ## Requirements
 
 - FreshRSS 1.20.0 or later
-- PHP 8.1 or later
 
 ## Responsive Breakpoints
 
@@ -105,9 +95,9 @@ xExtension-GridView/
 ### How It Works
 
 1. The extension registers hooks during `init()`: `js_vars` injects configuration, `entry_before_display` injects thumbnail markers, and optionally `entry_before_insert` fetches OG images
-2. JavaScript adds a toggle button and listens for the "G" keyboard shortcut
+2. JavaScript adds a toggle button and listens for the <kbd>G</kbd> keyboard shortcut
 3. When grid view is enabled, the stream container gets a `.grid` class and a `gridview-active` class is added to `body` (for FOLV prevention)
-4. A context header is inserted showing the current category, feed name, or "Main Stream"
+4. A context header is inserted showing the current category, feed name, or “Main Stream”
 5. FreshRSS date separator `.transition` elements are hidden in grid mode
 6. JavaScript transforms existing `.flux` elements into card format with:
    - Thumbnail extraction (with smart filtering for size and type)
