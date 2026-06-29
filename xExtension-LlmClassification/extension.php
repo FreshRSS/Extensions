@@ -305,23 +305,28 @@ final class LlmClassificationExtension extends Minz_Extension {
 		}
 
 		if ($response === null || ($response['fail'] ?? false) || !is_string($response['body'] ?? null) || ($response['body'] ?? '') === '') {
-			Minz_Log::warning('LlmClassification: API call failed after ' . (1 + $maxRetries) . ' attempt(s) for ' . $url);
+			Minz_Log::warning('LlmClassification: API call failed after ' .
+				(1 + $maxRetries) . ' attempt(s) for ' . $url . ' (HTTP ' . ($response['status'] ?? 0) . ')');
 			return null;
 		}
 
 		$responseData = json_decode($response['body'], true);
 		if (!is_array($responseData)) {
-			Minz_Log::warning('LlmClassification: Invalid JSON response from API');
+			Minz_Log::warning('LlmClassification: Invalid JSON response from API! (HTTP ' . ($response['status'] ?? 0) . ')');
 			return null;
 		}
 
 		$choices = $responseData['choices'] ?? null;
-		$content = is_array($choices) && is_array($choices[0] ?? null) && is_array($choices[0]['message'] ?? null)
-			? ($choices[0]['message']['content'] ?? null)
-			: null;
+		$choice = is_array($choices) && is_array($choices[0] ?? null) ? $choices[0] : null;
+		$content = is_array($choice) && is_array($choice['message'] ?? null) ? ($choice['message']['content'] ?? null) : null;
 		if (!is_string($content)) {
-			Minz_Log::warning('LlmClassification: Missing choices[0].message.content in API response');
+			Minz_Log::warning('LlmClassification: Missing `choices[0].message.content` in API response! (HTTP ' . ($response['status'] ?? 0) . ')');
 			return null;
+		}
+
+		$finishReason = is_array($choice) ? ($choice['finish_reason'] ?? 'stop') : null;
+		if ($finishReason !== 'stop') {
+			Minz_Log::warning('LlmClassification: API terminated prematurely with finish_reason “' . $finishReason . '”! (HTTP ' . ($response['status'] ?? 0) . ')');
 		}
 
 		$classification = json_decode($content, true);
@@ -331,7 +336,7 @@ final class LlmClassificationExtension extends Minz_Extension {
 			];
 		}
 
-		Minz_Log::warning('LlmClassification: LLM returned invalid JSON: ' . $content);
+		Minz_Log::warning('LlmClassification: LLM returned invalid JSON structure! `' . ($response['body'] ?? '') . '` (HTTP ' . ($response['status'] ?? 0) . ')');
 		return null;
 	}
 
