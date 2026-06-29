@@ -57,6 +57,9 @@ final class LlmClassificationExtension extends Minz_Extension {
 		if ($this->getUserConfigurationString('search_filter') === null) {
 			$this->setUserConfigurationValue('search_filter', '');
 		}
+		if ($this->getUserConfigurationBool('allow_thinking') === null) {
+			$this->setUserConfigurationValue('allow_thinking', true);
+		}
 	}
 
 	#[\Override]
@@ -67,28 +70,20 @@ final class LlmClassificationExtension extends Minz_Extension {
 			$apiUrl = trim(Minz_Request::paramString('api_url', plaintext: true));
 			$apiUrl = preg_replace('#/chat/completions/?$#i', '', $apiUrl) ?? $apiUrl;
 			$this->setUserConfigurationValue('api_url', $apiUrl);
-			$this->setUserConfigurationValue('api_key',
-				trim(Minz_Request::paramString('api_key', plaintext: true)));
+			$this->setUserConfigurationValue('api_key', trim(Minz_Request::paramString('api_key', plaintext: true)));
 			$this->setUserConfigurationValue('model', trim(Minz_Request::paramString('model', plaintext: true)));
 			$userPrompt = trim(Minz_Request::paramString('user_prompt', plaintext: true))
 				?: _t('ext.llm_classification.default_prompt');
 			$this->saveFile(self::PROMPT_FILENAME, $userPrompt);
 			$this->setUserConfigurationValue('max_content_length', Minz_Request::paramInt('max_content_length'));
-			$this->setUserConfigurationValue('timeout',
-				Minz_Request::paramInt('timeout') ?: self::DEFAULT_TIMEOUT);
+			$this->setUserConfigurationValue('timeout', Minz_Request::paramInt('timeout') ?: self::DEFAULT_TIMEOUT);
 			$this->setUserConfigurationValue('max_tokens', Minz_Request::paramInt('max_tokens'));
-			$this->setUserConfigurationValue('max_retries',
-				max(0, min(5, Minz_Request::paramInt('max_retries'))));
-
-			$this->setUserConfigurationValue('enable_tags',
-				Minz_Request::paramBoolean('enable_tags'));
-			$this->setUserConfigurationValue('tag_prefix',
-				trim(Minz_Request::paramString('tag_prefix', plaintext: true)));
-			$this->setUserConfigurationValue('allowed_tags',
-				trim(Minz_Request::paramString('allowed_tags', plaintext: true)));
-
-			$this->setUserConfigurationValue('search_filter',
-				trim(Minz_Request::paramString('search_filter', plaintext: true)));
+			$this->setUserConfigurationValue('max_retries', max(0, min(5, Minz_Request::paramInt('max_retries'))));
+			$this->setUserConfigurationValue('enable_tags', Minz_Request::paramBoolean('enable_tags'));
+			$this->setUserConfigurationValue('tag_prefix', trim(Minz_Request::paramString('tag_prefix', plaintext: true)));
+			$this->setUserConfigurationValue('allowed_tags', trim(Minz_Request::paramString('allowed_tags', plaintext: true)));
+			$this->setUserConfigurationValue('search_filter', trim(Minz_Request::paramString('search_filter', plaintext: true)));
+			$this->setUserConfigurationValue('allow_thinking', Minz_Request::paramBoolean('allow_thinking'));
 		}
 
 		$this->user_prompt = '';
@@ -254,6 +249,13 @@ final class LlmClassificationExtension extends Minz_Extension {
 			$body['max_completion_tokens'] = $maxTokens;
 		}
 
+		$allowThinking = $this->getUserConfigurationBool('allow_thinking') ?? true;
+		if (!$allowThinking) {
+			$body['chat_template_kwargs'] = [
+				'enable_thinking' => false,
+			];
+		}
+
 		$requestBody = json_encode($body, JSON_INVALID_UTF8_SUBSTITUTE | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
 		if ($requestBody === false) {
@@ -269,7 +271,7 @@ final class LlmClassificationExtension extends Minz_Extension {
 			$headers[] = 'Authorization: Bearer ' . $apiKey;
 		}
 
-		$cachePath = CACHE_PATH . '/llm_classification_' . sha1($apiUrl . $requestBody) . '.json';
+		$cachePath = CACHE_PATH . '/llm_classification_' . sha1($apiUrl . $apiKey . $model . $requestBody) . '.json';
 
 		$maxRetries = $this->getUserConfigurationInt('max_retries') ?? self::DEFAULT_MAX_RETRIES;
 		$response = null;
