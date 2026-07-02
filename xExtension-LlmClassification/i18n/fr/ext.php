@@ -46,7 +46,7 @@ Auteur : {author}
 Date : {date}
 URL : {url}
 Flux : {feed_name} ({feed_url})
-tags existantes : {tags}
+Tags existants : {tags}
 
 Contenu :
 {content}',
