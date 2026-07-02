@@ -426,6 +426,7 @@ final class LlmClassificationExtension extends Minz_Extension {
 
 		$systemPrompt = $this->getSystemPrompt();
 		$userPrompt = $this->buildUserPrompt($entry);
+		$incomingPromptHash = sha1($systemPrompt . $userPrompt);
 		$classification = null;
 
 		assert($this->getEntrypoint() !== '');	// For PHPStan // TODO: Fix in parent method
@@ -435,7 +436,6 @@ final class LlmClassificationExtension extends Minz_Extension {
 
 			// Compare prompt hashes for any meaningful change since the last classification
 			$existingPromptHash = $existingEntry?->attributeArray($this->getEntrypoint())[self::ATTRIBUTE_PROMPT_HASH] ?? null;
-			$incomingPromptHash = sha1($systemPrompt . $userPrompt);
 			if ($existingPromptHash === $incomingPromptHash) {
 				// Re-use existing tags matching the prefix
 				$prefix = $this->getUserConfigurationString('tag_prefix') ?? '';
@@ -452,10 +452,11 @@ final class LlmClassificationExtension extends Minz_Extension {
 			}
 		}
 
+		// re-attach the namespaced classification attribute so it survives the upcomming `updateEntry` write
+		$entry->_attribute($this->getEntrypoint(), [
+			self::ATTRIBUTE_PROMPT_HASH => $incomingPromptHash,
+		]);
 		if ($classification === null) {
-			$entry->_attribute($this->getEntrypoint(), [
-				self::ATTRIBUTE_PROMPT_HASH => sha1($systemPrompt . $userPrompt),
-			]);
 			if ($userPrompt === '') {
 				return $entry;
 			}
