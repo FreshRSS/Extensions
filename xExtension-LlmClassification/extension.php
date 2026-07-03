@@ -10,6 +10,7 @@ final class LlmClassificationExtension extends Minz_Extension {
 	private const DEFAULT_MAX_RETRIES = 2;
 	private const RETRYABLE_HTTP_STATUSES = [429, 500, 502, 503, 504];
 	private const PROMPT_FILENAME = 'prompt.md';
+	private const ATTRIBUTE_PROMPT_HASH = 'prompt_hash';
 
 	public string $user_prompt = '';
 
@@ -390,6 +391,25 @@ final class LlmClassificationExtension extends Minz_Extension {
 	}
 
 	/**
+	 * Look up the currently stored entry for an entry being updated.
+	 * @throws Minz_PermissionDeniedException
+	 */
+	private function loadExistingEntry(FreshRSS_Entry $incomingEntry): ?FreshRSS_Entry {
+		$feedId = $incomingEntry->feedId();
+		$guid = $incomingEntry->guid();
+		if ($feedId === 0 || $guid === '') {
+			return null;
+		}
+		try {
+			$entryDAO = FreshRSS_Factory::createEntryDao();
+			return $entryDAO->searchByGuid($feedId, $guid);
+		} catch (Minz_ConfigurationNamespaceException | Minz_PDOConnectionException $e) {
+			Minz_Log::warning('LlmClassification: Failed to load existing entry for re-classification: ' . $e->getMessage());
+			return null;
+		}
+	}
+
+	/**
 	 * Hook for EntryBeforeInsert: classify a new entry.
 	 * @throws Minz_PermissionDeniedException
 	 */
@@ -406,13 +426,39 @@ final class LlmClassificationExtension extends Minz_Extension {
 
 		$systemPrompt = $this->getSystemPrompt();
 		$userPrompt = $this->buildUserPrompt($entry);
-		if ($userPrompt === '') {
-			return $entry;
+		$incomingPromptHash = sha1($systemPrompt . $userPrompt);
+		$classification = null;
+
+		if ($entry->isUpdated()) {
+			$existingEntry = $this->loadExistingEntry($entry);
+
+			// Compare prompt hashes for any meaningful change since the last classification
+			$existingPromptHash = $existingEntry?->attributeArray($this->getEntrypoint())[self::ATTRIBUTE_PROMPT_HASH] ?? null;
+			if ($existingPromptHash === $incomingPromptHash) {
+				// Re-use existing tags matching the prefix
+				$prefix = $this->getUserConfigurationString('tag_prefix') ?? '';
+				$existingTags = $existingEntry->tags();
+				if ($prefix !== '') {
+					$existingTags = array_values(array_filter(
+						$existingTags,
+						static fn(string $tag) => str_starts_with($tag, $prefix)
+					));
+				}
+				$classification = [
+					'tags' => $existingTags,
+				];
+			}
 		}
 
-		$classification = $this->callLlm($systemPrompt, $userPrompt);
+		// re-attach the namespaced classification attribute so it survives the upcoming `updateEntry` write
+		$entry->_attribute($this->getEntrypoint(), [
+			self::ATTRIBUTE_PROMPT_HASH => $incomingPromptHash,
+		]);
 		if ($classification === null) {
-			return $entry;
+			if ($userPrompt === '') {
+				return $entry;
+			}
+			$classification = $this->callLlm($systemPrompt, $userPrompt) ?? [];
 		}
 
 		return $this->applyClassification($entry, $classification, removeOldTags: true);

@@ -11,6 +11,7 @@ It classifies articles on insertion using a customizable prompt, and applies tag
 - Entry filtering via FreshRSS Boolean search syntax
 - Response caching to avoid redundant API calls
 - Content truncation to control token usage
+- Skips re-classifying updated articles without any prompt-relevant change, avoiding redundant LLM API calls
 
 ## Requirements
 
@@ -68,9 +69,7 @@ The **user prompt** is an editable template. The following placeholders are repl
 1. A new article arrives in FreshRSS
 2. The extension checks if tag classification is enabled and the article matches the configured search filters
 3. The user prompt is built by replacing placeholders with article data
-4. The LLM API is called with the system prompt and the user prompt
-5. The returned tags are validated (prefix prepended, whitelist enforced) and applied to the article
-
-## Changelog
-
-- 0.1: Initial version
+4. For updates of previously-classified articles, the new prompt is compared against the stored hash; if unchanged, the previous tags are restored and no API call is made
+5. Otherwise, the LLM API is called with the system prompt and the user prompt
+6. The returned tags are validated (prefix prepended, whitelist enforced) and applied to the article
+7. The prompt hash is stored along the entry
