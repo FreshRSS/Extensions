@@ -450,7 +450,7 @@ final class LlmClassificationExtension extends Minz_Extension {
 			}
 		}
 
-		// re-attach the namespaced classification attribute so it survives the upcomming `updateEntry` write
+		// re-attach the namespaced classification attribute so it survives the upcoming `updateEntry` write
 		$entry->_attribute($this->getEntrypoint(), [
 			self::ATTRIBUTE_PROMPT_HASH => $incomingPromptHash,
 		]);
