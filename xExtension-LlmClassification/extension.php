@@ -429,8 +429,6 @@ final class LlmClassificationExtension extends Minz_Extension {
 		$incomingPromptHash = sha1($systemPrompt . $userPrompt);
 		$classification = null;
 
-		assert($this->getEntrypoint() !== '');	// For PHPStan // TODO: Fix in parent method
-
 		if ($entry->isUpdated()) {
 			$existingEntry = $this->loadExistingEntry($entry);
 
