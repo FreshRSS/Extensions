@@ -357,7 +357,7 @@
             "name": "LLM Classification",
             "author": "Alkarex",
             "description": "Tag incoming articles by calling an OpenAI-compatible LLM API",
-            "version": "0.2",
+            "version": "0.3",
             "entrypoint": "LlmClassification",
             "type": "user",
             "url": "https://github.com/FreshRSS/Extensions",
