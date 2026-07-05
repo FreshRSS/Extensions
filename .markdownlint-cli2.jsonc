@@ -1,0 +1,35 @@
+{
+	// markdownlint rule configuration (previously .markdownlint.json)
+	"config": {
+		"default": true,
+		"blanks-around-fences": false,
+		"blanks-around-lists": false,
+		"first-line-heading": false,
+		"line-length": false,
+		"no-blanks-blockquote": false,
+		"no-hard-tabs": false,
+		"no-inline-html": {
+			"allowed_elements": ["br", "img", "kbd", "details", "summary"]
+		},
+		"no-multiple-blanks": {
+			"maximum": 2
+		},
+		"no-trailing-spaces": true,
+		"ul-indent": false,
+		"ul-style": {
+			"style": "consistent"
+		}
+	},
+	// Markdown files to lint (previously the '**/*.md' CLI argument)
+	"globs": [
+		"**/*.md"
+	],
+	// Paths to ignore (previously .markdownlintignore)
+	"ignores": [
+		"**/node_modules/**",
+		"symbolic/**",
+		"third-party/**",
+		"tmp/**",
+		"vendor/**"
+	]
+}
