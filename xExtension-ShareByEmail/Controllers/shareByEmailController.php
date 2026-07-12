@@ -6,13 +6,13 @@ final class FreshExtension_shareByEmail_Controller extends Minz_ActionController
 	public ?Minz_Extension $extension;
 
 	/**
-	 * @var ShareByEmail\mailers\View
+	 * @var ShareByEmail\Models\View
 	 * @phpstan-ignore property.phpDocType
 	 */
 	protected $view;
 
 	public function __construct() {
-		parent::__construct(ShareByEmail\mailers\View::class);
+		parent::__construct(ShareByEmail\Models\View::class);
 	}
 
 	#[\Override]
