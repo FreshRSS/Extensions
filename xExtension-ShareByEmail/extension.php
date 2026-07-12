@@ -25,6 +25,11 @@ final class ShareByEmailExtension extends Minz_Extension {
 		spl_autoload_register(array($this, 'loader'));
 	}
 
+	#[\Override]
+	public function handleConfigureAction(): void {
+		$this->registerTranslates();
+	}
+
 	public function loader(string $class_name): void {
 		if (strpos($class_name, 'ShareByEmail') === 0) {
 			$class_name = substr($class_name, 13);
