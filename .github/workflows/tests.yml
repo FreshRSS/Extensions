@@ -49,6 +49,9 @@ jobs:
     - name: PHP_CodeSniffer
       run: composer run-script phpcs
 
+    - name: ImageProxy regression tests
+      run: composer run-script test-image-proxy
+
     - name: Git checkout FreshRSS source code
       uses: actions/checkout@v7
       with:
