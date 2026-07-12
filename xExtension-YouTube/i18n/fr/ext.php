@@ -2,6 +2,7 @@
 
 return array(
 	'yt_videos' => array(
+		'autosize' => 'Taille automatique du lecteur',
 		'height' => 'Hauteur du lecteur',
 		'width' => 'Largeur du lecteur',
 		'show_content' => 'Afficher le contenu du flux',

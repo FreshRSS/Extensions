@@ -2,6 +2,7 @@
 
 return array(
 	'yt_videos' => array(
+		'autosize' => 'Automatyczny rozmiar odtwarzacza',
 		'height' => 'Wysokość odtwarzacza wideo',
 		'width' => 'Szerokość odtwarzacza wideo',
 		'show_content' => 'Wyświetlaj zawartość kanałów',
