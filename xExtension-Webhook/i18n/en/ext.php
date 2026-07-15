@@ -21,6 +21,7 @@ return array(
 		'http_body_placeholder_feed_description' => 'Name of the feed',
 		'http_body_placeholder_feed_url_description' => 'URL of the feed',
 		'http_body_placeholder_tags_description' => 'Article tags (string, separated by " #")',
+		'http_body_placeholder_user_description' => 'Username in FreshRSS',
 		'http_body_placeholder_date_published_description' => 'Publication date (ISO 8601)',
 		'http_body_placeholder_date_received_description' => 'Date received by FreshRSS (ISO 8601)',
 		'http_body_placeholder_date_modified_description' => 'Last modified date (ISO 8601, null if never modified)',
