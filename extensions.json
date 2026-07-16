@@ -610,7 +610,7 @@
             "name": "Silent Refresh",
             "author": "featurecreep-cron",
             "description": "Updates unread counts without interrupting your reading",
-            "version": "0.1.2",
+            "version": "0.2.0",
             "entrypoint": "SilentRefresh",
             "type": "user",
             "url": "https://github.com/featurecreep-cron/freshrss-extensions",
