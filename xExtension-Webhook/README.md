@@ -81,7 +81,7 @@ Customize the webhook payload using placeholders:
 | `{feed_url}` | Feed URL |
 | `{thumbnail_url}` | Thumbnail (image) URL |
 | `{tags}` | Article tags (separated by " #") |
-| `{user}` |  Username in FreshRSS |
+| `{user}` | Username in FreshRSS |
 
 ## 🎯 Use Cases
 
