@@ -21,6 +21,7 @@ return array(
 		'http_body_placeholder_feed_description' => 'Nom du flux',
 		'http_body_placeholder_feed_url_description' => 'URL du flux',
 		'http_body_placeholder_tags_description' => 'Étiquettes de l’article (chaîne, séparées par « # »)',
+		'http_body_placeholder_user_description' => 'Utilisateur chez FreshRSS',
 		'http_body_placeholder_date_published_description' => 'Date de publication (ISO 8601)',
 		'http_body_placeholder_date_received_description' => 'Date de réception par FreshRSS (ISO 8601)',
 		'http_body_placeholder_date_modified_description' => 'Date de dernière modification (ISO 8601, null si jamais modifié)',

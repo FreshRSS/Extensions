@@ -62,7 +62,8 @@ Customize the webhook payload using placeholders:
 	"date": "{date}",
 	"timestamp": "{date_timestamp}",
 	"author": "{author}",
-	"tags": "{tags}"
+	"tags": "{tags}",
+	"user": "{user}"
 }
 ```
 
@@ -80,6 +81,7 @@ Customize the webhook payload using placeholders:
 | `{feed_url}` | Feed URL |
 | `{thumbnail_url}` | Thumbnail (image) URL |
 | `{tags}` | Article tags (separated by " #") |
+| `{user}` | Username in FreshRSS |
 
 ## 🎯 Use Cases
 
