@@ -443,6 +443,9 @@ final class LlmClassificationExtension extends Minz_Extension {
 						$existingTags,
 						static fn(string $tag) => str_starts_with($tag, $prefix)
 					));
+					// Strip the prefix from tags before re-adding them (will be re-applied in applyClassification)
+					$prefixLength = strlen($prefix);
+					$existingTags = array_map(static fn(string $tag) => substr($tag, $prefixLength), $existingTags);
 				}
 				$classification = [
 					'tags' => $existingTags,
