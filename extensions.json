@@ -24,17 +24,6 @@
             "directory": "."
         },
         {
-            "name": "Apple Music Artist Feed",
-            "version": "0.0.1",
-            "entrypoint": "AppleMusicArtist",
-            "type": "system",
-            "author": "Joseph Bushell",
-            "description": "Subscribe to an Apple Music artist's releases by pasting their Apple Music artist page URL.",
-            "url": "https://codeberg.org/sanpo/xExtension-AppleMusicArtist",
-            "method": "git",
-            "directory": "."
-        },
-        {
             "name": "ArticleSummary",
             "author": "Liang",
             "description": "Generate article summaries using OpenAI-compatible language model APIs. Supports both OpenAI and Ollama providers with a user-friendly configuration interface.",
@@ -242,17 +231,6 @@
             "url": "https://github.com/ravenscroftj/freshrss-flaresolverr-extension",
             "method": "git",
             "directory": "."
-        },
-        {
-            "name": "GReader Redate",
-            "author": "Julien Avérous",
-            "description": "Use published date instead of fetching date.",
-            "version": "1.3",
-            "entrypoint": "GReaderRedate",
-            "type": "user",
-            "url": "https://codeberg.org/javerous/freshrss-greader-redate",
-            "method": "git",
-            "directory": "xExtension-GReaderRedate"
         },
         {
             "name": "Grid View",
@@ -581,17 +559,6 @@
             "entrypoint": "ShareToLinkwarden",
             "type": "user",
             "url": "https://github.com/daften/xExtension-ShareToLinkwarden",
-            "method": "git",
-            "directory": "."
-        },
-        {
-            "name": "Show entry URL",
-            "author": "Strubbl",
-            "description": "Shows the URL of the currently displayed entry right before its content.",
-            "version": "1.1",
-            "entrypoint": "ShowURL",
-            "type": "user",
-            "url": "https://codeberg.org/strubbl/xExtension-ShowURL",
             "method": "git",
             "directory": "."
         },
