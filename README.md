@@ -238,3 +238,7 @@ There are some FreshRSS extensions out there, developed by community members.
 ### By [@sanpo](https://codeberg.org/sanpo), [Web](https://sanpo.land)
 
 * [Apple Music Artist](https://codeberg.org/sanpo/xExtension-AppleMusicArtist): Subscribe to an artist's releases by their Apple Music artist page URL.
+
+### By [@StathisZ](https://github.com/StathisZ)
+
+* [Mark Feed Read On Badge Click](https://github.com/StathisZ/freshrss-mark-read-on-click): Click a feed's unread-count badge in the sidebar to mark all its articles as read.
