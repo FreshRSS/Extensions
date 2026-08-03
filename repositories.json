@@ -130,4 +130,7 @@
 }, {
 	"url": "https://codeberg.org/sanpo/xExtension-AppleMusicArtist",
 	"type": "git"
+}, {
+	"url": "https://github.com/StathisZ/freshrss-mark-read-on-click",
+	"type": "git"
 }]
