@@ -387,6 +387,17 @@
             "directory": "xExtension-MarkAsReadExisting"
         },
         {
+            "name": "Mark Feed Read On Badge Click",
+            "author": "stathis",
+            "description": "Click a feed's unread-count badge in the sidebar to mark all its articles as read.",
+            "version": "1.1",
+            "entrypoint": "MarkFeedReadOnBadgeClick",
+            "type": "user",
+            "url": "https://github.com/StathisZ/freshrss-mark-read-on-click",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "Mark Previous as Read",
             "author": "kalvn",
             "description": "This extension adds a button in the footer of each entry. Clicking this button will mark all previous entries as read.",
