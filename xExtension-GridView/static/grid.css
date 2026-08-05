@@ -1,0 +1,781 @@
+/**
+ * Grid View Extension - CSS Styles
+ * Card layout for FreshRSS
+ */
+
+/* ============================================
+   Grid Toggle & Refresh Buttons
+   ============================================ */
+
+.read_grid,
+[data-grid-toggle] {
+	padding: 0.25rem 0.5rem;
+	display: inline-flex;
+	font-size: 1.25rem;
+	border: 1px solid var(--frss-border-color, #ddd);
+	border-radius: 4px;
+	align-items: center;
+	justify-content: center;
+	margin-left: 0.5rem;
+	cursor: pointer;
+	transition: background-color 0.2s ease, color 0.2s ease;
+	text-decoration: none;
+}
+
+.read_grid:hover,
+[data-grid-toggle]:hover {
+	background-color: var(--frss-background-alt, #f0f0f0);
+}
+
+.read_grid.active,
+[data-grid-toggle].active {
+	background-color: var(--frss-accent-color, #4a90d9) !important;
+	color: #fff !important;
+	border-color: var(--frss-accent-color, #4a90d9);
+}
+
+/* ============================================
+   Grid Container - Applied when view mode is 'grid'
+   ============================================ */
+
+#stream.grid {
+	padding: 1.25rem;
+	display: grid;
+	max-width: 100%;
+	grid-template-columns: repeat(var(--gridview-columns, 3), 1fr);
+	gap: 1.25rem;
+	box-sizing: border-box;
+}
+
+/* ============================================
+   Date Separators / Day Dividers
+   ============================================ */
+
+#stream.grid > .gridview-header {
+	margin: 0 0 0.25rem 0;
+	padding: 0.75rem 0;
+	display: flex;
+	width: 100%;
+	color: var(--frss-text-color, #333);
+	font-size: 1.25rem;
+	border-bottom: 2px solid var(--frss-accent-color, #4a90d9);
+	grid-column: 1 / -1;
+	font-weight: 700;
+	align-items: baseline;
+	gap: 0.75rem;
+}
+
+.gridview-header-name {
+	flex-shrink: 0;
+}
+
+.gridview-header-new-articles {
+	display: none;
+	color: var(--frss-accent-color, #4a90d9);
+	font-size: 0.8rem;
+	font-weight: 500;
+	cursor: pointer;
+	white-space: nowrap;
+}
+
+.gridview-header-new-articles.visible {
+	display: inline;
+}
+
+.gridview-header-new-articles:hover {
+	text-decoration: underline;
+}
+
+/* Hide the native FreshRSS new-article banner in grid mode */
+#stream.grid > #new-article,
+body.gridview-active #new-article {
+	display: none !important;
+}
+
+#stream.grid > .transition {
+	display: none;
+}
+
+#stream.grid .day,
+#stream.grid .date-separator,
+#stream.grid .flux_date,
+#stream.grid > .day-title,
+#stream.grid > h2,
+#stream.grid > h3 {
+	margin: 0.5rem 0;
+	padding: 0.75rem 0;
+	background: transparent;
+	display: flex;
+	width: 100%;
+	color: var(--frss-text-muted, #666);
+	font-size: 0.875rem;
+	border-bottom: 1px solid var(--frss-border-color, #e0e0e0);
+	grid-column: 1 / -1;  /* Span full width */
+	font-weight: 600;
+	align-items: center;
+}
+
+#stream.grid .day::before,
+#stream.grid .date-separator::before {
+	content: "📅 ";
+	margin-right: 0.5rem;
+}
+
+/* ============================================
+   Card Styling
+   ============================================ */
+
+#stream.grid .flux {
+	margin: 0;
+	/* Reset padding/margin that FreshRSS Reader view may add to .flux */
+	padding: 0;
+	background: var(--frss-background-color, #fff);
+	display: flex;
+	height: 100%;
+	border: 1px solid var(--frss-border-color, #e0e0e0);
+	border-radius: 12px;
+	flex-direction: column;
+	overflow: hidden;
+	isolation: isolate;
+	transition: box-shadow 0.2s ease, border 0.2s ease;
+	cursor: pointer;
+	min-height: 482px;
+}
+
+#stream.grid .flux:hover {
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Override FreshRSS default .not_read border in grid mode.
+   The actual unread indicator is managed via inline styles
+   by syncFluxVisualState() in grid.js. */
+
+#stream.grid .flux.not_read {
+	border-left: 1px solid var(--frss-border-color, #e0e0e0);
+}
+
+/* Override .current styling in grid mode. FreshRSS sets .current on the
+   most recently interacted article; the box-shadow looked like an unwanted
+   full blue border when switching from list view to grid view. */
+
+#stream.grid .flux.current {
+	box-shadow: none;
+}
+
+#stream.grid .flux.current:hover {
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================
+   Card Image / Thumbnail
+   ============================================ */
+
+#stream.grid .flux .flux_header {
+	margin: 0;
+	padding: 0;
+	background: none;
+	display: flex;
+	border: none;
+	flex-direction: column;
+	position: relative;
+}
+
+#stream.grid .flux .card-thumbnail {
+	background: var(--frss-background-alt, #f5f5f5);
+	display: flex;
+	width: 100%;
+	height: 394px;
+	border-radius: inherit;
+	overflow: hidden;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+	will-change: transform;
+}
+
+#stream.grid .flux .card-thumbnail img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform 0.3s ease;
+}
+
+#stream.grid .flux:hover .card-thumbnail img {
+	transform: scale(1.05);
+}
+
+#stream.grid .flux .card-thumbnail .no-image {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	display: flex;
+	width: 100%;
+	height: 100%;
+	color: #fff;
+	font-size: 3rem;
+	align-items: center;
+	justify-content: center;
+	opacity: 0.7;
+}
+
+#stream.grid .flux .card-thumbnail .placeholder-image {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	filter: brightness(0.85) saturate(0.9);
+}
+
+#stream.grid .flux:hover .card-thumbnail .placeholder-image {
+	filter: brightness(0.9) saturate(1);
+}
+
+/* ============================================
+   Card Content Area
+   ============================================ */
+
+#stream.grid .flux .card-content {
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	position: relative;
+}
+
+#stream.grid .flux .card-meta {
+	display: flex;
+	color: var(--frss-text-muted, #666);
+	font-size: 0.75rem;
+	align-items: center;
+	gap: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+
+#stream.grid .flux .card-meta .favicon {
+	width: 16px;
+	height: 16px;
+	border-radius: 2px;
+}
+
+#stream.grid .flux .card-meta .feed-name {
+	font-weight: 500;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 60%;
+}
+
+#stream.grid .flux .card-meta .reading-time {
+	margin-left: auto;
+	white-space: nowrap;
+}
+
+#stream.grid .flux .card-title {
+	margin: 0 0 0.5rem 0;
+	color: var(--frss-text-color, #333);
+	font-size: 1rem;
+	font-weight: 600;
+	line-height: 1.4;
+	overflow-wrap: break-word;
+}
+
+#stream.grid .flux .card-title a {
+	color: inherit;
+	text-decoration: none;
+}
+
+#stream.grid .flux .card-title a:hover {
+	color: var(--frss-accent-color, #4a90d9);
+}
+
+#stream.grid .flux .card-summary-wrapper {
+	position: relative;
+	flex-grow: 1;
+	margin: 0;
+	cursor: pointer;
+}
+
+#stream.grid .flux .card-summary {
+	margin: 0;
+	color: var(--frss-text-muted, #666);
+	font-size: 0.875rem;
+	line-height: 1.5;
+	overflow: hidden;
+}
+
+/* Scrollable tooltip panel shown on hover — fills .card-content area */
+#stream.grid .flux .card-summary-tooltip {
+	padding: 0.75rem 1rem;
+	background: var(--frss-background-color, #fff);
+	display: none;
+	border-radius: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	overflow-y: auto;
+	z-index: 100;
+}
+
+#stream.grid .flux .card-summary-tooltip p {
+	margin: 0;
+	color: var(--frss-text-color, #333);
+	font-size: 0.875rem;
+	line-height: 1.5;
+	padding-bottom: 1rem;
+}
+
+#stream.grid .flux .card-summary-tooltip.expanded {
+	display: block;
+}
+
+#stream.grid .flux .card-date {
+	color: var(--frss-text-muted, #888);
+	font-size: 0.75rem;
+	margin-top: auto;
+	padding-top: 0.75rem;
+}
+
+/* ============================================
+   Hide default elements in grid view
+   ============================================ */
+
+#stream.grid .flux .flux_content,
+#stream.grid .flux .item.manage,
+#stream.grid .flux .item.link,
+#stream.grid .flux > .flux_header > .horizontal-list {
+	display: none !important;
+}
+
+/* Hide the FreshRSS prev/up/next arrow buttons in grid mode */
+body.gridview-active #nav_entries {
+	display: none !important;
+}
+
+/* Ensure grid card wrapper fills the flux without extra spacing
+   (Reader view may apply padding/margin to .flux children) */
+
+#stream.grid .flux .gridview-card-content {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+
+/* ============================================
+   Card Actions (on hover)
+   ============================================ */
+
+#stream.grid .flux .card-actions {
+	padding: 0.75rem 1rem;
+	background: rgba(0, 0, 0, 0.55);
+	display: flex;
+	border-top: none;
+	gap: 0.5rem;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	backdrop-filter: blur(4px);
+	opacity: 0;
+	transition: opacity 0.2s ease;
+	z-index: 10;
+}
+
+#stream.grid .flux.card-selected .card-actions {
+	opacity: 1;
+}
+
+#stream.grid .flux .card-actions button,
+#stream.grid .flux .card-actions a {
+	padding: 0.25rem 0.5rem;
+	background: none;
+	color: rgba(255, 255, 255, 0.9);
+	font-size: 0.75rem;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+#stream.grid .flux .card-actions button:hover,
+#stream.grid .flux .card-actions a:hover {
+	background: rgba(255, 255, 255, 0.2);
+	color: #fff;
+}
+
+#stream.grid .flux.favorite .card-actions .action-star {
+	color: #f5a623;
+}
+
+/* ============================================
+   Share Button in Cards
+   ============================================ */
+
+#stream.grid .flux .card-actions .action-share {
+	padding: 0.25rem 0.5rem;
+	background: none;
+	display: inline-flex;
+	color: rgba(255, 255, 255, 0.9);
+	font-size: 0.85rem;
+	border: none;
+	border-radius: 4px;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+#stream.grid .flux .card-actions .action-share:hover {
+	background: rgba(255, 255, 255, 0.2);
+	color: #fff;
+}
+
+#stream.grid .flux .card-actions .action-share .icon {
+	width: 16px;
+	height: 16px;
+	opacity: 0.7;
+}
+
+#stream.grid .flux .card-actions .action-share:hover .icon {
+	opacity: 1;
+	filter: brightness(0) invert(1);
+}
+
+/* ============================================
+   Hidden Original Content (for FreshRSS functionality)
+   ============================================ */
+
+#stream.grid .flux .gridview-original-content {
+	display: none !important;
+}
+
+/* But show the share dropdown when it's activated via :target */
+#stream.grid .flux .gridview-original-content .dropdown-menu,
+#stream.grid .flux .gridview-original-content .item.share .dropdown-menu {
+	display: none;
+}
+
+/* When dropdown is targeted, show it positioned relative to the card */
+#stream.grid .flux .gridview-original-content .dropdown-target:target ~ .dropdown-menu {
+	padding: 0.5rem 0;
+	background: var(--frss-background-color, #fff);
+	display: block !important;
+	border: 1px solid var(--frss-border-color, #ddd);
+	border-radius: 4px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	position: fixed;
+	z-index: 9999;
+	min-width: 180px;
+}
+
+/* ============================================
+   Prevent Flash of List View (FOLV)
+   Hide untransformed flux entries in grid mode
+   so the default list layout never shows.
+   ============================================ */
+
+#stream.grid .flux:not(.gridview-transformed) {
+	margin: 0;
+	padding: 0;
+	height: 0;
+	border: none;
+	visibility: hidden;
+	min-height: 0;
+	overflow: hidden;
+}
+
+/* When grid mode is active (body flag), hide the raw stream content
+   even before JS adds .grid to a newly replaced #stream element.
+   This prevents the brief flash of list view during AJAX navigation. */
+
+body.gridview-active #stream:not(.grid) {
+	visibility: hidden;
+	min-height: 200px;
+}
+
+/* ============================================
+   Loading Skeleton / Spinner
+   Shown while grid items are being transformed
+   ============================================ */
+
+.gridview-loading-overlay {
+	padding: 0;
+	display: flex;
+	width: 100%;
+	grid-column: 1 / -1;
+	flex-wrap: wrap;
+	gap: 1.25rem;
+}
+
+.gridview-skeleton-card {
+	background: var(--frss-background-color, #fff);
+	max-width: calc(100% / var(--gridview-columns, 3) - 1.25rem + 1.25rem / var(--gridview-columns, 3));
+	border: 1px solid var(--frss-border-color, #e0e0e0);
+	border-radius: 12px;
+	flex: 1 1 calc(100% / var(--gridview-columns, 3) - 1.25rem);
+	min-width: 200px;
+	overflow: hidden;
+	min-height: 482px;
+}
+
+.gridview-skeleton-card .skeleton-thumbnail {
+	background: linear-gradient(90deg,
+	var(--frss-background-alt, #f0f0f0) 25%,
+	var(--frss-border-color, #e8e8e8) 50%,
+	var(--frss-background-alt, #f0f0f0) 75%);
+	width: 100%;
+	height: 394px;
+	background-size: 200% 100%;
+	animation: gridview-shimmer 1.5s infinite;
+}
+
+.gridview-skeleton-card .skeleton-content {
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.625rem;
+}
+
+.gridview-skeleton-card .skeleton-line {
+	background: linear-gradient(90deg,
+	var(--frss-background-alt, #f0f0f0) 25%,
+	var(--frss-border-color, #e8e8e8) 50%,
+	var(--frss-background-alt, #f0f0f0) 75%);
+	height: 0.875rem;
+	border-radius: 4px;
+	background-size: 200% 100%;
+	animation: gridview-shimmer 1.5s infinite;
+}
+
+.gridview-skeleton-card .skeleton-line.short {
+	width: 40%;
+}
+
+.gridview-skeleton-card .skeleton-line.medium {
+	width: 75%;
+}
+
+.gridview-skeleton-card .skeleton-line.long {
+	width: 100%;
+}
+
+@keyframes gridview-shimmer {
+	0% { background-position: 200% 0; }
+
+	100% { background-position: -200% 0; }
+}
+
+/* ============================================
+   Toast Notification
+   ============================================ */
+
+@keyframes gridview-toast-fade {
+	0% { opacity: 0; transform: translateX(-50%) translateY(10px); }
+
+	10% { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+	90% { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+	100% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+}
+
+/* ============================================
+   Mobile Bottom Bar (Menu Button)
+   ============================================ */
+
+.gridview-mobile-bar {
+	padding: 0.5rem;
+	display: none;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	z-index: 1000;
+	padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+body.gridview-active .gridview-mobile-bar {
+	display: block;
+}
+
+.gridview-mobile-menu-btn {
+	background: var(--frss-background-color, #fff);
+	display: flex;
+	width: 2.75rem;
+	height: 2.75rem;
+	color: var(--frss-text-color, #333);
+	border: 1px solid var(--frss-border-color, #ddd);
+	border-radius: 50%;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: background-color 0.2s ease, box-shadow 0.2s ease;
+	-webkit-tap-highlight-color: transparent;
+}
+
+.gridview-mobile-menu-btn:active {
+	background: var(--frss-background-alt, #f0f0f0);
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+/* ============================================
+   Sticky Nav Bar in Grid Mode
+   Keep the FreshRSS toolbar visible while scrolling
+   in grid mode (Normal and Reader views).
+
+   FreshRSS uses display:table on #global with .aside as
+   a table-cell. position:sticky cannot work inside a table
+   layout, so we:
+   1. Switch #global from table to flex layout
+   2. Wrap .nav_menu + #stream in a scroll container via JS
+	  (see grid.js: wrapContentForStickyNav)
+   3. Make .nav_menu sticky inside that scroll container
+   ============================================ */
+
+body.gridview-sticky-nav #global {
+	display: flex;
+	flex-direction: row;
+}
+
+body.gridview-sticky-nav #global > .aside {
+	display: block;
+	flex-shrink: 0;
+}
+
+body.gridview-sticky-nav .gridview-scroll-wrapper {
+	flex: 1 1 0%;
+	min-width: 0;
+	overflow-y: auto;
+}
+
+body.gridview-sticky-nav .nav_menu {
+	position: sticky;
+	top: 0;
+	z-index: 50;
+	background: var(--frss-background-color, #fff);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+	body.gridview-sticky-nav .nav_menu {
+		background: var(--frss-background-color, #1e1e1e);
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+	}
+}
+
+.theme-dark body.gridview-sticky-nav .nav_menu,
+body.theme-dark.gridview-sticky-nav .nav_menu,
+body.gridview-sticky-nav .theme-dark .nav_menu,
+[data-theme="dark"] body.gridview-sticky-nav .nav_menu,
+body.gridview-sticky-nav[data-theme="dark"] .nav_menu {
+	background: var(--frss-background-color, #1e1e1e);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================
+   Responsive Breakpoints
+   ============================================ */
+
+@media (max-width: 1200px) {
+	#stream.grid {
+		grid-template-columns: repeat(min(var(--gridview-columns, 3), 3), 1fr);
+	}
+}
+
+@media (max-width: 900px) {
+	#stream.grid {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 1rem;
+		padding: 1rem;
+	}
+}
+
+@media (max-width: 600px) {
+	#stream.grid {
+		grid-template-columns: 1fr;
+		gap: 0.75rem;
+		padding: 0.75rem;
+	}
+
+	#stream.grid .flux {
+		min-height: 419px;
+	}
+
+	#stream.grid .flux .card-thumbnail {
+		height: 328px;
+	}
+}
+
+/* ============================================
+   Dark Theme Support
+   ============================================ */
+
+@media (prefers-color-scheme: dark) {
+	#stream.grid .flux {
+		background: var(--frss-background-color, #1e1e1e);
+		border-color: var(--frss-border-color, #333);
+	}
+
+	#stream.grid .flux:hover {
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+	}
+
+	#stream.grid .flux .card-thumbnail .no-image {
+		background: linear-gradient(135deg, #434343 0%, #000 100%);
+	}
+
+	#stream.grid .flux .card-summary-tooltip {
+		background: var(--frss-background-color, #1e1e1e);
+		border-color: var(--frss-border-color, #333);
+		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+	}
+}
+
+/* Support FreshRSS dark themes */
+.theme-dark #stream.grid .flux,
+[data-theme="dark"] #stream.grid .flux {
+	background: var(--frss-background-color, #1e1e1e);
+	border-color: var(--frss-border-color, #333);
+}
+
+.theme-dark #stream.grid .flux:hover,
+[data-theme="dark"] #stream.grid .flux:hover {
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.theme-dark #stream.grid .flux .card-summary-tooltip,
+[data-theme="dark"] #stream.grid .flux .card-summary-tooltip {
+	background: var(--frss-background-color, #1e1e1e);
+	border-color: var(--frss-border-color, #333);
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+@media (prefers-color-scheme: dark) {
+	.gridview-mobile-menu-btn {
+		background: var(--frss-background-color, #1e1e1e);
+		color: var(--frss-text-color, #e0e0e0);
+		border-color: var(--frss-border-color, #333);
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	.gridview-skeleton-card {
+		background: var(--frss-background-color, #1e1e1e);
+		border-color: var(--frss-border-color, #333);
+	}
+}
+
+.theme-dark .gridview-mobile-menu-btn,
+[data-theme="dark"] .gridview-mobile-menu-btn {
+	background: var(--frss-background-color, #1e1e1e);
+	color: var(--frss-text-color, #e0e0e0);
+	border-color: var(--frss-border-color, #333);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.theme-dark .gridview-skeleton-card,
+[data-theme="dark"] .gridview-skeleton-card {
+	background: var(--frss-background-color, #1e1e1e);
+	border-color: var(--frss-border-color, #333);
+}

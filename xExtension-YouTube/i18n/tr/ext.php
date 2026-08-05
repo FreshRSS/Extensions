@@ -2,6 +2,7 @@
 
 return array(
 	'yt_videos' => array(
+		'autosize' => 'Oynatıcıyı otomatik boyutlandır',
 		'height' => 'Oynatıcı yükseklik',
 		'width' => 'Oynatıcı genişlik',
 		'show_content' => 'Yayın içeriğini görüntüle',

@@ -10,6 +10,10 @@ declare(strict_types=1);
 final class YouTubeExtension extends Minz_Extension
 {
 	/**
+	 * Whether the video player should use responsive sizing
+	 */
+	private bool $autoSize = false;
+	/**
 	 * Video player width
 	 */
 	private int $width = 560;
@@ -35,6 +39,7 @@ final class YouTubeExtension extends Minz_Extension
 	 */
 	#[\Override]
 	public function init(): void {
+		Minz_View::appendStyle($this->getFileUrl('style.css'));
 		$this->registerHook('entry_before_display', [$this, 'embedYouTubeVideo']);
 		$this->registerHook('check_url_before_add', [self::class, 'convertYoutubeFeedUrl']);
 		$this->registerHook('custom_favicon_hash', [$this, 'iconHashParams']);
@@ -312,6 +317,11 @@ final class YouTubeExtension extends Minz_Extension
 			return;
 		}
 
+		$autoSize = FreshRSS_Context::userConf()->attributeBool('yt_player_autosize');
+		if ($autoSize !== null) {
+			$this->autoSize = $autoSize;
+		}
+
 		$width = FreshRSS_Context::userConf()->attributeInt('yt_player_width');
 		if ($width !== null) {
 			$this->width = $width;
@@ -336,6 +346,14 @@ final class YouTubeExtension extends Minz_Extension
 		if ($noCookie !== null) {
 			$this->useNoCookie = $noCookie;
 		}
+	}
+
+	/**
+	 * Returns whether responsive sizing is enabled for the video player iframe.
+	 * You have to call loadConfigValues() before this one, otherwise you get the default value.
+	 */
+	public function isAutoSize(): bool {
+		return $this->autoSize;
 	}
 
 	/**
@@ -446,11 +464,11 @@ final class YouTubeExtension extends Minz_Extension
 	 */
 	public function getHtml(FreshRSS_Entry $entry, string $url): string {
 		$content = '';
+		$iframeAttributes = $this->autoSize
+			? 'class="youtube-plugin-video yt-player-autosize"'
+			: 'class="youtube-plugin-video" width="' . $this->width . '" height="' . $this->height . '"';
 
-		$iframe = '<iframe class="youtube-plugin-video"
-				style="height: ' . $this->height . 'px; width: ' . $this->width . 'px;"
-				width="' . $this->width . '"
-				height="' . $this->height . '"
+		$iframe = '<iframe ' . $iframeAttributes . '
 				src="' . $url . '"
 				frameborder="0"
 				referrerpolicy="strict-origin-when-cross-origin"
@@ -570,6 +588,7 @@ final class YouTubeExtension extends Minz_Extension
 					$this->resetAllIcons();
 					break;
 			}
+			FreshRSS_Context::userConf()->_attribute('yt_player_autosize', Minz_Request::paramBoolean('yt_autosize'));
 			FreshRSS_Context::userConf()->_attribute('yt_player_height', Minz_Request::paramInt('yt_height'));
 			FreshRSS_Context::userConf()->_attribute('yt_player_width', Minz_Request::paramInt('yt_width'));
 			FreshRSS_Context::userConf()->_attribute('yt_show_content', Minz_Request::paramBoolean('yt_show_content'));

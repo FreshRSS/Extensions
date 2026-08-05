@@ -79,9 +79,9 @@ There are some FreshRSS extensions out there, developed by community members.
 
 * [Reading Time](https://github.com/FreshRSS/Extensions/tree/main/xExtension-ReadingTime): Add a reading time estimation next to each article.
 
-### By [@Korbak](https://github.com/Korbak)
+### By [@Geekshere](https://github.com/Geekshere)
 
-* [Invidious](https://github.com/Korbak/freshrss-invidious): Displays videos from YouTube feeds inline and replaces every source by the Invidious instance of your choice for an enhanced privacy (no tracking or limitation)
+* [Invidious](https://github.com/Geekshere/freshrss-invidious): Displays videos from YouTube feeds inline and replaces every source by the Invidious instance of your choice for an enhanced privacy (no tracking or limitation)
 
 ### By [@CN-Tools](https://github.com/cn-tools)
 
@@ -234,6 +234,14 @@ There are some FreshRSS extensions out there, developed by community members.
 ### By [@caglaryalcin](https://github.com/caglaryalcin)
 
 * [Three Pane Reader](https://github.com/caglaryalcin/xExtension-ThreePaneReader): An Inoreader-style three-pane reading layout (navigation, article list, and article content side by side)
+
+### By [@sanpo](https://codeberg.org/sanpo), [Web](https://sanpo.land)
+
+* [Apple Music Artist](https://codeberg.org/sanpo/xExtension-AppleMusicArtist): Subscribe to an artist's releases by their Apple Music artist page URL.
+
+### By [@StathisZ](https://github.com/StathisZ)
+
+* [Mark Feed Read On Badge Click](https://github.com/StathisZ/freshrss-mark-read-on-click): Click a feed's unread-count badge in the sidebar to mark all its articles as read.
 
 ### By [@chenhaoc](https://github.com/chenhaoc)
 

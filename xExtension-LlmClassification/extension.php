@@ -10,6 +10,7 @@ final class LlmClassificationExtension extends Minz_Extension {
 	private const DEFAULT_MAX_RETRIES = 2;
 	private const RETRYABLE_HTTP_STATUSES = [429, 500, 502, 503, 504];
 	private const PROMPT_FILENAME = 'prompt.md';
+	private const ATTRIBUTE_PROMPT_HASH = 'prompt_hash';
 
 	public string $user_prompt = '';
 
@@ -57,6 +58,9 @@ final class LlmClassificationExtension extends Minz_Extension {
 		if ($this->getUserConfigurationString('search_filter') === null) {
 			$this->setUserConfigurationValue('search_filter', '');
 		}
+		if ($this->getUserConfigurationBool('allow_thinking') === null) {
+			$this->setUserConfigurationValue('allow_thinking', true);
+		}
 	}
 
 	#[\Override]
@@ -67,28 +71,20 @@ final class LlmClassificationExtension extends Minz_Extension {
 			$apiUrl = trim(Minz_Request::paramString('api_url', plaintext: true));
 			$apiUrl = preg_replace('#/chat/completions/?$#i', '', $apiUrl) ?? $apiUrl;
 			$this->setUserConfigurationValue('api_url', $apiUrl);
-			$this->setUserConfigurationValue('api_key',
-				trim(Minz_Request::paramString('api_key', plaintext: true)));
+			$this->setUserConfigurationValue('api_key', trim(Minz_Request::paramString('api_key', plaintext: true)));
 			$this->setUserConfigurationValue('model', trim(Minz_Request::paramString('model', plaintext: true)));
 			$userPrompt = trim(Minz_Request::paramString('user_prompt', plaintext: true))
 				?: _t('ext.llm_classification.default_prompt');
 			$this->saveFile(self::PROMPT_FILENAME, $userPrompt);
 			$this->setUserConfigurationValue('max_content_length', Minz_Request::paramInt('max_content_length'));
-			$this->setUserConfigurationValue('timeout',
-				Minz_Request::paramInt('timeout') ?: self::DEFAULT_TIMEOUT);
+			$this->setUserConfigurationValue('timeout', Minz_Request::paramInt('timeout') ?: self::DEFAULT_TIMEOUT);
 			$this->setUserConfigurationValue('max_tokens', Minz_Request::paramInt('max_tokens'));
-			$this->setUserConfigurationValue('max_retries',
-				max(0, min(5, Minz_Request::paramInt('max_retries'))));
-
-			$this->setUserConfigurationValue('enable_tags',
-				Minz_Request::paramBoolean('enable_tags'));
-			$this->setUserConfigurationValue('tag_prefix',
-				trim(Minz_Request::paramString('tag_prefix', plaintext: true)));
-			$this->setUserConfigurationValue('allowed_tags',
-				trim(Minz_Request::paramString('allowed_tags', plaintext: true)));
-
-			$this->setUserConfigurationValue('search_filter',
-				trim(Minz_Request::paramString('search_filter', plaintext: true)));
+			$this->setUserConfigurationValue('max_retries', max(0, min(5, Minz_Request::paramInt('max_retries'))));
+			$this->setUserConfigurationValue('enable_tags', Minz_Request::paramBoolean('enable_tags'));
+			$this->setUserConfigurationValue('tag_prefix', trim(Minz_Request::paramString('tag_prefix', plaintext: true)));
+			$this->setUserConfigurationValue('allowed_tags', trim(Minz_Request::paramString('allowed_tags', plaintext: true)));
+			$this->setUserConfigurationValue('search_filter', trim(Minz_Request::paramString('search_filter', plaintext: true)));
+			$this->setUserConfigurationValue('allow_thinking', Minz_Request::paramBoolean('allow_thinking'));
 		}
 
 		$this->user_prompt = '';
@@ -254,6 +250,13 @@ final class LlmClassificationExtension extends Minz_Extension {
 			$body['max_completion_tokens'] = $maxTokens;
 		}
 
+		$allowThinking = $this->getUserConfigurationBool('allow_thinking') ?? true;
+		if (!$allowThinking) {
+			$body['chat_template_kwargs'] = [
+				'enable_thinking' => false,
+			];
+		}
+
 		$requestBody = json_encode($body, JSON_INVALID_UTF8_SUBSTITUTE | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
 		if ($requestBody === false) {
@@ -269,10 +272,11 @@ final class LlmClassificationExtension extends Minz_Extension {
 			$headers[] = 'Authorization: Bearer ' . $apiKey;
 		}
 
-		$cachePath = CACHE_PATH . '/llm_classification_' . sha1($apiUrl . $requestBody) . '.json';
+		$cachePath = CACHE_PATH . '/llm_classification_' . sha1($apiUrl . $apiKey . $model . $requestBody) . '.json';
 
 		$maxRetries = $this->getUserConfigurationInt('max_retries') ?? self::DEFAULT_MAX_RETRIES;
 		$response = null;
+		$httpStatus = 0;
 
 		for ($attempt = 0; $attempt <= $maxRetries; $attempt++) {
 			$response = FreshRSS_http_Util::httpGet($url, $cachePath, type: 'json', curl_options: [
@@ -283,13 +287,16 @@ final class LlmClassificationExtension extends Minz_Extension {
 				CURLOPT_TIMEOUT => $timeout,
 			]);
 
+			$httpStatus = $response['status'] ?? null;
+			$httpStatus = is_numeric($httpStatus) ? (int)$httpStatus : 0;
+
 			if (!($response['fail'] ?? false) && ($response['body'] ?? '') !== '') {
 				break;	// Success
 			}
 
 			if ($attempt < $maxRetries && self::isRetryableFailure($response)) {
 				$delay = (int)pow(2, $attempt);	// Exponential backoff: 1s, 2s, 4s...
-				Minz_Log::warning('LlmClassification: API call failed (HTTP ' . ($response['status'] ?? 0)
+				Minz_Log::warning('LlmClassification: API call failed (HTTP ' . $httpStatus
 					. (($response['error'] ?? '') !== '' ? '; ' . ($response['error'] ?? '') : '')
 					. '), retry ' . ($attempt + 1) . '/' . $maxRetries . ' after ' . $delay . 's');
 				sleep($delay);
@@ -298,30 +305,36 @@ final class LlmClassificationExtension extends Minz_Extension {
 			}
 
 			Minz_Log::warning('LlmClassification: API call failed for ' . $url
-				. ' (HTTP ' . ($response['status'] ?? 0)
+				. ' (HTTP ' . $httpStatus
 				. (($response['error'] ?? '') !== '' ? '; ' . ($response['error'] ?? '') : '')
 				. '), not retrying');
 			return null;
 		}
 
 		if ($response === null || ($response['fail'] ?? false) || !is_string($response['body'] ?? null) || ($response['body'] ?? '') === '') {
-			Minz_Log::warning('LlmClassification: API call failed after ' . (1 + $maxRetries) . ' attempt(s) for ' . $url);
+			Minz_Log::warning('LlmClassification: API call failed after ' .
+				(1 + $maxRetries) . ' attempt(s) for ' . $url . ' (HTTP ' . $httpStatus . ')');
 			return null;
 		}
 
 		$responseData = json_decode($response['body'], true);
 		if (!is_array($responseData)) {
-			Minz_Log::warning('LlmClassification: Invalid JSON response from API');
+			Minz_Log::warning('LlmClassification: Invalid JSON response from API! (HTTP ' . $httpStatus . ')');
 			return null;
 		}
 
 		$choices = $responseData['choices'] ?? null;
-		$content = is_array($choices) && is_array($choices[0] ?? null) && is_array($choices[0]['message'] ?? null)
-			? ($choices[0]['message']['content'] ?? null)
-			: null;
+		$choice = is_array($choices) && is_array($choices[0] ?? null) ? $choices[0] : null;
+		$content = is_array($choice) && is_array($choice['message'] ?? null) ? ($choice['message']['content'] ?? null) : null;
 		if (!is_string($content)) {
-			Minz_Log::warning('LlmClassification: Missing choices[0].message.content in API response');
+			Minz_Log::warning('LlmClassification: Missing `choices[0].message.content` in API response! (HTTP ' . $httpStatus . ')');
 			return null;
+		}
+
+		$finishReason = is_array($choice) ? ($choice['finish_reason'] ?? 'stop') : null;
+		if ($finishReason !== 'stop') {
+			$finishReason = is_scalar($finishReason) ? (string)$finishReason : '?';
+			Minz_Log::warning('LlmClassification: API terminated prematurely with finish_reason “' . $finishReason . '”! (HTTP ' . $httpStatus . ')');
 		}
 
 		$classification = json_decode($content, true);
@@ -331,7 +344,7 @@ final class LlmClassificationExtension extends Minz_Extension {
 			];
 		}
 
-		Minz_Log::warning('LlmClassification: LLM returned invalid JSON: ' . $content);
+		Minz_Log::warning('LlmClassification: LLM returned invalid JSON structure! `' . ($response['body'] ?? '') . '` (HTTP ' . $httpStatus . ')');
 		return null;
 	}
 
@@ -378,6 +391,25 @@ final class LlmClassificationExtension extends Minz_Extension {
 	}
 
 	/**
+	 * Look up the currently stored entry for an entry being updated.
+	 * @throws Minz_PermissionDeniedException
+	 */
+	private function loadExistingEntry(FreshRSS_Entry $incomingEntry): ?FreshRSS_Entry {
+		$feedId = $incomingEntry->feedId();
+		$guid = $incomingEntry->guid();
+		if ($feedId === 0 || $guid === '') {
+			return null;
+		}
+		try {
+			$entryDAO = FreshRSS_Factory::createEntryDao();
+			return $entryDAO->searchByGuid($feedId, $guid);
+		} catch (Minz_ConfigurationNamespaceException | Minz_PDOConnectionException $e) {
+			Minz_Log::warning('LlmClassification: Failed to load existing entry for re-classification: ' . $e->getMessage());
+			return null;
+		}
+	}
+
+	/**
 	 * Hook for EntryBeforeInsert: classify a new entry.
 	 * @throws Minz_PermissionDeniedException
 	 */
@@ -394,13 +426,42 @@ final class LlmClassificationExtension extends Minz_Extension {
 
 		$systemPrompt = $this->getSystemPrompt();
 		$userPrompt = $this->buildUserPrompt($entry);
-		if ($userPrompt === '') {
-			return $entry;
+		$incomingPromptHash = sha1($systemPrompt . $userPrompt);
+		$classification = null;
+
+		if ($entry->isUpdated()) {
+			$existingEntry = $this->loadExistingEntry($entry);
+
+			// Compare prompt hashes for any meaningful change since the last classification
+			$existingPromptHash = $existingEntry?->attributeArray($this->getEntrypoint())[self::ATTRIBUTE_PROMPT_HASH] ?? null;
+			if ($existingPromptHash === $incomingPromptHash) {
+				// Re-use existing tags matching the prefix
+				$prefix = $this->getUserConfigurationString('tag_prefix') ?? '';
+				$existingTags = $existingEntry->tags();
+				if ($prefix !== '') {
+					$existingTags = array_values(array_filter(
+						$existingTags,
+						static fn(string $tag) => str_starts_with($tag, $prefix)
+					));
+					// Strip the prefix from tags before re-adding them (will be re-applied in applyClassification)
+					$prefixLength = strlen($prefix);
+					$existingTags = array_map(static fn(string $tag) => substr($tag, $prefixLength), $existingTags);
+				}
+				$classification = [
+					'tags' => $existingTags,
+				];
+			}
 		}
 
-		$classification = $this->callLlm($systemPrompt, $userPrompt);
+		// re-attach the namespaced classification attribute so it survives the upcoming `updateEntry` write
+		$entry->_attribute($this->getEntrypoint(), [
+			self::ATTRIBUTE_PROMPT_HASH => $incomingPromptHash,
+		]);
 		if ($classification === null) {
-			return $entry;
+			if ($userPrompt === '') {
+				return $entry;
+			}
+			$classification = $this->callLlm($systemPrompt, $userPrompt) ?? [];
 		}
 
 		return $this->applyClassification($entry, $classification, removeOldTags: true);

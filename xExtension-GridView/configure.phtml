@@ -1,0 +1,98 @@
+<?php
+/** @var GridViewExtension $this */
+$currentColumns = $this->getColumns();
+$fetchOgImage = $this->isOgImageFetchEnabled();
+$sortByDate = $this->isSortByPublicationDateEnabled();
+$mobileMenuButton = $this->isMobileMenuButtonEnabled();
+$stickyNav = $this->isStickyNavEnabled();
+?>
+
+<form method="post" action="<?= _url('extension', 'configure', 'e', $this->getName()) ?>">
+	<input type="hidden" name="_csrf" value="<?= FreshRSS_Auth::csrfToken() ?>">
+
+	<div class="form-group">
+		<label class="group-name" for="columns">
+			<?= _t('ext.gridview.config.columns') ?>
+		</label>
+		<div class="group-controls">
+			<select id="columns" name="columns">
+				<?php for ($i = 2; $i <= 4; $i++): ?>
+					<option value="<?= $i ?>" <?= $currentColumns === $i ? 'selected' : '' ?>>
+						<?= $i ?> <?= _t('ext.gridview.config.columns_label') ?>
+					</option>
+				<?php endfor; ?>
+			</select>
+			<p class="help"><?= _t('ext.gridview.config.columns_help') ?></p>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="group-name" for="fetch_og_image">
+			<?= _t('ext.gridview.config.fetch_og_image') ?>
+		</label>
+		<div class="group-controls">
+			<label>
+				<input type="checkbox" id="fetch_og_image" name="fetch_og_image" value="1" <?= $fetchOgImage ? 'checked' : '' ?> />
+				<?= _t('ext.gridview.config.fetch_og_image_label') ?>
+			</label>
+			<p class="help"><?= _t('ext.gridview.config.fetch_og_image_help') ?></p>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="group-name" for="sort_by_date">
+			<?= _t('ext.gridview.config.sort_by_date') ?>
+		</label>
+		<div class="group-controls">
+			<label>
+				<input type="checkbox" id="sort_by_date" name="sort_by_date" value="1" <?= $sortByDate ? 'checked' : '' ?> />
+				<?= _t('ext.gridview.config.sort_by_date_label') ?>
+			</label>
+			<p class="help"><?= _t('ext.gridview.config.sort_by_date_help') ?></p>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="group-name" for="mobile_menu_button">
+			<?= _t('ext.gridview.config.mobile_menu_button') ?>
+		</label>
+		<div class="group-controls">
+			<label>
+				<input type="checkbox" id="mobile_menu_button" name="mobile_menu_button" value="1" <?= $mobileMenuButton ? 'checked' : '' ?> />
+				<?= _t('ext.gridview.config.mobile_menu_button_label') ?>
+			</label>
+			<p class="help"><?= _t('ext.gridview.config.mobile_menu_button_help') ?></p>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="group-name" for="sticky_nav">
+			<?= _t('ext.gridview.config.sticky_nav') ?>
+		</label>
+		<div class="group-controls">
+			<label>
+				<input type="checkbox" id="sticky_nav" name="sticky_nav" value="1" <?= $stickyNav ? 'checked' : '' ?> />
+				<?= _t('ext.gridview.config.sticky_nav_label') ?>
+			</label>
+			<p class="help"><?= _t('ext.gridview.config.sticky_nav_help') ?></p>
+		</div>
+	</div>
+
+	<div class="form-group form-actions">
+		<div class="group-controls">
+			<button type="submit" class="btn btn-important">
+				<?= _t('gen.action.submit') ?>
+			</button>
+			<button type="reset" class="btn">
+				<?= _t('gen.action.cancel') ?>
+			</button>
+		</div>
+	</div>
+</form>
+
+<div class="form-group">
+	<label class="group-name"><?= _t('ext.gridview.config.usage_title') ?></label>
+	<div class="group-controls">
+		<p class="help"><?= _t('ext.gridview.config.usage_info') ?></p>
+	</div>
+</div>

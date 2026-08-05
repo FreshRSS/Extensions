@@ -226,6 +226,7 @@ class WebhookExtension extends Minz_Extension {
 					'{date_user_modified}' => $entry->lastUserModified() === null ? null : timestampToMachineDate($entry->lastUserModified()),
 					'{author}' => htmlspecialchars_decode($entry->authors(true), ENT_QUOTES),
 					'{tags}' => htmlspecialchars_decode($entry->tags(true), ENT_QUOTES),
+					'{user}' => Minz_User::name() ?? '',
 				];
 
 				$body = $this->replacePlaceholdersRecursive($body, $replacements);

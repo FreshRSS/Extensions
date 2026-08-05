@@ -20,7 +20,7 @@ jobs:
 
     steps:
     - name: Git checkout source code
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
       with:
         path: Extensions
         persist-credentials: false
@@ -35,7 +35,7 @@ jobs:
 
     - name: Use Composer cache
       id: composer-cache
-      uses: actions/cache@v5
+      uses: actions/cache@v6
       with:
         path: Extensions/vendor
         key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
@@ -49,8 +49,11 @@ jobs:
     - name: PHP_CodeSniffer
       run: composer run-script phpcs
 
+    - name: ImageProxy regression tests
+      run: composer run-script test-image-proxy
+
     - name: Git checkout FreshRSS source code
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
       with:
         repository: FreshRSS/FreshRSS
         path: FreshRSS
@@ -62,7 +65,7 @@ jobs:
     # NPM tests
 
     - name: Uses Node.js
-      uses: actions/setup-node@v6
+      uses: actions/setup-node@v7
       with:
         # https://nodejs.org/en/about/releases/
         node-version: '22'
@@ -87,7 +90,7 @@ jobs:
 
     - name: Use shell cache
       id: shell-cache
-      uses: actions/cache@v5
+      uses: actions/cache@v6
       with:
         path: Extensions/bin
         key: ${{ runner.os }}-typos@v1.16.21

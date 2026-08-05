@@ -42,7 +42,7 @@ final class CaptchaExtension extends Minz_Extension {
 			$csp = $this->loadDependencies();
 			if (!empty($csp)) $controller->_csp($csp);
 		} elseif (Minz_Request::is('user', 'create') && !FreshRSS_Auth::hasAccess('admin')) {
-			if (!CaptchaExtension::initCaptcha()) {
+			if (!$this->initCaptcha()) {
 				return false;
 			}
 		}
@@ -58,7 +58,7 @@ final class CaptchaExtension extends Minz_Extension {
 	/**
 	 * @throws FreshRSS_Context_Exception
 	 */
-	private function captchaWidget(): string {
+	public function captchaWidget(): string {
 		$config = self::getConfig();
 		if (!$this->isProtectedPage()) {
 			return '';

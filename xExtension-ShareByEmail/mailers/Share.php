@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace ShareByEmail\mailers;
 
+use ShareByEmail\Models\View;
+
 final class Share extends \Minz_Mailer {
 
 	/**
