@@ -242,3 +242,7 @@ There are some FreshRSS extensions out there, developed by community members.
 ### By [@StathisZ](https://github.com/StathisZ)
 
 * [Mark Feed Read On Badge Click](https://github.com/StathisZ/freshrss-mark-read-on-click): Click a feed's unread-count badge in the sidebar to mark all its articles as read.
+
+### By [@chenhaoc](https://github.com/chenhaoc)
+
+* [Title Dedup](https://github.com/chenhaoc/freshrss-dedup-extension): Mark target feed entries as read when the same title already exists in source feeds.

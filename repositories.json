@@ -133,4 +133,7 @@
 }, {
 	"url": "https://github.com/StathisZ/freshrss-mark-read-on-click",
 	"type": "git"
+}, {
+	"url": "https://github.com/chenhaoc/freshrss-dedup-extension",
+	"type": "git"
 }]
