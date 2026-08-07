@@ -654,7 +654,7 @@
             "name": "Sticky Reader",
             "author": "featurecreep-cron",
             "description": "Scroll straight to articles, keep controls within reach, read distraction-free",
-            "version": "0.2.8",
+            "version": "0.3.1",
             "entrypoint": "StickyReader",
             "type": "user",
             "url": "https://github.com/featurecreep-cron/freshrss-extensions",
