@@ -246,3 +246,7 @@ There are some FreshRSS extensions out there, developed by community members.
 ### By [@chenhaoc](https://github.com/chenhaoc)
 
 * [Title Dedup](https://github.com/chenhaoc/freshrss-dedup-extension): Mark target feed entries as read when the same title already exists in source feeds.
+
+### By [@profduweb](https://github.com/profduweb)
+
+* [Translate Google](https://github.com/profduweb/xExtension-TranslateGoogle): Open articles in Google Translate from the native article toolbar with a configurable target language.
