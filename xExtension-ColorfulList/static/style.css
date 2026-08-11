@@ -1,0 +1,7 @@
+.flux_header {
+	background-color: var(--colorful-list-background) !important;
+}
+
+.flux:hover .flux_header .title {
+	background-color: var(--colorful-list-background) !important;
+}
