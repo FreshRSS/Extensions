@@ -16,7 +16,7 @@
             "name": "Af_Readability",
             "author": "niehztog",
             "description": "Try to inline article content using Readability",
-            "version": "0.4",
+            "version": "0.5",
             "entrypoint": "Af_Readability",
             "type": "user",
             "url": "https://github.com/Niehztog/freshrss-af-readability",
@@ -93,7 +93,7 @@
             "name": "Colorful List",
             "author": "Claud Xiao",
             "description": "Colorful Entry Title based on RSS source",
-            "version": "0.3.2",
+            "version": "0.3.3",
             "entrypoint": "ColorfulList",
             "type": "user",
             "url": "https://github.com/FreshRSS/Extensions",
@@ -726,6 +726,17 @@
             "url": "https://github.com/oyox/FreshRSS-extensions",
             "method": "git",
             "directory": "xExtension-TouchControl"
+        },
+        {
+            "name": "Translate Google",
+            "author": "Profduweb",
+            "description": "Add a Google Translate action to article toolbars with a configurable target language.",
+            "version": "0.1.2",
+            "entrypoint": "TranslateGoogle",
+            "type": "user",
+            "url": "https://github.com/profduweb/xExtension-TranslateGoogle",
+            "method": "git",
+            "directory": "."
         },
         {
             "name": "TranslateTitlesCN",
