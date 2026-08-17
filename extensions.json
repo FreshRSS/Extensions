@@ -60,7 +60,7 @@
             "name": "AutoTTL",
             "author": "Magnus Kokk",
             "description": "A FreshRSS extension for automatic feed refresh TTL based on the average frequency of entries.",
-            "version": "0.6.4",
+            "version": "0.6.5",
             "entrypoint": "AutoTTL",
             "type": "user",
             "url": "https://github.com/mgnsk/FreshRSS-AutoTTL",
@@ -680,6 +680,17 @@
             "entrypoint": "ThreePaneReader",
             "type": "user",
             "url": "https://github.com/caglaryalcin/xExtension-ThreePaneReader",
+            "method": "git",
+            "directory": "."
+        },
+        {
+            "name": "ThreePanesView",
+            "author": "nicofrand",
+            "description": "Adds a third vertical pane along the articles list, to display the articles content.",
+            "version": "1.16",
+            "entrypoint": "ThreePanesView",
+            "type": "user",
+            "url": "https://framagit.org/nicofrand/xextension-threepanesview",
             "method": "git",
             "directory": "."
         },
