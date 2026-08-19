@@ -139,4 +139,7 @@
 }, {
 	"url": "https://github.com/profduweb/xExtension-TranslateGoogle",
 	"type": "git"
+}, {
+	"url": "https://github.com/bowencool/xExtension-BroadIconFetcher",
+	"type": "git"
 }]

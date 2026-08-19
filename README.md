@@ -250,3 +250,7 @@ There are some FreshRSS extensions out there, developed by community members.
 ### By [@profduweb](https://github.com/profduweb)
 
 * [Translate Google](https://github.com/profduweb/xExtension-TranslateGoogle): Open articles in Google Translate from the native article toolbar with a configurable target language.
+
+### By [@bowencool](https://github.com/bowencool)
+
+* [Broad Site Icon Fetcher](https://github.com/bowencool/xExtension-BroadIconFetcher): Fetch feed icons from RSS/Atom channel images, web manifests, metadata, and common HTML favicon declarations.
