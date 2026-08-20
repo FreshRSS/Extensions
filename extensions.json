@@ -79,6 +79,17 @@
             "directory": "xExtension-BlackList"
         },
         {
+            "name": "Broad Site Icon Fetcher",
+            "author": "Bowen",
+            "description": "Fetch feed icons from more sources than the built-in favicon lookup.",
+            "version": "1.0.2",
+            "entrypoint": "IconFetcher",
+            "type": "user",
+            "url": "https://github.com/bowencool/xExtension-BroadIconFetcher",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "Clickable Links",
             "author": "Kapdap",
             "description": "Replaces non-clickable plain text URLs found in articles with clickable HTML links.",
