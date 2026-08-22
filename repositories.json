@@ -142,4 +142,7 @@
 }, {
 	"url": "https://github.com/bowencool/xExtension-BroadIconFetcher",
 	"type": "git"
+}, {
+	"url": "https://github.com/cevvalkoala/xExtension-YouTubeDuration",
+	"type": "git"
 }]
