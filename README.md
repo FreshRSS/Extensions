@@ -254,3 +254,7 @@ There are some FreshRSS extensions out there, developed by community members.
 ### By [@bowencool](https://github.com/bowencool)
 
 * [Broad Site Icon Fetcher](https://github.com/bowencool/xExtension-BroadIconFetcher): Fetch feed icons from RSS/Atom channel images, web manifests, metadata, and common HTML favicon declarations.
+
+### By [@cevvalkoala](https://github.com/cevvalkoala)
+
+* [YouTube Duration](https://github.com/cevvalkoala/xExtension-YouTubeDuration): Add YouTube video duration or Shorts markers to new YouTube entry titles using the YouTube Data API, a local cache and configurable system-wide formatting.
