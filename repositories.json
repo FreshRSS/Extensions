@@ -145,4 +145,10 @@
 }, {
 	"url": "https://github.com/cevvalkoala/xExtension-YouTubeDuration",
 	"type": "git"
+}, {
+	"url": "https://github.com/barrymieny/xExtension-TagEmoji",
+	"type": "git"
+}, {
+	"url": "https://github.com/barrymieny/xExtension-TelegraafPremiumTag",
+	"type": "git"
 }]

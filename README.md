@@ -258,3 +258,8 @@ There are some FreshRSS extensions out there, developed by community members.
 ### By [@cevvalkoala](https://github.com/cevvalkoala)
 
 * [YouTube Duration](https://github.com/cevvalkoala/xExtension-YouTubeDuration): Add YouTube video duration or Shorts markers to new YouTube entry titles using the YouTube Data API, a local cache and configurable system-wide formatting.
+
+### By [@barrymieny](https://github.com/barrymieny)
+
+* [Tag Emoji](https://github.com/barrymieny/xExtension-TagEmoji): Prefix an entry title with a configured emoji when the entry has a matching feed tag.
+* [Telegraaf Premium Tag](https://github.com/barrymieny/xExtension-TelegraafPremiumTag): Synchronize the #Premium article tag with the unnamespaced `<premium>` field in Telegraaf RSS items.
