@@ -151,4 +151,7 @@
 }, {
 	"url": "https://github.com/barrymieny/xExtension-TelegraafPremiumTag",
 	"type": "git"
+}, {
+	"url": "https://github.com/Marc-T/xExtension-TagEZ",
+	"type": "git"
 }]

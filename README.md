@@ -263,3 +263,7 @@ There are some FreshRSS extensions out there, developed by community members.
 
 * [Tag Emoji](https://github.com/barrymieny/xExtension-TagEmoji): Prefix an entry title with a configured emoji when the entry has a matching feed tag.
 * [Telegraaf Premium Tag](https://github.com/barrymieny/xExtension-TelegraafPremiumTag): Synchronize the #Premium article tag with the unnamespaced `<premium>` field in Telegraaf RSS items.
+
+### By [@Marc-T](https://github.com/Marc-T)
+
+* [TagEZ](https://github.com/Marc-T/xExtension-TagEZ): Adds a Tags accordion to the left sidebar of FreshRSS, listing article tags
