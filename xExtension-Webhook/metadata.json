@@ -2,7 +2,7 @@
 	"name": "Webhook",
 	"author": "Lukas Melega, Ryahn",
 	"description": "Send custom webhook when new article appears (and matches custom criteria)",
-	"version": "0.2.2",
+	"version": "0.2.3",
 	"entrypoint": "Webhook",
 	"type": "user",
 	"compatibility": "1.28.2"
