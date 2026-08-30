@@ -253,7 +253,6 @@ class WebhookExtension extends Minz_Extension {
 		$view = new FreshRSS_View();
 		$view->entries = [$entry];
 		$view->internal_rendering = true;
-		$view->publishLabelsInsteadOfTags = false;
 		$view->entryIdsTagNames = [];
 		$view->rss_base = '';
 		$view->image_url = '';
