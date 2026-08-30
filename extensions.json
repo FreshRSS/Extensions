@@ -684,6 +684,17 @@
             "directory": "."
         },
         {
+            "name": "TagEZ",
+            "author": "Marc Trouwaert",
+            "description": "Ajoute un accordéon dans le bandeau de gauche listant tous les tags d’articles (balises  des flux) avec le nombre d’articles, trié par popularité. Un clic filtre les articles sur le tag.",
+            "version": "1.0.0",
+            "entrypoint": "TagEZ",
+            "type": "user",
+            "url": "https://github.com/Marc-T/xExtension-TagEZ",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "Telegraaf Premium Tag",
             "author": "Barry Mieny",
             "description": "Adds the Premium tag to Telegraaf entries marked as premium.",
@@ -819,7 +830,7 @@
             "name": "Webhook",
             "author": "Lukas Melega, Ryahn",
             "description": "Send custom webhook when new article appears (and matches custom criteria)",
-            "version": "0.2.2",
+            "version": "0.2.3",
             "entrypoint": "Webhook",
             "type": "user",
             "url": "https://github.com/FreshRSS/Extensions",
@@ -852,7 +863,7 @@
             "name": "YouTube Duration",
             "author": "CevvalKoala",
             "description": "Adds YouTube video duration or Shorts markers to new YouTube entry titles using the YouTube Data API. Uses a local cache and configurable system-wide formatting.",
-            "version": "2.0.1",
+            "version": "2.0.2",
             "entrypoint": "YouTubeDuration",
             "type": "system",
             "url": "https://github.com/cevvalkoala/xExtension-YouTubeDuration",
