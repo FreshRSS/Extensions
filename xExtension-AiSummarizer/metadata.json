@@ -1,0 +1,8 @@
+{
+	"name": "AI Summarizer",
+	"author": "FreshRSS Contributors",
+	"description": "Automatically generate AI summaries for RSS articles using OpenAI-compatible LLM APIs",
+	"version": 0.1,
+	"entrypoint": "AiSummarizer",
+	"type": "user"
+}
