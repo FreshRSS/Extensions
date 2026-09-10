@@ -5,6 +5,7 @@ Ths2 = "Ths2"
 
 [default.extend-words]
 referer = "referer"
+sur = "sur"
 
 [files]
 extend-exclude = [

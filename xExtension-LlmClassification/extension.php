@@ -151,6 +151,7 @@ final class LlmClassificationExtension extends Minz_Extension {
 	/**
 	 * Check whether the entry matches the configured search filter.
 	 * Returns true if no filter is configured or the entry matches at least one filter line.
+	 * @throws Minz_BadRequestException
 	 */
 	private function entryMatchesSearchFilter(FreshRSS_Entry $entry): bool {
 		$filterStr = $this->getUserConfigurationString('search_filter') ?? '';
@@ -411,6 +412,7 @@ final class LlmClassificationExtension extends Minz_Extension {
 
 	/**
 	 * Hook for EntryBeforeInsert: classify a new entry.
+	 * @throws Minz_BadRequestException
 	 * @throws Minz_PermissionDeniedException
 	 */
 	public function classifyEntry(FreshRSS_Entry $entry): FreshRSS_Entry {
