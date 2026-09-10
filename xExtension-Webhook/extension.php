@@ -142,6 +142,7 @@ class WebhookExtension extends Minz_Extension {
 	 *
 	 * @param FreshRSS_Entry $entry The RSS entry to check
 	 * @return bool True if the entry matches any filter line, or if no filter is configured
+	 * @throws Minz_BadRequestException
 	 */
 	private function entryMatchesSearchFilter(FreshRSS_Entry $entry): bool {
 		$searchFilter = $this->getUserConfigurationString('search_filter') ?? '';
