@@ -14,6 +14,7 @@ extend-exclude = [
 	"*.map",
 	"*.min.js",
 	"*.rtl.css",
+	"*/i18n/az",
 	"*/i18n/de",
 	"*/i18n/fr",
 	"*/i18n/pl",
