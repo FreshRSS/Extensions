@@ -267,3 +267,7 @@ There are some FreshRSS extensions out there, developed by community members.
 ### By [@Marc-T](https://github.com/Marc-T)
 
 * [TagEZ](https://github.com/Marc-T/xExtension-TagEZ): Adds a Tags accordion to the left sidebar of FreshRSS, listing article tags
+
+### By [@hyprninja](https://github.com/hyprninja)
+
+* [Keyword Auto Read](https://github.com/hyprninja/freshrss-keyword-auto-read): Mark incoming articles as read when they match keyword, field-scoped or regular expression rules, with a dry-run mode and a sweep for articles already stored.

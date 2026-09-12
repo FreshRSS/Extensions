@@ -154,4 +154,7 @@
 }, {
 	"url": "https://github.com/Marc-T/xExtension-TagEZ",
 	"type": "git"
+}, {
+	"url": "https://github.com/hyprninja/freshrss-keyword-auto-read",
+	"type": "git"
 }]
