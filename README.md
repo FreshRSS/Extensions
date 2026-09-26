@@ -267,3 +267,7 @@ There are some FreshRSS extensions out there, developed by community members.
 ### By [@Marc-T](https://github.com/Marc-T)
 
 * [TagEZ](https://github.com/Marc-T/xExtension-TagEZ): Adds a Tags accordion to the left sidebar of FreshRSS, listing article tags
+
+### By [@iovictor](https://github.com/iovictor)
+
+* [Heatmap](https://github.com/iovictor/xExtension-Heatmap): Automatically calculates and displays a temperature for every article in your feeds, helping you cut through the noise by highlighting articles that are highly upvoted or frequently shared across the web.

@@ -924,6 +924,17 @@
             "url": "https://github.com/wogong/freshrss-translate-summary",
             "method": "git",
             "directory": "."
+        },
+        {
+            "name": "freshrss-heatmap",
+            "author": "iovictor",
+            "description": "Automatically calculates and displays a temperature for every article in your feeds, helping you cut through the noise by highlighting articles that are highly upvoted or frequently shared across the web.",
+            "version": "0.1.0",
+            "entrypoint": "TranslateSummary",
+            "type": "user",
+            "url": "https://github.com/iovictor/xExtension-Heatmap",
+            "method": "git",
+            "directory": "xExtension-Heatmap"
         }
     ]
 }
