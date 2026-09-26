@@ -277,6 +277,17 @@
             "directory": "xExtension-GridView"
         },
         {
+            "name": "Heatmap",
+            "author": "Antigravity",
+            "description": "Calculates a social credibility and virality score for articles.",
+            "version": "1.0.0",
+            "entrypoint": "Heatmap",
+            "type": "user",
+            "url": "https://github.com/iovictor/xExtension-Heatmap",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "Image Cache",
             "author": "Victrid",
             "description": "Cache feed images on your own facility or Cloudflare cache.",
@@ -924,17 +935,6 @@
             "url": "https://github.com/wogong/freshrss-translate-summary",
             "method": "git",
             "directory": "."
-        },
-        {
-            "name": "freshrss-heatmap",
-            "author": "iovictor",
-            "description": "Automatically calculates and displays a temperature for every article in your feeds, helping you cut through the noise by highlighting articles that are highly upvoted or frequently shared across the web.",
-            "version": "0.1.0",
-            "entrypoint": "TranslateSummary",
-            "type": "user",
-            "url": "https://github.com/iovictor/xExtension-Heatmap",
-            "method": "git",
-            "directory": "xExtension-Heatmap"
         }
     ]
 }
