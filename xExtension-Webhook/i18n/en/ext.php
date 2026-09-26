@@ -9,6 +9,8 @@ return array(
 		'description' => 'Webhooks allow external services to be notified when certain events happen.<br />When the specified events happen, we’ll send a HTTP request (usually POST) to the URL you provide.',
 		'search_filter' => 'Search filter',
 		'search_filter_description' => 'Uses <a href="https://freshrss.github.io/FreshRSS/en/users/10_filter.html" target="_blank" rel="noopener">FreshRSS search filter syntax</a>. Each line is an OR condition. Leave empty to match all entries.',
+		'ignore_updated' => 'Ignore updated articles',
+		'ignore_updated_description' => 'Do not send the webhook again when an already known article is updated (its content changed in the feed).',
 		'http_body' => 'HTTP Body',
 		'http_body_description' => 'Must be valid <b>JSON</b> or form data (<b>x-www-form-urlencoded</b>)',
 		'http_body_placeholder_summary' => 'You can use special placeholders that will be replaced by the actual values:',

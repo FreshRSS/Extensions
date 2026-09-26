@@ -21,6 +21,16 @@ declare(strict_types=1);
 					<small><?= _t('ext.webhook.search_filter_description') ?></small>
 				</div>
 			</div>
+
+			<div class="form-group">
+				<label class="group-name" for="ignore_updated"><?= _t('ext.webhook.ignore_updated') ?></label>
+				<div class="group-controls">
+					<input type="checkbox" name="ignore_updated" id="ignore_updated" value="1" <?=
+						$this->getUserConfigurationBool('ignore_updated') ? 'checked="checked"' : '' ?> />
+					<br />
+					<small><?= _t('ext.webhook.ignore_updated_description') ?></small>
+				</div>
+			</div>
 		</details>
 	</fieldset>
 

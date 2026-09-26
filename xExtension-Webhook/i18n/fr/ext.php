@@ -9,6 +9,8 @@ return array(
 		'description' => 'Les webhooks permettent de notifier des services externes lorsque certains événements se produisent.<br />Lorsque les événements spécifiés se produisent, nous envoyons une requête HTTP (généralement POST) à l’URL que vous fournissez.',
 		'search_filter' => 'Filtre de recherche',
 		'search_filter_description' => 'Utilise la <a href="https://freshrss.github.io/FreshRSS/fr/users/10_filter.html" target="_blank" rel="noopener">syntaxe de filtre de recherche FreshRSS</a>. Chaque ligne est une condition OU. Laisser vide pour correspondre à tous les articles.',
+		'ignore_updated' => 'Ignorer les articles mis à jour',
+		'ignore_updated_description' => 'Ne pas envoyer à nouveau le webhook lorsqu’un article déjà connu est mis à jour (son contenu a changé dans le flux).',
 		'http_body' => 'Corps HTTP',
 		'http_body_description' => 'Doit être du <b>JSON</b> valide ou des données de formulaire (<b>x-www-form-urlencoded</b>)',
 		'http_body_placeholder_summary' => 'Vous pouvez utiliser des espaces réservés spéciaux qui seront remplacés par les valeurs réelles :',
