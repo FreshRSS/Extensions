@@ -157,4 +157,7 @@
 }, {
 	"url": "https://github.com/iovictor/xExtension-Heatmap",
 	"type": "git"
+}, {
+	"url": "https://github.com/cevvalkoala/xExtension-SaveAudio",
+	"type": "git"
 }]
