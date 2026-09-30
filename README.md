@@ -272,3 +272,8 @@ There are some FreshRSS extensions out there, developed by community members.
 ### By [@iovictor](https://github.com/iovictor)
 
 * [Heatmap](https://github.com/iovictor/xExtension-Heatmap): Automatically calculates and displays a temperature for every article in your feeds, helping you cut through the noise by highlighting articles that are highly upvoted or frequently shared across the web.
+
+### By [@shcheglovnd](https://github.com/shcheglovnd)
+
+* [Telegram Channels](https://github.com/shcheglovnd/FreshRSS-xExtension-TelegramChannels): Follow public Telegram channels directly, without RSSHub or any other proxy, by reading each channel’s public web preview (`t.me/s/…`), including every photo of a post.
+* [X Profiles](https://github.com/shcheglovnd/FreshRSS-xExtension-XProfiles): Follow X (Twitter) profiles directly, without Nitter or an X account, by reading the latest posts from the page x.com shows logged-out visitors.

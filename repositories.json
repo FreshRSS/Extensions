@@ -160,4 +160,10 @@
 }, {
 	"url": "https://github.com/cevvalkoala/xExtension-SaveAudio",
 	"type": "git"
+}, {
+	"url": "https://github.com/shcheglovnd/FreshRSS-xExtension-TelegramChannels",
+	"type": "git"
+}, {
+	"url": "https://github.com/shcheglovnd/FreshRSS-xExtension-XProfiles",
+	"type": "git"
 }]
