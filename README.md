@@ -278,3 +278,7 @@ There are some FreshRSS extensions out there, developed by community members.
 * [Telegram Channels](https://github.com/shcheglovnd/FreshRSS-xExtension-TelegramChannels): Follow public Telegram channels directly, without RSSHub or any other proxy, by reading each channel’s public web preview (`t.me/s/…`), including every photo of a post.
 * [X Profiles](https://github.com/shcheglovnd/FreshRSS-xExtension-XProfiles): Follow X (Twitter) profiles directly, without Nitter or an X account, by reading the latest posts from the page x.com shows logged-out visitors.
 * [YouTube Channels](https://github.com/shcheglovnd/FreshRSS-xExtension-YouTubeChannels): Subscribe to YouTube channels with any link to them (`@handle`, channel, video or playlist), without a proxy or an API key; requests to YouTube’s unreliable feed server are retried, with the channel page as a fallback, so new videos keep arriving.
+
+### By [@stdAri](https://github.com/stdAri)
+
+* [Daily Digest](https://github.com/stdAri/xExtension-DailyDigest): Scheduled AI digests of new articles (combined or per category) via any OpenAI-compatible API, with numbered citations deep-linking into FreshRSS.
