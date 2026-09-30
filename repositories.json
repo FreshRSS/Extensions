@@ -166,4 +166,7 @@
 }, {
 	"url": "https://github.com/shcheglovnd/FreshRSS-xExtension-XProfiles",
 	"type": "git"
+}, {
+	"url": "https://github.com/shcheglovnd/FreshRSS-xExtension-YouTubeChannels",
+	"type": "git"
 }]
