@@ -728,6 +728,17 @@
             "directory": "."
         },
         {
+            "name": "Telegram Channels",
+            "author": "shcheglovnd",
+            "description": "Follow public Telegram channels directly — no RSSHub or other proxy. Reads the channel’s public web preview (t.me/s/…), with all photos of a post.",
+            "version": "0.1.1",
+            "entrypoint": "TelegramChannels",
+            "type": "user",
+            "url": "https://github.com/shcheglovnd/FreshRSS-xExtension-TelegramChannels",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "Theme Mode Synchronizer",
             "author": "Aidi Stan",
             "description": "Synchronize the theme with your system light/dark mode",
@@ -880,6 +891,28 @@
             "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
             "directory": "xExtension-WordHighlighter"
+        },
+        {
+            "name": "X Profiles",
+            "author": "shcheglovnd",
+            "description": "Follow X (Twitter) profiles directly — no Nitter or other proxy, no X account. Reads the latest posts from the page X shows logged-out visitors, with photos, videos and quotes.",
+            "version": "0.1.2",
+            "entrypoint": "XProfiles",
+            "type": "user",
+            "url": "https://github.com/shcheglovnd/FreshRSS-xExtension-XProfiles",
+            "method": "git",
+            "directory": "."
+        },
+        {
+            "name": "YouTube Channels",
+            "author": "shcheglovnd",
+            "description": "Follow YouTube channels by pasting any link to them — no proxy, no API key. Retries YouTube’s flaky feed server and falls back to the channel page, so feeds keep updating; channel avatars as feed icons.",
+            "version": "0.1.0",
+            "entrypoint": "YouTubeChannels",
+            "type": "user",
+            "url": "https://github.com/shcheglovnd/FreshRSS-xExtension-YouTubeChannels",
+            "method": "git",
+            "directory": "."
         },
         {
             "name": "YouTube Duration",
