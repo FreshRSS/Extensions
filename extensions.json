@@ -159,7 +159,7 @@
             "name": "Extension Manager",
             "author": "featurecreep-cron",
             "description": "Install, update, and remove extensions from the settings page",
-            "version": "0.6.5",
+            "version": "0.6.6",
             "entrypoint": "ExtensionManager",
             "type": "user",
             "url": "https://github.com/featurecreep-cron/freshrss-extensions",
