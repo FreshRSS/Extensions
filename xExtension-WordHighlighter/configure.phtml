@@ -12,7 +12,7 @@ declare(strict_types=1);
 		</label>
 		<div class="group-controls">
 			<textarea name="words_list"
-				id="words_list"><?= $this->word_highlighter_conf ?></textarea>
+				id="words_list"><?= htmlspecialchars($this->word_highlighter_conf, ENT_QUOTES, 'UTF-8') ?></textarea>
 		</div>
 	</div>
 
@@ -75,14 +75,10 @@ declare(strict_types=1);
 	</details>
 
 	<div class="form-group form-actions">
-		<?php if ($this->permission_problem !== '') { ?>
-			<p class="alert alert-error"><?= _t('ext.word_highlighter.permission_problem', $this->permission_problem) ?></p>
-		<?php } else { ?>
-			<div class="group-controls">
-				<button type="submit" class="btn btn-important"><?= _t('gen.action.submit') ?></button>
-				<button type="reset" class="btn"><?= _t('gen.action.cancel') ?></button>
-			</div>
-		<?php } ?>
+		<div class="group-controls">
+			<button type="submit" class="btn btn-important"><?= _t('gen.action.submit') ?></button>
+			<button type="reset" class="btn"><?= _t('gen.action.cancel') ?></button>
+		</div>
 	</div>
 
 </form>
