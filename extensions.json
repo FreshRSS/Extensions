@@ -464,6 +464,17 @@
             "directory": "."
         },
         {
+            "name": "Podcast Player",
+            "author": "Tyson Freeze",
+            "description": "Audio at the top of articles, 15-second rewind, 30-second forward, playback speeds, and remembered listening positions.",
+            "version": "0.2.0",
+            "entrypoint": "PodcastPlayer",
+            "type": "user",
+            "url": "https://github.com/Minimistro32/freshrss-podcast-player",
+            "method": "git",
+            "directory": "xExtension-PodcastPlayer"
+        },
+        {
             "name": "Quick Collapse",
             "author": "romibi and Marien Fressinaud",
             "description": "Quickly change from folded to unfolded articles",
