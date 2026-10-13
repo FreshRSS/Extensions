@@ -172,4 +172,22 @@
 }, {
 	"url": "https://github.com/Minimistro32/freshrss-podcast-player",
 	"type": "git"
+}, {
+	"url": "https://github.com/shcheglovnd/FreshRSS-xExtension-AlphaXivPapers",
+	"type": "git"
+}, {
+	"url": "https://github.com/shcheglovnd/FreshRSS-xExtension-GoogleNewsTopStories",
+	"type": "git"
+}, {
+	"url": "https://github.com/shcheglovnd/FreshRSS-xExtension-HackerNewsPoints",
+	"type": "git"
+}, {
+	"url": "https://github.com/shcheglovnd/FreshRSS-xExtension-HuggingFacePapers",
+	"type": "git"
+}, {
+	"url": "https://github.com/shcheglovnd/FreshRSS-xExtension-InstagramProfiles",
+	"type": "git"
+}, {
+	"url": "https://github.com/shcheglovnd/FreshRSS-xExtension-SiteRateLimits",
+	"type": "git"
 }]
