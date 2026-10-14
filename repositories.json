@@ -172,4 +172,7 @@
 }, {
 	"url": "https://github.com/Minimistro32/freshrss-podcast-player",
 	"type": "git"
+}, {
+	"url": "https://github.com/cevvalkoala/xExtension-FetchAndSummarize",
+	"type": "git"
 }]
