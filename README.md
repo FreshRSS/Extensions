@@ -254,6 +254,7 @@ There are some FreshRSS extensions out there, developed by community members.
 ### By [@bowencool](https://github.com/bowencool)
 
 * [Broad Site Icon Fetcher](https://github.com/bowencool/xExtension-BroadIconFetcher): Fetch feed icons from RSS/Atom channel images, web manifests, metadata, and common HTML favicon declarations.
+* [Retry-After Allowlist](https://github.com/bowencool/xExtension-RetryAfterAllowlist): Bypass shared Retry-After cooldowns for selected feed hosts.
 
 ### By [@cevvalkoala](https://github.com/cevvalkoala)
 
