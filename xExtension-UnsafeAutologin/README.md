@@ -7,6 +7,8 @@ It is especially advised to not use this extension, unless only as a last resort
 
 ## Changelog
 
+* 1.0.2 [2026-10-15]
+	* Refactor registerHook calls to use first class callable syntax available starting from PHP 8.1+
 * 1.0.1 [2026-03-14]
 	* Ensure controller is hooked properly, even when other extensions are also hooking the same controller, by using new `Minz_HookType::ActionExecute` hook
 * 1.0.0 [2025-11-23]

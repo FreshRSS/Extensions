@@ -6,7 +6,7 @@ final class QuickCollapseExtension extends Minz_Extension {
 	#[\Override]
 	public function init(): void {
 		$this->registerTranslates();
-		$this->registerHook('js_vars', [$this, 'jsVars']);
+		$this->registerHook('js_vars', $this->jsVars(...));
 
 		Minz_View::appendStyle($this->getFileUrl('style.css'));
 		Minz_View::appendScript($this->getFileUrl('script.js'), cond: false, defer: true, async: false);

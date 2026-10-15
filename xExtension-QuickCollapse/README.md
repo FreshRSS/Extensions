@@ -6,6 +6,7 @@ To install this extension, you must upload this directory in your `./extensions`
 
 ## Changelog
 
-- 1.0 Refactored using the js_vars extension hook
-- 0.2.2 Turkish language support added
-- 0.1 initial version
+* 1.0.3 Refactored the single registerHook call to use first class callable syntax
+* 1.0 Refactored using the js_vars extension hook
+* 0.2.2 Turkish language support added
+* 0.1 initial version

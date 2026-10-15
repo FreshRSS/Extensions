@@ -23,6 +23,9 @@ With activated Youtube extension:
 
 ## Changelog
 
+1.3.1:
+- Refactored registerHook calls to use first class callable syntax
+
 0.12:
 - Turkish language support added
 
