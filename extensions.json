@@ -587,6 +587,17 @@
             "directory": "xExtension-RemoveEmojis"
         },
         {
+            "name": "Retry-After Allowlist",
+            "author": "Bowen",
+            "description": "Bypass shared Retry-After cooldowns for selected feed hosts.",
+            "version": "1.0.0",
+            "entrypoint": "RetryAfterAllowlist",
+            "type": "system",
+            "url": "https://github.com/bowencool/xExtension-RetryAfterAllowlist",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "Right-Click Actions",
             "author": "featurecreep-cron",
             "description": "Adds context menus to articles, feeds, and categories",
