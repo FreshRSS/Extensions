@@ -23,7 +23,7 @@ final class LlmClassificationExtension extends Minz_Extension {
 			throw new FreshRSS_Context_Exception('System configuration not initialised!');
 		}
 		$this->registerTranslates();
-		$this->registerHook(Minz_HookType::EntryBeforeInsert, [$this, 'classifyEntry']);
+		$this->registerHook(Minz_HookType::EntryBeforeInsert, $this->classifyEntry(...));
 
 		if ($this->getUserConfigurationString('api_url') === null) {
 			$this->setUserConfigurationValue('api_url', '');

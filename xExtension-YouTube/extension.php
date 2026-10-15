@@ -40,13 +40,13 @@ final class YouTubeExtension extends Minz_Extension
 	#[\Override]
 	public function init(): void {
 		Minz_View::appendStyle($this->getFileUrl('style.css'));
-		$this->registerHook('entry_before_display', [$this, 'embedYouTubeVideo']);
-		$this->registerHook('check_url_before_add', [self::class, 'convertYoutubeFeedUrl']);
-		$this->registerHook('custom_favicon_hash', [$this, 'iconHashParams']);
-		$this->registerHook('custom_favicon_btn_url', [$this, 'iconBtnUrl']);
-		$this->registerHook('feed_before_insert', [$this, 'feedBeforeInsert']);
+		$this->registerHook('entry_before_display', $this->embedYouTubeVideo(...));
+		$this->registerHook('check_url_before_add', self::convertYoutubeFeedUrl(...));
+		$this->registerHook('custom_favicon_hash', $this->iconHashParams(...));
+		$this->registerHook('custom_favicon_btn_url', $this->iconBtnUrl(...));
+		$this->registerHook('feed_before_insert', $this->feedBeforeInsert(...));
 		if (Minz_Request::controllerName() === 'extension') {
-			$this->registerHook('js_vars', [self::class, 'jsVars']);
+			$this->registerHook('js_vars', self::jsVars(...));
 			Minz_View::appendScript($this->getFileUrl('fetchIcons.js'));
 		}
 		$this->registerTranslates();

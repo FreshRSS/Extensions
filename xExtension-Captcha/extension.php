@@ -13,8 +13,8 @@ final class CaptchaExtension extends Minz_Extension {
 	#[\Override]
 	public function init(): void {
 		$this->registerTranslates();
-		$this->registerHook(Minz_HookType::BeforeLoginBtn, [$this, 'captchaWidget']);
-		$this->registerHook(Minz_HookType::ActionExecute, [$this, 'handleProtectedPage']);
+		$this->registerHook(Minz_HookType::BeforeLoginBtn, $this->captchaWidget(...));
+		$this->registerHook(Minz_HookType::ActionExecute, $this->handleProtectedPage(...));
 
 		if (Minz_Request::controllerName() === 'extension') {
 			Minz_View::appendScript($this->getFileUrl('captchaConfig.js'));
