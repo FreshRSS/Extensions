@@ -19,7 +19,7 @@ final class ImageProxyExtension extends Minz_Extension {
 		if (!FreshRSS_Context::hasSystemConf()) {
 			throw new FreshRSS_Context_Exception('System configuration not initialised!');
 		}
-		$this->registerHook('entry_before_display', [self::class, 'setImageProxyHook']);
+		$this->registerHook('entry_before_display', self::setImageProxyHook(...));
 		// Defaults
 		$save = false;
 		if (FreshRSS_Context::userConf()->attributeString('image_proxy_url') == null) {
@@ -129,10 +129,7 @@ final class ImageProxyExtension extends Minz_Extension {
 
 		$doc = new DOMDocument();
 		libxml_use_internal_errors(true);	// prevent tag soup errors from showing
-		$content = mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8');
-		if (!is_string($content)) {
-			return '';
-		}
+		$content = mb_encode_numericentity($content, [0x80, 0x10FFFF, 0, ~0], 'UTF-8');
 		$doc->loadHTML($content);
 		$imgs = $doc->getElementsByTagName('img');
 		foreach ($imgs as $img) {

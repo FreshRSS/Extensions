@@ -6,6 +6,7 @@ final class ColorfulListExtension extends Minz_Extension
 {
 	#[\Override]
 	public function init(): void {
+		Minz_View::appendStyle($this->getFileUrl('style.css'));
 		Minz_View::appendScript($this->getFileUrl('script.js'));
 	}
 }

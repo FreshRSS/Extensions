@@ -79,9 +79,9 @@ There are some FreshRSS extensions out there, developed by community members.
 
 * [Reading Time](https://github.com/FreshRSS/Extensions/tree/main/xExtension-ReadingTime): Add a reading time estimation next to each article.
 
-### By [@Korbak](https://github.com/Korbak)
+### By [@Geekshere](https://github.com/Geekshere)
 
-* [Invidious](https://github.com/Korbak/freshrss-invidious): Displays videos from YouTube feeds inline and replaces every source by the Invidious instance of your choice for an enhanced privacy (no tracking or limitation)
+* [Invidious](https://github.com/Geekshere/freshrss-invidious): Displays videos from YouTube feeds inline and replaces every source by the Invidious instance of your choice for an enhanced privacy (no tracking or limitation)
 
 ### By [@CN-Tools](https://github.com/cn-tools)
 
@@ -238,3 +238,55 @@ There are some FreshRSS extensions out there, developed by community members.
 ### By [@sanpo](https://codeberg.org/sanpo), [Web](https://sanpo.land)
 
 * [Apple Music Artist](https://codeberg.org/sanpo/xExtension-AppleMusicArtist): Subscribe to an artist's releases by their Apple Music artist page URL.
+
+### By [@StathisZ](https://github.com/StathisZ)
+
+* [Mark Feed Read On Badge Click](https://github.com/StathisZ/freshrss-mark-read-on-click): Click a feed's unread-count badge in the sidebar to mark all its articles as read.
+
+### By [@chenhaoc](https://github.com/chenhaoc)
+
+* [Title Dedup](https://github.com/chenhaoc/freshrss-dedup-extension): Mark target feed entries as read when the same title already exists in source feeds.
+
+### By [@profduweb](https://github.com/profduweb)
+
+* [Translate Google](https://github.com/profduweb/xExtension-TranslateGoogle): Open articles in Google Translate from the native article toolbar with a configurable target language.
+
+### By [@bowencool](https://github.com/bowencool)
+
+* [Broad Site Icon Fetcher](https://github.com/bowencool/xExtension-BroadIconFetcher): Fetch feed icons from RSS/Atom channel images, web manifests, metadata, and common HTML favicon declarations.
+* [Retry-After Allowlist](https://github.com/bowencool/xExtension-RetryAfterAllowlist): Bypass shared Retry-After cooldowns for selected feed hosts.
+
+### By [@cevvalkoala](https://github.com/cevvalkoala)
+
+* [YouTube Duration](https://github.com/cevvalkoala/xExtension-YouTubeDuration): Add YouTube video duration or Shorts markers to new YouTube entry titles using the YouTube Data API, a local cache and configurable system-wide formatting.
+* [Save Audio](https://github.com/cevvalkoala/xExtension-SaveAudio): Add a download audio button to headline bars of the articles which contain an audio. Useful for downloading podcast episodes.
+* [Fetch and Summarize](https://github.com/cevvalkoala/xExtension-FetchAndSummarize): Add a button to headline bars of the articles to fetch the linked article and summarize it. If the article cannot be fetched, the extension summarizes the text in the feed item.
+
+### By [@barrymieny](https://github.com/barrymieny)
+
+* [Tag Emoji](https://github.com/barrymieny/xExtension-TagEmoji): Prefix an entry title with a configured emoji when the entry has a matching feed tag.
+* [Telegraaf Premium Tag](https://github.com/barrymieny/xExtension-TelegraafPremiumTag): Synchronize the #Premium article tag with the unnamespaced `<premium>` field in Telegraaf RSS items.
+
+### By [@Marc-T](https://github.com/Marc-T)
+
+* [TagEZ](https://github.com/Marc-T/xExtension-TagEZ): Adds a Tags accordion to the left sidebar of FreshRSS, listing article tags
+
+### By [@iovictor](https://github.com/iovictor)
+
+* [Heatmap](https://github.com/iovictor/xExtension-Heatmap): Automatically calculates and displays a temperature for every article in your feeds, helping you cut through the noise by highlighting articles that are highly upvoted or frequently shared across the web.
+
+### By [@shcheglovnd](https://github.com/shcheglovnd)
+
+* [alphaXiv Papers](https://github.com/shcheglovnd/FreshRSS-xExtension-AlphaXivPapers): Follow the papers on alphaXiv with enough likes (100 within the last 90 days by default), read from alphaXiv’s API; papers arrive when they reach the threshold, often weeks after they were published, and a feed can set its own threshold and period in its address.
+* [Google News Top Stories](https://github.com/shcheglovnd/FreshRSS-xExtension-GoogleNewsTopStories): Follow the top stories of Google News, each one entry however often Google changes its lead article, dated when it enters the top 10 (or another number), with how long it stays there and its best rank.
+* [Hacker News Points](https://github.com/shcheglovnd/FreshRSS-xExtension-HackerNewsPoints): Follow the Hacker News stories that reach a number of points (500 by default), dated when they reach it rather than when they were posted, so that they don’t land below the stories already read; a feed can set its own minimum in its address.
+* [Hugging Face Papers](https://github.com/shcheglovnd/FreshRSS-xExtension-HuggingFacePapers): Follow Hugging Face’s Daily Papers with enough upvotes (50 by default), read from Hugging Face’s API, including the papers that reach the threshold days after their day; a feed can set its own threshold in its address.
+* [Instagram Profiles](https://github.com/shcheglovnd/FreshRSS-xExtension-InstagramProfiles): Follow public Instagram profiles without RSSHub, RSS-Bridge or an Instagram account, by reading each profile’s public embed: the latest posts with every photo of an album, and an alert when a story is up, or the stories themselves with an Instagram session cookie.
+* [Site Rate Limits](https://github.com/shcheglovnd/FreshRSS-xExtension-SiteRateLimits): Refresh feeds within the rate limits of their sites, e.g. Reddit’s one request per minute: background refreshes wait for the next allowed request instead of failing with `429 Too Many Requests`, following per-site rules or the sites’ rate-limit headers (system extension).
+* [Telegram Channels](https://github.com/shcheglovnd/FreshRSS-xExtension-TelegramChannels): Follow public Telegram channels directly, without RSSHub or any other proxy, by reading each channel’s public web preview (`t.me/s/…`), including every photo of a post.
+* [X Profiles](https://github.com/shcheglovnd/FreshRSS-xExtension-XProfiles): Follow X (Twitter) profiles directly, without Nitter or an X account, by reading the latest posts from the page x.com shows logged-out visitors.
+* [YouTube Channels](https://github.com/shcheglovnd/FreshRSS-xExtension-YouTubeChannels): Subscribe to YouTube channels with any link to them (`@handle`, channel, video or playlist), without a proxy or an API key; requests to YouTube’s unreliable feed server are retried, with the channel page as a fallback, so new videos keep arriving.
+
+### By [@Minimistro32](https://github.com/Minimistro32)
+
+* [Podcast Player](https://github.com/Minimistro32/freshrss-podcast-player): Moves podcast playback controls to the top of the article for easy access. Also adds skip buttons, playback speed, and saved listening progress with UI support for mobile.

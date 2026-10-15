@@ -1,7 +1,7 @@
 parameters:
 	phpVersion:
 		min: 80100	# PHP 8.1
-		max: 80499	# PHP 8.4
+		max: 80599	# PHP 8.5
 	level: 0	# https://phpstan.org/user-guide/rule-levels
 	fileExtensions:
 		- php
@@ -12,15 +12,18 @@ parameters:
 	excludePaths:
 		analyse:
 			- ../FreshRSS
+			- third-party/*/composer-setup.php
 			- third-party/*/vendor/*?
 		analyseAndScan:
 			- .git/*?
 			- node_modules/*?
 			- symbolic/*?
 			- third-party/*/tests/*?
+			- third-party/*/phpstan-bootstrap.php
 			- tmp/*?
 			- vendor/
 			- xExtension-*
+	reportUnmatchedIgnoredErrors: false
 	dynamicConstantNames:
 		- TYPE_GIT
 	reportMaybesInPropertyPhpDocTypes: false

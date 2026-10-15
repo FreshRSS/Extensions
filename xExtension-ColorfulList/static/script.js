@@ -25,7 +25,7 @@ function colorize(mList) {
 	const entry = document.querySelectorAll('.flux_header');
 	entry.forEach((e, i) => {
 		const cl = stringToColour(e.querySelector('.website').textContent) + '12';
-		e.style.background = cl;
+		e.style.setProperty('--colorful-list-background', cl);
 	});
 }
 

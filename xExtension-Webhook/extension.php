@@ -60,7 +60,7 @@ class WebhookExtension extends Minz_Extension {
 	#[\Override]
 	public function init(): void {
 		$this->registerTranslates();
-		$this->registerHook('entry_before_insert', [$this, 'processArticle']);
+		$this->registerHook('entry_before_insert', $this->processArticle(...));
 	}
 
 	/**
@@ -142,6 +142,7 @@ class WebhookExtension extends Minz_Extension {
 	 *
 	 * @param FreshRSS_Entry $entry The RSS entry to check
 	 * @return bool True if the entry matches any filter line, or if no filter is configured
+	 * @throws Minz_BadRequestException
 	 */
 	private function entryMatchesSearchFilter(FreshRSS_Entry $entry): bool {
 		$searchFilter = $this->getUserConfigurationString('search_filter') ?? '';
@@ -226,6 +227,7 @@ class WebhookExtension extends Minz_Extension {
 					'{date_user_modified}' => $entry->lastUserModified() === null ? null : timestampToMachineDate($entry->lastUserModified()),
 					'{author}' => htmlspecialchars_decode($entry->authors(true), ENT_QUOTES),
 					'{tags}' => htmlspecialchars_decode($entry->tags(true), ENT_QUOTES),
+					'{user}' => Minz_User::name() ?? '',
 				];
 
 				$body = $this->replacePlaceholdersRecursive($body, $replacements);
@@ -252,7 +254,6 @@ class WebhookExtension extends Minz_Extension {
 		$view = new FreshRSS_View();
 		$view->entries = [$entry];
 		$view->internal_rendering = true;
-		$view->publishLabelsInsteadOfTags = false;
 		$view->entryIdsTagNames = [];
 		$view->rss_base = '';
 		$view->image_url = '';

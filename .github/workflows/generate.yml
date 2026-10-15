@@ -4,6 +4,14 @@ on:
   schedule:
     - cron: '11 11 * * *'
   workflow_dispatch: ~
+  push:
+    branches: ["main"]
+    paths:
+      - '.github/workflows/generate.yml' # To regenerate extensions.json according to any workflow changes itself
+      - 'xExtension-*/metadata.json' # For version/description updates in official extensions
+      - 'repositories.json' # For new third-party extensions
+      # - 'extensions.json' # Must not be included to avoid causing a commit loop
+      - 'generate.php' # To regenerate extensions.json with the latest approach
 
 permissions:
   contents: write
@@ -16,7 +24,7 @@ jobs:
 
     steps:
       - name: Checkout source code # zizmor: ignore[artipacked] Credentials are needed later
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Build JSON file
         run: php ./generate.php

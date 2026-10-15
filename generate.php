@@ -58,7 +58,7 @@ foreach ($gitRepositories as $key => $gitRepository) {
 			$metadata['method'] = TYPE_GIT;
 			$metadata['directory'] = ($directory === sha1($gitRepository)) ? '.' : $directory;
 
-			$required_keys = [
+			$allowed_keys = [
 				'name',
 				'author',
 				'description',
@@ -68,6 +68,7 @@ foreach ($gitRepositories as $key => $gitRepository) {
 				'url',
 				'method',
 				'directory',
+				'compatibility',
 			];
 
 			// Sanitize extension values to prevent HTML injection (when rendered by FreshRSS)
@@ -76,7 +77,7 @@ foreach ($gitRepositories as $key => $gitRepository) {
 				if ($k === 'description') {
 					continue;
 				}
-				if (!in_array($k, $required_keys, true)) {
+				if (!in_array($k, $allowed_keys, true)) {
 					unset($metadata[$k]);
 					continue;
 				}

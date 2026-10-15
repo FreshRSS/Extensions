@@ -42,6 +42,10 @@ intitle:security alert
 #your-project-name
 ```
 
+#### Ignore updated articles
+
+FreshRSS also processes articles it already knows when their content changes in the feed. Enable this option to send the webhook only once per article, and not again on such updates.
+
 #### Webhook Settings
 
 - **Webhook URL**: Your webhook endpoint URL
@@ -62,7 +66,8 @@ Customize the webhook payload using placeholders:
 	"date": "{date}",
 	"timestamp": "{date_timestamp}",
 	"author": "{author}",
-	"tags": "{tags}"
+	"tags": "{tags}",
+	"user": "{user}"
 }
 ```
 
@@ -80,6 +85,7 @@ Customize the webhook payload using placeholders:
 | `{feed_url}` | Feed URL |
 | `{thumbnail_url}` | Thumbnail (image) URL |
 | `{tags}` | Article tags (separated by " #") |
+| `{user}` | Username in FreshRSS |
 
 ## 🎯 Use Cases
 

@@ -2,6 +2,7 @@
 
 return array(
 	'yt_videos' => array(
+		'autosize' => 'Automatically size the player',
 		'height' => 'Player height',
 		'width' => 'Player width',
 		'show_content' => 'Display the feeds content',

@@ -130,4 +130,70 @@
 }, {
 	"url": "https://codeberg.org/sanpo/xExtension-AppleMusicArtist",
 	"type": "git"
+}, {
+	"url": "https://github.com/StathisZ/freshrss-mark-read-on-click",
+	"type": "git"
+}, {
+	"url": "https://github.com/chenhaoc/freshrss-dedup-extension",
+	"type": "git"
+}, {
+	"url": "https://github.com/profduweb/xExtension-TranslateGoogle",
+	"type": "git"
+}, {
+	"url": "https://github.com/bowencool/xExtension-BroadIconFetcher",
+	"type": "git"
+}, {
+	"url": "https://github.com/bowencool/xExtension-RetryAfterAllowlist",
+	"type": "git"
+}, {
+	"url": "https://github.com/cevvalkoala/xExtension-YouTubeDuration",
+	"type": "git"
+}, {
+	"url": "https://github.com/barrymieny/xExtension-TagEmoji",
+	"type": "git"
+}, {
+	"url": "https://github.com/barrymieny/xExtension-TelegraafPremiumTag",
+	"type": "git"
+}, {
+	"url": "https://github.com/Marc-T/xExtension-TagEZ",
+	"type": "git"
+}, {
+	"url": "https://github.com/iovictor/xExtension-Heatmap",
+	"type": "git"
+}, {
+	"url": "https://github.com/cevvalkoala/xExtension-SaveAudio",
+	"type": "git"
+}, {
+	"url": "https://github.com/shcheglovnd/FreshRSS-xExtension-TelegramChannels",
+	"type": "git"
+}, {
+	"url": "https://github.com/shcheglovnd/FreshRSS-xExtension-XProfiles",
+	"type": "git"
+}, {
+	"url": "https://github.com/shcheglovnd/FreshRSS-xExtension-YouTubeChannels",
+	"type": "git"
+}, {
+	"url": "https://github.com/Minimistro32/freshrss-podcast-player",
+	"type": "git"
+}, {
+	"url": "https://github.com/shcheglovnd/FreshRSS-xExtension-AlphaXivPapers",
+	"type": "git"
+}, {
+	"url": "https://github.com/shcheglovnd/FreshRSS-xExtension-GoogleNewsTopStories",
+	"type": "git"
+}, {
+	"url": "https://github.com/shcheglovnd/FreshRSS-xExtension-HackerNewsPoints",
+	"type": "git"
+}, {
+	"url": "https://github.com/shcheglovnd/FreshRSS-xExtension-HuggingFacePapers",
+	"type": "git"
+}, {
+	"url": "https://github.com/shcheglovnd/FreshRSS-xExtension-InstagramProfiles",
+	"type": "git"
+}, {
+	"url": "https://github.com/shcheglovnd/FreshRSS-xExtension-SiteRateLimits",
+	"type": "git"
+}, {
+	"url": "https://github.com/cevvalkoala/xExtension-FetchAndSummarize",
+	"type": "git"
 }]

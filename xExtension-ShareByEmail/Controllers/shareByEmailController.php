@@ -6,13 +6,13 @@ final class FreshExtension_shareByEmail_Controller extends Minz_ActionController
 	public ?Minz_Extension $extension;
 
 	/**
-	 * @var ShareByEmail\mailers\View
+	 * @var ShareByEmail\Models\View
 	 * @phpstan-ignore property.phpDocType
 	 */
 	protected $view;
 
 	public function __construct() {
-		parent::__construct(ShareByEmail\mailers\View::class);
+		parent::__construct(ShareByEmail\Models\View::class);
 	}
 
 	#[\Override]
@@ -70,7 +70,7 @@ final class FreshExtension_shareByEmail_Controller extends Minz_ActionController
 
 		if (Minz_Request::isPost()) {
 			$this->view->to = $to = Minz_Request::paramString('to');
-			$this->view->subject = $subject = Minz_Request::paramString('subject');
+			$this->view->subject = $subject = Minz_Request::paramString('subject', plaintext: true);
 			$this->view->content = $content = Minz_Request::paramString('content');
 
 			if ($to == "" || $subject == "" || $content == "") {

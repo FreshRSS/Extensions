@@ -13,8 +13,8 @@ final class CaptchaExtension extends Minz_Extension {
 	#[\Override]
 	public function init(): void {
 		$this->registerTranslates();
-		$this->registerHook(Minz_HookType::BeforeLoginBtn, [$this, 'captchaWidget']);
-		$this->registerHook(Minz_HookType::ActionExecute, [$this, 'handleProtectedPage']);
+		$this->registerHook(Minz_HookType::BeforeLoginBtn, $this->captchaWidget(...));
+		$this->registerHook(Minz_HookType::ActionExecute, $this->handleProtectedPage(...));
 
 		if (Minz_Request::controllerName() === 'extension') {
 			Minz_View::appendScript($this->getFileUrl('captchaConfig.js'));
@@ -42,7 +42,7 @@ final class CaptchaExtension extends Minz_Extension {
 			$csp = $this->loadDependencies();
 			if (!empty($csp)) $controller->_csp($csp);
 		} elseif (Minz_Request::is('user', 'create') && !FreshRSS_Auth::hasAccess('admin')) {
-			if (!CaptchaExtension::initCaptcha()) {
+			if (!$this->initCaptcha()) {
 				return false;
 			}
 		}
@@ -58,7 +58,7 @@ final class CaptchaExtension extends Minz_Extension {
 	/**
 	 * @throws FreshRSS_Context_Exception
 	 */
-	private function captchaWidget(): string {
+	public function captchaWidget(): string {
 		$config = self::getConfig();
 		if (!$this->isProtectedPage()) {
 			return '';

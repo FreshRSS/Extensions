@@ -4,7 +4,7 @@ declare(strict_types=1);
 final class UnsafeAutologinExtension extends Minz_Extension {
 	#[\Override]
 	public function init(): void {
-		$this->registerHook(Minz_HookType::ActionExecute, [$this, 'handleLogin']);
+		$this->registerHook(Minz_HookType::ActionExecute, $this->handleLogin(...));
 	}
 
 	/**
