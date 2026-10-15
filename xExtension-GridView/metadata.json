@@ -5,5 +5,5 @@
 	"version": "1.1.1",
 	"entrypoint": "GridView",
 	"type": "user",
-	"compatibility": "1.20.0"
+	"compatibility": "1.25.0"
 }
