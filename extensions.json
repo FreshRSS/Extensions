@@ -200,6 +200,17 @@
             "directory": "xExtension-FeedTitleBuilder"
         },
         {
+            "name": "FetchAndSummarize",
+            "author": "FetchAndSummarize contributors",
+            "description": "Fetch article text and create an inline AI summary",
+            "version": "1.0.0",
+            "entrypoint": "FetchAndSummarize",
+            "type": "user",
+            "url": "https://github.com/cevvalkoala/xExtension-FetchAndSummarize",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "FilterTitle",
             "author": "CNTools | Clemens Neubauer",
             "description": "Filter feed entries by filter keywords in title",
@@ -266,6 +277,17 @@
             "directory": "xExtension-GReaderRedate"
         },
         {
+            "name": "Google News Top Stories",
+            "author": "shcheglovnd",
+            "description": "The top stories of Google News, each one entry however often Google changes its lead article, dated when it enters the top N, with how long it stays and its best rank. Subscribe to https://news.google.com/rss?hl=en-US&gl=US&ceid=US:en, or e.g. …&top=5&min_hours=1.",
+            "version": "0.1.0",
+            "entrypoint": "GoogleNewsTopStories",
+            "type": "user",
+            "url": "https://github.com/shcheglovnd/FreshRSS-xExtension-GoogleNewsTopStories",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "Grid View",
             "author": "Marius Stroe &lt;https://github.com/mstroe&gt;",
             "description": "A grid/card view for displaying feeds with images, configurable 2-4 columns, FreshRSS native share integration, and browser reader mode support",
@@ -278,6 +300,17 @@
             "directory": "xExtension-GridView"
         },
         {
+            "name": "Hacker News Points",
+            "author": "shcheglovnd",
+            "description": "Hacker News stories with at least a given number of points, dated when they reach it rather than when they were posted. Subscribe to https://news.ycombinator.com/, or e.g. https://news.ycombinator.com/?min_points=500&date=posted.",
+            "version": "0.1.0",
+            "entrypoint": "HackerNewsPoints",
+            "type": "user",
+            "url": "https://github.com/shcheglovnd/FreshRSS-xExtension-HackerNewsPoints",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "Heatmap",
             "author": "Antigravity",
             "description": "Calculates a social credibility and virality score for articles.",
@@ -285,6 +318,17 @@
             "entrypoint": "Heatmap",
             "type": "user",
             "url": "https://github.com/iovictor/xExtension-Heatmap",
+            "method": "git",
+            "directory": "."
+        },
+        {
+            "name": "Hugging Face Papers",
+            "author": "shcheglovnd",
+            "description": "Hugging Face’s Daily Papers as a feed of the papers with at least a given number of upvotes, including the papers that reach it days later. Subscribe to https://huggingface.co/papers, or e.g. https://huggingface.co/papers?min_upvotes=100&weeks=4.",
+            "version": "0.4.1",
+            "entrypoint": "HuggingFacePapers",
+            "type": "user",
+            "url": "https://github.com/shcheglovnd/FreshRSS-xExtension-HuggingFacePapers",
             "method": "git",
             "directory": "."
         },
@@ -309,6 +353,17 @@
             "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
             "directory": "xExtension-ImageProxy"
+        },
+        {
+            "name": "Instagram Profiles",
+            "author": "shcheglovnd",
+            "description": "Follow public Instagram profiles without an account: the latest posts with every photo of an album, read from the profile’s public embed, and an alert when a story is up — or, with an Instagram session, the stories themselves.",
+            "version": "0.1.0",
+            "entrypoint": "InstagramProfiles",
+            "type": "user",
+            "url": "https://github.com/shcheglovnd/FreshRSS-xExtension-InstagramProfiles",
+            "method": "git",
+            "directory": "."
         },
         {
             "name": "Invidious Video Feed",
@@ -686,6 +741,17 @@
             "directory": "xExtension-SilentRefresh"
         },
         {
+            "name": "Site Rate Limits",
+            "author": "shcheglovnd",
+            "description": "Refresh feeds within the rate limits of their sites, e.g. Reddit’s one request per minute: wait for the next allowed request instead of failing with “429 Too Many Requests”, from per-site rules or rate-limit headers.",
+            "version": "0.1.0",
+            "entrypoint": "SiteRateLimits",
+            "type": "system",
+            "url": "https://github.com/shcheglovnd/FreshRSS-xExtension-SiteRateLimits",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "Smart Mobile Menu",
             "author": "Marco Heizmann",
             "description": "Minimizes the required button space and groups buttons.",
@@ -991,6 +1057,17 @@
             "entrypoint": "Youlag",
             "type": "user",
             "url": "https://github.com/civilblur/youlag",
+            "method": "git",
+            "directory": "."
+        },
+        {
+            "name": "alphaXiv Papers",
+            "author": "shcheglovnd",
+            "description": "alphaXiv’s papers as a feed of those with at least a given number of likes, including the papers that reach it weeks later. Subscribe to https://www.alphaxiv.org/?sort=Likes, or e.g. https://www.alphaxiv.org/?sort=Likes&interval=30+Days&min_likes=200.",
+            "version": "0.1.0",
+            "entrypoint": "AlphaXivPapers",
+            "type": "user",
+            "url": "https://github.com/shcheglovnd/FreshRSS-xExtension-AlphaXivPapers",
             "method": "git",
             "directory": "."
         },
