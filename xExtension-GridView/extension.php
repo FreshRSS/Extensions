@@ -37,18 +37,18 @@ final class GridViewExtension extends Minz_Extension {
 		}
 
 		// Inject column count and settings as JS variable
-		$this->registerHook('js_vars', [$this, 'injectJsVars']);
+		$this->registerHook('js_vars', $this->injectJsVars(...));
 
 		// Inject thumbnail URL into content so it's available in all view modes
 		// (Reading View doesn't render the .item.thumbnail element)
-		$this->registerHook('entry_before_display', [$this, 'injectThumbnailMarker']);
+		$this->registerHook('entry_before_display', $this->injectThumbnailMarker(...));
 
 		// Fetch OG image for entries that have no thumbnail (user-configurable)
 		if ($this->isOgImageFetchEnabled()) {
-			$this->registerHook('entry_before_insert', [$this, 'fetchOgImage']);
+			$this->registerHook('entry_before_insert', $this->fetchOgImage(...));
 			// Instead of blocking page render to fetch OG images, inject a
 			// marker that the JS picks up and fetches asynchronously.
-			$this->registerHook('entry_before_display', [$this, 'markEntryForOgFetch']);
+			$this->registerHook('entry_before_display', $this->markEntryForOgFetch(...));
 		}
 	}
 

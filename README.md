@@ -254,11 +254,13 @@ There are some FreshRSS extensions out there, developed by community members.
 ### By [@bowencool](https://github.com/bowencool)
 
 * [Broad Site Icon Fetcher](https://github.com/bowencool/xExtension-BroadIconFetcher): Fetch feed icons from RSS/Atom channel images, web manifests, metadata, and common HTML favicon declarations.
+* [Retry-After Allowlist](https://github.com/bowencool/xExtension-RetryAfterAllowlist): Bypass shared Retry-After cooldowns for selected feed hosts.
 
 ### By [@cevvalkoala](https://github.com/cevvalkoala)
 
 * [YouTube Duration](https://github.com/cevvalkoala/xExtension-YouTubeDuration): Add YouTube video duration or Shorts markers to new YouTube entry titles using the YouTube Data API, a local cache and configurable system-wide formatting.
 * [Save Audio](https://github.com/cevvalkoala/xExtension-SaveAudio): Add a download audio button to headline bars of the articles which contain an audio. Useful for downloading podcast episodes.
+* [Fetch and Summarize](https://github.com/cevvalkoala/xExtension-FetchAndSummarize): Add a button to headline bars of the articles to fetch the linked article and summarize it. If the article cannot be fetched, the extension summarizes the text in the feed item.
 
 ### By [@barrymieny](https://github.com/barrymieny)
 

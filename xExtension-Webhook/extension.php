@@ -60,7 +60,7 @@ class WebhookExtension extends Minz_Extension {
 	#[\Override]
 	public function init(): void {
 		$this->registerTranslates();
-		$this->registerHook('entry_before_insert', [$this, 'processArticle']);
+		$this->registerHook('entry_before_insert', $this->processArticle(...));
 	}
 
 	/**

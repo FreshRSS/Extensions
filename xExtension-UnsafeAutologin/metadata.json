@@ -2,7 +2,7 @@
 	"name": "Unsafe Autologin",
 	"author": "Inverle",
 	"description": "Brings back removed unsafe autologin feature from FreshRSS",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"entrypoint": "UnsafeAutologin",
 	"type": "system"
 }
