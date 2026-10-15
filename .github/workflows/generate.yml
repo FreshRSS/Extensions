@@ -7,6 +7,7 @@ on:
   push:
     branches: ["main"]
     paths:
+      - '.github/workflows/generate.yml' # To regenerate extensions.json according to any workflow changes itself
       - 'xExtension-*/metadata.json' # For version/description updates in official extensions
       - 'repositories.json' # For new third-party extensions
       # - 'extensions.json' # Must not be included to avoid causing a commit loop
