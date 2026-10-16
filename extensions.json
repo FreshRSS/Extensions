@@ -203,7 +203,7 @@
             "name": "FetchAndSummarize",
             "author": "FetchAndSummarize contributors",
             "description": "Fetch article text and create an inline AI summary",
-            "version": "1.0.0",
+            "version": "1.2.0",
             "entrypoint": "FetchAndSummarize",
             "type": "user",
             "url": "https://github.com/cevvalkoala/xExtension-FetchAndSummarize",
