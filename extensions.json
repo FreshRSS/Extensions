@@ -987,7 +987,7 @@
             "name": "X Profiles",
             "author": "shcheglovnd",
             "description": "Follow X (Twitter) profiles directly — no Nitter or other proxy, no X account. Reads the latest posts from the page X shows logged-out visitors, with photos, videos and quotes.",
-            "version": "0.1.2",
+            "version": "0.1.3",
             "entrypoint": "XProfiles",
             "type": "user",
             "url": "https://github.com/shcheglovnd/FreshRSS-xExtension-XProfiles",
