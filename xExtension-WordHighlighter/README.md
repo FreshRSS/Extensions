@@ -24,6 +24,15 @@ Light theme:
 
 ## Changelog
 
+- 0.0.5 Settings are stored in the user configuration instead of files
+  written into the extension directory, so the extension works with a
+  read-only `extensions/` folder (no more "config file is not writable"
+  error) and no JavaScript file is generated at runtime. Existing
+  `static/config.<user>.json` settings are picked up automatically until
+  saved once. Settings reach the script through `js_vars`.
+  Fixed highlighting intermittently not starting: the script is loaded
+  `async` and could run before `#stream` was parsed; it now waits for
+  `DOMContentLoaded`. The word list textarea is now escaped.
 - 0.0.3 Turkish language support added.
 - 0.0.2 use `json` for storing configuration, add more configuration options
   (enable_in_article, enable_logs, case_sensitive, separate_word_search)
