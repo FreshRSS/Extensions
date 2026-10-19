@@ -388,17 +388,6 @@
             "directory": "xExtension-Invidious"
         },
         {
-            "name": "Kagi Summarizer",
-            "author": "Rudis Muiznieks",
-            "description": "Add buttons to summarize articles with the Kagi Universal Summarizer.",
-            "version": "0.4",
-            "entrypoint": "KagiSummarizer",
-            "type": "user",
-            "url": "https://code.sitosis.com/rudism/freshrss-kagi-summarizer",
-            "method": "git",
-            "directory": "."
-        },
-        {
             "name": "Karakeep Button",
             "author": "veverkap",
             "description": "Add FreshRSS articles to Karakeep with one simple button click/keyboard shortcut.",
