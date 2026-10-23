@@ -19,6 +19,8 @@ return [
 		'intro' => 'You are about to share this article by email: “<strong>%s</strong>”',
 		'title' => 'Share an article by email',
 		'manage' => [
+			'default_recipient' => 'Default recipient',
+			'default_recipient_help' => 'Prefills the “To” field when sharing an article. Leave empty to have no default recipient.',
 			'mailer' => 'Mailing system',
 			'mail' => 'PHP <code>mail()</code>',
 			'smtp' => 'SMTP (send from %s)',

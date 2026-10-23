@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+/** @var ShareByEmailExtension $this */
 ?>
 
 <div class="form-group">
@@ -15,3 +16,31 @@ declare(strict_types=1);
 		<p class="help"><?= _i('help') ?> <?= _t('shareByEmail.share.manage.help') ?></a></p>
 	</div>
 </div>
+
+<form action="<?= _url('extension', 'configure', 'e', urlencode($this->getName())) ?>" method="post" data-auto-leave-validation="1">
+	<input type="hidden" name="_csrf" value="<?= FreshRSS_Auth::csrfToken() ?>" />
+
+	<div class="form-group">
+		<label class="group-name" for="share_by_email_default_recipient">
+			<?= _t('shareByEmail.share.manage.default_recipient') ?>
+		</label>
+		<div class="group-controls">
+			<input
+				type="email"
+				name="share_by_email_default_recipient"
+				id="share_by_email_default_recipient"
+				class="long"
+				placeholder="alice@example.net"
+				value="<?= htmlspecialchars($this->getDefaultRecipient(), ENT_COMPAT, 'UTF-8') ?>"
+			/>
+			<p class="help"><?= _i('help') ?> <?= _t('shareByEmail.share.manage.default_recipient_help') ?></p>
+		</div>
+	</div>
+
+	<div class="form-group form-actions">
+		<div class="group-controls">
+			<button type="submit" class="btn btn-important"><?= _t('gen.action.submit') ?></button>
+			<button type="reset" class="btn"><?= _t('gen.action.cancel') ?></button>
+		</div>
+	</div>
+</form>
