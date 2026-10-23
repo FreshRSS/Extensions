@@ -23,6 +23,9 @@ With activated Youtube extension:
 
 ## Changelog
 
+1.4.0:
+- Added an option to disable embedding videos, e.g. to only use the channel icons and URL conversion
+
 1.3.2:
 - Fixed PHP warnings about HTML5 tags (such as `<figure>`) when displaying the feed content
 

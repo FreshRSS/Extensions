@@ -10,6 +10,10 @@ declare(strict_types=1);
 final class YouTubeExtension extends Minz_Extension
 {
 	/**
+	 * Whether videos should be embedded in the article content
+	 */
+	private bool $embedVideos = true;
+	/**
 	 * Whether the video player should use responsive sizing
 	 */
 	private bool $autoSize = false;
@@ -317,6 +321,11 @@ final class YouTubeExtension extends Minz_Extension
 			return;
 		}
 
+		$embedVideos = FreshRSS_Context::userConf()->attributeBool('yt_embed_videos');
+		if ($embedVideos !== null) {
+			$this->embedVideos = $embedVideos;
+		}
+
 		$autoSize = FreshRSS_Context::userConf()->attributeBool('yt_player_autosize');
 		if ($autoSize !== null) {
 			$this->autoSize = $autoSize;
@@ -346,6 +355,14 @@ final class YouTubeExtension extends Minz_Extension
 		if ($noCookie !== null) {
 			$this->useNoCookie = $noCookie;
 		}
+	}
+
+	/**
+	 * Returns whether videos are embedded in the article content.
+	 * You have to call loadConfigValues() before this one, otherwise you get the default value.
+	 */
+	public function isEmbedVideos(): bool {
+		return $this->embedVideos;
 	}
 
 	/**
@@ -412,6 +429,10 @@ final class YouTubeExtension extends Minz_Extension
 		}
 
 		$this->loadConfigValues();
+
+		if (!$this->embedVideos) {
+			return $entry;
+		}
 
 		if (stripos($entry->content(), '<iframe class="youtube-plugin-video"') !== false) {
 			return $entry;
@@ -588,6 +609,7 @@ final class YouTubeExtension extends Minz_Extension
 					$this->resetAllIcons();
 					break;
 			}
+			FreshRSS_Context::userConf()->_attribute('yt_embed_videos', Minz_Request::paramBoolean('yt_embed_videos'));
 			FreshRSS_Context::userConf()->_attribute('yt_player_autosize', Minz_Request::paramBoolean('yt_autosize'));
 			FreshRSS_Context::userConf()->_attribute('yt_player_height', Minz_Request::paramInt('yt_height'));
 			FreshRSS_Context::userConf()->_attribute('yt_player_width', Minz_Request::paramInt('yt_width'));

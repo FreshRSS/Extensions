@@ -2,6 +2,7 @@
 
 return array(
 	'yt_videos' => array(
+		'embed_videos' => 'Embed videos in articles',
 		'autosize' => 'Automatically size the player',
 		'height' => 'Player height',
 		'width' => 'Player width',
