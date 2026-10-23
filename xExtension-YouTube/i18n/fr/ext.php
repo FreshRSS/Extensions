@@ -2,6 +2,7 @@
 
 return array(
 	'yt_videos' => array(
+		'embed_videos' => 'Intégrer les vidéos dans les articles',
 		'autosize' => 'Taille automatique du lecteur',
 		'height' => 'Hauteur du lecteur',
 		'width' => 'Largeur du lecteur',

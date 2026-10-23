@@ -2,6 +2,7 @@
 
 return array(
 	'yt_videos' => array(
+		'embed_videos' => 'Videoları makalelere yerleştir',
 		'autosize' => 'Oynatıcıyı otomatik boyutlandır',
 		'height' => 'Oynatıcı yükseklik',
 		'width' => 'Oynatıcı genişlik',

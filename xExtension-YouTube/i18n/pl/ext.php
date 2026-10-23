@@ -2,6 +2,7 @@
 
 return array(
 	'yt_videos' => array(
+		'embed_videos' => 'Osadzaj filmy w artykułach',
 		'autosize' => 'Automatyczny rozmiar odtwarzacza',
 		'height' => 'Wysokość odtwarzacza wideo',
 		'width' => 'Szerokość odtwarzacza wideo',
