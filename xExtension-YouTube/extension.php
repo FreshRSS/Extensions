@@ -480,7 +480,7 @@ final class YouTubeExtension extends Minz_Extension
 			$doc->recover = true;
 			$doc->strictErrorChecking = false;
 
-			if ($doc->loadHTML('<?xml encoding="utf-8" ?>' . $entry->content())) {
+			if ($doc->loadHTML('<?xml encoding="utf-8" ?>' . $entry->content(), LIBXML_NONET | LIBXML_NOERROR | LIBXML_NOWARNING)) {
 				$xpath = new DOMXPath($doc);
 
 				/** @var DOMNodeList<DOMElement> $titles */

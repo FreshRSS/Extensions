@@ -23,6 +23,9 @@ With activated Youtube extension:
 
 ## Changelog
 
+1.3.2:
+- Fixed PHP warnings about HTML5 tags (such as `<figure>`) when displaying the feed content
+
 1.3.1:
 - Refactored registerHook calls to use first class callable syntax
 
