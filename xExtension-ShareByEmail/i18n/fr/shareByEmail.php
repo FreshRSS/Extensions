@@ -19,6 +19,8 @@ return [
 		'intro' => 'Vous êtes sur le point de partager cet article par courriel : « <strong>%s</strong> »',
 		'title' => 'Partager un article par courriel',
 		'manage' => [
+			'default_recipient' => 'Destinataire par défaut',
+			'default_recipient_help' => 'Pré-remplit le champ « Pour » lors du partage d’un article. Laisser vide pour ne pas avoir de destinataire par défaut.',
 			'mailer' => 'Système de messagerie',
 			'mail' => 'PHP <code>mail()</code>',
 			'smtp' => 'SMTP (envoyer en tant que %s)',

@@ -19,6 +19,8 @@ return [
 		'intro' => 'Diesen Artikel per Mail versenden: “<strong>%s</strong>”',
 		'title' => 'Einen Artikel per Mail teilen.',
 		'manage' => [
+			'default_recipient' => 'Standard-Empfänger',
+			'default_recipient_help' => 'Füllt das Feld „An“ beim Teilen eines Artikels vor. Leer lassen, um keinen Standard-Empfänger zu verwenden.',
 			'mailer' => 'E-Mail-Versand',
 			'mail' => 'via PHP <code>mail()</code>',
 			'smtp' => 'via SMTP (versendet von %s)',
