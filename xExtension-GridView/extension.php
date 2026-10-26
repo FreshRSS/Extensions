@@ -430,43 +430,30 @@ final class GridViewExtension extends Minz_Extension {
 	/**
 	 * Fetch a URL and extract the og:image meta tag.
 	 *
-	 * @param string $url The article URL to fetch
+	 * @param non-empty-string $url The article URL to fetch
 	 * @return string|null The og:image URL or null if not found
 	 */
 	private function extractOgImage(string $url): ?string {
-		$ctx = stream_context_create([
-			'http' => [
-				'timeout' => 5,
-				'method' => 'GET',
-				'header' => "User-Agent: FreshRSS/GridView\r\n",
-				'follow_location' => 1,
-				'max_redirects' => 3,
-				'ignore_errors' => true,
-			],
-			'ssl' => [
-				'verify_peer' => true,
-				'verify_peer_name' => true,
-			],
-		]);
-
-		// Only fetch the first 50 KB — og:image is in <head>
-		$html = @file_get_contents($url, false, $ctx, 0, 50000);
-		if ($html === false || $html === '') {
+		// Use the FreshRSS HTTP client, as FreshRSS 1.30+ disables the http(s) stream wrappers
+		['body' => $html, 'effective_url' => $effectiveUrl, 'fail' => $fail] = FreshRSS_http_Util::httpGet($url,
+			cachePath: CACHE_PATH . '/' . sha1($url) . '.html', type: 'html', attributes: ['timeout' => 5]);
+		if ($fail || $html === '') {
 			return null;
 		}
+		$pageUrl = $effectiveUrl ?: $url;
 
 		// Try og:image first, then twitter:image (both attribute orderings)
 		if (preg_match('/<meta\s[^>]*property=["\']og:image["\'][^>]*content=["\']([^"\']+)["\']/i', $html, $matches)) {
-			return $this->normalizeImageUrl($matches[1], $url);
+			return $this->normalizeImageUrl($matches[1], $pageUrl);
 		}
 		if (preg_match('/<meta\s[^>]*content=["\']([^"\']+)["\'][^>]*property=["\']og:image["\']/i', $html, $matches)) {
-			return $this->normalizeImageUrl($matches[1], $url);
+			return $this->normalizeImageUrl($matches[1], $pageUrl);
 		}
 		if (preg_match('/<meta\s[^>]*name=["\']twitter:image["\'][^>]*content=["\']([^"\']+)["\']/i', $html, $matches)) {
-			return $this->normalizeImageUrl($matches[1], $url);
+			return $this->normalizeImageUrl($matches[1], $pageUrl);
 		}
 		if (preg_match('/<meta\s[^>]*content=["\']([^"\']+)["\'][^>]*name=["\']twitter:image["\']/i', $html, $matches)) {
-			return $this->normalizeImageUrl($matches[1], $url);
+			return $this->normalizeImageUrl($matches[1], $pageUrl);
 		}
 
 		return null;

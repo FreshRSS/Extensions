@@ -60,7 +60,7 @@ Your grid view preference is saved locally and persists across sessions.
 
 ## Requirements
 
-- FreshRSS 1.20.0 or later
+- FreshRSS 1.28.0 or later
 
 ## Responsive Breakpoints
 
