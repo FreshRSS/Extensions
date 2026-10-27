@@ -66,6 +66,7 @@ final class ImageProxyTest {
 			$this->testInvalidUtf8();
 			$this->testHtmlDocumentsAndTagSoup();
 			$this->testImageAttributes();
+			$this->testVideoPosters();
 			$this->testUriSchemes();
 		} catch (FreshRSS_Context_Exception $e) {
 			throw new RuntimeException('ImageProxy configuration failed', 0, $e);
@@ -164,6 +165,28 @@ final class ImageProxyTest {
 	}
 
 	/** @throws FreshRSS_Context_Exception */
+	private function testVideoPosters(): void {
+		$input = '<video src="https://videos.example/one.mp4" poster="http://images.example/poster.jpg"></video>'
+			. '<video src="https://videos.example/two.mp4"></video>';
+		$output = ImageProxyExtension::swapUris($input);
+		$videos = $this->elements($output, 'video');
+
+		$this->assertSame(2, count($videos), 'All video elements must remain present');
+		$this->assertSame(
+			self::PROXY_URL . 'http://images.example/poster.jpg',
+			$videos[0]->getAttribute('poster'),
+			'Video posters must be proxied',
+		);
+		$this->assertSame(
+			'http://images.example/poster.jpg',
+			$videos[0]->getAttribute('data-xextension-imageproxy-original-poster'),
+			'Original poster must be retained',
+		);
+		$this->assertSame('https://videos.example/one.mp4', $videos[0]->getAttribute('src'), 'Video sources must not be proxied');
+		$this->assertSame(false, $videos[1]->hasAttribute('poster'), 'Videos without poster must remain without poster');
+	}
+
+	/** @throws FreshRSS_Context_Exception */
 	private function testUriSchemes(): void {
 		$this->assertSame(
 			'data:image/png;base64,abc',
@@ -197,14 +220,19 @@ final class ImageProxyTest {
 
 	/** @return list<DOMElement> */
 	private function images(string $html): array {
+		return $this->elements($html, 'img');
+	}
+
+	/** @return list<DOMElement> */
+	private function elements(string $html, string $tagName): array {
 		$doc = $this->parseFragment($html);
-		$images = [];
-		foreach ($doc->getElementsByTagName('img') as $image) {
-			if ($image instanceof DOMElement) {
-				$images[] = $image;
+		$elements = [];
+		foreach ($doc->getElementsByTagName($tagName) as $element) {
+			if ($element instanceof DOMElement) {
+				$elements[] = $element;
 			}
 		}
-		return $images;
+		return $elements;
 	}
 
 	private function parseFragment(string $html): DOMDocument {

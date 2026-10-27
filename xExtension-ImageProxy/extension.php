@@ -157,6 +157,17 @@ final class ImageProxyExtension extends Minz_Extension {
 			}
 		}
 
+		// Video posters are images too; keep the original URL for the same reason as above
+		$videos = $doc->getElementsByTagName('video');
+		foreach ($videos as $video) {
+			if (!($video instanceof DOMElement) || !$video->hasAttribute('poster')) {
+				continue;
+			}
+			$poster = $video->getAttribute('poster');
+			$video->setAttribute('data-xextension-imageproxy-original-poster', $poster);
+			$video->setAttribute('poster', self::getProxyImageUri($poster));
+		}
+
 		$body = $doc->getElementsByTagName('body')->item(0);
 
 		$output = $doc->saveHTML($body);
