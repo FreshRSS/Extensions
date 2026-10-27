@@ -6,6 +6,7 @@ To use it, upload this entire directory to the FreshRSS `./extensions` directory
 
 ## Changelog
 
+* 1.0.4 Respect the feed option to hide enclosures
 * 1.0.3 Proxy the poster images of videos
 * 1.0.1 Replace deprecated HTML entity conversion on PHP 8.2+
 * 1.0 Breaking changes due to significant code upgrade: settings must be saved again
