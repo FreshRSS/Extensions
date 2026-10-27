@@ -184,8 +184,11 @@ final class ImageProxyExtension extends Minz_Extension {
 	 * @throws FreshRSS_Context_Exception
 	 */
 	public static function setImageProxyHook(FreshRSS_Entry $entry): FreshRSS_Entry {
+		// The enclosures become part of the content, so only include them if the feed displays them
+		// We most likely already have the feed object in cache, otherwise make a request
+		$feed = FreshRSS_Category::findFeed(FreshRSS_Context::categories(), $entry->feedId()) ?? $entry->feed();
 		$entry->_content(
-			self::swapUris($entry->content())
+			self::swapUris($entry->content($feed?->attributeBoolean('display_enclosures') ?? true))
 		);
 
 		return $entry;
