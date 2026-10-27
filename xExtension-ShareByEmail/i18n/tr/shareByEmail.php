@@ -19,6 +19,8 @@ return [
 		'intro' => 'Bu makaleyi e-posta yoluyla paylaşmak üzeresiniz: “<strong>%s</strong>”',
 		'title' => 'Bir makaleyi e-posta ile paylaşın',
 		'manage' => [
+			'default_recipient' => 'Varsayılan alıcı',
+			'default_recipient_help' => 'Bir makale paylaşılırken “Kime” alanını önceden doldurur. Varsayılan alıcı istemiyorsanız boş bırakın.',
 			'mailer' => 'Mail sistemi',
 			'mail' => 'PHP <code>mail()</code>',
 			'smtp' => 'SMTP (%s kaynağından gönder)',
