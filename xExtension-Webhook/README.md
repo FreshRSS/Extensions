@@ -63,8 +63,7 @@ Customize the webhook payload using placeholders:
 	"feed": "{feed_name}",
 	"url": "{url}",
 	"content": "{content}",
-	"date": "{date}",
-	"timestamp": "{date_timestamp}",
+	"published": "{date_published}",
 	"author": "{author}",
 	"tags": "{tags}",
 	"user": "{user}"
@@ -78,12 +77,13 @@ Customize the webhook payload using placeholders:
 | `{title}` | Article title |
 | `{url}` | Article URL |
 | `{content}` | Article content (HTML) |
-| `{date}` | Publication date (string) |
-| `{date_timestamp}` | Publication date as Unix timestamp |
+| `{date_published}` | Publication date (ISO 8601) |
+| `{date_received}` | Date received by FreshRSS (ISO 8601) |
+| `{date_modified}` | Last modified date (ISO 8601, `null` if never modified) |
+| `{date_user_modified}` | Last user-modified date (ISO 8601, `null` if never modified) |
 | `{author}` | Article authors |
 | `{feed_name}` | Feed name |
 | `{feed_url}` | Feed URL |
-| `{thumbnail_url}` | Thumbnail (image) URL |
 | `{tags}` | Article tags (separated by " #") |
 | `{user}` | Username in FreshRSS |
 
@@ -129,7 +129,7 @@ Customize the webhook payload using placeholders:
 		"title": "{title}",
 		"url": "{url}",
 		"feed": "{feed_name}",
-		"timestamp": "{date_timestamp}"
+		"published": "{date_published}"
 	}
 }
 ```

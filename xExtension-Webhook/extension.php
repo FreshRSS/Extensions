@@ -220,7 +220,7 @@ class WebhookExtension extends Minz_Extension {
 					'{feed_name}' => htmlspecialchars_decode($entry->feed()?->name() ?? '', ENT_QUOTES),
 					'{feed_url}' => htmlspecialchars_decode($entry->feed()?->url() ?? '', ENT_QUOTES),
 					'{url}' => htmlspecialchars_decode($entry->link(), ENT_QUOTES),
-					'{content}' => htmlspecialchars_decode($entry->content(), ENT_QUOTES),
+					'{content}' => $entry->content(),
 					'{date_published}' => timestampToMachineDate($entry->date(raw: true)),
 					'{date_received}' => timestampToMachineDate($entry->dateAdded(raw: true)),
 					'{date_modified}' => $entry->lastModified() === null ? null : timestampToMachineDate($entry->lastModified()),
