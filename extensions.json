@@ -291,10 +291,10 @@
             "name": "Grid View",
             "author": "Marius Stroe &lt;https://github.com/mstroe&gt;",
             "description": "A grid/card view for displaying feeds with images, configurable 2-4 columns, FreshRSS native share integration, and browser reader mode support",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "entrypoint": "GridView",
             "type": "user",
-            "compatibility": "1.25.0",
+            "compatibility": "1.28.0",
             "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
             "directory": "xExtension-GridView"
