@@ -23,6 +23,9 @@ With activated Youtube extension:
 
 ## Changelog
 
+1.4.1:
+- Fixed the original thumbnail, description and enclosures of the feed being appended below the video
+
 1.4.0:
 - Added an option to disable embedding videos, e.g. to only use the channel icons and URL conversion
 
