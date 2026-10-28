@@ -481,6 +481,31 @@ final class YouTubeExtension extends Minz_Extension
 	}
 
 	/**
+	 * Returns hidden references to the URLs of the thumbnail and enclosures of an entry.
+	 * When displaying an entry, FreshRSS appends the thumbnail and enclosures whose URL is not found in the content,
+	 * which would show them again after the video player that replaces them.
+	 */
+	private function getEnclosureReferences(FreshRSS_Entry $entry): string {
+		$urls = [];
+		$thumbnail = $entry->thumbnail(searchEnclosures: false);
+		if ($thumbnail !== null) {
+			$urls[] = $thumbnail['url'];
+		}
+		foreach ($entry->enclosures() as $enclosure) {
+			$urls[] = $enclosure['url'];
+		}
+
+		$references = '';
+		foreach (array_unique($urls) as $url) {
+			if ($url === '') {
+				continue;
+			}
+			$references .= '<p hidden data-xextension-youtube-original-src="' . $url . '"></p>';
+		}
+		return $references;
+	}
+
+	/**
 	 * Returns an HTML <iframe> for a given URL for the configured width and height, with content ignored, appended or formatted.
 	 */
 	public function getHtml(FreshRSS_Entry $entry, string $url): string {
@@ -553,7 +578,7 @@ final class YouTubeExtension extends Minz_Extension
 			}
 		}
 
-		return $content;
+		return $content . $this->getEnclosureReferences($entry);
 	}
 
 	/**
