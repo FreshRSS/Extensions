@@ -48,12 +48,8 @@
 			// get textContent, from the article itself (not the header, not the bottom line):
 			reading_time.textContent = flux.querySelector('.flux_content .content').textContent;
 
-			// split the text to count the words correctly (source: http://www.mediacollege.com/internet/javascript/text/count-words.html)
-			reading_time.textContent = reading_time.textContent.replace(/(^\s*)|(\s*$)/gi, ''); // exclude  start and end white-space
-			reading_time.textContent = reading_time.textContent.replace(/[ ]{2,}/gi, ' '); // 2 or more space to 1
-			reading_time.textContent = reading_time.textContent.replace(/\n /, '\n'); // exclude newline with a start spacing
-
-			return reading_time.textContent.split(' ').length;
+			// count the sequences of non-white-space characters, as words can be separated by any white-space (e.g. new lines, tabs)
+			return (reading_time.textContent.match(/\S+/g) || []).length;
 		},
 
 		flux_letters_count: function flux_letters_count(flux, language) {
