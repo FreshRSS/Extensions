@@ -1,2 +1,4 @@
 config-words.*.js
 config-words.*.txt
+config.*.json
+config.*.js
