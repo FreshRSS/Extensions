@@ -196,4 +196,10 @@
 }, {
 	"url": "https://github.com/cevvalkoala/xExtension-FetchAndSummarize",
 	"type": "git"
+}, {
+	"url": "https://github.com/stdAri/xExtension-DailyDigest",
+	"type": "git"
+}, {
+	"url": "https://github.com/stdAri/xExtension-ExtensionShortcuts",
+	"type": "git"
 }]
