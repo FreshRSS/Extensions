@@ -18,6 +18,10 @@ return array(
 				'label' => 'Tajny klucz (prywatny)',
 				'placeholder' => 'Wprowadź swój tajny klucz…',
 			),
+			'min_score' => array(
+				'label' => 'Minimalny wynik',
+				'help' => 'Od 0.0 (bardzo prawdopodobnie bot) do 1.0 (bardzo prawdopodobnie człowiek). Google zaleca 0.5.',
+			),
 		),
 		'invalid_captcha' => 'Nieprawidłowa captcha. Spróbuj ponownie.',
 		'clear_fields' => 'Wyczyść pola',
