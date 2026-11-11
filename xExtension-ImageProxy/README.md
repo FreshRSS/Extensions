@@ -28,7 +28,7 @@ To use it, upload this entire directory to the FreshRSS `./extensions` directory
 
 * `url_encode` (default: `1`): whether to URL-encode (RFC 3986) the proxied URL
 
-* `excluded_domains` (default: empty): domains whose images are never proxied, one per line or separated by commas, e.g. `intranet.example, 192.168.1.10`;
+* `excluded_domains` (default: empty): domains whose images are never proxied, one per line, e.g. `intranet.example` and `192.168.1.10`;
   subdomains are matched too, so `example.org` also covers `images.example.org`.
   This is useful for images served from internal hosts that the proxy cannot reach, or from domains that the proxy refuses to serve
 

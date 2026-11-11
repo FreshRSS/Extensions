@@ -9,6 +9,6 @@ return array(
 		'scheme_include' => 'Bağlantıya http*:// ekle',
 		'url_encode' => 'Bağlantıyı kodla',
 		'excluded_domains' => 'Do not proxy these domains', // TODO
-		'excluded_domains_help' => 'One domain per line (or separated by commas). Their subdomains are not proxied either: for instance, example.org also matches images.example.org.', // TODO
+		'excluded_domains_help' => 'One domain per line. Their subdomains are not proxied either: for instance, example.org also matches images.example.org.', // TODO
 	),
 );

@@ -86,7 +86,7 @@ final class ImageProxyExtension extends Minz_Extension {
 			return false;
 		}
 		$excludedDomains = strtolower(FreshRSS_Context::userConf()->attributeString('image_proxy_excluded_domains') ?? '');
-		$domains = preg_split('/[\s,]+/', $excludedDomains, flags: PREG_SPLIT_NO_EMPTY) ?: [];
+		$domains = preg_split('/\s+/', $excludedDomains, flags: PREG_SPLIT_NO_EMPTY) ?: [];
 		foreach ($domains as $domain) {
 			$domain = trim($domain, '*[].');	// Accept `*.example.org`, `.example.org`, and `[::1]`
 			if ($domain !== '' && ($host === $domain || str_ends_with($host, '.' . $domain))) {

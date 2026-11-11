@@ -213,7 +213,7 @@ final class ImageProxyTest {
 
 	/** @throws FreshRSS_Context_Exception */
 	private function testExcludedDomains(): void {
-		$this->configure(excludedDomains: " Intranet.example,\r\n*.cdn.example  192.168.1.10\n.dot.example,[::1],,\n");
+		$this->configure(excludedDomains: " Intranet.example\r\n*.cdn.example  192.168.1.10\n.dot.example [::1]\n\n");
 		$notProxied = [
 			'http://intranet.example/a.png' => 'Excluded domains must not be proxied',
 			'https://INTRANET.example/a.png' => 'Excluded domains must be matched case-insensitively',
