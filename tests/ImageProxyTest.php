@@ -68,6 +68,7 @@ final class ImageProxyTest {
 			$this->testImageAttributes();
 			$this->testVideoPosters();
 			$this->testUriSchemes();
+			$this->testExcludedDomains();
 		} catch (FreshRSS_Context_Exception $e) {
 			throw new RuntimeException('ImageProxy configuration failed', 0, $e);
 		} finally {
@@ -77,7 +78,7 @@ final class ImageProxyTest {
 		fwrite(STDOUT, "ImageProxy regression tests passed ({$this->assertions} assertions).\n");
 	}
 
-	private function configure(bool $includeScheme = true, bool $encodeUrl = false): void {
+	private function configure(bool $includeScheme = true, bool $encodeUrl = false, string $excludedDomains = ''): void {
 		ImageProxyTestContext::configure([
 			'image_proxy_url' => self::PROXY_URL,
 			'image_proxy_scheme_http' => true,
@@ -85,6 +86,7 @@ final class ImageProxyTest {
 			'image_proxy_scheme_default' => 'auto',
 			'image_proxy_scheme_include' => $includeScheme,
 			'image_proxy_url_encode' => $encodeUrl,
+			'image_proxy_excluded_domains' => $excludedDomains,
 		]);
 	}
 
@@ -206,6 +208,45 @@ final class ImageProxyTest {
 			self::PROXY_URL . rawurlencode('images.example/a b.png'),
 			ImageProxyExtension::getProxyImageUri('http://images.example/a b.png'),
 			'Configured scheme removal and URL encoding must be preserved',
+		);
+	}
+
+	/** @throws FreshRSS_Context_Exception */
+	private function testExcludedDomains(): void {
+		$this->configure(excludedDomains: " Intranet.example,\r\n*.cdn.example  192.168.1.10\n.dot.example,[::1],,\n");
+		$notProxied = [
+			'http://intranet.example/a.png' => 'Excluded domains must not be proxied',
+			'https://INTRANET.example/a.png' => 'Excluded domains must be matched case-insensitively',
+			'http://images.intranet.example/a.png' => 'Subdomains of excluded domains must not be proxied',
+			'http://cdn.example/a.png' => 'Wildcard entries must match the domain itself',
+			'http://img.cdn.example/a.png' => 'Wildcard entries must match subdomains',
+			'http://img.dot.example/a.png' => 'Entries with a leading dot must match subdomains',
+			'http://192.168.1.10:8080/a.png' => 'Excluded IP addresses must not be proxied, whatever the port',
+			'http://[::1]/a.png' => 'Excluded IPv6 addresses must not be proxied',
+			'//intranet.example/a.png' => 'Protocol-relative URLs of excluded domains must not be proxied',
+		];
+		foreach ($notProxied as $url => $message) {
+			$this->assertSame($url, ImageProxyExtension::getProxyImageUri($url), $message);
+		}
+
+		$proxied = [
+			'http://example/a.png' => 'Parent domains of excluded domains must be proxied',
+			'http://myintranet.example/a.png' => 'Domains merely ending with an excluded domain must be proxied',
+			'http://intranet.example.org/a.png' => 'Domains merely starting with an excluded domain must be proxied',
+			'http://192.168.1.100/a.png' => 'Other IP addresses must be proxied',
+			'http://images.example/intranet.example.png' => 'Only the host must be compared to excluded domains',
+		];
+		foreach ($proxied as $url => $message) {
+			$this->assertSame(self::PROXY_URL . $url, ImageProxyExtension::getProxyImageUri($url), $message);
+		}
+
+		$images = $this->images(ImageProxyExtension::swapUris(
+			'<img src="http://intranet.example/a.png" srcset="http://intranet.example/b.png 1x, http://images.example/c.png 2x">'));
+		$this->assertSame('http://intranet.example/a.png', $images[0]->getAttribute('src'), 'Images of excluded domains must keep their src');
+		$this->assertSame(
+			'http://intranet.example/b.png 1x, ' . self::PROXY_URL . 'http://images.example/c.png 2x',
+			$images[0]->getAttribute('srcset'),
+			'Only srcset candidates of non-excluded domains must be proxied',
 		);
 	}
 
