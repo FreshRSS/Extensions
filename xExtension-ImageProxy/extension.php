@@ -10,6 +10,7 @@ final class ImageProxyExtension extends Minz_Extension {
 	private const SCHEME_DEFAULT = 'auto';
 	private const SCHEME_INCLUDE = false;
 	private const URL_ENCODE = true;
+	private const EXCLUDED_DOMAINS = '';
 
 	/**
 	 * @throws FreshRSS_Context_Exception
@@ -46,6 +47,10 @@ final class ImageProxyExtension extends Minz_Extension {
 			FreshRSS_Context::userConf()->_attribute('image_proxy_url_encode', self::URL_ENCODE);
 			$save = true;
 		}
+		if (FreshRSS_Context::userConf()->attributeString('image_proxy_excluded_domains') === null) {
+			FreshRSS_Context::userConf()->_attribute('image_proxy_excluded_domains', self::EXCLUDED_DOMAINS);
+			$save = true;
+		}
 		if ($save) {
 			FreshRSS_Context::userConf()->save();
 		}
@@ -66,8 +71,29 @@ final class ImageProxyExtension extends Minz_Extension {
 				Minz_Request::paramString('image_proxy_scheme_default', plaintext: true) ?: self::SCHEME_DEFAULT);
 			FreshRSS_Context::userConf()->_attribute('image_proxy_scheme_include', Minz_Request::paramBoolean('image_proxy_scheme_include'));
 			FreshRSS_Context::userConf()->_attribute('image_proxy_url_encode', Minz_Request::paramBoolean('image_proxy_url_encode'));
+			FreshRSS_Context::userConf()->_attribute('image_proxy_excluded_domains', Minz_Request::paramString('image_proxy_excluded_domains', plaintext: true));
 			FreshRSS_Context::userConf()->save();
 		}
+	}
+
+	/**
+	 * Whether the host is one of the domains excluded from proxying, or a subdomain of one of them.
+	 * @throws FreshRSS_Context_Exception
+	 */
+	private static function isExcludedHost(string $host): bool {
+		$host = trim(strtolower($host), '[].');
+		if ($host === '') {
+			return false;
+		}
+		$excludedDomains = strtolower(FreshRSS_Context::userConf()->attributeString('image_proxy_excluded_domains') ?? '');
+		$domains = preg_split('/\s+/', $excludedDomains, flags: PREG_SPLIT_NO_EMPTY) ?: [];
+		foreach ($domains as $domain) {
+			$domain = ltrim(trim($domain, '[]'), '*.');	// Accept `*.example.org`, `.example.org`, and `[::1]`
+			if ($domain !== '' && ($host === $domain || str_ends_with($host, '.' . $domain))) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -75,6 +101,9 @@ final class ImageProxyExtension extends Minz_Extension {
 	 */
 	public static function getProxyImageUri(string $url): string {
 		$parsed_url = parse_url($url);
+		if (isset($parsed_url['host']) && self::isExcludedHost($parsed_url['host'])) {
+			return $url;
+		}
 		$scheme = $parsed_url['scheme'] ?? '';
 		if ($scheme === 'http') {
 			if (!FreshRSS_Context::userConf()->attributeBool('image_proxy_scheme_http')) {

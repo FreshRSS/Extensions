@@ -52,6 +52,15 @@
 				<?= FreshRSS_Context::userConf()->attributeBool('image_proxy_url_encode') ? 'checked' : '' ?>>
 		</div>
 	</div>
+	<div class="form-group">
+		<label class="group-name" for="image_proxy_excluded_domains"><?= _t('ext.imageproxy.excluded_domains'); ?></label>
+		<div class="group-controls">
+			<textarea name="image_proxy_excluded_domains" id="image_proxy_excluded_domains" class="w100"><?=
+				htmlspecialchars(FreshRSS_Context::userConf()->attributeString('image_proxy_excluded_domains') ?? '', ENT_COMPAT, 'UTF-8')
+			?></textarea>
+			<p class="help"><?= _t('ext.imageproxy.excluded_domains_help'); ?></p>
+		</div>
+	</div>
 
 	<div class="form-group form-actions">
 		<div class="group-controls">
