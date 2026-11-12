@@ -6,7 +6,8 @@ To use it, upload this entire directory to the FreshRSS `./extensions` directory
 
 ## Changelog
 
-* 1.0.5 Use the standard HTML5 parser of PHP 8.4+ when available
+* 1.1.1 Use the standard HTML5 parser of PHP 8.4+ when available
+* 1.1.0 Add a list of domains that are not proxied
 * 1.0.4 Respect the feed option to hide enclosures
 * 1.0.3 Proxy the poster images of videos
 * 1.0.1 Replace deprecated HTML entity conversion on PHP 8.2+
@@ -27,6 +28,10 @@ To use it, upload this entire directory to the FreshRSS `./extensions` directory
 * `scheme_include` (default: `0`): whether to include the scheme - `http*://` - in the proxied URL
 
 * `url_encode` (default: `1`): whether to URL-encode (RFC 3986) the proxied URL
+
+* `excluded_domains` (default: empty): domains whose images are never proxied, one per line, e.g. `intranet.example` and `192.168.1.10`;
+  subdomains are matched too, so `example.org` also covers `images.example.org`.
+  This is useful for images served from internal hosts that the proxy cannot reach, or from domains that the proxy refuses to serve
 
 ## Proxy Settings
 

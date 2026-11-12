@@ -9,7 +9,8 @@ class Node {}
 
 class Element extends Node {
 	public string $innerHTML;
-	public function getAttribute(string $qualifiedName): ?string {}
+	/** @return string Callers check hasAttribute() first (real signature is ?string) */
+	public function getAttribute(string $qualifiedName): string {}
 	public function hasAttribute(string $qualifiedName): bool {}
 	public function setAttribute(string $qualifiedName, string $value): void {}
 }
