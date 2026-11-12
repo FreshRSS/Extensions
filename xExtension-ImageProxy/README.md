@@ -6,6 +6,7 @@ To use it, upload this entire directory to the FreshRSS `./extensions` directory
 
 ## Changelog
 
+* 1.1.1 Use the standard HTML5 parser of PHP 8.4+ when available
 * 1.1.0 Add a list of domains that are not proxied
 * 1.0.4 Respect the feed option to hide enclosures
 * 1.0.3 Proxy the poster images of videos
