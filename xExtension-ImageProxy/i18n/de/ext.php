@@ -9,6 +9,6 @@ return array(
 		'scheme_include' => 'http*:// in die URL einfügen',
 		'url_encode' => 'URL-Prozentkodierung',
 		'excluded_domains' => 'Diese Domains nicht über den Proxy laden',
-		'excluded_domains_help' => 'Eine Domain pro Zeile. Ihre Subdomains werden ebenfalls nicht über den Proxy geladen: example.org gilt zum Beispiel auch für images.example.org.',
+		'excluded_domains_help' => 'Eine Domain pro Zeile. Subdomains sind ebenfalls eingeschlossen: example.org gilt zum Beispiel auch für images.example.org.',
 	),
 );

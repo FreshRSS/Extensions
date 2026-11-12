@@ -9,6 +9,6 @@ return array(
 		'scheme_include' => 'http*:// in url opnemen',
 		'url_encode' => 'Url encoderen',
 		'excluded_domains' => 'Deze domeinen niet proxyen',
-		'excluded_domains_help' => 'Eén domein per regel. Hun subdomeinen worden ook niet geproxyd: example.org geldt bijvoorbeeld ook voor images.example.org.',
+		'excluded_domains_help' => 'Eén domein per regel. Subdomeinen zijn ook inbegrepen: example.org geldt bijvoorbeeld ook voor images.example.org.',
 	),
 );
