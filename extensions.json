@@ -371,7 +371,7 @@
             "name": "Image Proxy",
             "author": "Frans de Jonge",
             "description": "No insecure content warnings or disappearing images.",
-            "version": "1.0.4",
+            "version": "1.1.0",
             "entrypoint": "ImageProxy",
             "type": "user",
             "url": "https://github.com/FreshRSS/Extensions",
