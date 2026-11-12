@@ -1,9 +1,7 @@
 parameters:
 	phpVersion:
-		min: 80100	# PHP 8.1
+		min: 80400	# PHP 8.4 (PHP 8.1+ covered by phpstan-php83.neon)
 		max: 80599	# PHP 8.5
-	scanFiles:
-		- tests/stubs/php84-dom.php
 	level: 10	# https://phpstan.org/user-guide/rule-levels
 	fileExtensions:
 		- php
@@ -14,7 +12,6 @@ parameters:
 	excludePaths:
 		analyse:
 			- ../FreshRSS
-			- tests/stubs/php84-dom.php
 		analyseAndScan:
 			- .git/*?
 			- node_modules/*?

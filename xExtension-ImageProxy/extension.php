@@ -157,8 +157,8 @@ final class ImageProxyExtension extends Minz_Extension {
 			if (!($img instanceof DOMElement || $img instanceof Dom\Element)) {
 				continue;
 			}
-			if ($img->hasAttribute('src')) {
-				$src = $img->getAttribute('src');
+			$src = $img->getAttribute('src');
+			if ($src != '') {	// `''` with DOMElement, `null` with Dom\Element
 				$newSrc = self::getProxyImageUri($src);
 				/*
 				Due to the URL change, FreshRSS is not aware of already rendered enclosures.
@@ -168,8 +168,8 @@ final class ImageProxyExtension extends Minz_Extension {
 				$img->setAttribute('data-xextension-imageproxy-original-src', $src);
 				$img->setAttribute('src', $newSrc);
 			}
-			if ($img->hasAttribute('srcset')) {
-				$srcSet = $img->getAttribute('srcset');
+			$srcSet = $img->getAttribute('srcset');
+			if ($srcSet != '') {
 				$newSrcSet = preg_replace_callback('/(?:([^\s,]+)(\s*(?:\s+\d+[wx])(?:,\s*)?))/', fn (array $matches) => self::getSrcSetUris($matches), $srcSet);
 				if ($newSrcSet != null) {
 					$img->setAttribute('data-xextension-imageproxy-original-srcset', $srcSet);
@@ -180,10 +180,13 @@ final class ImageProxyExtension extends Minz_Extension {
 
 		// Video posters are images too; keep the original URL for the same reason as above
 		foreach ($doc->getElementsByTagName('video') as $video) {
-			if (!($video instanceof DOMElement || $video instanceof Dom\Element) || !$video->hasAttribute('poster')) {
+			if (!($video instanceof DOMElement || $video instanceof Dom\Element)) {
 				continue;
 			}
 			$poster = $video->getAttribute('poster');
+			if ($poster == '') {
+				continue;
+			}
 			$video->setAttribute('data-xextension-imageproxy-original-poster', $poster);
 			$video->setAttribute('poster', self::getProxyImageUri($poster));
 		}
