@@ -213,7 +213,7 @@ final class ImageProxyTest {
 
 	/** @throws FreshRSS_Context_Exception */
 	private function testExcludedDomains(): void {
-		$this->configure(excludedDomains: " Intranet.example\r\n*.cdn.example  192.168.1.10\n.dot.example [::1]\n\n");
+		$this->configure(excludedDomains: " Intranet.example\r\n*.cdn.example  192.168.1.10\n.dot.example [::1] star.example.*\n\n");
 		$notProxied = [
 			'http://intranet.example/a.png' => 'Excluded domains must not be proxied',
 			'https://INTRANET.example/a.png' => 'Excluded domains must be matched case-insensitively',
@@ -233,6 +233,7 @@ final class ImageProxyTest {
 			'http://example/a.png' => 'Parent domains of excluded domains must be proxied',
 			'http://myintranet.example/a.png' => 'Domains merely ending with an excluded domain must be proxied',
 			'http://intranet.example.org/a.png' => 'Domains merely starting with an excluded domain must be proxied',
+			'http://star.example/a.png' => 'A trailing wildcard is not supported and must not match',
 			'http://192.168.1.100/a.png' => 'Other IP addresses must be proxied',
 			'http://images.example/intranet.example.png' => 'Only the host must be compared to excluded domains',
 		];

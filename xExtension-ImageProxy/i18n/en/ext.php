@@ -9,6 +9,6 @@ return array(
 		'scheme_include' => 'Include http*:// in URL',
 		'url_encode' => 'Encode the URL',
 		'excluded_domains' => 'Do not proxy these domains',
-		'excluded_domains_help' => 'One domain per line. Their subdomains are not proxied either: for instance, example.org also matches images.example.org.',
+		'excluded_domains_help' => 'One domain per line. Subdomains are included as well: for instance, example.org also matches images.example.org.',
 	),
 );
