@@ -120,24 +120,16 @@ final class ImageProxyExtension extends Minz_Extension {
 	}
 
 	/**
+	 * Proxies the images of a parsed HTML document: `src` and `srcset` of `<img>` and `poster` of `<video>`.
 	 * @throws FreshRSS_Context_Exception
 	 */
-	public static function swapUris(string $content): string {
-		if ($content === '') {
-			return $content;
-		}
-
-		$doc = new DOMDocument();
-		libxml_use_internal_errors(true);	// prevent tag soup errors from showing
-		$content = mb_encode_numericentity($content, [0x80, 0x10FFFF, 0, ~0], 'UTF-8');
-		$doc->loadHTML($content);
-		$imgs = $doc->getElementsByTagName('img');
-		foreach ($imgs as $img) {
-			if (!($img instanceof DOMElement)) {
+	private static function swapDocumentUris(DOMDocument|Dom\HTMLDocument $doc): void {
+		foreach ($doc->getElementsByTagName('img') as $img) {
+			if (!($img instanceof DOMElement || $img instanceof Dom\Element)) {
 				continue;
 			}
 			if ($img->hasAttribute('src')) {
-				$src = $img->getAttribute('src');
+				$src = $img->getAttribute('src') ?? '';
 				$newSrc = self::getProxyImageUri($src);
 				/*
 				Due to the URL change, FreshRSS is not aware of already rendered enclosures.
@@ -148,7 +140,7 @@ final class ImageProxyExtension extends Minz_Extension {
 				$img->setAttribute('src', $newSrc);
 			}
 			if ($img->hasAttribute('srcset')) {
-				$srcSet = $img->getAttribute('srcset');
+				$srcSet = $img->getAttribute('srcset') ?? '';
 				$newSrcSet = preg_replace_callback('/(?:([^\s,]+)(\s*(?:\s+\d+[wx])(?:,\s*)?))/', fn (array $matches) => self::getSrcSetUris($matches), $srcSet);
 				if ($newSrcSet != null) {
 					$img->setAttribute('data-xextension-imageproxy-original-srcset', $srcSet);
@@ -158,15 +150,37 @@ final class ImageProxyExtension extends Minz_Extension {
 		}
 
 		// Video posters are images too; keep the original URL for the same reason as above
-		$videos = $doc->getElementsByTagName('video');
-		foreach ($videos as $video) {
-			if (!($video instanceof DOMElement) || !$video->hasAttribute('poster')) {
+		foreach ($doc->getElementsByTagName('video') as $video) {
+			if (!($video instanceof DOMElement || $video instanceof Dom\Element) || !$video->hasAttribute('poster')) {
 				continue;
 			}
-			$poster = $video->getAttribute('poster');
+			$poster = $video->getAttribute('poster') ?? '';
 			$video->setAttribute('data-xextension-imageproxy-original-poster', $poster);
 			$video->setAttribute('poster', self::getProxyImageUri($poster));
 		}
+	}
+
+	/**
+	 * @throws FreshRSS_Context_Exception
+	 */
+	public static function swapUris(string $content): string {
+		if ($content === '') {
+			return $content;
+		}
+
+		if (class_exists('Dom\HTMLDocument')) {	// PHP 8.4+
+			// Standard HTML5 parser, which handles modern markup such as `<picture>` and does not wrap loose text in `<p>`
+			$doc = Dom\HTMLDocument::createFromString($content, LIBXML_NOERROR, overrideEncoding: 'UTF-8');
+			self::swapDocumentUris($doc);
+			return $doc->body->innerHTML ?? '';
+		}
+
+		// PHP < 8.4
+		$doc = new DOMDocument();
+		libxml_use_internal_errors(true);	// prevent tag soup errors from showing
+		$content = mb_encode_numericentity($content, [0x80, 0x10FFFF, 0, ~0], 'UTF-8');
+		$doc->loadHTML($content);
+		self::swapDocumentUris($doc);
 
 		$body = $doc->getElementsByTagName('body')->item(0);
 

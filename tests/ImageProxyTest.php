@@ -67,6 +67,7 @@ final class ImageProxyTest {
 			$this->testHtmlDocumentsAndTagSoup();
 			$this->testImageAttributes();
 			$this->testVideoPosters();
+			$this->testHtml5Parsing();
 			$this->testUriSchemes();
 		} catch (FreshRSS_Context_Exception $e) {
 			throw new RuntimeException('ImageProxy configuration failed', 0, $e);
@@ -141,8 +142,8 @@ final class ImageProxyTest {
 
 		$this->assertSame(3, count($images), 'All image elements must remain present');
 		$this->assertSame(
-			self::PROXY_URL . 'http://images.example/one%20caf%C3%A9.jpg',
-			$images[0]->getAttribute('src'),
+			self::PROXY_URL . 'http://images.example/one café.jpg',
+			rawurldecode($images[0]->getAttribute('src')),	// The legacy parser of PHP < 8.4 percent-encodes URLs when serialising
 			'Unicode image URLs must be proxied',
 		);
 		$this->assertSame(
@@ -184,6 +185,37 @@ final class ImageProxyTest {
 		);
 		$this->assertSame('https://videos.example/one.mp4', $videos[0]->getAttribute('src'), 'Video sources must not be proxied');
 		$this->assertSame(false, $videos[1]->hasAttribute('poster'), 'Videos without poster must remain without poster');
+	}
+
+	/** @throws FreshRSS_Context_Exception */
+	private function testHtml5Parsing(): void {
+		if (!class_exists('Dom\HTMLDocument')) {
+			return;	// The HTML5 parser is only available in PHP 8.4+
+		}
+
+		$picture = ImageProxyExtension::swapUris(
+			'<picture><source srcset="https://images.example/a.webp" type="image/webp"><img src="http://images.example/a.jpg"></picture>'
+			. '<p>after</p>'
+		);
+		$this->assertSame(
+			'<picture><source srcset="https://images.example/a.webp" type="image/webp">'
+				. '<img src="' . self::PROXY_URL . 'http://images.example/a.jpg" data-xextension-imageproxy-original-src="http://images.example/a.jpg">'
+				. '</picture><p>after</p>',
+			$picture,
+			'Void elements such as <source> must not swallow the following elements',
+		);
+
+		$this->assertSame(
+			'Loose text &amp; <br> line',
+			ImageProxyExtension::swapUris('Loose text &amp; <br> line'),
+			'Loose text must not be wrapped in a paragraph',
+		);
+
+		$this->assertSame(
+			'<p>Body text</p>',
+			ImageProxyExtension::swapUris('<!doctype html><html><body class="page"><p>Body text</p></body></html>'),
+			'The <body> element must not be returned, even with attributes',
+		);
 	}
 
 	/** @throws FreshRSS_Context_Exception */
