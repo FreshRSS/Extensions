@@ -9,6 +9,8 @@ const TYPE_GIT = 'git';
 $tempFolder = './third-party/';
 
 $extensions = [];
+/** @var array<int,string> $extensionDirectories Absolute path of the directory of each extension, with the same keys as $extensions */
+$extensionDirectories = [];
 $gitRepositories = [];
 if (file_exists($tempFolder)) {
 	// TODO: Improve by keeping git copy if possible (e.g. fetch + reset)
@@ -85,10 +87,68 @@ foreach ($gitRepositories as $key => $gitRepository) {
 			}
 			$metadata['description'] = strip_tags(is_string($metadata['description'] ?? null) ? $metadata['description'] : '', allowed_tags: ['a']);
 
+			$extensionDirectories[count($extensions)] = realpath(dirname($metadataFile)) ?: '';
 			$extensions[] = $metadata;
 		} catch (Exception $exception) {
 			continue;
 		}
+	}
+}
+
+// ------------------------------------------------------------------------------- //
+// Count the PHPStan errors of each extension, when PHPStan and FreshRSS are found //
+// ------------------------------------------------------------------------------- //
+if (is_file('vendor/bin/phpstan') && is_dir('../FreshRSS/')) {
+	echo PHP_EOL, 'Running PHPStan on the extensions', PHP_EOL;
+	$phpstanOutput = [];
+	$phpstanExitCode = 0;
+	$phpstanCommand = escapeshellarg(PHP_BINARY) . ' vendor/bin/phpstan analyse -c phpstan-third-party.neon --error-format=json --no-progress .';
+	exec($phpstanCommand, $phpstanOutput, $phpstanExitCode);
+	try {
+		// PHPStan exits with 1 when errors are found, and with another non-zero code when it cannot analyse
+		if ($phpstanExitCode > 1) {
+			throw new RuntimeException('PHPStan failed with exit code ' . $phpstanExitCode);
+		}
+		$phpstanResult = json_decode(implode("\n", $phpstanOutput), true, 512, JSON_THROW_ON_ERROR);
+		if (!is_array($phpstanResult) || !is_array($phpstanResult['files'] ?? null) || !is_array($phpstanResult['errors'] ?? null)) {
+			throw new RuntimeException('Not a PHPStan JSON output!');
+		}
+
+		$phpstanErrors = array_fill_keys(array_keys($extensions), 0);
+		// Attribute each error to the extension with the most specific directory found in the path of the file
+		$findExtension = static function (string $path) use ($extensionDirectories): ?int {
+			$found = null;
+			foreach ($extensionDirectories as $key => $directory) {
+				if ($directory !== '' && str_contains($path, $directory . '/') &&
+					($found === null || strlen($directory) > strlen($extensionDirectories[$found]))) {
+					$found = $key;
+				}
+			}
+			return $found;
+		};
+		foreach ($phpstanResult['files'] as $file => $fileResult) {
+			$key = $findExtension((string)$file);
+			if ($key !== null && is_array($fileResult) && is_int($fileResult['errors'] ?? null)) {
+				$phpstanErrors[$key] += $fileResult['errors'];
+			}
+		}
+		// Errors not tied to a file, such as internal errors, mention the path of the file being analysed
+		foreach ($phpstanResult['errors'] as $error) {
+			if (!is_string($error)) {
+				continue;
+			}
+			echo 'PHPStan: ', $error, PHP_EOL;
+			$key = $findExtension($error);
+			if ($key !== null) {
+				$phpstanErrors[$key]++;
+			}
+		}
+
+		foreach ($phpstanErrors as $key => $count) {
+			$extensions[$key]['phpstan_errors'] = $count;
+		}
+	} catch (Exception $exception) {
+		echo 'The PHPStan errors can not be counted: ', $exception->getMessage(), PHP_EOL;
 	}
 }
 
