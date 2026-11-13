@@ -141,6 +141,14 @@ final class ImageProxyExtension extends Minz_Extension {
 	}
 
 	/**
+	 * Same as getProxyImageUri() for the HTML-encoded URLs that FreshRSS stores, e.g. the ones of thumbnails.
+	 * @throws FreshRSS_Context_Exception
+	 */
+	public static function getProxyImageHtmlUri(string $url): string {
+		return htmlspecialchars(self::getProxyImageUri(htmlspecialchars_decode($url, ENT_QUOTES)), ENT_COMPAT, 'UTF-8');
+	}
+
+	/**
 	 * @param array<string> $matches
 	 * @throws FreshRSS_Context_Exception
 	 */
@@ -216,10 +224,43 @@ final class ImageProxyExtension extends Minz_Extension {
 		// The enclosures become part of the content, so only include them if the feed displays them
 		// We most likely already have the feed object in cache, otherwise make a request
 		$feed = FreshRSS_Category::findFeed(FreshRSS_Context::categories(), $entry->feedId()) ?? $entry->feed();
-		$entry->_content(
-			self::swapUris($entry->content($feed?->attributeBoolean('display_enclosures') ?? true))
-		);
+		$withEnclosures = $feed?->attributeBoolean('display_enclosures') ?? true;
+		$entry->_content(self::swapUris($entry->content($withEnclosures)));
+		self::swapThumbnailUris($entry, $withEnclosures);
 
 		return $entry;
+	}
+
+	/**
+	 * Proxy the thumbnails of the entry and of its enclosures, which are shown in the list of articles.
+	 * @throws FreshRSS_Context_Exception
+	 */
+	private static function swapThumbnailUris(FreshRSS_Entry $entry, bool $withEnclosures): void {
+		$thumbnail = $entry->attributeArray('thumbnail');
+		if (is_string($thumbnail['url'] ?? null) && $thumbnail['url'] !== '') {
+			$url = self::getProxyImageHtmlUri($thumbnail['url']);
+			// When displaying the enclosures, FreshRSS appends the thumbnail to the content unless its URL is found there.
+			// The content set above already includes the thumbnail, so to avoid showing it twice,
+			// only proxy it if the proxied URL is found in the content as well (e.g. not if the content only links to it).
+			if (!$withEnclosures || preg_match('/([\'"])' . preg_quote($url, '/') . '\1/', $entry->content(false)) === 1) {
+				$thumbnail['url'] = $url;
+				$entry->_attribute('thumbnail', $thumbnail);
+			}
+		}
+
+		// The thumbnails of the enclosures are not compared to the content, so they can always be proxied
+		$enclosures = $entry->attributeArray('enclosures') ?? [];
+		foreach ($enclosures as $key => $enclosure) {
+			if (is_array($enclosure) && is_array($enclosure['thumbnails'] ?? null)) {
+				$enclosure['thumbnails'] = array_map(
+					fn (mixed $src) => is_string($src) ? self::getProxyImageHtmlUri($src) : $src,
+					$enclosure['thumbnails']
+				);
+				$enclosures[$key] = $enclosure;
+			}
+		}
+		if ($enclosures !== []) {
+			$entry->_attribute('enclosures', $enclosures);
+		}
 	}
 }
