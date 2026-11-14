@@ -290,17 +290,6 @@
             "directory": "."
         },
         {
-            "name": "GReader Redate",
-            "author": "Julien Avérous",
-            "description": "Use published date instead of fetching date.",
-            "version": "1.3",
-            "entrypoint": "GReaderRedate",
-            "type": "user",
-            "url": "https://codeberg.org/javerous/freshrss-greader-redate",
-            "method": "git",
-            "directory": "xExtension-GReaderRedate"
-        },
-        {
             "name": "Google News Top Stories",
             "author": "shcheglovnd",
             "description": "The top stories of Google News, each one entry however often Google changes its lead article, dated when it enters the top N, with how long it stays and its best rank. Subscribe to https://news.google.com/rss?hl=en-US&gl=US&ceid=US:en, or e.g. …&top=5&min_hours=1.",
