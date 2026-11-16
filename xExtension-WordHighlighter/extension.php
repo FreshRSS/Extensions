@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 final class WordHighlighterExtension extends Minz_Extension
 {
-	private const JSON_ENCODE_CONF = JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR;
-
-	public string $word_highlighter_conf = 'test';
-	public string $permission_problem = '';
+	public string $word_highlighter_conf = '';
 	public bool $enable_in_article = false;
 	public bool $enable_logs = false;
 	public bool $case_sensitive = false;
@@ -16,82 +13,124 @@ final class WordHighlighterExtension extends Minz_Extension
 	#[\Override]
 	public function init(): void {
 		$this->registerTranslates();
+		$this->registerHook(Minz_HookType::JsVars, $this->jsVars(...));
 
 		// register CSS for WordHighlighter:
 		Minz_View::appendStyle($this->getFileUrl('style.css'));
 
 		Minz_View::appendScript($this->getFileUrl('mark.min.js'), cond: false, defer: false, async: false);
 
-		$current_user = Minz_Session::paramString('currentUser');
-
-		$staticPath = join_path($this->getPath(), 'static');
-		$configFileJs = join_path($staticPath, 'config.' . $current_user . '.js');
-
-		if (file_exists($configFileJs)) {
-			Minz_View::appendScript($this->getFileUrl('config.' . $current_user . '.js'));
-		}
-
 		Minz_View::appendScript($this->getFileUrl('word-highlighter.js'));
+	}
+
+	/**
+	 * @param array<string,mixed> $vars
+	 * @return array<string,mixed>
+	 */
+	public function jsVars(array $vars): array {
+		$name = $this->getName();
+		// $vars values are mixed; copy an existing array before adding the configuration key.
+		$extensionVars = [];
+		if (isset($vars[$name]) && is_array($vars[$name])) {
+			$extensionVars = $vars[$name];
+		}
+		$extensionVars['configuration'] = $this->getWordHighlighterConfiguration();
+		$vars[$name] = $extensionVars;
+		return $vars;
 	}
 
 	#[\Override]
 	public function handleConfigureAction(): void {
 		$this->registerTranslates();
 
-		$current_user = Minz_Session::paramString('currentUser');
-		$staticPath = join_path($this->getPath(), 'static');
-
-		$configFileJson = join_path($staticPath, ('config.' . $current_user . '.json'));
-
-		if (!file_exists($configFileJson) && !is_writable($staticPath)) {
-			$tmpPath = explode(EXTENSIONS_PATH . '/', $staticPath);
-			$this->permission_problem = $tmpPath[1] . '/';
-		} elseif (file_exists($configFileJson) && !is_writable($configFileJson)) {
-			$tmpPath = explode(EXTENSIONS_PATH . '/', $configFileJson);
-			$this->permission_problem = $tmpPath[1];
-		} elseif (Minz_Request::isPost()) {
-			$configWordList = html_entity_decode(Minz_Request::paramString('words_list'));
-
-			$this->word_highlighter_conf = $configWordList;
-			$this->enable_in_article = (bool) Minz_Request::paramString('enable-in-article');
-			$this->enable_logs = (bool) Minz_Request::paramString('enable_logs');
-			$this->case_sensitive = (bool) Minz_Request::paramString('case_sensitive');
-			$this->separate_word_search = (bool) Minz_Request::paramString('separate_word_search');
-
-			$configObj = [
-				'enable_in_article' => $this->enable_in_article,
-				'enable_logs' => $this->enable_logs,
-				'case_sensitive' => $this->case_sensitive,
-				'separate_word_search' => $this->separate_word_search,
-				'words' => preg_split("/\r\n|\n|\r/", $configWordList) ?: [],
-			];
-			$configJson = json_encode($configObj, WordHighlighterExtension::JSON_ENCODE_CONF);
-			file_put_contents(join_path($staticPath, ('config.' . $current_user . '.json')), $configJson . PHP_EOL);
-			file_put_contents(join_path($staticPath, ('config.' . $current_user . '.js')), $this->jsonToJs($configJson) . PHP_EOL);
+		if (Minz_Request::isPost()) {
+			// setUserConfigurationValue() saves on every call. Edge has no multi-key
+			// write, so the flat keys are stored one at a time.
+			$this->setUserConfigurationValue(
+				'words',
+				$this->normalizeWords(preg_split('/\r\n|\n|\r/', Minz_Request::paramString('words_list', true)) ?: [])
+			);
+			$this->setUserConfigurationValue('enable_in_article', Minz_Request::paramBoolean('enable-in-article'));
+			$this->setUserConfigurationValue('enable_logs', Minz_Request::paramBoolean('enable_logs'));
+			$this->setUserConfigurationValue('case_sensitive', Minz_Request::paramBoolean('case_sensitive'));
+			$this->setUserConfigurationValue('separate_word_search', Minz_Request::paramBoolean('separate_word_search'));
 		}
 
-		if (file_exists($configFileJson)) {
-			try {
-				$confJson = json_decode(file_get_contents($configFileJson) ?: '', true, 8, JSON_THROW_ON_ERROR);
-				if (json_last_error() !== JSON_ERROR_NONE || !is_array($confJson)) {
-					return;
-				}
-				$this->enable_in_article = (bool) ($confJson['enable_in_article'] ?? false);
-				$this->enable_logs = (bool) ($confJson['enable_logs'] ?? false);
-				$this->case_sensitive = (bool) ($confJson['case_sensitive'] ?? false);
-				$this->separate_word_search = (bool) ($confJson['separate_word_search'] ?? false);
-				$words = is_array($confJson['words']) ? array_filter($confJson['words'], static fn($word) => is_string($word)) : [];
-				$this->word_highlighter_conf = implode("\n", $words);
-			} catch (Exception $exception) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
-				// probably nothing to do needed
-			}
-		}
+		$configuration = $this->getWordHighlighterConfiguration();
+		$this->word_highlighter_conf = implode("\n", $configuration['words']);
+		$this->enable_in_article = $configuration['enable_in_article'];
+		$this->enable_logs = $configuration['enable_logs'];
+		$this->case_sensitive = $configuration['case_sensitive'];
+		$this->separate_word_search = $configuration['separate_word_search'];
 	}
 
-	private function jsonToJs(string $jsonStr): string {
-		$js = "window.WordHighlighterConf = " .
-		$jsonStr . ";\n" .
-		"window.WordHighlighterConf.enable_logs && console.log('WordHighlighter: loaded user config:', window.WordHighlighterConf);";
-		return $js;
+	/**
+	 * Settings from the user configuration, or from the legacy per-user JSON file
+	 * (static/config.<user>.json, written by versions up to 0.0.4) until they are saved once.
+	 * @return array{words:list<string>,enable_in_article:bool,enable_logs:bool,case_sensitive:bool,separate_word_search:bool}
+	 */
+	private function getWordHighlighterConfiguration(): array {
+		$storedWords = $this->getUserConfigurationArray('words');
+		if ($storedWords === null) {
+			$configuration = $this->readLegacyConfiguration();
+		} else {
+			$configuration = [
+				'words' => $storedWords,
+				'enable_in_article' => $this->getUserConfigurationBool('enable_in_article'),
+				'enable_logs' => $this->getUserConfigurationBool('enable_logs'),
+				'case_sensitive' => $this->getUserConfigurationBool('case_sensitive'),
+				'separate_word_search' => $this->getUserConfigurationBool('separate_word_search'),
+			];
+		}
+
+		return [
+			'words' => $this->normalizeWords(is_array($configuration['words'] ?? null) ? $configuration['words'] : []),
+			'enable_in_article' => ($configuration['enable_in_article'] ?? false) === true,
+			'enable_logs' => ($configuration['enable_logs'] ?? false) === true,
+			'case_sensitive' => ($configuration['case_sensitive'] ?? false) === true,
+			'separate_word_search' => ($configuration['separate_word_search'] ?? false) === true,
+		];
+	}
+
+	/**
+	 * Legacy per-user file from versions up to 0.0.4. Read-only; never written.
+	 * @return array<mixed>
+	 */
+	private function readLegacyConfiguration(): array {
+		$current_user = Minz_User::name() ?? '';
+		if ($current_user === '') {
+			$current_user = Minz_Session::paramString('currentUser');
+		}
+		if (preg_match('/\A[A-Za-z0-9_.-]+\z/', $current_user) !== 1) {
+			return [];
+		}
+
+		$configFileJson = join_path($this->getPath(), 'static', 'config.' . $current_user . '.json');
+		if (!is_file($configFileJson) || !is_readable($configFileJson)) {
+			return [];
+		}
+
+		try {
+			$legacyConfiguration = json_decode(file_get_contents($configFileJson) ?: '', true, 8, JSON_THROW_ON_ERROR);
+		} catch (JsonException $exception) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
+			// Ignore invalid legacy configuration.
+			return [];
+		}
+
+		return is_array($legacyConfiguration) ? $legacyConfiguration : [];
+	}
+
+	/**
+	 * @param array<mixed> $words
+	 * @return list<string>
+	 */
+	private function normalizeWords(array $words): array {
+		$result = [];
+		foreach ($words as $word) {
+			if (is_string($word) && trim($word) !== '') {
+				$result[] = trim($word);
+			}
+		}
+		return array_values(array_unique($result));
 	}
 }
