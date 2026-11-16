@@ -8,6 +8,7 @@ To use it, upload the ```xExtension-YouTube``` directory to the FreshRSS `./exte
 
 - Embeds Youtube videos directly in FreshRSS, instead of linking to the Youtube page
 - Simplifies the subscription to channel URLs by automatically detecting the channels feed URL
+- Optionally shows only the video thumbnail, and loads the player once it is clicked, so that the pages load faster and the players do not contact YouTube until you decide to watch a video
 
 You can simply add Youtube video subscriptions by pasting URLs like:
 - `https://www.youtube.com/channel/UCwbjxO5qQTMkSZVueqKwxuw`
@@ -22,6 +23,9 @@ With activated Youtube extension:
 ![screenshot after](https://github.com/kevinpapst/freshrss-youtube/blob/screenshot-readme/after.png?raw=true "After activating the extension you can enjoy your video directly in the FreshRSS stream")
 
 ## Changelog
+
+1.5.0:
+- Added an option to only load the player once the video thumbnail is clicked
 
 1.4.1:
 - Fixed the original thumbnail, description and enclosures of the feed being appended below the video

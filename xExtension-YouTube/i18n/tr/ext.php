@@ -13,5 +13,6 @@ return array(
 		'fetching_icons' => 'Fetching icons',
 		'finished_fetching_icons' => 'Finished fetching icons.',
 		'use_nocookie' => 'Çerezsiz olan "www.youtube-nocookie.com" alan adını kullanın',
+		'click_to_play' => 'Oynatıcıyı yalnızca video küçük resmine tıklandığında yükle',
 	),
 );
