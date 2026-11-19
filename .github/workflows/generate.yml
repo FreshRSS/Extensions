@@ -12,6 +12,7 @@ on:
       - 'repositories.json' # For new third-party extensions
       # - 'extensions.json' # Must not be included to avoid causing a commit loop
       - 'generate.php' # To regenerate extensions.json with the latest approach
+      - 'phpstan-third-party.neon' # To count the PHPStan errors of extensions with the latest rules
 
 permissions:
   contents: write
@@ -21,10 +22,25 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FILE: extensions.json
+    defaults:
+      run:
+        working-directory: ./Extensions
 
     steps:
       - name: Checkout source code # zizmor: ignore[artipacked] Credentials are needed later
         uses: actions/checkout@v7
+        with:
+          path: Extensions
+
+      - name: Checkout FreshRSS source code # Needed by PHPStan
+        uses: actions/checkout@v7
+        with:
+          repository: FreshRSS/FreshRSS
+          path: FreshRSS
+          persist-credentials: false
+
+      - name: Run Composer install # Needed by PHPStan
+        run: composer install --prefer-dist --no-progress
 
       - name: Build JSON file
         run: php ./generate.php

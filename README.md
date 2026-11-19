@@ -17,6 +17,8 @@ make test-all
 composer run-script phpstan-third-party
 ```
 
+When `../FreshRSS/` and the Composer dependencies are available, `./generate.php` also adds the number of PHPStan errors of each extension to `extensions.json`, as `phpstan_errors`.
+
 ## Core extensions
 
 *Custom CSS* and *Custom JS* are now a part of [core extensions shipped with FreshRSS](https://github.com/FreshRSS/FreshRSS/tree/edge/lib/core-extensions).
