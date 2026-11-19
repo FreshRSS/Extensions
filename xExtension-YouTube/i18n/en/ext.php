@@ -13,5 +13,6 @@ return array(
 		'fetching_icons' => 'Fetching icons',
 		'finished_fetching_icons' => 'Finished fetching icons.',
 		'use_nocookie' => 'Use the cookie-free domain www.youtube-nocookie.com',
+		'click_to_play' => 'Only load the player once the video thumbnail is clicked',
 	),
 );
