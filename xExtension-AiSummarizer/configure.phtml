@@ -1,0 +1,142 @@
+<?php
+$apiUrl = $this->getUserConfigurationString('api_url') ?? '';
+$apiKey = $this->getUserConfigurationString('api_key') ?? '';
+$model = $this->getUserConfigurationString('model') ?? 'gpt-4o-mini';
+$maxContentLength = $this->getUserConfigurationInt('max_content_length') ?? 8000;
+$timeout = $this->getUserConfigurationInt('timeout') ?? 30;
+$maxTokens = $this->getUserConfigurationInt('max_tokens') ?? 512;
+$maxRetries = $this->getUserConfigurationInt('max_retries') ?? 2;
+$enableSummary = $this->getUserConfigurationBool('enable_summary') ?? false;
+$summaryStyle = $this->getUserConfigurationString('summary_style') ?? 'blockquote';
+$onlyUnread = $this->getUserConfigurationBool('only_unread') ?? true;
+$searchFilter = $this->getUserConfigurationString('search_filter') ?? '';
+
+$defaultPrompt = 'Summarize the following article in 2-3 sentences, focusing on the key points:
+
+Title: {title}
+Content: {content}';
+
+if ($this->user_prompt === '') {
+	$this->user_prompt = $defaultPrompt;
+}
+?>
+
+<div class="post-category">
+	<h3><?= _t('ext.ai_summarizer.config.api_title') ?></h3>
+
+	<div class="form-group">
+		<label class="group-name" for="api_url"><?= _t('ext.ai_summarizer.config.api_url') ?></label>
+		<div class="group-controls">
+			<input type="text" id="api_url" name="api_url" value="<?= htmlspecialchars($apiUrl, ENT_COMPAT, 'UTF-8') ?>" placeholder="https://api.openai.com/v1" style="width: 100%;" />
+			<p class="help-block">OpenAI-compatible API base URL (e.g., https://api.openai.com/v1, http://localhost:11434/v1 for Ollama)</p>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="group-name" for="api_key"><?= _t('ext.ai_summarizer.config.api_key') ?></label>
+		<div class="group-controls">
+			<input type="password" id="api_key" name="api_key" value="<?= htmlspecialchars($apiKey, ENT_COMPAT, 'UTF-8') ?>" placeholder="sk-..." style="width: 100%;" />
+			<p class="help-block">Bearer token for API authentication (optional for local APIs like Ollama)</p>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="group-name" for="model"><?= _t('ext.ai_summarizer.config.model') ?></label>
+		<div class="group-controls">
+			<input type="text" id="model" name="model" value="<?= htmlspecialchars($model, ENT_COMPAT, 'UTF-8') ?>" placeholder="gpt-4o-mini" style="width: 100%;" />
+			<p class="help-block">Model name (e.g., gpt-4o-mini, llama3, gemini-pro)</p>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="group-name" for="timeout"><?= _t('ext.ai_summarizer.config.timeout') ?></label>
+		<div class="group-controls">
+			<input type="number" id="timeout" name="timeout" value="<?= $timeout ?>" min="1" max="300" />
+			<p class="help-block">HTTP request timeout in seconds (1–300)</p>
+		</div>
+	</div>
+</div>
+
+<div class="post-category">
+	<h3><?= _t('ext.ai_summarizer.config.summarization_title') ?></h3>
+
+	<div class="form-group">
+		<label class="group-name">
+			<input type="checkbox" id="enable_summary" name="enable_summary" value="1" <?= $enableSummary ? 'checked="checked"' : '' ?> />
+			<?= _t('ext.ai_summarizer.config.enable_summary') ?>
+		</label>
+		<p class="help-block">Master toggle for the extension</p>
+	</div>
+
+	<div class="form-group">
+		<label class="group-name" for="summary_style"><?= _t('ext.ai_summarizer.config.summary_style') ?></label>
+		<div class="group-controls">
+			<select id="summary_style" name="summary_style">
+				<option value="blockquote" <?= $summaryStyle === 'blockquote' ? 'selected' : '' ?>>Blockquote (default)</option>
+				<option value="info-box" <?= $summaryStyle === 'info-box' ? 'selected' : '' ?>>Info Box (styled)</option>
+				<option value="simple" <?= $summaryStyle === 'simple' ? 'selected' : '' ?>>Simple (italic)</option>
+			</select>
+			<p class="help-block">How to display the summary at the top of the article</p>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="group-name">
+			<input type="checkbox" id="only_unread" name="only_unread" value="1" <?= $onlyUnread ? 'checked="checked"' : '' ?> />
+			<?= _t('ext.ai_summarizer.config.only_unread') ?>
+		</label>
+		<p class="help-block">Only generate summaries for unread articles</p>
+	</div>
+
+	<div class="form-group">
+		<label class="group-name" for="user_prompt"><?= _t('ext.ai_summarizer.config.user_prompt') ?></label>
+		<div class="group-controls">
+			<textarea id="user_prompt" name="user_prompt" rows="8" style="width: 100%;"><?= htmlspecialchars($this->user_prompt, ENT_COMPAT, 'UTF-8') ?></textarea>
+			<p class="help-block">
+				Template for the summarization prompt. Available placeholders:<br/>
+				<code>{title}</code>, <code>{content}</code>, <code>{author}</code>, <code>{url}</code>,
+				<code>{feed_url}</code>, <code>{feed_name}</code>, <code>{date}</code>
+			</p>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="group-name" for="max_content_length"><?= _t('ext.ai_summarizer.config.max_content_length') ?></label>
+		<div class="group-controls">
+			<input type="number" id="max_content_length" name="max_content_length" value="<?= $maxContentLength ?>" min="0" />
+			<p class="help-block">Maximum characters for {content} placeholder (0 = unlimited)</p>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="group-name" for="max_tokens"><?= _t('ext.ai_summarizer.config.max_tokens') ?></label>
+		<div class="group-controls">
+			<input type="number" id="max_tokens" name="max_tokens" value="<?= $maxTokens ?>" min="0" />
+			<p class="help-block">Maximum tokens for the summary response (0 = unlimited)</p>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="group-name" for="max_retries"><?= _t('ext.ai_summarizer.config.max_retries') ?></label>
+		<div class="group-controls">
+			<input type="number" id="max_retries" name="max_retries" value="<?= $maxRetries ?>" min="0" max="5" />
+			<p class="help-block">Number of retry attempts for failed API calls (0–5)</p>
+		</div>
+	</div>
+</div>
+
+<div class="post-category">
+	<h3><?= _t('ext.ai_summarizer.config.conditions_title') ?></h3>
+
+	<div class="form-group">
+		<label class="group-name" for="search_filter"><?= _t('ext.ai_summarizer.config.search_filter') ?></label>
+		<div class="group-controls">
+			<textarea id="search_filter" name="search_filter" rows="4" style="width: 100%;"><?= htmlspecialchars($searchFilter, ENT_COMPAT, 'UTF-8') ?></textarea>
+			<p class="help-block">
+				Only summarize entries matching at least one filter (one per line).<br/>
+				Uses <a href="https://freshrss.github.io/FreshRSS/en/users/10_filter.html" target="_blank">FreshRSS Boolean search syntax</a>.<br/>
+				Leave empty to summarize all entries.
+			</p>
+		</div>
+	</div>
+</div>
