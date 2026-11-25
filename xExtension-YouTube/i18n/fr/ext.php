@@ -13,5 +13,6 @@ return array(
 		'fetching_icons' => 'Récupération des icônes',
 		'finished_fetching_icons' => 'Récupération des icônes terminée.',
 		'use_nocookie' => 'Utiliser le domaine www.youtube-nocookie.com pour éviter les cookies',
+		'click_to_play' => 'Ne charger le lecteur qu’après un clic sur la miniature de la vidéo',
 	),
 );

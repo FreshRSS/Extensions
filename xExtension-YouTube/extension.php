@@ -37,6 +37,10 @@ final class YouTubeExtension extends Minz_Extension
 	 * Switch to enable the Youtube No-Cookie domain
 	 */
 	private bool $useNoCookie = false;
+	/**
+	 * Whether a preview of the video is displayed instead of the player, which is only loaded once the preview is clicked
+	 */
+	private bool $clickToPlay = false;
 
 	/**
 	 * Initialize this extension
@@ -44,6 +48,7 @@ final class YouTubeExtension extends Minz_Extension
 	#[\Override]
 	public function init(): void {
 		Minz_View::appendStyle($this->getFileUrl('style.css'));
+		Minz_View::appendScript($this->getFileUrl('clickToPlay.js'));
 		$this->registerHook('entry_before_display', $this->embedYouTubeVideo(...));
 		$this->registerHook('check_url_before_add', self::convertYoutubeFeedUrl(...));
 		$this->registerHook('custom_favicon_hash', $this->iconHashParams(...));
@@ -355,6 +360,11 @@ final class YouTubeExtension extends Minz_Extension
 		if ($noCookie !== null) {
 			$this->useNoCookie = $noCookie;
 		}
+
+		$clickToPlay = FreshRSS_Context::userConf()->attributeBool('yt_click_to_play');
+		if ($clickToPlay !== null) {
+			$this->clickToPlay = $clickToPlay;
+		}
 	}
 
 	/**
@@ -414,6 +424,14 @@ final class YouTubeExtension extends Minz_Extension
 	}
 
 	/**
+	 * Returns whether a preview of the video is displayed instead of the player, until it is clicked.
+	 * You have to call loadConfigValues() before this one, otherwise you get default values.
+	 */
+	public function isClickToPlay(): bool {
+		return $this->clickToPlay;
+	}
+
+	/**
 	 * Inserts the YouTube video iframe into the content of an entry, if the entries link points to a YouTube watch URL.
 	 * @throws FreshRSS_Context_Exception
 	 */
@@ -434,7 +452,8 @@ final class YouTubeExtension extends Minz_Extension
 			return $entry;
 		}
 
-		if (stripos($entry->content(), '<iframe class="youtube-plugin-video"') !== false) {
+		// The player (or its preview) has already been inserted
+		if (stripos($entry->content(), 'class="youtube-plugin-video') !== false) {
 			return $entry;
 		}
 
@@ -506,7 +525,32 @@ final class YouTubeExtension extends Minz_Extension
 	}
 
 	/**
-	 * Returns an HTML <iframe> for a given URL for the configured width and height, with content ignored, appended or formatted.
+	 * Returns a link to the video showing its thumbnail, for the configured width (and a 16:9 ratio) or with responsive sizing,
+	 * which `static/clickToPlay.js` replaces by the player <iframe> for the given URL once clicked.
+	 * Returns null if there is no thumbnail to display.
+	 */
+	private function getPreviewHtml(FreshRSS_Entry $entry, string $url): ?string {
+		$thumbnail = $entry->thumbnail()['url'] ?? '';
+		if ($thumbnail === '' && preg_match('#^https://www\.youtube(?:-nocookie)?\.com/embed/([0-9A-Za-z_-]+)#', $url, $matches) === 1) {
+			$thumbnail = 'https://i.ytimg.com/vi/' . $matches[1] . '/hqdefault.jpg';
+		}
+		if ($thumbnail === '') {
+			return null;
+		}
+
+		$previewAttributes = $this->autoSize
+			? 'class="youtube-plugin-video yt-player-preview yt-player-autosize"'
+			: 'class="youtube-plugin-video yt-player-preview" data-yt-player-width="' . $this->width . '" data-yt-player-height="' . $this->height . '"';
+		$imageAttributes = 'alt="' . htmlspecialchars($entry->title(), ENT_COMPAT, 'UTF-8', double_encode: false) . '"' .
+			($this->autoSize ? '' : ' width="' . $this->width . '"');
+
+		return '<a ' . $previewAttributes . ' href="' . $entry->link() . '" data-yt-player-src="' . $url . '">' .
+			'<img src="' . $thumbnail . '" ' . $imageAttributes . ' /></a>';
+	}
+
+	/**
+	 * Returns an HTML <iframe> (or a preview of the video replaced by the <iframe> once clicked) for a given URL
+	 * for the configured width and height, with content ignored, appended or formatted.
 	 */
 	public function getHtml(FreshRSS_Entry $entry, string $url): string {
 		$content = '';
@@ -519,6 +563,10 @@ final class YouTubeExtension extends Minz_Extension
 				frameborder="0"
 				referrerpolicy="strict-origin-when-cross-origin"
 				allowFullScreen></iframe>';
+
+		if ($this->clickToPlay) {
+			$iframe = $this->getPreviewHtml($entry, $url) ?? $iframe;
+		}
 
 		if ($this->showContent) {
 			$doc = new DOMDocument();
@@ -641,6 +689,7 @@ final class YouTubeExtension extends Minz_Extension
 			FreshRSS_Context::userConf()->_attribute('yt_show_content', Minz_Request::paramBoolean('yt_show_content'));
 			FreshRSS_Context::userConf()->_attribute('yt_download_channel_icons', Minz_Request::paramBoolean('yt_download_channel_icons'));
 			FreshRSS_Context::userConf()->_attribute('yt_nocookie', Minz_Request::paramBoolean('yt_nocookie'));
+			FreshRSS_Context::userConf()->_attribute('yt_click_to_play', Minz_Request::paramBoolean('yt_click_to_play'));
 			FreshRSS_Context::userConf()->save();
 		}
 
