@@ -10,18 +10,20 @@
             "type": "user",
             "url": "https://github.com/deimosfr/xExtension-AiSummary",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Af_Readability",
             "author": "niehztog",
             "description": "Try to inline article content using Readability",
-            "version": "0.5",
+            "version": "0.6",
             "entrypoint": "Af_Readability",
             "type": "user",
             "url": "https://github.com/Niehztog/freshrss-af-readability",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Apple Music Artist Feed",
@@ -32,7 +34,8 @@
             "description": "Subscribe to an Apple Music artist's releases by pasting their Apple Music artist page URL.",
             "url": "https://codeberg.org/sanpo/xExtension-AppleMusicArtist",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 1
         },
         {
             "name": "ArticleSummary",
@@ -43,7 +46,8 @@
             "type": "user",
             "url": "https://github.com/LiangWei88/xExtension-ArticleSummary",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Auto Refresh",
@@ -54,7 +58,8 @@
             "type": "user",
             "url": "https://github.com/Eisa01/FreshRSS---Auto-Refresh-Extension",
             "method": "git",
-            "directory": "xExtension-AutoRefresh"
+            "directory": "xExtension-AutoRefresh",
+            "phpstan_errors": 0
         },
         {
             "name": "AutoTTL",
@@ -65,7 +70,8 @@
             "type": "user",
             "url": "https://github.com/mgnsk/FreshRSS-AutoTTL",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Black List",
@@ -76,7 +82,8 @@
             "type": "system",
             "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
             "method": "git",
-            "directory": "xExtension-BlackList"
+            "directory": "xExtension-BlackList",
+            "phpstan_errors": 0
         },
         {
             "name": "Broad Site Icon Fetcher",
@@ -87,7 +94,8 @@
             "type": "user",
             "url": "https://github.com/bowencool/xExtension-BroadIconFetcher",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Clickable Links",
@@ -98,7 +106,8 @@
             "type": "user",
             "url": "https://github.com/kapdap/freshrss-extensions",
             "method": "git",
-            "directory": "xExtension-ClickableLinks"
+            "directory": "xExtension-ClickableLinks",
+            "phpstan_errors": 0
         },
         {
             "name": "Colorful List",
@@ -109,7 +118,8 @@
             "type": "user",
             "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
-            "directory": "xExtension-ColorfulList"
+            "directory": "xExtension-ColorfulList",
+            "phpstan_errors": 0
         },
         {
             "name": "Comics in feed",
@@ -120,7 +130,8 @@
             "type": "system",
             "url": "https://github.com/giventofly/freshrss-comicsinfeed",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 1
         },
         {
             "name": "Compact Reader",
@@ -131,7 +142,8 @@
             "type": "user",
             "url": "https://github.com/featurecreep-cron/freshrss-extensions",
             "method": "git",
-            "directory": "xExtension-CompactReader"
+            "directory": "xExtension-CompactReader",
+            "phpstan_errors": 0
         },
         {
             "name": "Copy2Clipboard",
@@ -142,7 +154,8 @@
             "type": "user",
             "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
             "method": "git",
-            "directory": "xExtension-Copy2Clipboard"
+            "directory": "xExtension-Copy2Clipboard",
+            "phpstan_errors": 0
         },
         {
             "name": "Date Format",
@@ -153,7 +166,8 @@
             "type": "user",
             "url": "https://github.com/aledeg/xExtension-DateFormat",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Extension Manager",
@@ -164,7 +178,8 @@
             "type": "user",
             "url": "https://github.com/featurecreep-cron/freshrss-extensions",
             "method": "git",
-            "directory": "xExtension-ExtensionManager"
+            "directory": "xExtension-ExtensionManager",
+            "phpstan_errors": 0
         },
         {
             "name": "Feed Digest",
@@ -175,7 +190,8 @@
             "type": "system",
             "url": "https://github.com/fengchang/xExtension-FeedDigest",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 2
         },
         {
             "name": "Feed Priority Shortcut",
@@ -186,7 +202,8 @@
             "type": "user",
             "url": "https://github.com/aidistan/freshrss-extensions",
             "method": "git",
-            "directory": "xExtension-FeedPriorityShortcut"
+            "directory": "xExtension-FeedPriorityShortcut",
+            "phpstan_errors": 0
         },
         {
             "name": "FeedTitleBuilder",
@@ -197,18 +214,20 @@
             "type": "user",
             "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
             "method": "git",
-            "directory": "xExtension-FeedTitleBuilder"
+            "directory": "xExtension-FeedTitleBuilder",
+            "phpstan_errors": 0
         },
         {
             "name": "FetchAndSummarize",
             "author": "FetchAndSummarize contributors",
             "description": "Fetch article text and create an inline AI summary",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "entrypoint": "FetchAndSummarize",
             "type": "user",
             "url": "https://github.com/cevvalkoala/xExtension-FetchAndSummarize",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "FilterTitle",
@@ -219,7 +238,8 @@
             "type": "system",
             "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
             "method": "git",
-            "directory": "xExtension-FilterTitle"
+            "directory": "xExtension-FilterTitle",
+            "phpstan_errors": 0
         },
         {
             "name": "Fixed Nav Menu",
@@ -230,18 +250,20 @@
             "type": "user",
             "url": "https://github.com/oyox/FreshRSS-extensions",
             "method": "git",
-            "directory": "xExtension-FixedNavMenu"
+            "directory": "xExtension-FixedNavMenu",
+            "phpstan_errors": 0
         },
         {
             "name": "Form Captcha",
             "author": "Inverle",
             "description": "Protect register/login forms with captcha",
-            "version": "1.0.7",
+            "version": "1.0.8",
             "entrypoint": "Captcha",
             "type": "system",
             "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
-            "directory": "xExtension-Captcha"
+            "directory": "xExtension-Captcha",
+            "phpstan_errors": 0
         },
         {
             "name": "Fresh Vibes View",
@@ -252,7 +274,8 @@
             "type": "user",
             "url": "https://github.com/tryallthethings/freshvibes",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "FreshRss FlareSolverr",
@@ -263,7 +286,8 @@
             "type": "system",
             "url": "https://github.com/ravenscroftj/freshrss-flaresolverr-extension",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "GReader Redate",
@@ -274,7 +298,8 @@
             "type": "user",
             "url": "https://codeberg.org/javerous/freshrss-greader-redate",
             "method": "git",
-            "directory": "xExtension-GReaderRedate"
+            "directory": "xExtension-GReaderRedate",
+            "phpstan_errors": 0
         },
         {
             "name": "Google News Top Stories",
@@ -285,7 +310,8 @@
             "type": "user",
             "url": "https://github.com/shcheglovnd/FreshRSS-xExtension-GoogleNewsTopStories",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Grid View",
@@ -297,7 +323,8 @@
             "compatibility": "1.28.0",
             "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
-            "directory": "xExtension-GridView"
+            "directory": "xExtension-GridView",
+            "phpstan_errors": 0
         },
         {
             "name": "Hacker News Points",
@@ -308,7 +335,8 @@
             "type": "user",
             "url": "https://github.com/shcheglovnd/FreshRSS-xExtension-HackerNewsPoints",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Heatmap",
@@ -319,7 +347,8 @@
             "type": "user",
             "url": "https://github.com/iovictor/xExtension-Heatmap",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Hugging Face Papers",
@@ -330,7 +359,8 @@
             "type": "user",
             "url": "https://github.com/shcheglovnd/FreshRSS-xExtension-HuggingFacePapers",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Image Cache",
@@ -341,18 +371,20 @@
             "type": "user",
             "url": "https://github.com/Victrid/freshrss-image-cache-plugin",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Image Proxy",
             "author": "Frans de Jonge",
             "description": "No insecure content warnings or disappearing images.",
-            "version": "1.0.4",
+            "version": "1.1.0",
             "entrypoint": "ImageProxy",
             "type": "user",
             "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
-            "directory": "xExtension-ImageProxy"
+            "directory": "xExtension-ImageProxy",
+            "phpstan_errors": 0
         },
         {
             "name": "Instagram Profiles",
@@ -363,7 +395,8 @@
             "type": "user",
             "url": "https://github.com/shcheglovnd/FreshRSS-xExtension-InstagramProfiles",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Invidious Video Feed",
@@ -374,7 +407,8 @@
             "type": "system",
             "url": "https://github.com/Korbak/freshrss-invidious",
             "method": "git",
-            "directory": "xExtension-Invidious"
+            "directory": "xExtension-Invidious",
+            "phpstan_errors": 0
         },
         {
             "name": "Invidious Video Feed",
@@ -385,7 +419,8 @@
             "type": "user",
             "url": "https://github.com/tunbridgep/freshrss-invidious",
             "method": "git",
-            "directory": "xExtension-Invidious"
+            "directory": "xExtension-Invidious",
+            "phpstan_errors": 0
         },
         {
             "name": "Karakeep Button",
@@ -396,7 +431,8 @@
             "type": "user",
             "url": "https://github.com/veverkap/xExtension-karakeep-button",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Keep Folder State",
@@ -407,7 +443,8 @@
             "type": "user",
             "url": "https://github.com/oyox/FreshRSS-extensions",
             "method": "git",
-            "directory": "xExtension-KeepFolderState"
+            "directory": "xExtension-KeepFolderState",
+            "phpstan_errors": 0
         },
         {
             "name": "KillTheNews",
@@ -418,7 +455,8 @@
             "type": "user",
             "url": "https://github.com/juherr/xExtension-KillTheNews",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "LLM Classification",
@@ -430,7 +468,8 @@
             "compatibility": "1.28.2",
             "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
-            "directory": "xExtension-LlmClassification"
+            "directory": "xExtension-LlmClassification",
+            "phpstan_errors": 0
         },
         {
             "name": "LaTeX support",
@@ -441,7 +480,8 @@
             "type": "user",
             "url": "https://github.com/aledeg/xExtension-LatexSupport",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Mark As Read Existing",
@@ -452,7 +492,8 @@
             "type": "user",
             "url": "https://github.com/bullitt186/FreshRSS-MarkAsReadExisting",
             "method": "git",
-            "directory": "xExtension-MarkAsReadExisting"
+            "directory": "xExtension-MarkAsReadExisting",
+            "phpstan_errors": 0
         },
         {
             "name": "Mark Feed Read On Badge Click",
@@ -463,7 +504,8 @@
             "type": "user",
             "url": "https://github.com/StathisZ/freshrss-mark-read-on-click",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Mark Previous as Read",
@@ -474,7 +516,8 @@
             "type": "user",
             "url": "https://github.com/kalvn/freshrss-mark-previous-as-read",
             "method": "git",
-            "directory": "xExtension-MarkPreviousAsRead"
+            "directory": "xExtension-MarkPreviousAsRead",
+            "phpstan_errors": 0
         },
         {
             "name": "Mobile Scroll Menu",
@@ -485,7 +528,8 @@
             "type": "user",
             "url": "https://github.com/oyox/FreshRSS-extensions",
             "method": "git",
-            "directory": "xExtension-MobileScrollMenu"
+            "directory": "xExtension-MobileScrollMenu",
+            "phpstan_errors": 0
         },
         {
             "name": "News Assistant",
@@ -496,7 +540,8 @@
             "type": "user",
             "url": "https://github.com/reply2future/xExtension-NewsAssistant",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Paywall",
@@ -507,7 +552,8 @@
             "type": "user",
             "url": "https://github.com/aledeg/xExtension-Paywall",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Podcast Player",
@@ -518,18 +564,20 @@
             "type": "user",
             "url": "https://github.com/Minimistro32/freshrss-podcast-player",
             "method": "git",
-            "directory": "xExtension-PodcastPlayer"
+            "directory": "xExtension-PodcastPlayer",
+            "phpstan_errors": 0
         },
         {
             "name": "Quick Collapse",
             "author": "romibi and Marien Fressinaud",
             "description": "Quickly change from folded to unfolded articles",
-            "version": "1.0.3",
+            "version": "1.0.4",
             "entrypoint": "QuickCollapse",
             "type": "user",
             "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
-            "directory": "xExtension-QuickCollapse"
+            "directory": "xExtension-QuickCollapse",
+            "phpstan_errors": 0
         },
         {
             "name": "QuickFilter",
@@ -540,7 +588,8 @@
             "type": "user",
             "url": "https://github.com/featurecreep-cron/freshrss-extensions",
             "method": "git",
-            "directory": "xExtension-QuickFilter"
+            "directory": "xExtension-QuickFilter",
+            "phpstan_errors": 0
         },
         {
             "name": "RSS-Bridge",
@@ -551,7 +600,8 @@
             "type": "system",
             "url": "https://github.com/DevonHess/FreshRSS-Extensions",
             "method": "git",
-            "directory": "xExtension-RssBridge"
+            "directory": "xExtension-RssBridge",
+            "phpstan_errors": 0
         },
         {
             "name": "RateLimitFeeds",
@@ -562,7 +612,8 @@
             "type": "system",
             "url": "https://github.com/pe1uca/xExtension-RateLimiter",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Readable",
@@ -573,7 +624,8 @@
             "type": "user",
             "url": "https://github.com/printfuck/xExtension-Readable",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Readeck Button",
@@ -584,18 +636,20 @@
             "type": "user",
             "url": "https://github.com/Joedmin/xExtension-readeck-button",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "ReadingTime",
             "author": "Lapineige, hkcomori",
             "description": "Add a reading time estimation next to each article",
-            "version": "1.6.2",
+            "version": "1.6.3",
             "entrypoint": "ReadingTime",
             "type": "user",
             "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
-            "directory": "xExtension-ReadingTime"
+            "directory": "xExtension-ReadingTime",
+            "phpstan_errors": 0
         },
         {
             "name": "Recently Read",
@@ -606,7 +660,8 @@
             "type": "user",
             "url": "https://github.com/featurecreep-cron/freshrss-extensions",
             "method": "git",
-            "directory": "xExtension-RecentlyRead"
+            "directory": "xExtension-RecentlyRead",
+            "phpstan_errors": 0
         },
         {
             "name": "Reddit Image",
@@ -617,7 +672,8 @@
             "type": "user",
             "url": "https://github.com/aledeg/xExtension-RedditImage",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Remove emojis",
@@ -628,7 +684,8 @@
             "type": "user",
             "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
             "method": "git",
-            "directory": "xExtension-RemoveEmojis"
+            "directory": "xExtension-RemoveEmojis",
+            "phpstan_errors": 0
         },
         {
             "name": "Retry-After Allowlist",
@@ -639,7 +696,8 @@
             "type": "system",
             "url": "https://github.com/bowencool/xExtension-RetryAfterAllowlist",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Right-Click Actions",
@@ -650,7 +708,8 @@
             "type": "user",
             "url": "https://github.com/featurecreep-cron/freshrss-extensions",
             "method": "git",
-            "directory": "xExtension-RightClickActions"
+            "directory": "xExtension-RightClickActions",
+            "phpstan_errors": 0
         },
         {
             "name": "Save Audio",
@@ -661,7 +720,8 @@
             "type": "user",
             "url": "https://github.com/cevvalkoala/xExtension-SaveAudio",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "SendToMyJD2",
@@ -672,7 +732,8 @@
             "type": "user",
             "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
             "method": "git",
-            "directory": "xExtension-SendToMyJD2"
+            "directory": "xExtension-SendToMyJD2",
+            "phpstan_errors": 1
         },
         {
             "name": "Share By Email",
@@ -683,7 +744,8 @@
             "type": "user",
             "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
-            "directory": "xExtension-ShareByEmail"
+            "directory": "xExtension-ShareByEmail",
+            "phpstan_errors": 0
         },
         {
             "name": "Share to Linkwarden",
@@ -694,7 +756,8 @@
             "type": "user",
             "url": "https://github.com/daften/xExtension-ShareToLinkwarden",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Show entry URL",
@@ -705,7 +768,8 @@
             "type": "user",
             "url": "https://codeberg.org/strubbl/xExtension-ShowURL",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "ShowFeedID",
@@ -716,7 +780,8 @@
             "type": "user",
             "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
-            "directory": "xExtension-showFeedID"
+            "directory": "xExtension-showFeedID",
+            "phpstan_errors": 0
         },
         {
             "name": "Silent Refresh",
@@ -727,7 +792,8 @@
             "type": "user",
             "url": "https://github.com/featurecreep-cron/freshrss-extensions",
             "method": "git",
-            "directory": "xExtension-SilentRefresh"
+            "directory": "xExtension-SilentRefresh",
+            "phpstan_errors": 0
         },
         {
             "name": "Site Rate Limits",
@@ -738,7 +804,8 @@
             "type": "system",
             "url": "https://github.com/shcheglovnd/FreshRSS-xExtension-SiteRateLimits",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Smart Mobile Menu",
@@ -749,7 +816,8 @@
             "type": "user",
             "url": "https://github.com/oyox/FreshRSS-extensions",
             "method": "git",
-            "directory": "xExtension-SmartMobileMenu"
+            "directory": "xExtension-SmartMobileMenu",
+            "phpstan_errors": 0
         },
         {
             "name": "Sticky Feeds",
@@ -760,7 +828,8 @@
             "type": "user",
             "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
-            "directory": "xExtension-StickyFeeds"
+            "directory": "xExtension-StickyFeeds",
+            "phpstan_errors": 0
         },
         {
             "name": "Sticky Reader",
@@ -771,7 +840,8 @@
             "type": "user",
             "url": "https://github.com/featurecreep-cron/freshrss-extensions",
             "method": "git",
-            "directory": "xExtension-StickyReader"
+            "directory": "xExtension-StickyReader",
+            "phpstan_errors": 0
         },
         {
             "name": "Tag Emoji",
@@ -782,7 +852,8 @@
             "type": "user",
             "url": "https://github.com/barrymieny/xExtension-TagEmoji",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "TagEZ",
@@ -793,7 +864,8 @@
             "type": "user",
             "url": "https://github.com/Marc-T/xExtension-TagEZ",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Telegraaf Premium Tag",
@@ -804,7 +876,8 @@
             "type": "user",
             "url": "https://github.com/barrymieny/xExtension-TelegraafPremiumTag",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Telegram Channels",
@@ -815,7 +888,8 @@
             "type": "user",
             "url": "https://github.com/shcheglovnd/FreshRSS-xExtension-TelegramChannels",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Theme Mode Synchronizer",
@@ -826,7 +900,8 @@
             "type": "user",
             "url": "https://github.com/aidistan/freshrss-extensions",
             "method": "git",
-            "directory": "xExtension-ThemeModeSynchronizer"
+            "directory": "xExtension-ThemeModeSynchronizer",
+            "phpstan_errors": 0
         },
         {
             "name": "Three Pane Reader",
@@ -837,7 +912,8 @@
             "type": "user",
             "url": "https://github.com/caglaryalcin/xExtension-ThreePaneReader",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "ThreePanesView",
@@ -848,7 +924,8 @@
             "type": "user",
             "url": "https://framagit.org/nicofrand/xextension-threepanesview",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Title Dedup",
@@ -859,18 +936,20 @@
             "type": "system",
             "url": "https://github.com/chenhaoc/freshrss-dedup-extension",
             "method": "git",
-            "directory": "xExtension-TitleDedup"
+            "directory": "xExtension-TitleDedup",
+            "phpstan_errors": 0
         },
         {
             "name": "Title-Wrap",
             "author": "₣rans de Jonge, Joris Kinable",
             "description": "Applies a line-wrap to long article titles, as opposed to truncating the title when it overflows its display area.",
-            "version": "0.3.1",
+            "version": "0.3.2",
             "entrypoint": "TitleWrap",
             "type": "user",
             "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
-            "directory": "xExtension-TitleWrap"
+            "directory": "xExtension-TitleWrap",
+            "phpstan_errors": 0
         },
         {
             "name": "Touch Control",
@@ -881,7 +960,8 @@
             "type": "user",
             "url": "https://github.com/oyox/FreshRSS-extensions",
             "method": "git",
-            "directory": "xExtension-TouchControl"
+            "directory": "xExtension-TouchControl",
+            "phpstan_errors": 0
         },
         {
             "name": "Translate Google",
@@ -892,7 +972,8 @@
             "type": "user",
             "url": "https://github.com/profduweb/xExtension-TranslateGoogle",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "TranslateTitlesCN",
@@ -903,7 +984,8 @@
             "type": "user",
             "url": "https://github.com/jacob2826/FreshRSS-TranslateTitlesCN",
             "method": "git",
-            "directory": "TranslateTitlesCN"
+            "directory": "TranslateTitlesCN",
+            "phpstan_errors": 11
         },
         {
             "name": "TwitchChannel2RssFeed",
@@ -914,7 +996,8 @@
             "type": "user",
             "url": "https://github.com/babico/xExtension-TwitchChannel2RssFeed",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Unsafe Autologin",
@@ -925,7 +1008,8 @@
             "type": "system",
             "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
-            "directory": "xExtension-UnsafeAutologin"
+            "directory": "xExtension-UnsafeAutologin",
+            "phpstan_errors": 0
         },
         {
             "name": "Wallabag Button",
@@ -936,7 +1020,8 @@
             "type": "user",
             "url": "https://github.com/Joedmin/xExtension-wallabag-button",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Webhook",
@@ -948,7 +1033,8 @@
             "compatibility": "1.28.2",
             "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
-            "directory": "xExtension-Webhook"
+            "directory": "xExtension-Webhook",
+            "phpstan_errors": 0
         },
         {
             "name": "White List",
@@ -959,7 +1045,8 @@
             "type": "system",
             "url": "https://github.com/aledeg/xExtension-WhiteList",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Word highlighter",
@@ -970,7 +1057,8 @@
             "type": "user",
             "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
-            "directory": "xExtension-WordHighlighter"
+            "directory": "xExtension-WordHighlighter",
+            "phpstan_errors": 0
         },
         {
             "name": "X Profiles",
@@ -981,7 +1069,8 @@
             "type": "user",
             "url": "https://github.com/shcheglovnd/FreshRSS-xExtension-XProfiles",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "YouTube Channels",
@@ -992,18 +1081,20 @@
             "type": "user",
             "url": "https://github.com/shcheglovnd/FreshRSS-xExtension-YouTubeChannels",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "YouTube Duration",
             "author": "CevvalKoala",
             "description": "Adds YouTube video duration or Shorts markers to new YouTube entry titles using the YouTube Data API. Uses a local cache and configurable system-wide formatting.",
-            "version": "2.0.2",
+            "version": "2.1.0",
             "entrypoint": "YouTubeDuration",
             "type": "system",
             "url": "https://github.com/cevvalkoala/xExtension-YouTubeDuration",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "YouTube Embed Fix",
@@ -1014,7 +1105,8 @@
             "type": "user",
             "url": "https://github.com/featurecreep-cron/freshrss-extensions",
             "method": "git",
-            "directory": "xExtension-YouTubeEmbed"
+            "directory": "xExtension-YouTubeEmbed",
+            "phpstan_errors": 0
         },
         {
             "name": "YouTube Video Feed",
@@ -1025,7 +1117,8 @@
             "type": "user",
             "url": "https://github.com/FreshRSS/Extensions",
             "method": "git",
-            "directory": "xExtension-YouTube"
+            "directory": "xExtension-YouTube",
+            "phpstan_errors": 0
         },
         {
             "name": "YouTubeChannel2RssFeed",
@@ -1036,7 +1129,8 @@
             "type": "user",
             "url": "https://github.com/cn-tools/cntools_FreshRssExtensions",
             "method": "git",
-            "directory": "xExtension-YouTubeChannel2RssFeed"
+            "directory": "xExtension-YouTubeChannel2RssFeed",
+            "phpstan_errors": 0
         },
         {
             "name": "Youlag",
@@ -1047,7 +1141,8 @@
             "type": "user",
             "url": "https://github.com/civilblur/youlag",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 3
         },
         {
             "name": "alphaXiv Papers",
@@ -1058,7 +1153,8 @@
             "type": "user",
             "url": "https://github.com/shcheglovnd/FreshRSS-xExtension-AlphaXivPapers",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "freshrss-translate-summary",
@@ -1069,7 +1165,8 @@
             "type": "user",
             "url": "https://github.com/wogong/freshrss-translate-summary",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         }
     ]
 }
