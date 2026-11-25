@@ -167,7 +167,8 @@
             "compatibility": "1.28.0",
             "url": "https://github.com/stdAri/xExtension-DailyDigest",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Date Format",
@@ -203,7 +204,8 @@
             "compatibility": "1.28.0",
             "url": "https://github.com/stdAri/xExtension-ExtensionShortcuts",
             "method": "git",
-            "directory": "."
+            "directory": ".",
+            "phpstan_errors": 0
         },
         {
             "name": "Feed Digest",
