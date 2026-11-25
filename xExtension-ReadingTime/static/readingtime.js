@@ -22,12 +22,17 @@
 
 				reading_time.flux = flux_list[i];
 
-				if (metrics == 'letters') {
-					reading_time.count = reading_time.flux_letters_count(flux_list[i], language);
-				} else {  // words
-					reading_time.count = reading_time.flux_words_count(flux_list[i]);
+				if (reading_time.is_youtube_video(flux_list[i])) {
+					// YouTube feeds provide only the description of the video, which says nothing about how long it takes to watch it
+					reading_time.reading_time = '';
+				} else {
+					if (metrics == 'letters') {
+						reading_time.count = reading_time.flux_letters_count(flux_list[i], language);
+					} else {  // words
+						reading_time.count = reading_time.flux_words_count(flux_list[i]);
+					}
+					reading_time.reading_time = reading_time.calc_read_time(reading_time.count, speed);
 				}
-				reading_time.reading_time = reading_time.calc_read_time(reading_time.count, speed);
 
 				flux_list[i].dataset.readingTime = reading_time.reading_time;
 
@@ -37,11 +42,19 @@
 				li.style.overflow = 'hidden';
 				li.style.textAlign = 'right';
 				li.style.display = 'table-cell';
-				li.textContent = reading_time.reading_time + '\u2009m';
+				if (reading_time.reading_time !== '') {  // Keep the empty cell of videos, to align the columns of the articles
+					li.textContent = reading_time.reading_time + '\u2009m';
+				}
 
 				const ul = document.querySelector('#' + reading_time.flux.id + ' ul.horizontal-list');
 				ul.insertBefore(li, ul.children[ul.children.length - 1]);
 			}
+		},
+
+		is_youtube_video: function is_youtube_video(flux) {
+			// `data-link` is only available since FreshRSS 1.28
+			const link = flux.dataset.link || flux.querySelector('.flux_content .go_website')?.getAttribute('href') || '';
+			return /^https?:\/\/(?:(?:(?:www|m|music)\.)?youtube\.com\/(?:watch\?|shorts\/|live\/)|youtu\.be\/)/i.test(link);
 		},
 
 		flux_words_count: function flux_words_count(flux) {
