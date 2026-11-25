@@ -114,7 +114,7 @@ if (is_file('vendor/bin/phpstan') && is_dir('../FreshRSS/')) {
 			throw new RuntimeException('Not a PHPStan JSON output!');
 		}
 
-		$phpstanErrors = array_fill_keys(array_keys($extensions), 0);
+		$phpstanErrors = array_fill(0, \count($extensions), 0);
 		// Attribute each error to the extension with the most specific directory found in the path of the file
 		$findExtension = static function (string $path) use ($extensionDirectories): ?int {
 			$found = null;
