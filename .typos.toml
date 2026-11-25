@@ -17,6 +17,7 @@ extend-exclude = [
 	"*/i18n/az",
 	"*/i18n/de",
 	"*/i18n/fr",
+	"*/i18n/nl",
 	"*/i18n/pl",
 	"bin/",
 	"node_modules/",

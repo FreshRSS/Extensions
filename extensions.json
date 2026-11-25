@@ -158,6 +158,18 @@
             "phpstan_errors": 0
         },
         {
+            "name": "Daily Digest",
+            "author": "stdAri",
+            "description": "Scheduled AI digests of new articles (combined or per category) with numbered citations linking to the articles inside FreshRSS. Any OpenAI-compatible API, optional fallback model.",
+            "version": "0.4.1",
+            "entrypoint": "DailyDigest",
+            "type": "user",
+            "compatibility": "1.28.0",
+            "url": "https://github.com/stdAri/xExtension-DailyDigest",
+            "method": "git",
+            "directory": "."
+        },
+        {
             "name": "Date Format",
             "author": "Alexis Degrugillier",
             "description": "Change how dates are displayed in the interface",
@@ -180,6 +192,18 @@
             "method": "git",
             "directory": "xExtension-ExtensionManager",
             "phpstan_errors": 0
+        },
+        {
+            "name": "Extension Shortcuts",
+            "author": "stdAri",
+            "description": "Lists every enabled extension that has a configuration page in the settings menu, one click away.",
+            "version": "0.1.0",
+            "entrypoint": "ExtensionShortcuts",
+            "type": "user",
+            "compatibility": "1.28.0",
+            "url": "https://github.com/stdAri/xExtension-ExtensionShortcuts",
+            "method": "git",
+            "directory": "."
         },
         {
             "name": "Feed Digest",

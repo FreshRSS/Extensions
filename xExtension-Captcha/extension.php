@@ -9,6 +9,8 @@ final class CaptchaExtension extends Minz_Extension {
 		'provider' => [],
 		'sendClientIp' => true,
 	];
+	/** Minimum reCAPTCHA v3 score by default, as recommended by Google */
+	private const RECAPTCHA_V3_MIN_SCORE = 0.5;
 
 	#[\Override]
 	public function init(): void {
@@ -95,6 +97,15 @@ final class CaptchaExtension extends Minz_Extension {
 	}
 
 	/**
+	 * Minimum reCAPTCHA v3 score, from 0.0 (very likely a bot) to 1.0 (very likely a human), needed to pass the challenge
+	 * @param array{provider:array<string,string>} $config
+	 */
+	public static function getRecaptchaV3MinScore(array $config): float {
+		$minScore = $config['provider']['minScore'] ?? '';
+		return is_numeric($minScore) ? max(0.0, min(1.0, (float)$minScore)) : self::RECAPTCHA_V3_MIN_SCORE;
+	}
+
+	/**
 	 * @throws FreshRSS_Context_Exception
 	 * @throws Minz_PermissionDeniedException
 	 */
@@ -163,7 +174,7 @@ final class CaptchaExtension extends Minz_Extension {
 				Minz_Error::error(500);
 				return false;
 			}
-			/** @var array{success:bool,error-codes:string[]} $json */
+			/** @var array{success:bool,error-codes:string[],score?:float} $json */
 			$json = json_decode($body, true);
 			if (!is_array($json)) {
 				Minz_Error::error(500);
@@ -174,6 +185,18 @@ final class CaptchaExtension extends Minz_Extension {
 				CaptchaExtension::warnLog("($actionName) Failed to verify '$provider' challenge for user \"$username\": " . implode(',', $json['error-codes']));
 				Minz_Error::error(400, ['error' => [_t('ext.form_captcha.invalid_captcha')]]);
 				return false;
+			}
+			if ($provider === 'recaptcha-v3') {
+				// reCAPTCHA v3 does not challenge the user: a successful response only gives a score of how likely the user is a human
+				$score = $json['score'] ?? null;
+				$minScore = self::getRecaptchaV3MinScore($config);
+				if ($score === null || $score < $minScore) {
+					$actionName = Minz_Request::actionName();
+					CaptchaExtension::warnLog("($actionName) Rejected '$provider' challenge for user \"$username\": score " .
+						($score ?? 'missing') . ", minimum score $minScore");
+					Minz_Error::error(400, ['error' => [_t('ext.form_captcha.invalid_captcha')]]);
+					return false;
+				}
 			}
 		}
 		return true;

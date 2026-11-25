@@ -1,6 +1,14 @@
-/* globals context */
+/* globals context, loadLazyImages */
 
 (function () {
+	function loadLazyImagesIfExpanded() {
+		const streamElem = document.getElementById('stream');
+		// Articles collapsed by default are rendered with lazy-loaded media, which must be loaded once expanded
+		if (context.does_lazyload && !streamElem.classList.contains('hide_posts')) {
+			loadLazyImages(streamElem);
+		}
+	}
+
 	function toggleCollapse() {
 		const streamElem = document.getElementById('stream');
 		const toggleElem = document.getElementById('toggle-collapse');
@@ -14,15 +22,7 @@
 			toggleElem.classList.add('collapsed');
 		}
 
-		if (context.does_lazyload && wasCollapsed) {
-			const lazyloadedElements = streamElem.querySelectorAll(
-				'img[data-original], iframe[data-original]'
-			);
-			lazyloadedElements.forEach(function (el) {
-				el.src = el.getAttribute('data-original');
-				el.removeAttribute('data-original');
-			});
-		}
+		loadLazyImagesIfExpanded();
 	}
 
 	function syncWithContext() {
@@ -52,6 +52,9 @@
 	toggleElem.id = 'toggle-collapse';
 	toggleElem.classList.add('btn');
 	toggleElem.addEventListener('click', toggleCollapse);
+
+	// articles loaded afterwards (e.g. when scrolling down) are rendered with lazy-loaded media as well
+	document.body.addEventListener('freshrss:load-more', loadLazyImagesIfExpanded);
 
 	// replace the "order" button by a stick containing the order and the
 	// collapse buttons

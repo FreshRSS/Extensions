@@ -18,6 +18,10 @@ return array(
 				'label' => 'Secret Key (private)',
 				'placeholder' => 'Enter your secret key here…',
 			),
+			'min_score' => array(
+				'label' => 'Minimum score',
+				'help' => 'From 0.0 (very likely a bot) to 1.0 (very likely a human). Google recommends 0.5.',
+			),
 		),
 		'invalid_captcha' => 'Invalid captcha, try again.',
 		'clear_fields' => 'Clear fields',

@@ -22,6 +22,7 @@ Available configuration settings:
 * Site Key
 * Secret Key
 * Send client IP address?
+* Minimum score (reCAPTCHA v3)
 
 <details>
 <summary>Show configuration screenshot</summary>
@@ -36,6 +37,9 @@ If you are having trouble with logging in after configuring the extension, you c
 
 ## Changelog
 
+* 1.0.8 [2026-11-03]
+	* Security
+		* reCAPTCHA v3 responses are now rejected when their score is lower than a configurable minimum score (0.5 by default, as recommended by Google). reCAPTCHA v3 never challenges the user, so any request with a valid token was accepted before, including those scored as very likely coming from a bot
 * 1.0.7 [2026-10-15]
 	* Refactor registerHook calls to use first class callable syntax available starting from PHP 8.1+
 * 1.0.6 [2026-06-04]

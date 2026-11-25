@@ -8,5 +8,7 @@ return array(
 		'scheme_default' => 'Belirtilmemiş Vekil URL Şeması',
 		'scheme_include' => 'Bağlantıya http*:// ekle',
 		'url_encode' => 'Bağlantıyı kodla',
+		'excluded_domains' => 'Do not proxy these domains', // TODO
+		'excluded_domains_help' => 'One domain per line. Subdomains are included as well: for instance, example.org also matches images.example.org.', // TODO
 	),
 );

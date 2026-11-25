@@ -9,5 +9,6 @@ The CSS code (since 0.3 legacy) used to wrap long titles was originally [propose
 
 ## Changelog
 
+- 0.3.2 Fix titles squeezed on hover with the grid-based article row of FreshRSS 1.30.0+
 - 0.3 ready for FreshRSS 1.23.2-dev (April 2023) / upcoming 1.24.0
 - 0.1 initial version
