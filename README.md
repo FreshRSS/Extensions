@@ -295,3 +295,7 @@ There are some FreshRSS extensions out there, developed by community members.
 
 * [Daily Digest](https://github.com/stdAri/xExtension-DailyDigest): Scheduled AI digests of new articles (combined or per category) via any OpenAI-compatible API, with numbered citations deep-linking into FreshRSS.
 * [Extension Shortcuts](https://github.com/stdAri/xExtension-ExtensionShortcuts): Lists every enabled extension that has a configuration page in the settings menu (sidebar and header gear menu), so its settings are one click away.
+
+### By [@konkere](https://github.com/konkere)
+
+* [Entity Exorcist](https://github.com/konkere/xExtension-EntityExorcist): Fix malformed HTML entities in article titles from selected RSS feeds.

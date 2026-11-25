@@ -202,4 +202,7 @@
 }, {
 	"url": "https://github.com/stdAri/xExtension-ExtensionShortcuts",
 	"type": "git"
+}, {
+	"url": "https://github.com/konkere/xExtension-EntityExorcist",
+	"type": "git"
 }]
