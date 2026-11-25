@@ -39,8 +39,24 @@ jobs:
           path: FreshRSS
           persist-credentials: false
 
+      - name: Use Composer cache
+        id: composer-cache
+        uses: actions/cache@v6
+        with:
+          path: Extensions/vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
       - name: Run Composer install # Needed by PHPStan
         run: composer install --prefer-dist --no-progress
+        if: steps.composer-cache.outputs.cache-hit != 'true'
+
+      - name: Use PHPStan result cache # https://phpstan.org/user-guide/result-cache
+        uses: actions/cache@v6
+        with:
+          path: /tmp/phpstan
+          key: ${{ runner.os }}-phpstan-third-party
 
       - name: Build JSON file
         run: php ./generate.php
