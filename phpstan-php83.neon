@@ -1,0 +1,36 @@
+# Compatibility PHP < 8.4, due to new class `Dom\` introduced in PHP 8.4+
+parameters:
+	phpVersion:
+		min: 80100	# PHP 8.1
+		max: 80399	# PHP 8.3
+	level: 9	# https://phpstan.org/user-guide/rule-levels
+	fileExtensions:
+		- php
+		- phtml
+	paths:
+		- ../FreshRSS
+		- .
+	excludePaths:
+		analyse:
+			- ../FreshRSS
+		analyseAndScan:
+			- .git/*?
+			- node_modules/*?
+			- symbolic/*?
+			- third-party/*?
+			- tmp/*?
+			- vendor/
+	reportUnmatchedIgnoredErrors: false
+	treatPhpDocTypesAsCertain: false
+	dynamicConstantNames:
+		- TYPE_GIT
+	ignoreErrors:
+		# `Dom\` used by PHP 8.4+
+		-
+			identifier: class.notFound
+			messages:
+				- '#^Class Dom\\\S+ not found\.$#'
+				- '#^Parameter \S+ of .+ has invalid type Dom\\\S+\.$#'
+				- '#^.+ has invalid return type Dom\\\S+\.$#'
+				- '#^Property \S+ has unknown class Dom\\\S+ as its type\.$#'
+				- '#^Call to method \S+ on an unknown class Dom\\\S+\.$#'

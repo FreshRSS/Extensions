@@ -68,6 +68,7 @@
 		"phpcs": "phpcs . -s",
 		"phpcbf": "phpcbf . -p -s",
 		"phpstan": "phpstan analyse .",
+		"phpstan-php83": "phpstan analyse -c phpstan-php83.neon .",
 		"phpstan-third-party": "phpstan analyse -c phpstan-third-party.neon .",
 		"test-image-proxy": "php tests/ImageProxyTest.php",
 		"test": [
@@ -75,7 +76,8 @@
 			"@phtml-lint",
 			"@test-image-proxy",
 			"@phpcs",
-			"@phpstan"
+			"@phpstan",
+			"@phpstan-php83"
 		],
 		"fix": [
 			"@phpcbf"
