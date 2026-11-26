@@ -67,6 +67,7 @@ final class ImageProxyTest {
 			$this->testHtmlDocumentsAndTagSoup();
 			$this->testImageAttributes();
 			$this->testVideoPosters();
+			$this->testHtmlEncodedUris();
 			$this->testUriSchemes();
 			$this->testExcludedDomains();
 		} catch (FreshRSS_Context_Exception $e) {
@@ -186,6 +187,29 @@ final class ImageProxyTest {
 		);
 		$this->assertSame('https://videos.example/one.mp4', $videos[0]->getAttribute('src'), 'Video sources must not be proxied');
 		$this->assertSame(false, $videos[1]->hasAttribute('poster'), 'Videos without poster must remain without poster');
+	}
+
+	/** @throws FreshRSS_Context_Exception */
+	private function testHtmlEncodedUris(): void {
+		$url = 'http://images.example/thumbnail.jpg?w=1&amp;h=2';
+		$this->assertSame(
+			self::PROXY_URL . $url,
+			ImageProxyExtension::getProxyImageHtmlUri($url),
+			'HTML-encoded URLs must be proxied and remain HTML-encoded',
+		);
+		$this->assertContains(
+			'src="' . ImageProxyExtension::getProxyImageHtmlUri($url) . '"',
+			ImageProxyExtension::swapUris('<img src="' . $url . '">'),
+			'Proxied HTML-encoded URLs must be found as such in the proxied content',
+		);
+
+		$this->configure(encodeUrl: true);
+		$this->assertSame(
+			self::PROXY_URL . rawurlencode('http://images.example/thumbnail.jpg?w=1&h=2'),
+			ImageProxyExtension::getProxyImageHtmlUri($url),
+			'HTML-encoded URLs must be decoded before being URL-encoded',
+		);
+		$this->configure();
 	}
 
 	/** @throws FreshRSS_Context_Exception */
